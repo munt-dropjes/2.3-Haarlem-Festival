@@ -8,7 +8,8 @@ CREATE TABLE Users (
     Email VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
     ProfilePicture VARCHAR(255),
-    CreatedAt DATETIME NOT NULL
+    CreatedAt DATETIME NOT NULL,
+    verified BOOLEAN NOT NULL
 );
 
 CREATE TABLE Visitors (
