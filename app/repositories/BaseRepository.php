@@ -2,6 +2,8 @@
 
 namespace Repositories;
 
+use PDOException;
+
 class BaseRepository{
     protected $connection;
 
