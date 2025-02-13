@@ -83,5 +83,13 @@ Embark on an unforgettable adventure at Teyler’s Museum with a special interac
 This unique experience combines fun and learning in a way that sparks curiosity and creativity. Kids will meet intriguing characters, explore fascinating science facts, and work together to unravel the professor’s greatest mystery. It’s an exciting journey that will challenge their problem-solving skills and leave them with a sense of accomplishment.</p>
     </div>
 </div>
+<div class="container mt-4 d-flex justify-content-between align-items-center">
+    <div class="col-md-6">
+        <iframe src="https://www.google.com/maps/d/embed?mid=1FYl1K84-DwA0wW6LkFzpX3yUolaKvm8&ehbc=2E312F&noprof=1" width="640" height="480"></iframe>
+    </div>
+    <div class="col-md-6">
+        <img src="images/homepage7.png" class="img-fluid" alt="map image" style="height: 480px; width: 640px;">
+    </div>
+</div>
 </body>
 </html>
