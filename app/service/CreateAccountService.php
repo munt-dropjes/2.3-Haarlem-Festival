@@ -1,6 +1,6 @@
 <?php
-namespace App\Service;
-use App\Repository\CreateAccountRepository;
+namespace Service;
+use Repositories\CreateAccountRepository;
 
 class CreateAccountService {
     public function insert($account) {

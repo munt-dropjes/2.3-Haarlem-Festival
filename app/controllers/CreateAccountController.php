@@ -1,8 +1,9 @@
 <?php
-namespace App\Controllers;
-use App\Models\User;
+namespace Controllers;
+
 use Controllers\Controller;
-use App\Service\CreateAccountService;
+use Service\CreateAccountService;
+use Models\User;
 
 class CreateAccountController extends Controller {
     private $accountService;
@@ -12,24 +13,28 @@ class CreateAccountController extends Controller {
             $this->accountService = new CreateAccountService();
         }
     public function index() {
-        require __DIR__ . '/../views/create-account/create-account.php';
+        echo 'hi';
+        $this->view('create-account/index');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            
-            $email = htmlspecialchars($_POST['email']);
-            $password = htmlspecialchars($_POST['password']);
-            $height = htmlspecialchars($_POST['height']);
-            $weight = htmlspecialchars($_POST['weight']);
-            $age = htmlspecialchars($_POST['age']);
-        
-            $user = new User();
-            $user->setUserName($email);
-            $user->setPassword($password);
-            $user->setHeight($height);
-            $user->setWeight($weight);
-            $user->setAge($age);
-
+            $user = $this->createUser();
             $this->accountService->insert($user);
         }
-    }   
+    }  
+    
+    private function createUser(): User {
+        $email = htmlspecialchars($_POST['email']);
+        $password = htmlspecialchars($_POST['password']);
+        $height = htmlspecialchars($_POST['height']);
+        $weight = htmlspecialchars($_POST['weight']);
+        $age = htmlspecialchars($_POST['age']);
+        
+        $user = new User();
+        $user->setUserName($email);
+        $user->setPassword($password);
+        $user->setHeight($height);
+        $user->setWeight($weight);
+        $user->setAge($age);
+        return $user;
+    }
 }
 ?>

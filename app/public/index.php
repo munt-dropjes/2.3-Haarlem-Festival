@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\CreateAccountController;
 use Bramus\Router\Router;
 
 
@@ -15,8 +16,9 @@ $router->setNamespace('\Controllers');
 // Add your routes here:
 // default route
     //home
-    $router->get('/', 'HomeController@index');
+    $router->get('/', 'Controller@fourofour');
     $router->get('/home', 'HomeController@index');
+    $router->get('/createaccount', 'createaccountController@index');
 
 // Run the router
 $router->run();

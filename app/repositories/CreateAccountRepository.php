@@ -1,5 +1,5 @@
 <?php
-namespace App\Repositories;
+namespace Repositories;
 use Repositories\BaseRepository;
 class CreateAccountRepository extends BaseRepository
 {
