@@ -4,11 +4,17 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Homepage Haarlem Festival</title>
-    <!-- <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet"> -->
+    <link href="https://fonts.googleapis.com/css2?family=Monoton&display=swap" rel="stylesheet">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <style>
         body {
             background: linear-gradient(to bottom, #F28DE5, #B2F5EA);
+        }
+        p {
+            font-family: 'Quicksand', sans-serif;
+        }
+        h2 {
+            font-family: 'Zen Dots', sans-serif;
         }
 
     </style>
@@ -18,7 +24,7 @@
     <img src="images/homepage1.png" class="img-fluid w-100" alt="plaatje kerk haarlem">
   </div>
 <div class="container mt-4 text-center" style="max-width: 713px; margin: 0 auto;">
-    <h1>What is the festival?</h1>
+    <h1 style="font-family: 'Monoton', cursive;">What is the festival?</h1>
     <p>The Haarlem Festival in the Netherlands is a lively celebration that brings the city to life with an exciting mix of music, food, and family-friendly fun. Jazz enthusiasts can revel in soulful performances, while dance lovers groove to electrifying beats. 
     Foodies will delight in Yummy, the festival's culinary hub, offering a diverse array of delicious flavors. 
     Families can explore the enchanting Magic@Teylers, a special program for kids hosted at the historic Teylers Museum. With its diverse lineup, the Haarlem Festival promises an unforgettable experience for all ages, set against the charming backdrop of Haarlem's historic streets.</p>
