@@ -1,5 +1,6 @@
 <?php
 namespace Models;
+use enums\roleEnum;
 class User {
     private $UserID;
     private $Role;
@@ -8,14 +9,14 @@ class User {
     private $password;
     private $verified;
 
-    public function __construct($UserID, $Role, $Name, $Email, $password, $createdAt) {
-        $this->UserID = $UserID;
-        $this->Role = $Role;
+    //for account creation
+    public function __construct($Name, $Email, $password) {
+        $this->Role = roleEnum::CUSTOMER;
         $this->Name = $Name;
         $this->Email = $Email;
         $this->password = $password;
-        $this->createdAt = $createdAt;
     }
+
 
     public function getID() {
         return $this->UserID;

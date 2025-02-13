@@ -24,16 +24,8 @@ class CreateAccountController extends Controller {
     private function createUser(): User {
         $email = htmlspecialchars($_POST['email']);
         $password = htmlspecialchars($_POST['password']);
-        $height = htmlspecialchars($_POST['height']);
-        $weight = htmlspecialchars($_POST['weight']);
-        $age = htmlspecialchars($_POST['age']);
-        
-        $user = new User();
-        $user->setUserName($email);
-        $user->setPassword($password);
-        $user->setHeight($height);
-        $user->setWeight($weight);
-        $user->setAge($age);
+        $name = htmlspecialchars($_POST['firstname'] . ' ' . $_POST['surname']);
+        $user = new User($name,$email,$password);
         return $user;
     }
 }
