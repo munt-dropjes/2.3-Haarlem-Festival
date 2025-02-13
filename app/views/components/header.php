@@ -27,7 +27,7 @@
 		<a href="#">HOME</a>
 		<a href="#">JAZZ</a>
 		<a href="#">DANCE</a>
-		<a href="#">FUNKY</a>
+		<a href="#">YUMMIE</a>
 		<a href="#">STROLL THROUGH HISTORY</a>
 		<a href="#">MAGIC TEYLERS</a>
 	</div>
