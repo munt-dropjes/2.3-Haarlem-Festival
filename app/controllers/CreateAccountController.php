@@ -2,7 +2,7 @@
 namespace Controllers;
 
 use Controllers\Controller;
-use Service\CreateAccountService;
+use Services\CreateAccountService;
 use Models\User;
 
 class CreateAccountController extends Controller {
@@ -13,7 +13,6 @@ class CreateAccountController extends Controller {
             $this->accountService = new CreateAccountService();
         }
     public function index() {
-        echo 'hi';
         $this->view('create-account/index');
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $user = $this->createUser();

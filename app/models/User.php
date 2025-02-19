@@ -7,14 +7,18 @@ class User {
     private $Name;
     private $Email;
     private $password;
+    private $phone;
+    private $country;
     private $verified;
 
     //for account creation
-    public function __construct($Name, $Email, $password) {
+    public function __construct($Name, $Email, $password, $phone, $country) {
         $this->Role = roleEnum::CUSTOMER;
         $this->Name = $Name;
         $this->Email = $Email;
         $this->password = $password;
+        $this->phone = $phone;
+        $this->country = $country;
     }
 
 
@@ -29,6 +33,12 @@ class User {
     }
     public function getPassword() {
         return $this->password;
+    }
+    public function getPhone() {
+        return $this->phone;
+    }
+    public function getCountry() {
+        return $this->country;
     }
     public function getRole() {
         return $this->Role;

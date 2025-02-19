@@ -1,5 +1,5 @@
 <?php
-namespace Service;
+namespace Services;
 use Repositories\CreateAccountRepository;
 
 class CreateAccountService {
