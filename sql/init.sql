@@ -1,6 +1,7 @@
 CREATE DATABASE IF NOT EXISTS thefestivaldb;
 USE thefestivaldb;
 
+--create the tables and their contents
 CREATE TABLE Users (
     UserID UUID PRIMARY KEY,
     Role ENUM('Customer', 'Administrator', 'Employee'),
@@ -127,7 +128,7 @@ CREATE TABLE Invoices (
     FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
 );
 
--- Relationships
+-- add the relationships
 ALTER TABLE Customers ADD CONSTRAINT FK_Customers_Orders FOREIGN KEY (UserID) REFERENCES Users(UserID);
 ALTER TABLE Customers ADD CONSTRAINT FK_Customers_ShoppingCart FOREIGN KEY (UserID) REFERENCES Users(UserID);
 ALTER TABLE Customers ADD CONSTRAINT FK_Customers_Tickets FOREIGN KEY (UserID) REFERENCES Users(UserID);
