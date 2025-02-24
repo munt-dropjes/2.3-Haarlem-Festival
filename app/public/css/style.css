@@ -128,3 +128,9 @@ footer .footer-icon {
     max-width: 500px;
     margin: 0 auto; 
 }
+
+.required{
+	color: red !important; 
+	display: inline; 
+	float: none;
+}

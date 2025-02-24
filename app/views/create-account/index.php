@@ -11,11 +11,11 @@
         <div class="mb-3">
             <div class="row">
                 <div class ="col">
-                    <label for="firstname" class="form-label">Firstname:</label>
+                    <label for="firstname" class="form-label">Firstname:<span class="required">*</span></label>
                     <input type="text" class="form-control" id="firstname" name="firstname" required>
                 </div>
                 <div class="col">  
-                    <label for="lastname" class="form-label">Lastname:</label>
+                    <label for="lastname" class="form-label">Lastname:<span class="required">*</span></label>
                     <input type="text" class="form-control" id="lastname" name="lastname" required>
                 </div>
             </div>  
@@ -23,22 +23,22 @@
 
 
         <div class="mb-3">
-            <label for="email" class="form-label">Email:</label>
+            <label for="email" class="form-label">Email:<span class="required">*</span></label>
             <input type="email" class="form-control" id="email" name="email" required>
         </div>
         
         <div class="mb-3">
-            <label for="password" class="form-label">Password:</label>
+            <label for="password" class="form-label">Password:<span class="required">*</span></label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         
         <div class="mb-3">
-            <label for="phone" class="form-label">Phone:</label>
+            <label for="phone" class="form-label">Phone:<span class="required">*</span></label>
             <input type="tel" class="form-control" id="phone" name="phone"  required>
         </div>
         
         <div class="mb-3">
-        <label for="country" class="form-label">Country</label><span style="color: red !important; display: inline; float: none;">*</span>      
+        <label for="country" class="form-label">Country:</label><span class="required">*</span>      
         
         <!--Oh god why-->
         <select id="country" name="country" class="form-control">
