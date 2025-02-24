@@ -18,6 +18,7 @@ $router->setNamespace('\Controllers');
     $router->get('/', 'Controller@fourofour');
     $router->get('/home', 'HomeController@index');
     $router->get('/createaccount', 'createaccountController@index');
+    $router->post('/createaccount', 'createaccountController@create');
 
 // Run the router
 $router->run();

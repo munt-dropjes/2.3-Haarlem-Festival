@@ -1,6 +1,7 @@
 <?php
-    enum Role: string {
-        case ADMINISTRATOR = 'administrator';
-        case CUSTOMER = 'customer';
-        case EMPLOYEE = 'employee';
-    }
+namespace Enums;
+class roleEnum {
+    const CUSTOMER = 'Customer';
+    const ADMINISTRATOR = 'Administrator';
+    const EMPLOYEE = 'Employee';
+}

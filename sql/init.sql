@@ -3,33 +3,33 @@ USE thefestivaldb;
 
 --create the tables and their contents
 CREATE TABLE Users (
-    UserID UUID PRIMARY KEY,
+    UserID INT AUTO_INCREMENT PRIMARY KEY,
     Role ENUM('Customer', 'Administrator', 'Employee'),
     Name VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
     Phone VARCHAR(255) NOT NULL,
     Country VARCHAR(255) NOT NULL,
-    Verified BOOLEAN NOT NULL
+    Verified BOOLEAN NOT NULL DEFAULT FALSE
 );
 
 CREATE TABLE Visitors (
-    UserID UUID PRIMARY KEY,
+    UserID INT PRIMARY KEY,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 CREATE TABLE Customers (
-    UserID UUID PRIMARY KEY,
+    UserID INT PRIMARY KEY,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 CREATE TABLE Employees (
-    UserID UUID PRIMARY KEY,
+    UserID INT PRIMARY KEY,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
 CREATE TABLE Administrators (
-    UserID UUID PRIMARY KEY,
+    UserID INT PRIMARY KEY,
     FOREIGN KEY (UserID) REFERENCES Users(UserID)
 );
 
@@ -71,7 +71,7 @@ CREATE TABLE Stroll (
 CREATE TABLE Tickets (
     TicketID UUID PRIMARY KEY,
     EventID UUID NOT NULL,
-    UserID UUID NOT NULL,
+    UserID INT NOT NULL,
     QRCode VARCHAR(255) NOT NULL,
     Status ENUM('Valid', 'Scanned', 'Cancelled') NOT NULL,
     PurchasedAt DATETIME NOT NULL,
@@ -81,7 +81,7 @@ CREATE TABLE Tickets (
 
 CREATE TABLE Orders (
     OrderID UUID PRIMARY KEY,
-    CustomerID UUID NOT NULL,
+    CustomerID INT NOT NULL,
     Status ENUM('Pending', 'Paid', 'Cancelled') NOT NULL,
     CreatedAt DATETIME NOT NULL,
     PaymentMethod ENUM('iDEAL', 'CreditCard', 'PayPal') NOT NULL,
@@ -90,7 +90,7 @@ CREATE TABLE Orders (
 
 CREATE TABLE ShoppingCart (
     CartID UUID PRIMARY KEY,
-    CustomerID UUID NOT NULL,
+    CustomerID INT NOT NULL,
     CreatedAt DATETIME NOT NULL,
     FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
 );
@@ -108,7 +108,7 @@ CREATE TABLE ShoppingCartItems (
 CREATE TABLE Payments (
     PaymentID UUID PRIMARY KEY,
     OrderID UUID NOT NULL,
-    CustomerID UUID NOT NULL,
+    CustomerID INT NOT NULL,
     Status ENUM('Success', 'Failed', 'Pending') NOT NULL,
     PaymentDate DATETIME NOT NULL,
     Amount DECIMAL(10, 2) NOT NULL,
@@ -120,7 +120,7 @@ CREATE TABLE Payments (
 CREATE TABLE Invoices (
     InvoiceID UUID PRIMARY KEY,
     OrderID UUID NOT NULL,
-    CustomerID UUID NOT NULL,
+    CustomerID INT NOT NULL,
     TotalAmount DECIMAL(10, 2) NOT NULL,
     VAT DECIMAL(10, 2) NOT NULL,
     InvoiceDate DATETIME NOT NULL,

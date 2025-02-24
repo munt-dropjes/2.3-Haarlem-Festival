@@ -7,7 +7,8 @@
       "Repositories\\": "repositories",
       "Config\\": "config",
       "Exceptions\\": "exceptions",
-      "Controllers\\Api\\": "controllers/api"
+      "Controllers\\Api\\": "controllers/api",
+      "Enums\\": "enums"
     }
   },
   "require": {

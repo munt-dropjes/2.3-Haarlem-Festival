@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
 :root {
 	--header-height: 7rem;
 	--sidebar-width: 20rem;
@@ -134,3 +135,33 @@ footer .footer-icon {
 	display: inline; 
 	float: none;
 }
+
+
+
+.btn-primary{
+	background-color: #FCFC7A !important;
+	color: #000 !important;
+	font-family: 'holtwood-one-sc-regular', sans-serif !important;
+	border-color: #000 !important;
+	font-size: 20pt !important;
+	border-radius: 50px !important;
+}
+
+.create-account-container{
+	max-width: 600px !important;
+	margin: 0 auto; 
+}
+
+.submitbtn{
+	background-color: #FCFC7A !important;
+	color: #000 !important;
+	font-family: 'holtwood-one-sc-regular', sans-serif !important;
+	border-color: #000 !important;
+	font-size: 20pt !important;
+	border-radius: 50px !important;
+}
+
+.submitbtn:hover{
+	filter: brightness(90%);
+}
+

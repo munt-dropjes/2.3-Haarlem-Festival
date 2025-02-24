@@ -16,7 +16,7 @@
                 </div>
                 <div class="col">  
                     <label for="lastname" class="form-label">Lastname:<span class="required">*</span></label>
-                    <input type="text" class="form-control" id="lastname" name="lastname" required>
+                    <input type="text" class="form-control" id="surname" name="surname" required>
                 </div>
             </div>  
         </div>
@@ -289,7 +289,7 @@
         </select>
         </div>
 
-        <button type="submit" class="btn btn-primary w-100">Submit</button>
+        <button type="submit" class="submitbtn btn w-100">Submit</button>
         </form>
     </div>
 

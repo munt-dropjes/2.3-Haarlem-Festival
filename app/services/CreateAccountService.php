@@ -3,10 +3,12 @@ namespace Services;
 use Repositories\CreateAccountRepository;
 
 class CreateAccountService {
-    public function insert($account) {
-        // retrieve data
+    public function insert($user) {
         $repository = new CreateAccountRepository();
-        $repository->insert($account);        
+        if ($repository->checkEmail($user)){
+            throw new \Exception("Email already exists");
+        }
+        $repository->insert($user);        
     }
 }
 ?>

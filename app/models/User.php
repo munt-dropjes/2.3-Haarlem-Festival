@@ -1,6 +1,6 @@
 <?php
 namespace Models;
-use enums\roleEnum;
+use Enums\roleEnum;
 class User {
     private $UserID;
     private $Role;
@@ -16,7 +16,7 @@ class User {
         $this->Role = roleEnum::CUSTOMER;
         $this->Name = $Name;
         $this->Email = $Email;
-        $this->password = $password;
+        $this->setPassword($password);
         $this->phone = $phone;
         $this->country = $country;
     }
@@ -34,6 +34,13 @@ class User {
     public function getPassword() {
         return $this->password;
     }
+
+    public function setPassword(string $password): self
+    {
+        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        return $this;
+    }
+
     public function getPhone() {
         return $this->phone;
     }
@@ -46,5 +53,6 @@ class User {
     public function getVerified() {
         return $this->verified;
     }
+
 }
 ?>

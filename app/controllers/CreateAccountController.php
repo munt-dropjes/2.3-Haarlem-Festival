@@ -14,11 +14,12 @@ class CreateAccountController extends Controller {
         }
     public function index() {
         $this->view('create-account/index');
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            $user = $this->createUser();
-            $this->accountService->insert($user);
-        }
     }  
+
+    public function create() {
+        $user = $this->createUser();
+        $this->accountService->insert($user);
+    }
     
     private function createUser(): User {
         $email = htmlspecialchars($_POST['email']);
