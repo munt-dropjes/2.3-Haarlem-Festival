@@ -24,6 +24,10 @@ p {
 	font-family: 'Quicksand', sans-serif;
 }
 
+h1{
+	font-family: 'Zen Dots', sans-serif;
+}
+
 h2 {
 	font-family: 'Zen Dots', sans-serif;
 }
@@ -31,6 +35,12 @@ h2 {
 .navbar {
 	background-color: #4B0082;
 	height: var(--header-height);
+}
+
+.form-label {
+	color: #000;
+	font-family: 'Zen Dots', sans-serif;
+
 }
 
 .nav-button {
@@ -111,4 +121,10 @@ footer .footer-icon {
 	color: white;
 
 	box-shadow: 5px 5px 0 0 #FCFC7A;
+}
+
+
+.create-account-container {
+    max-width: 500px;
+    margin: 0 auto; 
 }

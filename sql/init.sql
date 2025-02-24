@@ -1,5 +1,5 @@
-CREATE DATABASE IF NOT EXISTS festival_db;
-USE festival_db;
+CREATE DATABASE IF NOT EXISTS thefestivaldb;
+USE thefestivaldb;
 
 CREATE TABLE Users (
     UserID UUID PRIMARY KEY,
@@ -7,9 +7,9 @@ CREATE TABLE Users (
     Name VARCHAR(255) NOT NULL,
     Email VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
-    ProfilePicture VARCHAR(255),
-    CreatedAt DATETIME NOT NULL,
-    verified BOOLEAN NOT NULL
+    Phone VARCHAR(255) NOT NULL,
+    Country VARCHAR(255) NOT NULL,
+    Verified BOOLEAN NOT NULL
 );
 
 CREATE TABLE Visitors (
