@@ -22,9 +22,11 @@ class CreateAccountController extends Controller {
     
     private function createUser(): User {
         $email = htmlspecialchars($_POST['email']);
-        $password = htmlspecialchars($_POST['password']);
         $name = htmlspecialchars($_POST['firstname'] . ' ' . $_POST['surname']);
-        $user = new User($name,$email,$password);
+        $password = htmlspecialchars($_POST['password']);
+        $phone = htmlspecialchars($_POST['phone']);
+        $country = htmlspecialchars($_POST['country']);
+        $user = new User($name,$email,$password, $phone, $country);
         return $user;
     }
 }
