@@ -9,6 +9,9 @@ class Controller
         //extract variables to be used in the view
         extract($data);
 
+        //default head
+        require_once __DIR__ . '/../views/components/head.php';
+
         //default header
         //require_once __DIR__ . '/../views/components/header.php';
 
