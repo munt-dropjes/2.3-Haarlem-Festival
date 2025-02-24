@@ -17,8 +17,13 @@ class CreateAccountController extends Controller {
     }  
 
     public function create() {
-        $user = $this->createUser();
-        $this->accountService->insert($user);
+        try{
+            $user = $this->createUser();
+            $this->accountService->insert($user);
+            $this->view('create-account/success');
+        } catch (\Exception $e) {
+            $this->view('create-account/index', ['error' => $e->getMessage()]);
+        }
     }
     
     private function createUser(): User {
