@@ -14,7 +14,7 @@ class LoginService {
 
     public function check(User $user) {
         if (empty($user->getEmail()) || empty($user->getPassword())) {
-            throw new \InvalidArgumentException("Username and password cannot be empty.");
+            throw new \InvalidArgumentException("Email and password cannot be empty.");
         }
         $dbUser = $this->repository->retrieveUser($user);
         if ($dbUser === null) {

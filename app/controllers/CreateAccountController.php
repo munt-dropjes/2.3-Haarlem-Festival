@@ -50,6 +50,8 @@ class CreateAccountController extends Controller {
         $phone = htmlspecialchars($_POST['phone']);
         $country = htmlspecialchars($_POST['country']);
         $user = new User($name,$email,$password, $phone, $country);
+
+        
         return $user;
     }
 }
