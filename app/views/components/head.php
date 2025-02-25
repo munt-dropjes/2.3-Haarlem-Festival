@@ -37,6 +37,9 @@
 		function onSubmit(token) {
 			document.getElementById("create-account-form").submit();
 		}
+		function onSubmitLogin(token) {
+			document.getElementById("create-account-form").submit();
+		}
  	</script>
 </head>
 

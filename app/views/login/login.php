@@ -4,7 +4,7 @@
 <body class="d-flex flex-column min-vh-100">
 
 <main>
-    <div class="container mt-5">
+    <div class="container mt-5 create-account-container">
       <h2 class="text-center">Login</h2>
       <?php if (isset($error)): ?>
         <div class="alert alert-danger" role="alert">
@@ -23,14 +23,16 @@
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         
-        <div class="d-flex justify-content-between">
+        <div class="mb-3">
         <button class="g-recaptcha submitbtn btn w-100"
             data-sitekey="6LfcK-IqAAAAABEgGDE2OeMJVkk3GhJariYfb9qY"
-            data-callback='onSubmit'
+            data-callback='onSubmitLogin'
             data-action='submit' 
             type="submit" 
-            class="">Submit</button>
-          <a href="/createaccount" class="submitbtn btn w-100">Create Account</a>
+            class="">Login</button>
+        </div>
+        <div class="mb-3">
+        <a href="/createaccount" class="submitbtn btn w-100">Create Account</a>
         </div>
       </form>
     </div>

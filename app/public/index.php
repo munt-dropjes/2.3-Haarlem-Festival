@@ -19,6 +19,7 @@ $router->setNamespace('\Controllers');
     $router->get('/home', 'HomeController@index');
     $router->get('/createaccount', 'createaccountController@index');
     $router->post('/createaccount', 'createaccountController@create');
-
+    $router->get('/login', 'LoginController@index');
+    $router->post('/login', 'LoginController@login');
 // Run the router
 $router->run();

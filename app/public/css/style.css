@@ -165,3 +165,6 @@ footer .footer-icon {
 	filter: brightness(90%);
 }
 
+.form-control{
+	border-radius: 50px !important;
+}

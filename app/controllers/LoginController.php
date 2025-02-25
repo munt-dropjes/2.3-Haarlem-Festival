@@ -12,33 +12,47 @@ class LoginController extends Controller {
         }
 
     public function index() {
-        if ($_SERVER["REQUEST_METHOD"] == "POST") {
-            
-            $email = htmlspecialchars($_POST['username']);
-            $password = htmlspecialchars($_POST['password']);
-
-            $user = new User();
-            $user->setEmail($email);
-            $user->setPasswordOnLogin($password);
-            try{
-                $authenticatedUser = $this->loginService->check($user);
-
-                if ($authenticatedUser) {
-                    session_start();
-                    $_SESSION['user'] = $authenticatedUser;
-                    header("Location: /dashboard");
-                    exit;
-                } else {
-                    $error = "Invalid email or password.";
-                }
-            }
-            catch(\Exception $e){
-                $this->view('login/login', ['error' => $e->getMessage()]);
-            }
-            
-        }
-        require __DIR__ . '/../views/login/login.php';
+        $this->view('login/login');
     }
 
+    public function login() {
+        if ($_SERVER["REQUEST_METHOD"] == "POST") {
+            $recaptcha_url= 'https://www.google.com/recaptcha/api/siteverify';
+            $recaptcha_secret = '6LfcK-IqAAAAANq23MOEd3F0eFD3vVPsr0Z1VTty';
+            $recaptcha_response = $_POST['g-recaptcha-response'];
+
+            $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
+            
+            $recaptcha = json_decode($recaptcha,true);
+
+            if($recaptcha['success'] == 1 AND $recaptcha['score'] >= 0.5 AND $recaptcha['action'] == 'submit'){
+                try{
+                    $email = htmlspecialchars(strtolower($_POST['email']));
+                    $password = htmlspecialchars($_POST['password']);
+        
+                    $user = new User();
+                    $user->setEmail($email);
+                    $user->setPasswordOnLogin($password);
+                    try{
+                        $authenticatedUser = $this->loginService->check($user);
+        
+                        if ($authenticatedUser) {
+                            session_start();
+                            $_SESSION['user'] = $authenticatedUser;
+                            $this->view('home/index');
+                            exit;
+                        } else {
+                            $this->view('login/login', ['error' => 'Invalid email or password']);
+                        }
+                    }
+                    catch(\Exception $e){
+                        $this->view('login/login', ['error' => $e->getMessage()]);
+                    }
+                } catch (\Exception $e) {
+                    $this->view('login/login', ['error' => $e->getMessage()]);
+                }
+            }
+        }
+    }
 }
 ?>

@@ -9,7 +9,7 @@
         <div class="row">
             <div class="col-12">
                 <h1>Account created successfully</h1>
-                <a href="/">Click here to return to the home page</a>
+                <a href="/login">Click here to login</a>
             </div>
         </div>
     </div>

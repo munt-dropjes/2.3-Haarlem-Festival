@@ -20,7 +20,6 @@ class CreateAccountController extends Controller {
     }  
 
     public function create() {
-        echo "<script>console.log('CreateAccountController::create() method called');</script>";
         if ($_SERVER['REQUEST_METHOD'] = 'POST') {
             $recaptcha_url= 'https://www.google.com/recaptcha/api/siteverify';
             $recaptcha_secret = '6LfcK-IqAAAAANq23MOEd3F0eFD3vVPsr0Z1VTty';
@@ -45,7 +44,7 @@ class CreateAccountController extends Controller {
     }
     
     private function createUser(): User {
-        $email = htmlspecialchars($_POST['email']);
+        $email = htmlspecialchars(strtolower($_POST['email']));
         $name = htmlspecialchars($_POST['firstname'] . ' ' . $_POST['surname']);
         $password = htmlspecialchars($_POST['password']);
         $phone = htmlspecialchars($_POST['phone']);

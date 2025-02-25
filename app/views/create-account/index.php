@@ -300,7 +300,7 @@
             data-callback='onSubmit'
             data-action='submit' 
             type="submit" 
-            class="">Submit</button>
+            class="">Create Account</button>
         </form>
     </div>
 
