@@ -18,7 +18,7 @@ class LoginController extends Controller {
             $password = htmlspecialchars($_POST['password']);
 
             $user = new User();
-            $user->setUserName($email);
+            $user->setEmail($email);
             $user->setPasswordOnLogin($password);
             try{
                 $authenticatedUser = $this->loginService->check($user);

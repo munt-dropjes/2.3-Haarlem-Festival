@@ -30,7 +30,18 @@ class User {
     public function getName() {
         return $this->Name;
     }
+
+    public function setName($Name) {
+        $this->Name = $Name;
+        return $this->Name;
+    }
+    
     public function getEmail() {
+        return $this->Email;
+    }
+
+    public function setEmail($Email) {
+        $this->Email = $Email;
         return $this->Email;
     }
     public function getPassword() {
@@ -43,16 +54,45 @@ class User {
         return $this;
     }
 
+    public function setPasswordOnLogin(string $password) :self
+    {
+        $this->password = $password;
+        return $this;
+    }
+
     public function getPhone() {
         return $this->phone;
     }
+
+    public function setPhone($phone) {
+        $this->phone = $phone;
+        return $this->phone;
+    }
+
     public function getCountry() {
         return $this->country;
     }
+
+    public function setCountry($country) {
+        $this->country = $country;
+        return $this->country;
+    }
+
     public function getRole() {
         return $this->Role;
     }
+
+    public function setRole($Role) {
+        $this->Role = $Role;
+        return $this->Role;
+    }
+
     public function getVerified() {
+        return $this->verified;
+    }
+
+    public function setVerified($verified) {
+        $this->verified = $verified;
         return $this->verified;
     }
 
