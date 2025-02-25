@@ -1,6 +1,6 @@
 <?php
 namespace Models;
-use Enums\roleEnum;
+
 class User {
     private $UserID;
     private $Role;
@@ -10,19 +10,6 @@ class User {
     private $phone;
     private $country;
     private $verified;
-
-    //for account creation
-    public function __construct($Name, $Email, $password, $phone, $country) {
-        $this->Role = roleEnum::CUSTOMER;
-        $this->Name = $Name;
-        $this->Email = $Email;
-        $this->setPassword($password);
-        $this->phone = $phone;
-        $this->country = $country;
-    }
-
-    
-
 
     public function getID() {
         return $this->UserID;
@@ -35,7 +22,7 @@ class User {
         $this->Name = $Name;
         return $this->Name;
     }
-    
+
     public function getEmail() {
         return $this->Email;
     }

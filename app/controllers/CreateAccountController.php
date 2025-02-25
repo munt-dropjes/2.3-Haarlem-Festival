@@ -4,6 +4,7 @@ namespace Controllers;
 use Controllers\Controller;
 use Services\CreateAccountService;
 use Models\User;
+use Enums\roleEnum;
 
 class CreateAccountController extends Controller {
     private $accountService;
@@ -49,9 +50,13 @@ class CreateAccountController extends Controller {
         $password = htmlspecialchars($_POST['password']);
         $phone = htmlspecialchars($_POST['phone']);
         $country = htmlspecialchars($_POST['country']);
-        $user = new User($name,$email,$password, $phone, $country);
-
-        
+        $user = new User();
+        $user->setRole(roleEnum::CUSTOMER);
+        $user->setEmail($email);
+        $user->setName($name);
+        $user->setPassword($password);
+        $user->setPhone($phone);
+        $user->setCountry($country);
         return $user;
     }
 }
