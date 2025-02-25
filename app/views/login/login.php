@@ -11,7 +11,7 @@
           <?php echo $error; ?>
         </div>
       <?php endif; ?>
-      <form method="POST">
+      <form method="POST" id="login-form">
 
       <div class="mb-3">
             <label for="email" class="form-label">Email:<span class="required">*</span></label>

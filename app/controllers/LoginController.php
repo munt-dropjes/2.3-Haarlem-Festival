@@ -39,7 +39,7 @@ class LoginController extends Controller {
                         if ($authenticatedUser) {
                             session_start();
                             $_SESSION['user'] = $authenticatedUser;
-                            $this->view('home/index');
+                            header('Location: /home');
                             exit;
                         } else {
                             $this->view('login/login', ['error' => 'Invalid email or password']);

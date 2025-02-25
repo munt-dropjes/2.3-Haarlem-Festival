@@ -9,11 +9,11 @@ class LoginRepository extends BaseRepository
 {
     public function retrieveUser($user): ?User
     {
-        $username = $user->getUserName();
-        $stmt = $this->connection->prepare("SELECT * FROM users WHERE username = :user_id");
-        $stmt->bindParam(':user_id', $username, \PDO::PARAM_STR);
+        $email = $user->getEmail();
+        $stmt = $this->connection->prepare("SELECT * FROM Users WHERE Email = :email");
+        $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
         $stmt->execute();
-        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'user');
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\User');
         $fetchedUser = $stmt->fetch();
         return $fetchedUser ?: null;
     }

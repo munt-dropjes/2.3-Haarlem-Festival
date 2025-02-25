@@ -6,10 +6,10 @@ class User {
     private $Role;
     private $Name;
     private $Email;
-    private $password;
-    private $phone;
-    private $country;
-    private $verified;
+    private $Password;
+    private $Phone;
+    private $Country;
+    private $Verified;
 
     public function getID() {
         return $this->UserID;
@@ -32,37 +32,37 @@ class User {
         return $this->Email;
     }
     public function getPassword() {
-        return $this->password;
+        return $this->Password;
     }
 
     public function setPassword(string $password): self
     {
-        $this->password = password_hash($password, PASSWORD_DEFAULT);
+        $this->Password = password_hash($password, PASSWORD_DEFAULT);
         return $this;
     }
 
     public function setPasswordOnLogin(string $password) :self
     {
-        $this->password = $password;
+        $this->Password = $password;
         return $this;
     }
 
     public function getPhone() {
-        return $this->phone;
+        return $this->Phone;
     }
 
     public function setPhone($phone) {
-        $this->phone = $phone;
-        return $this->phone;
+        $this->Phone = $phone;
+        return $this->Phone;
     }
 
     public function getCountry() {
-        return $this->country;
+        return $this->Country;
     }
 
     public function setCountry($country) {
-        $this->country = $country;
-        return $this->country;
+        $this->Country = $country;
+        return $this->Country;
     }
 
     public function getRole() {
@@ -75,12 +75,12 @@ class User {
     }
 
     public function getVerified() {
-        return $this->verified;
+        return $this->Verified;
     }
 
     public function setVerified($verified) {
-        $this->verified = $verified;
-        return $this->verified;
+        $this->Verified = $verified;
+        return $this->Verified;
     }
 
 }
