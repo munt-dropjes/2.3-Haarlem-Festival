@@ -1,7 +1,7 @@
 CREATE DATABASE IF NOT EXISTS thefestivaldb;
 USE thefestivaldb;
 
---create the tables and their contents
+-- create the tables and their contents
 CREATE TABLE Users (
     UserID INT AUTO_INCREMENT PRIMARY KEY,
     Role ENUM('Customer', 'Administrator', 'Employee'),

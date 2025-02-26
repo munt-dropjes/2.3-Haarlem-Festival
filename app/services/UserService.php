@@ -16,7 +16,13 @@ class UserService {
 
     // ~~Create~~
     public function create($user) : User {
-        return $this->userRepository->create($user);
+        return $this->userRepository->create($this->createUser(
+            $user['email'],
+            $user['name'],
+            $user['password'],
+            $user['phone'],
+            $user['country']
+        ));
     }
 
     public function insert($user) {
@@ -69,7 +75,7 @@ class UserService {
 
     // ~~ Private Methods ~~
 
-    public function create($email, $name, $password, $phone, $country) {
+    private function createUser($email, $name, $password, $phone, $country) {
         $user = new User();
         $user->setRole(roleEnum::CUSTOMER);
         $user->setEmail($email);

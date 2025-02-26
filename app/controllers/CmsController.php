@@ -25,7 +25,6 @@ class CmsController extends Controller {
             header('Location: /cms/users?limit=10&offset=0&search=' . $search);
         }
 
-
         $this->view('cms/users', [
             'users' => $this->userService->getAllUsers(),
             'totalEntries' => $this->userService->countTotalUsers(),

@@ -9,13 +9,16 @@ class UserRepository extends BaseRepository{
     // ~~Create~~
     public function create($user) : User {
         try{
-            $sql = "INSERT INTO users (username, email, password) 
-                    VALUES (:username, :email, :password)";
-            $stmt = $this->db->prepare($sql);
+            $sql = "INSERT INTO Users (role, name, email, password, phone, country) 
+                    VALUES (?, ?, ?, ?, ?, ?)";
+            $stmt = $this->connection->prepare($sql);
             $stmt->execute([
-                'username' => $user['username'],
-                'email' => $user['email'],
-                'password' => $user['password']
+                $user->getRole(),
+                $user->getName(),
+                $user->getEmail(),
+                $user->getPassword(),
+                $user->getPhone(),
+                $user->getCountry()
             ]);
             return $this->getUser($user['email']);
         }
@@ -47,7 +50,7 @@ class UserRepository extends BaseRepository{
                     ORDER BY username
                     LIMIT :limit 
                     OFFSET :offset";
-            $stmt = $this->db->prepare($sql);
+            $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':search', $search);
