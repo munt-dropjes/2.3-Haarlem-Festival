@@ -22,19 +22,20 @@
             <table class="table table-striped table-hover">
                 <thead>
                     <tr>
-                        <th>Username</th>
+                        <th>Naam</th>
                         <th>Email</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
                 <tbody>
-                    <?php foreach ($users as $user): ?>
+                    <?php foreach ($users as $user): 
+                        ?>
                         <tr>
-                            <td><?= $user['username'] ?></td>
-                            <td><?= $user['email'] ?></td>
+                            <td><?= $user->getName() ?></td>
+                            <td><?= $user->getEmail() ?></td>
                             <td>
-                                <a href="/cms/users/edit?id=<?= $user['id'] ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="/cms/users/delete?id=<?= $user['id'] ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>

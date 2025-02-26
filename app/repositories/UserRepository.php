@@ -3,7 +3,9 @@
 namespace Repositories;
 
 use Exception;
+use PDO;
 use Models\User;
+use Services\UserService;
 
 class UserRepository extends BaseRepository{
     // ~~Create~~
@@ -29,27 +31,26 @@ class UserRepository extends BaseRepository{
 
     // ~~Read~~
     public function getAllUsers($limit, $offset, $search) : array {
+        $userService = new UserService();
+
         try{
             $sql = "SELECT * 
                     FROM Users 
-                    WHERE Name LIKE :search 
-                    OR Email LIKE :search 
+                    WHERE ( 
+                        UPPER(Name) LIKE UPPER(CONCAT('%', :search, '%'))
+                        OR UPPER(Email) LIKE UPPER(CONCAT('%', :search, '%')) 
+                    )
                     ORDER BY Email
-                    LIMIT :limit 
-                    OFFSET :offset";
-
+                    LIMIT :limit
+                    OFFSET :offset;";
             $stmt = $this->connection->prepare($sql);
-            $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
-            $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
-            $stmt->bindParam(':search', $search);
+            $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+            $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+            $stmt->bindParam(':search', $search, PDO::PARAM_STR);
 
             $stmt->execute();
-            
-            $users = [];
-            while($row = $stmt->fetch(\PDO::FETCH_OBJ)){
-                $users[] = $this->createUser($row);
-            }
-            return $users;
+            $obj = $stmt->fetchAll(PDO::FETCH_CLASS, 'Models\User');
+            return $obj;
         }
         catch(Exception $e){
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all users");
@@ -61,7 +62,7 @@ class UserRepository extends BaseRepository{
         try{
             $email = $user->getEmail();
             $stmt = $this->connection->prepare("SELECT * FROM Users WHERE Email = :email");
-            $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
             $stmt->execute();
             $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\User');
             $fetchedUser = $stmt->fetch();
@@ -88,7 +89,7 @@ class UserRepository extends BaseRepository{
         try{
             $stmt = $this->connection->prepare("SELECT * FROM Users WHERE Email = ?");
             $stmt->execute([$user->getEmail()]);
-            $user = $stmt->fetch(\PDO::FETCH_ASSOC);
+            $user = $stmt->fetch(PDO::FETCH_ASSOC);
             if ($user) {
                     return true;
             } else {
