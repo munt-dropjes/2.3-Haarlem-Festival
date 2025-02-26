@@ -26,6 +26,7 @@ class ComposerStaticInit8c9d6bbe85511cd5cb5caa87d87255b6
         'E' => 
         array (
             'Exceptions\\' => 11,
+            'Enums\\' => 6,
         ),
         'C' => 
         array (
@@ -55,6 +56,10 @@ class ComposerStaticInit8c9d6bbe85511cd5cb5caa87d87255b6
         'Exceptions\\' => 
         array (
             0 => __DIR__ . '/../..' . '/exceptions',
+        ),
+        'Enums\\' => 
+        array (
+            0 => __DIR__ . '/../..' . '/enums',
         ),
         'Controllers\\Api\\' => 
         array (
