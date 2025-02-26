@@ -1,3 +1,47 @@
+<?php
+// Databaseverbinding (Pas aan naar jouw instellingen)
+$host = 'mysql';
+$dbname = 'jazz';
+$user = 'root';
+$pass = 'secret123';
+
+try {
+    $pdo = new PDO("mysql:host=$host;dbname=$dbname;charset=utf8", $user, $pass);
+    $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
+} catch (PDOException $e) {
+    die("Fout bij verbinden met database: " . $e->getMessage());
+}
+
+// Haal alle dagen en artiesten op uit de database
+$query = "
+    SELECT festival_days.id AS day_id, festival_days.date, 
+           artists.name, artists.image
+    FROM festival_days
+    JOIN artists ON festival_days.id = artists.day_id
+    ORDER BY festival_days.date, artists.name;
+";
+
+$stmt = $pdo->prepare($query);
+$stmt->execute();
+$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+// Data groeperen per dag
+$festivalDays = [];
+foreach ($results as $row) {
+    $dayId = $row['day_id'];
+    if (!isset($festivalDays[$dayId])) {
+        $festivalDays[$dayId] = [
+            'date' => $row['date'],
+            'artists' => []
+        ];
+    }
+    $festivalDays[$dayId]['artists'][] = [
+        'name' => $row['name'],
+        'image' => $row['image']
+    ];
+}
+?>
+
 <main>
     <div class="container-fluid p-0">
 		<img src="images/jazz1.png" class="img-fluid w-100" alt="plaatje kerk haarlem">
@@ -10,7 +54,7 @@
 
 
 
-    <div class="container mt-5">
+<div class="container mt-5">
     <h2 class="text-center mb-4">Festival Line-up</h2>
 
     <div class="accordion" id="festivalAccordion">
@@ -26,7 +70,7 @@
                         <div class="artist-container">
                             <?php foreach ($info['artists'] as $artist) { ?>
                                 <div class="artist-card">
-                                    <img src="images/<?= $artist['image'] ?>" alt="<?= $artist['name'] ?>">
+                                    <img src="images/<?= $artist['image'] ?>" alt="<?= $artist['name'] ?>" width="406" height="225">
                                     <div class="artist-name"><?= strtoupper($artist['name']) ?></div>
                                 </div>
                             <?php } ?>
@@ -37,6 +81,7 @@
         <?php } ?>
     </div>
 </div>
+
 
 
 
