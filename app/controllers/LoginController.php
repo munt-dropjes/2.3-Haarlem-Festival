@@ -3,6 +3,7 @@ namespace Controllers;
 use Services\LoginService;
 use Models\User;
 use Controllers\Controller;
+use Config\reCAPTCHAConfig;
 
 class LoginController extends Controller {
     private $loginService;
@@ -18,7 +19,7 @@ class LoginController extends Controller {
     public function login() {
         if ($_SERVER["REQUEST_METHOD"] == "POST") {
             $recaptcha_url= 'https://www.google.com/recaptcha/api/siteverify';
-            $recaptcha_secret = '6LfcK-IqAAAAANq23MOEd3F0eFD3vVPsr0Z1VTty';
+            $recaptcha_secret = reCAPTCHAConfig::secret;
             $recaptcha_response = $_POST['g-recaptcha-response'];
 
             $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);

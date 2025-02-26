@@ -5,15 +5,19 @@ use Controllers\Controller;
 use Services\CreateAccountService;
 use Models\User;
 use Enums\roleEnum;
+use Services\MailerService;
+use Config\reCAPTCHAConfig;
 
 class CreateAccountController extends Controller {
     private $accountService;
+    private $mailerService;
 
     
 
     function __construct()
         {
             $this->accountService = new CreateAccountService();
+            $this->mailerService = new MailerService();
         }
     public function index() {
         $this->view('create-account/index');
@@ -22,7 +26,7 @@ class CreateAccountController extends Controller {
     public function create() {
         if ($_SERVER['REQUEST_METHOD'] = 'POST') {
             $recaptcha_url= 'https://www.google.com/recaptcha/api/siteverify';
-            $recaptcha_secret = '6LfcK-IqAAAAANq23MOEd3F0eFD3vVPsr0Z1VTty';
+            $recaptcha_secret = reCAPTCHAConfig::secret;
             $recaptcha_response = $_POST['g-recaptcha-response'];
 
             $recaptcha = file_get_contents($recaptcha_url . '?secret=' . $recaptcha_secret . '&response=' . $recaptcha_response);
@@ -33,6 +37,7 @@ class CreateAccountController extends Controller {
                 try{
                     $user = $this->createUser();
                     $this->accountService->insert($user);
+                    $this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Account Created', 'Your account has been created successfully!');
                     $this->view('create-account/success');
                 } catch (\Exception $e) {
                     $this->view('create-account/index', ['error' => $e->getMessage()]);

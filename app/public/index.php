@@ -21,5 +21,6 @@ $router->setNamespace('\Controllers');
     $router->post('/createaccount', 'createaccountController@create');
     $router->get('/login', 'LoginController@index');
     $router->post('/login', 'LoginController@login');
+    $router->get('/logout', 'LogOutController@index');
 // Run the router
 $router->run();

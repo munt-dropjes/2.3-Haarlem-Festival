@@ -16,7 +16,7 @@
 					<img src="/assets/icons/wishlist.svg" alt="">
 				</a>
 
-				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" onclick="toggleSidebar()">
+				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" onclick="toggleAccountSidebar()">
 					<i class="fa-solid fa-user fs-2"></i>
 				</a>
 			</div>
@@ -31,4 +31,16 @@
 		<a href="#">STROLL THROUGH HISTORY</a>
 		<a href="#">MAGIC TEYLERS</a>
 	</div>
+
+
+    <div id="accountbar" class="accountbar">
+        <?php if (isset($_SESSION['user'])) : ?>
+            <a href="/profile">Profile</a>
+            <a href="/logout">Logout</a>
+        <?php else : ?>
+            <a href="/login">Login</a>
+            <a href="/createaccount">Create Account</a>
+        <?php endif; ?>
+    </div>
+
 </header>

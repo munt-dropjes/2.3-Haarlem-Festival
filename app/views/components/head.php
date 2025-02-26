@@ -33,15 +33,6 @@
 
 	<!-- Google reCAPTCHA -->
 	<script src="https://www.google.com/recaptcha/api.js"></script>
-	<script>
-		function onSubmit(token) {
-			document.getElementById("create-account-form").submit();
-		}
-
-		function onSubmitLogin(token) {
-			document.getElementById("login-form").submit();
-		}
- 	</script>
 </head>
 
 <body>

@@ -6,6 +6,7 @@ class Controller
 {
     public function view($viewPath, $data = []) : void
     {
+        session_start();
         //extract variables to be used in the view
         extract($data);
 
