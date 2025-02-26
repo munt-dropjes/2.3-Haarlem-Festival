@@ -14,7 +14,7 @@
                     </form>
                 </div>
                 <div class="col-sm-6">
-                    <a href="/cms/users/create" class="btn btn-success" data-toggle="modal"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
+                    <a href="/cms/users/create" class="btn btn-success"><i class="material-icons">&#xE147;</i> <span>Add New User</span></a>
                 </div>
             </div>
         </div>
@@ -24,6 +24,7 @@
                     <tr>
                         <th>Naam</th>
                         <th>Email</th>
+                        <th>Role</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -33,9 +34,10 @@
                         <tr>
                             <td><?= $user->getName() ?></td>
                             <td><?= $user->getEmail() ?></td>
+                            <td><?= $user->getRole() ?></td>
                             <td>
-                                <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="edit" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete" data-toggle="modal"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -47,9 +49,11 @@
                 <b><?= $totalEntries ?></b> entries
             </div>
             <ul class="pagination">
-                <li class="page-item">
+                <?php if ($offset + $limit < $totalEntries): ?>
+                    <li class="page-item">
                     <a href="?limit=<?= $limit ?>&offset=<?= $offset - $limit ?>&search<?= $search ?>">Previous</a>
                 </li>
+                <?php endif; ?>
                 <li class="page-item active">
                     <a href="?limit=<?= $limit ?>&offset=0" class="page-link"><?= ceil($offset / $limit) + 1 ?></a>
                 </li>

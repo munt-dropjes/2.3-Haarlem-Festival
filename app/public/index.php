@@ -43,5 +43,8 @@ $router->before('GET|POST', '/cms/.*', function() {
     //cms
     $router->get('/cms', 'CmsController@index');
     $router->get('/cms/users', 'CmsController@users');
+    $router->get('/cms/users/delete', 'CmsController@users');
+    $router->get('/cms/users/edit', 'CmsController@users');
+    
 // Run the router
 $router->run();
