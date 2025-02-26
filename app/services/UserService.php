@@ -15,21 +15,11 @@ class UserService {
     }
 
     // ~~Create~~
-    public function create($user) : User {
-        return $this->userRepository->create($this->createUser(
-            $user['email'],
-            $user['name'],
-            $user['password'],
-            $user['phone'],
-            $user['country']
-        ));
-    }
-
-    public function insert($user) {
+    public function insertUser($user) : User {
         if ($this->userRepository->checkEmail($user)){
             throw new \Exception("Email already exists");
         }
-        $this->userRepository->insert($user);        
+        return $this->userRepository->insertUser($user);        
     }
 
     // ~~Read~~
@@ -37,7 +27,7 @@ class UserService {
         return $this->userRepository->getAllUsers($limit, $offset, $search);
     }
 
-    private function GetUser(User $user) {
+    private function getUser(User $user) {
         if (empty($user->getEmail()) || empty($user->getPassword())) {
             throw new \InvalidArgumentException("Email and password cannot be empty.");
         }
@@ -56,12 +46,12 @@ class UserService {
     }
 
     // ~~Update~~
-    public function update($user, $email) : User {
+    public function updateUser($user, $email) : User {
         return $this->userRepository->update($user);
     }
 
     // ~~Delete~~
-    public function delete($email) : void {
+    public function deleteUser($email) : void {
         $this->userRepository->delete($email);
     }
 
@@ -73,9 +63,8 @@ class UserService {
         return $authenticatedUser;
     }
 
-    // ~~ Private Methods ~~
-
-    private function createUser($email, $name, $password, $phone, $country) {
+    // ~~Rest of the methods~~
+    public function create($email, $name, $password, $phone, $country) {
         $user = new User();
         $user->setRole(roleEnum::CUSTOMER);
         $user->setEmail($email);

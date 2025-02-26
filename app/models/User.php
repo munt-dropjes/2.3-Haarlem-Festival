@@ -5,7 +5,7 @@ class User {
     private $UserID;
     private $Role;
     private $Name;
-    private $Email;
+    private $Email; // Email is the username and always in lowercase
     private $Password;
     private $Phone;
     private $Country;
