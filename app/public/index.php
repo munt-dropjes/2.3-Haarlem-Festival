@@ -30,10 +30,14 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
 
+    $router->get('/createaccount', 'createaccountController@index');
+    $router->post('/createaccount', 'createaccountController@create');
+    $router->get('/login', 'LoginController@index');
+    $router->post('/login', 'LoginController@login');
+    $router->get('/logout', 'LogOutController@index');
 
     //cms
     $router->get('/cms', 'CmsController@index');
     $router->get('/cms/users', 'CmsController@users');
-
 // Run the router
 $router->run();
