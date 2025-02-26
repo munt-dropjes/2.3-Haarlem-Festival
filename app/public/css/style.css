@@ -23,7 +23,9 @@ body {
 p {
 	font-family: 'Quicksand', sans-serif;
 }
-
+h1 {
+	font-family: 'Monoton';
+}
 h2 {
 	font-family: 'Zen Dots', sans-serif;
 }

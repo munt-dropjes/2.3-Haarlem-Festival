@@ -16,6 +16,7 @@ $router->setNamespace('\Controllers');
     //home
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
+    $router->get('/jazz', 'JazzController@index');
 
 // Run the router
 $router->run();
