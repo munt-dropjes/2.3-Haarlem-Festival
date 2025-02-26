@@ -26,8 +26,8 @@ class CmsController extends Controller {
         }
 
         $this->view('cms/users', [
-            'users' => $this->userService->getAllUsers(),
-            'totalEntries' => $this->userService->countTotalUsers(),
+            'users' => $userService->getAllUsers($limit, $offset, $search),
+            'totalEntries' => $userService->countTotalUsers(),
             'limit' => $limit,
             'offset' => $offset,
             'search' => $search

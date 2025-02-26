@@ -31,7 +31,7 @@ class UserService {
         if (empty($user->getEmail()) || empty($user->getPassword())) {
             throw new \InvalidArgumentException("Email and password cannot be empty.");
         }
-        $dbUser = $this->userRepository->retrieveUser($user);
+        $dbUser = $this->userRepository->getUser($user);
         if ($dbUser === null) {
             throw new \InvalidArgumentException("User not found.");
         }

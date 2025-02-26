@@ -9,7 +9,7 @@ class UserRepository extends BaseRepository{
     // ~~Create~~
     public function insertUser($user) : User {
         try{
-            $sql = "INSERT INTO Users (role, name, email, password, phone, country) 
+            $sql = "INSERT INTO Users (Role, Name, Email, Password, Phone, Country) 
                     VALUES (?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
@@ -31,20 +31,22 @@ class UserRepository extends BaseRepository{
     public function getAllUsers($limit, $offset, $search) : array {
         try{
             $sql = "SELECT * 
-                    FROM users 
-                    WHERE username LIKE :search 
-                    OR email LIKE :search 
-                    ORDER BY username
+                    FROM Users 
+                    WHERE Name LIKE :search 
+                    OR Email LIKE :search 
+                    ORDER BY Email
                     LIMIT :limit 
                     OFFSET :offset";
+
             $stmt = $this->connection->prepare($sql);
             $stmt->bindParam(':limit', $limit, \PDO::PARAM_INT);
             $stmt->bindParam(':offset', $offset, \PDO::PARAM_INT);
             $stmt->bindParam(':search', $search);
+
             $stmt->execute();
             
             $users = [];
-            while($row = $stmt->fetch(PDO::FETCH_OBJ)){
+            while($row = $stmt->fetch(\PDO::FETCH_OBJ)){
                 $users[] = $this->createUser($row);
             }
             return $users;
@@ -70,10 +72,21 @@ class UserRepository extends BaseRepository{
         }
     }
 
+    public function countTotalUsers() : int {
+        try{
+            $stmt = $this->connection->prepare("SELECT COUNT(*) FROM Users");
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        }
+        catch(Exception $e){
+            throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to count total users");
+        }
+    }
+
     public function checkEmail($user): bool
     {
         try{
-            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE email = ?");
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE Email = ?");
             $stmt->execute([$user->getEmail()]);
             $user = $stmt->fetch(\PDO::FETCH_ASSOC);
             if ($user) {
@@ -91,8 +104,8 @@ class UserRepository extends BaseRepository{
     public function updateUser($user) : User {
         try{
             $sql = "UPDATE Users 
-                    SET role = ?, name = ?, email = ?, password = ?, phone = ?, country = ?
-                    WHERE email = ?";
+                    SET Role = ?, Name = ?, Email = ?, Password = ?, Phone = ?, Country = ?
+                    WHERE Email = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
                 $user->getRole(),
@@ -113,7 +126,7 @@ class UserRepository extends BaseRepository{
     // ~~Delete~~
     public function deleteUser($email) : void {
         try{
-            $sql = "DELETE FROM Users WHERE email = ?";
+            $sql = "DELETE FROM Users WHERE Email = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([$email]);
         }

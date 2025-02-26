@@ -2,6 +2,11 @@
 
 use Bramus\Router\Router;
 
+require_once __DIR__ . '/../Models/User.php';
+if (session_status() == PHP_SESSION_NONE) {
+    session_start();
+}
+
 require_once __DIR__ . '/../vendor/autoload.php';
 
 $router = new Router();
@@ -13,7 +18,6 @@ $router->before('GET|POST', '/cms/.*', function() {
         return;
     }
     
-    //uncomment this to enable authentication - kan pas na registration ticket
     // if (!isset($_SESSION['user'])) {
     //     header('Location: /login');
     //     exit();
