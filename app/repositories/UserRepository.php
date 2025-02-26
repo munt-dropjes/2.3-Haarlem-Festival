@@ -1,9 +1,24 @@
 <?php
+
 namespace Repositories;
-use Repositories\BaseRepository;
-class CreateAccountRepository extends BaseRepository
+
+use Models\User;
+
+
+class UserRepository extends BaseRepository
 {
-        function insert($user)
+    public function retrieveUser($user): ?User
+    {
+        $email = $user->getEmail();
+        $stmt = $this->connection->prepare("SELECT * FROM Users WHERE Email = :email");
+        $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
+        $stmt->execute();
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\User');
+        $fetchedUser = $stmt->fetch();
+        return $fetchedUser ?: null;
+    }
+
+    public function insert($user)
         {
                 $stmt = $this->connection->prepare("INSERT INTO Users (role, name, email, password, phone, country) VALUES (?, ?, ?, ?, ?, ?)");
                 $stmt->execute([
@@ -16,7 +31,7 @@ class CreateAccountRepository extends BaseRepository
                 ]);
         }
 
-        function checkEmail($user): bool
+    public function checkEmail($user): bool
         {
                 $stmt = $this->connection->prepare("SELECT * FROM Users WHERE email = ?");
                 $stmt->execute([$user->getEmail()]);
@@ -28,4 +43,3 @@ class CreateAccountRepository extends BaseRepository
                 }
         }
 }
-?>

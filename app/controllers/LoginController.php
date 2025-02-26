@@ -4,12 +4,13 @@ use Services\LoginService;
 use Models\User;
 use Controllers\Controller;
 use Config\reCAPTCHAConfig;
+use Services\UserService;
 
 class LoginController extends Controller {
-    private $loginService;
+    private $userService;
     function __construct()
         {
-            $this->loginService = new LoginService();
+            $this->userService = new UserService();
         }
 
     public function index() {
@@ -30,13 +31,8 @@ class LoginController extends Controller {
                 try{
                     $email = htmlspecialchars(strtolower($_POST['email']));
                     $password = htmlspecialchars($_POST['password']);
-        
-                    $user = new User();
-                    $user->setEmail($email);
-                    $user->setPasswordOnLogin($password);
                     try{
-                        $authenticatedUser = $this->loginService->check($user);
-        
+                        $authenticatedUser = $this->userService->login($email, $password);
                         if ($authenticatedUser) {
                             session_start();
                             $_SESSION['user'] = $authenticatedUser;

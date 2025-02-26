@@ -15,7 +15,7 @@ $router->setNamespace('\Controllers');
 // Add your routes here:
 // default route
     //home
-    $router->get('/', 'Controller@fourofour');
+    $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
     $router->get('/createaccount', 'createaccountController@index');
     $router->post('/createaccount', 'createaccountController@create');

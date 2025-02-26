@@ -7,17 +7,16 @@ use Models\User;
 use Enums\roleEnum;
 use Services\MailerService;
 use Config\reCAPTCHAConfig;
+use Services\UserService;
 
 class CreateAccountController extends Controller {
-    private $accountService;
     private $mailerService;
-
-    
+    private $userService;
 
     function __construct()
         {
-            $this->accountService = new CreateAccountService();
             $this->mailerService = new MailerService();
+            $this->userService = new UserService();
         }
     public function index() {
         $this->view('create-account/index');
@@ -36,7 +35,7 @@ class CreateAccountController extends Controller {
             if($recaptcha['success'] == 1 AND $recaptcha['score'] >= 0.5 AND $recaptcha['action'] == 'submit'){
                 try{
                     $user = $this->createUser();
-                    $this->accountService->insert($user);
+                    $this->userService->insert($user);
                     $this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Account Created', 'Your account has been created successfully!');
                     $this->view('create-account/success');
                 } catch (\Exception $e) {
@@ -54,14 +53,7 @@ class CreateAccountController extends Controller {
         $password = htmlspecialchars($_POST['password']);
         $phone = htmlspecialchars($_POST['phone']);
         $country = htmlspecialchars($_POST['country']);
-        $user = new User();
-        $user->setRole(roleEnum::CUSTOMER);
-        $user->setEmail($email);
-        $user->setName($name);
-        $user->setPassword($password);
-        $user->setPhone($phone);
-        $user->setCountry($country);
-        return $user;
+        return $this->userService->create($email, $name, $password, $phone, $country);
     }
 }
 ?>

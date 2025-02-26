@@ -14,5 +14,5 @@ function onSubmitLogin(token) {
 
 
 function toggleAccountSidebar() {
-    document.getElementById('accountBar').classList.toggle('active');
+    document.getElementById('accountbar').classList.toggle('active');
 }

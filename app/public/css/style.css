@@ -176,7 +176,7 @@ footer .footer-icon {
     top: var(--header-height);
     right: calc(var(--sidebar-width) * -1);
     width: var(--sidebar-width);
-    height: 100%;
+    height: fit-content;
     display: flex;
     flex-direction: column;
     transition: all 0.5s;
