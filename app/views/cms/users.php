@@ -25,6 +25,7 @@
                         <th>Naam</th>
                         <th>Email</th>
                         <th>Role</th>
+                        <th>Registered At</th>
                         <th>Actions</th>
                     </tr>
                 </thead>
@@ -35,6 +36,7 @@
                             <td><?= $user->getName() ?></td>
                             <td><?= $user->getEmail() ?></td>
                             <td><?= $user->getRole() ?></td>
+                            <td><?= $user->getRegisteredAt ?></td>
                             <td>
                                 <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="edit"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>

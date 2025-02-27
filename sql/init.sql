@@ -9,7 +9,8 @@ CREATE TABLE Users (
     Email VARCHAR(255) NOT NULL UNIQUE,
     Password VARCHAR(255) NOT NULL,
     Phone VARCHAR(255) NOT NULL,
-    Country VARCHAR(255) NOT NULL
+    Country VARCHAR(255) NOT NULL,
+    RegisteredAt DATETIME NOT NULL DEFAULT current_timestamp()
 );
 
 CREATE TABLE Visitors (
