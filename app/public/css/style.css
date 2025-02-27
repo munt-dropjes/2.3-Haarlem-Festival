@@ -1,4 +1,12 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	scroll-margin-top: var(--header-height);
+}
+
 :root {
 	--header-height: 7rem;
 	--sidebar-width: 20rem;
@@ -9,7 +17,6 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-
 }
 
 main {
@@ -25,7 +32,7 @@ p {
 	font-family: 'Quicksand', sans-serif;
 }
 
-h1{
+h1 {
 	font-family: 'Zen Dots', sans-serif;
 }
 
@@ -87,7 +94,6 @@ h2 {
 	font-weight: 900;
 	text-decoration: none;
 	padding-block: 0.5rem;
-
 }
 
 #sidebar.active {
@@ -126,19 +132,17 @@ footer .footer-icon {
 
 
 .create-account-container {
-    max-width: 500px;
-    margin: 0 auto; 
+	max-width: 500px;
+	margin: 0 auto;
 }
 
-.required{
-	color: red !important; 
-	display: inline; 
+.required {
+	color: red !important;
+	display: inline;
 	float: none;
 }
 
-
-
-.btn-primary{
+.btn-primary {
 	background-color: #FCFC7A !important;
 	color: #000 !important;
 	font-family: 'holtwood-one-sc-regular', sans-serif !important;
@@ -147,12 +151,12 @@ footer .footer-icon {
 	border-radius: 50px !important;
 }
 
-.create-account-container{
+.create-account-container {
 	max-width: 600px !important;
-	margin: 0 auto; 
+	margin: 0 auto;
 }
 
-.submitbtn{
+.submitbtn {
 	background-color: #FCFC7A !important;
 	color: #000 !important;
 	font-family: 'holtwood-one-sc-regular', sans-serif !important;
@@ -161,35 +165,35 @@ footer .footer-icon {
 	border-radius: 50px !important;
 }
 
-.submitbtn:hover{
+.submitbtn:hover {
 	filter: brightness(90%);
 }
 
-.form-control{
+.form-control {
 	border-radius: 50px !important;
 }
 
 #accountbar {
-    background-color: #FCFC7A;
-    padding: 2rem;
-    position: fixed;
-    top: var(--header-height);
-    right: calc(var(--sidebar-width) * -1);
-    width: var(--sidebar-width);
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.5s;
+	background-color: #FCFC7A;
+	padding: 2rem;
+	position: fixed;
+	top: var(--header-height);
+	right: calc(var(--sidebar-width) * -1);
+	width: var(--sidebar-width);
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.5s;
 }
 
 #accountbar a {
-    color: #4B0082;
-    font-size: 1rem;
-    font-weight: 900;
-    text-decoration: none;
-    padding-block: 0.5rem;
+	color: #4B0082;
+	font-size: 1rem;
+	font-weight: 900;
+	text-decoration: none;
+	padding-block: 0.5rem;
 }
 
 #accountbar.active {
-    right: 0;
+	right: 0;
 }
