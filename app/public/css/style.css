@@ -8,7 +8,7 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-
+	z-index: 1000;
 }
 
 main {
@@ -113,4 +113,46 @@ footer .footer-icon {
 	color: white;
 
 	box-shadow: 5px 5px 0 0 #FCFC7A;
+}
+
+.artist-container {
+	display: flex;  /* Zorgt ervoor dat de artiesten naast elkaar staan */
+	overflow-x: auto; /* Maakt horizontale scroll mogelijk */
+	gap: 10px; /* Ruimte tussen de kaarten */
+	padding-bottom: 10px; /* Extra ruimte onder de container */
+	flex-wrap: nowrap; /* Voorkomt dat de artiesten naar een nieuwe regel gaan */
+}
+.artist-container::-webkit-scrollbar {
+	height: 10px; /* Hoogte van de horizontale scrollbar */
+  }
+  
+  /* De "duim" (het deel dat je kunt slepen) van de scrollbar */
+  .artist-container::-webkit-scrollbar-thumb {
+	background-color: purple; /* Gele kleur voor de duim */
+	border-radius: 5px; /* Ronde hoeken voor de duim */
+	border: 2px solid #ccc; /* Een rand rondom de duim */
+  }
+  
+  /* De achtergrond van de scrollbar */
+  .artist-container::-webkit-scrollbar-track {
+	background-color: yellow; /* Kleur van de achtergrond van de scrollbar */
+	border-radius: 5px; /* Ronde hoeken voor de achtergrond */
+  }
+.artist-card {
+	flex: 0 0 auto; /* Zorgt ervoor dat de kaarten hun eigen grootte behouden */
+	width: 406px; /* Breedte van de kaarten */
+	text-align: center;
+}
+
+.accordion-button {
+	font-weight: bold;
+}
+
+.accordion-body {
+	padding: 10px 0;
+}
+
+.accordion-collapse {
+	max-height: 400px; /* Maximale hoogte van de accordion */
+	overflow-y: auto; /* Verticaal scrollen inschakelen */
 }

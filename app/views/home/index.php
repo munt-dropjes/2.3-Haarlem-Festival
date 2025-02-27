@@ -13,11 +13,11 @@
 			against the charming backdrop of Haarlem's historic streets.</p>
 	</div>
 	<div class="container mt-4 d-flex justify-content-between align-items-center">
-		<div class="col-md-6">
+		<div class="col-md-6"style="padding: 20px;">
 			<img src="images/homepage2.png" class="img-fluid" alt="festival image" style="height: 400px; width: 726px;">
 		</div>
-		<div class="col-md-6">
-			<h2>Feel the Beat at "The Festival"c</h2>
+		<div class="col-md-6 text-center"style="padding: 20px;">
+			<h2>Feel the Beat at "The Festival"</h2>
 			<p>At Haarlem Dance, we bring you the best in dance, house, techno, and trance, set against the backdrop of
 				Haarlem's most iconic locations and its charming surroundings.
 				Prepare for an extraordinary experience as six of the world's top DJs take the stage in unforgettable
@@ -29,7 +29,7 @@
 		</div>
 	</div>
 	<div class="container mt-4 d-flex justify-content-between align-items-center">
-		<div class="col-md-6">
+		<div class="col-md-6 text-center"style="padding: 20px;">
 			<h2>Discover the Flavors of Haarlem</h2>
 			<p>While Haarlem might not be world-famous for its culinary traditions, it’s a hidden gem for food lovers!
 				On our Yummie page, you’ll find a selection of the city’s best restaurants offering exclusive Festival
@@ -38,15 +38,15 @@
 				crafted just for The Festival. Whether you're a foodie or simply love great cuisine, there's something
 				delicious waiting for you.</p>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6"style="padding: 20px;">
 			<img src="images/Homepage3.png" class="img-fluid" alt="culinary image" style="height: 400px; width: 726px;">
 		</div>
 	</div>
 	<div class="container mt-4 d-flex justify-content-between align-items-center">
-		<div class="col-md-6">
+		<div class="col-md-6"style="padding: 20px;">
 			<img src="images/homepage4.png" class="img-fluid" alt="festival image" style="height: 400px; width: 726px;">
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 text-center"style="padding: 20px;">
 			<h2>Experience the Soul of Haarlem Jazz</h2>
 			<p>Haarlem Jazz is a cornerstone of the city’s vibrant music scene, and during The Festival, we’re bringing
 				its spirit back to life!
@@ -58,7 +58,7 @@
 		</div>
 	</div>
 	<div class="container mt-4 d-flex justify-content-between align-items-center">
-		<div class="col-md-6">
+		<div class="col-md-6 text-center" style="padding: 20px;">
 			<h2>Discover Haarlem’s Fascinating History</h2>
 			<p>Step into the past and uncover the rich history of Haarlem with our guided walking tours. Wander through
 				the city’s historic streets, admire its centuries-old architecture, and hear the captivating stories
@@ -69,16 +69,16 @@
 				Our expert guides will bring Haarlem’s history to life, making it engaging and enjoyable for visitors
 				from around the world.</p>
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6" style="padding: 20px;">
 			<img src="images/homepage5.png" class="img-fluid" alt="jazz image" style="height: 400px; width: 726px;">
 		</div>
 	</div>
 	<div class="container mt-4 d-flex justify-content-between align-items-center">
-		<div class="col-md-6">
+		<div class="col-md-6"style="padding: 20px;">
 			<img src="images/homepage6.png" class="img-fluid" alt="family fun image"
-				style="height: 400px; width: 726px;">
+				style="height: 400px; width: 726px; ">
 		</div>
-		<div class="col-md-6">
+		<div class="col-md-6 text-center"  style="padding: 20px;">
 			<h2>The Secret of Professor Teyler</h2>
 			<p>
 				Embark on an unforgettable adventure at Teyler’s Museum with a special interactive experience designed
