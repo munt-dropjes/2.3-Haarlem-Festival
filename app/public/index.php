@@ -22,5 +22,6 @@ $router->setNamespace('\Controllers');
     $router->get('/login', 'LoginController@index');
     $router->post('/login', 'LoginController@login');
     $router->get('/logout', 'LogOutController@index');
+    $router->get('/stroll', 'StrollController@index');
 // Run the router
 $router->run();

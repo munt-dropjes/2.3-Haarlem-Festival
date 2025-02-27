@@ -16,3 +16,14 @@ function onSubmitLogin(token) {
 function toggleAccountSidebar() {
     document.getElementById('accountbar').classList.toggle('active');
 }
+
+document.addEventListener('DOMContentLoaded', function() {
+	const buttons = document.querySelectorAll('.languageSelectionBarButton button');
+	
+	buttons.forEach(button => {
+		button.addEventListener('click', function() {
+			buttons.forEach(btn => btn.classList.remove('selected'));
+			this.classList.add('selected');
+		});
+	});
+});

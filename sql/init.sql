@@ -127,6 +127,10 @@ CREATE TABLE Invoices (
     FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
 );
 
+CREATE TABLE StrollHome(    
+    
+)
+
 -- add the relationships
 ALTER TABLE Customers ADD CONSTRAINT FK_Customers_Orders FOREIGN KEY (UserID) REFERENCES Users(UserID);
 ALTER TABLE Customers ADD CONSTRAINT FK_Customers_ShoppingCart FOREIGN KEY (UserID) REFERENCES Users(UserID);
