@@ -146,3 +146,7 @@ ALTER TABLE Employees ADD CONSTRAINT FK_Employees_Tickets FOREIGN KEY (UserID) R
 
 ALTER TABLE Administrators ADD CONSTRAINT FK_Administrators_Events FOREIGN KEY (UserID) REFERENCES Users(UserID);
 ALTER TABLE Administrators ADD CONSTRAINT FK_Administrators_Orders FOREIGN KEY (UserID) REFERENCES Users(UserID);
+
+-- insert some data
+INSERT INTO Users (Role, Name, Email, Password, Phone, Country) 
+    VALUES ('Customer', 'Daniel Zwart', 'dtzwart@gmail.com', '$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW', '0612345678', 'Netherlands');

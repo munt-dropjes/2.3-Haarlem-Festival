@@ -42,9 +42,10 @@ $router->before('GET|POST', '/cms/.*', function() {
 
     //cms
     $router->get('/cms', 'CmsController@index');
-    $router->get('/cms/users', 'CmsController@users');
-    $router->get('/cms/users/delete', 'CmsController@users');
-    $router->get('/cms/users/edit', 'CmsController@users');
+    $router->get('/cms/users', 'CmsUserController@index');
+    $router->post('/cms/users/create', 'CmsUserController@create');
+    $router->post('/cms/users/delete', 'CmsUserController@delete');
+    $router->post('/cms/users/edit', 'CmsUserController@update');
     
 // Run the router
 $router->run();
