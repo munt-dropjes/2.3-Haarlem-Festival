@@ -18,24 +18,16 @@ class UserService {
         }
         $this->repository->insert($user);        
     }
-    
-    public function login($email, $password) {
-        $user = new User();
-        $user->setEmail($email);
-        $user->setPasswordOnLogin($password);
-        $authenticatedUser = $this->GetUser($user);
-        return $authenticatedUser;
-    }
 
-    private function GetUser(User $user) {
-        if (empty($user->getEmail()) || empty($user->getPassword())) {
+    public function login($email, $password) {
+        if (empty($email) || empty($password)) {
             throw new \InvalidArgumentException("Email and password cannot be empty.");
         }
-        $dbUser = $this->repository->retrieveUser($user);
+        $dbUser = $this->repository->retrieveUser($email);
         if ($dbUser === null) {
             throw new \InvalidArgumentException("User not found.");
         }
-        if (password_verify($user->getPassword(), $dbUser->getPassword())) {
+        if (password_verify($password, $dbUser->getPassword())) {
             return $dbUser; 
         }
         return null;

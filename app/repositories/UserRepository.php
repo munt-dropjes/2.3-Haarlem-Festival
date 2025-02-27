@@ -7,9 +7,8 @@ use Models\User;
 
 class UserRepository extends BaseRepository
 {
-    public function retrieveUser($user): ?User
+    public function retrieveUser($email): ?User
     {
-        $email = $user->getEmail();
         $stmt = $this->connection->prepare("SELECT * FROM Users WHERE Email = :email");
         $stmt->bindParam(':email', $email, \PDO::PARAM_STR);
         $stmt->execute();
