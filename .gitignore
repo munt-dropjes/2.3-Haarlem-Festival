@@ -12,3 +12,9 @@
 .app/vendor/tinymce/tinymce
 .vs
 /app/vendor/*
+app/vendor/composer/platform_check.php
+app/vendor/composer/installed.php
+app/vendor/composer/installed.json
+app/vendor/composer/autoload_static.php
+app/vendor/composer/autoload_psr4.php
+app/composer.lock
