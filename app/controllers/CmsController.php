@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Services\UserService;
+use Models\User;
 
 class CmsController extends Controller {
 
@@ -23,14 +24,14 @@ class CmsController extends Controller {
         }
 
         if (isset($_POST['edit'])) {
-            $user = new User();
-            $user->setRole($_POST['role']);
-            $user->setName($_POST['name']);
-            $user->setEmail($_POST['email']);
-            $user->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
-            $user->setPhone($_POST['phone']);
-            $user->setCountry($_POST['country']);
-            $userService->updateUser($user, $_POST['email']);
+            $updateUser = new User();
+            $updateUser->setRole($_POST['role']);
+            $updateUser->setName($_POST['name']);
+            $updateUser->setEmail($_POST['email']);
+            $updateUser->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
+            $updateUser->setPhone($_POST['phone']);
+            $updateUser->setCountry($_POST['country']);
+            $userService->updateUser($updateUser, $_POST['email']);
         }
 
         if (isset($_POST['create'])) {

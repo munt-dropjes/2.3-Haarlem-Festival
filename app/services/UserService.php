@@ -27,6 +27,10 @@ class UserService {
         return $this->userRepository->getAllUsers($limit, $offset, $search);
     }
 
+    public function getUserByEmail($email) : User {
+        return $this->userRepository->getUserByEmail($email);
+    }
+
     private function getUser(User $user) {
         if (empty($user->getEmail()) || empty($user->getPassword())) {
             throw new \InvalidArgumentException("Email and password cannot be empty.");
@@ -47,12 +51,12 @@ class UserService {
 
     // ~~Update~~
     public function updateUser($user, $email) : User {
-        return $this->userRepository->update($user);
+        return $this->userRepository->updateUser($user);
     }
 
     // ~~Delete~~
     public function deleteUser($email) : void {
-        $this->userRepository->delete($email);
+        $this->userRepository->deleteUser($email);
     }
 
     public function login($email, $password) {

@@ -57,6 +57,21 @@ class UserRepository extends BaseRepository{
         }
     }
 
+    public function getUserByEmail($email): ?User
+    {
+        try{
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE Email = :email");
+            $stmt->bindParam(':email', $email, PDO::PARAM_STR);
+            $stmt->execute();
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\User');
+            $fetchedUser = $stmt->fetch();
+            return $fetchedUser ?: null;
+        }
+        catch(Exception $e){
+            throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get user with email: " . $email);
+        }
+    }
+    
     public function getUser($user): ?User
     {
         try{
