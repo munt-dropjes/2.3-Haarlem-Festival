@@ -1,0 +1,201 @@
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	scroll-margin-top: var(--header-height);
+}
+
+:root {
+	--header-height: 7rem;
+	--sidebar-width: 20rem;
+}
+
+header {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	
+	z-index: 9999;
+}
+
+main {
+	min-height: 1080px;
+	margin-top: var(--header-height);
+}
+
+body {
+	background: linear-gradient(to bottom, #F28DE5, #B2F5EA);
+}
+
+p {
+	font-family: 'Quicksand', sans-serif;
+}
+
+h1 {
+	font-family: 'Zen Dots', sans-serif;
+}
+
+h2 {
+	font-family: 'Zen Dots', sans-serif;
+}
+
+.navbar {
+	background-color: #4B0082;
+	height: var(--header-height);
+}
+
+.form-label {
+	color: #000;
+	font-family: 'Zen Dots', sans-serif;
+
+}
+
+.nav-button {
+	color: black;
+	background-color: #FCFC7A;
+
+	width: 4rem;
+	height: 4rem;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.logo {
+	height: 100%;
+}
+
+.logo>img {
+	height: 100%;
+}
+
+#sidebar {
+	background-color: #FCFC7A;
+	padding: 2rem;
+
+	position: fixed;
+	top: var(--header-height);
+	left: calc(var(--sidebar-width) * -1);
+
+	width: var(--sidebar-width);
+	height: 100%;
+
+	display: flex;
+	flex-direction: column;
+
+	transition: all 0.5s;
+}
+
+#sidebar a {
+	color: #4B0082;
+	font-size: 1rem;
+	font-weight: 900;
+	text-decoration: none;
+	padding-block: 0.5rem;
+}
+
+#sidebar.active {
+	left: 0;
+}
+
+
+footer {
+	min-height: 15rem;
+}
+
+footer .footer-icon {
+	height: 3rem;
+}
+
+
+.CTA {
+	background-color: #FCFC7A;
+	color: black;
+	font-size: 1.5rem;
+	font-weight: 900;
+	text-align: center;
+	padding: 1rem;
+
+	box-shadow: 5px 5px 0 0 #4B0082;
+	transition-property: box-shadow color background-color;
+	transition-duration: 300ms;
+}
+
+.CTA:hover {
+	background-color: #4B0082;
+	color: white;
+
+	box-shadow: 5px 5px 0 0 #FCFC7A;
+}
+
+
+.create-account-container {
+	max-width: 500px;
+	margin: 0 auto;
+}
+
+.required {
+	color: red !important;
+	display: inline;
+	float: none;
+}
+
+.btn-primary {
+	background-color: #FCFC7A !important;
+	color: #000 !important;
+	font-family: 'holtwood-one-sc-regular', sans-serif !important;
+	border-color: #000 !important;
+	font-size: 20pt !important;
+	border-radius: 50px !important;
+}
+
+.create-account-container {
+	max-width: 600px !important;
+	margin: 0 auto;
+}
+
+.submitbtn {
+	background-color: #FCFC7A !important;
+	color: #000 !important;
+	font-family: 'holtwood-one-sc-regular', sans-serif !important;
+	border-color: #000 !important;
+	font-size: 20pt !important;
+	border-radius: 50px !important;
+}
+
+.submitbtn:hover {
+	filter: brightness(90%);
+}
+
+.form-control {
+	border-radius: 50px !important;
+}
+
+#accountbar {
+	background-color: #FCFC7A;
+	padding: 2rem;
+	position: fixed;
+	top: var(--header-height);
+	right: calc(var(--sidebar-width) * -1);
+	width: var(--sidebar-width);
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.5s;
+}
+
+#accountbar a {
+	color: #4B0082;
+	font-size: 1rem;
+	font-weight: 900;
+	text-decoration: none;
+	padding-block: 0.5rem;
+}
+
+#accountbar.active {
+	right: 0;
+}

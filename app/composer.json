@@ -7,10 +7,12 @@
       "Repositories\\": "repositories",
       "Config\\": "config",
       "Exceptions\\": "exceptions",
-      "Controllers\\Api\\": "controllers/api"
+      "Controllers\\Api\\": "controllers/api",
+      "Enums\\": "enums"
     }
   },
   "require": {
-    "bramus/router": "~1.6"
+    "bramus/router": "~1.6",
+    "phpmailer/phpmailer": "^6.9.1"
   }
 }
