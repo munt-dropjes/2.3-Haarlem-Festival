@@ -11,6 +11,7 @@ return array(
     'PHPMailer\\PHPMailer\\' => array($vendorDir . '/phpmailer/phpmailer/src'),
     'Models\\' => array($baseDir . '/models'),
     'Exceptions\\' => array($baseDir . '/exceptions'),
+    'Enums\\' => array($baseDir . '/enums'),
     'Controllers\\Api\\' => array($baseDir . '/controllers/api'),
     'Controllers\\' => array($baseDir . '/controllers'),
     'Config\\' => array($baseDir . '/config'),

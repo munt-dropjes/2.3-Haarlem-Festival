@@ -1,5 +1,6 @@
 <?php
 
+use App\Controllers\CreateAccountController;
 use Bramus\Router\Router;
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -18,5 +19,10 @@ $router->setNamespace('\Controllers');
     $router->get('/home', 'HomeController@index');
     $router->get('/jazz', 'JazzController@index');
 
+    $router->get('/createaccount', 'createaccountController@index');
+    $router->post('/createaccount', 'createaccountController@create');
+    $router->get('/login', 'LoginController@index');
+    $router->post('/login', 'LoginController@login');
+    $router->get('/logout', 'LogOutController@index');
 // Run the router
 $router->run();
