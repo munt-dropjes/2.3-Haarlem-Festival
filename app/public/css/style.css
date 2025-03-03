@@ -170,7 +170,7 @@ footer .footer-icon {
 .accordion-collapse {
 	max-height: 400px; /* Maximale hoogte van de accordion */
 	overflow-y: auto; /* Verticaal scrollen inschakelen */
-
+}
 .create-account-container {
 	max-width: 500px;
 	margin: 0 auto;
