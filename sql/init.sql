@@ -60,10 +60,14 @@ CREATE TABLE Jazz (
     FOREIGN KEY (EventID) REFERENCES Events(EventID)
 );
 
+--Think of way to add pictures to the events
+--for reference can add 1 to each event, makes updating it per event more easy
+--can add 1 picture to be used by all events of the same type, makes it take up less space in the db but do need to add another table for that.
 CREATE TABLE Stroll (
     EventID UUID PRIMARY KEY,
     Language VARCHAR(255) NOT NULL,
     Guide VARCHAR(255) NOT NULL,
+    FamilyTicketPrice DECIMAL(10, 2) NOT NULL,
     FOREIGN KEY (EventID) REFERENCES Events(EventID)
 );
 
@@ -127,9 +131,6 @@ CREATE TABLE Invoices (
     FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
 );
 
-CREATE TABLE StrollHome(    
-    
-)
 
 -- add the relationships
 ALTER TABLE Customers ADD CONSTRAINT FK_Customers_Orders FOREIGN KEY (UserID) REFERENCES Users(UserID);
