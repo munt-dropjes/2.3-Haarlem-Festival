@@ -10,6 +10,7 @@ class User {
     private $Phone;
     private $Country;
     private $Verified;
+    private $ResetToken;
 
     public function getID() {
         return $this->UserID;
@@ -81,6 +82,15 @@ class User {
     public function setVerified($verified) {
         $this->Verified = $verified;
         return $this->Verified;
+    }
+
+    public function getResetToken() {
+        return $this->ResetToken;
+    }
+
+    public function setResetToken($resetToken) {
+        $this->ResetToken = $resetToken;
+        return $this->ResetToken;
     }
 
 }

@@ -1,11 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-
-<body class="d-flex flex-column min-vh-100">
-
 <main>
     <div class="container mt-5 create-account-container">
-      <h2 class="text-center">Login</h2>
+      <h2 class="text-center">Forgot Password</h2>
       <?php if (isset($error)): ?>
         <div class="alert alert-danger" role="alert">
           <?php echo $error; ?>
