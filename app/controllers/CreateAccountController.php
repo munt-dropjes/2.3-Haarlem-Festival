@@ -35,7 +35,7 @@ class CreateAccountController extends Controller {
             if($recaptcha['success'] == 1 AND $recaptcha['score'] >= 0.5 AND $recaptcha['action'] == 'submit'){
                 try{
                     $user = $this->createUser();
-                    $this->userService->insert($user);
+                    $this->userService->insertUser($user);
                     $this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Account Created', 'Your account has been created successfully!');
                     $this->view('create-account/success');
                 } catch (\Exception $e) {
