@@ -5,10 +5,7 @@ namespace Controllers;
 class Controller
 {
     public function view($viewPath, $data = []) : void
-    {
-        //start session
-        session_start();
-        
+    {        
         //extract variables to be used in the view
         extract($data);
 

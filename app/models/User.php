@@ -5,12 +5,13 @@ class User {
     private $UserID;
     private $Role;
     private $Name;
-    private $Email;
+    private $Email; // Email is the username and always in lowercase
     private $Password;
     private $Phone;
     private $Country;
     private $Verified;
     private $ResetToken;
+    private $RegisteredAt;
 
     public function getID() {
         return $this->UserID;
@@ -91,7 +92,15 @@ class User {
     public function setResetToken($resetToken) {
         $this->ResetToken = $resetToken;
         return $this->ResetToken;
+
+    public function getRegisteredAt() {
+        return $this->RegisteredAt;
     }
 
+    public function setRegisteredAt($registeredAt) {
+        $this->RegisteredAt = $registeredAt;
+        return $this->RegisteredAt;
+
+    }
 }
 ?>
