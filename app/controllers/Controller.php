@@ -5,7 +5,7 @@ namespace Controllers;
 class Controller
 {
     public function view($viewPath, $data = []) : void
-    {
+    {        
         //extract variables to be used in the view
         extract($data);
 

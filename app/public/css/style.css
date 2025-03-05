@@ -1,3 +1,12 @@
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	scroll-margin-top: var(--header-height);
+}
+
 :root {
 	--header-height: 7rem;
 	--sidebar-width: 20rem;
@@ -8,7 +17,8 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-
+	
+	z-index: 9999;
 }
 
 main {
@@ -24,6 +34,10 @@ p {
 	font-family: 'Quicksand', sans-serif;
 }
 
+h1 {
+	font-family: 'Zen Dots', sans-serif;
+}
+
 h2 {
 	font-family: 'Zen Dots', sans-serif;
 }
@@ -31,6 +45,12 @@ h2 {
 .navbar {
 	background-color: #4B0082;
 	height: var(--header-height);
+}
+
+.form-label {
+	color: #000;
+	font-family: 'Zen Dots', sans-serif;
+
 }
 
 .nav-button {
@@ -76,7 +96,6 @@ h2 {
 	font-weight: 900;
 	text-decoration: none;
 	padding-block: 0.5rem;
-
 }
 
 #sidebar.active {
@@ -114,84 +133,69 @@ footer .footer-icon {
 }
 
 
-.yummieOverview-container {
-    padding: 2rem 0;
-    display: flex;
-    justify-content: center;
+.create-account-container {
+	max-width: 500px;
+	margin: 0 auto;
 }
 
-.yummieOverview-grid {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center;
+.required {
+	color: red !important;
+	display: inline;
+	float: none;
 }
 
-/* ============================= */
-/* YUMMIE OVERVIEW CARDS         */
-/* ============================= */
-
-.yummieOverview-card {
-  
-    background: white;
-    border-radius: 10px;
-    box-shadow: 5px 5px 15px rgba(0, 0, 0, 0.2);
-    overflow: hidden;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    border: 1px solid #ddd;
-    padding: 1rem;
-}
-.yummieOverview-card-body{
-	padding: 5px;
+.btn-primary {
+	background-color: #FCFC7A !important;
+	color: #000 !important;
+	font-family: 'holtwood-one-sc-regular', sans-serif !important;
+	border-color: #000 !important;
+	font-size: 20pt !important;
+	border-radius: 50px !important;
 }
 
-/* Zorgt ervoor dat de knoppen naast elkaar staan */
-.btn-group {
-    display: flex;
-    width: 100%;
-    gap: 10px; /* Ruimte tussen knoppen */
+.create-account-container {
+	max-width: 600px !important;
+	margin: 0 auto;
 }
 
-.yummieOverview-reserve-btn {
-    background-color: #FCFC7A !important;
-    color: black !important;
-    font-size: 1.5rem;
-    font-weight: 900;
-    text-align: center;
-    border: 2px solid black;
-    box-shadow: 5px 5px 0 0 #4B0082;
-    transition: all 0.3s ease-in-out;
+.submitbtn {
+	background-color: #FCFC7A !important;
+	color: #000 !important;
+	font-family: 'holtwood-one-sc-regular', sans-serif !important;
+	border-color: #000 !important;
+	font-size: 20pt !important;
+	border-radius: 50px !important;
 }
 
-.yummieOverview-reserve-btn:hover {
-	background-color: #4B0082 !important;
-    color: white !important;
-    box-shadow: 5px 5px 0 0 #FCFC7A;
+.submitbtn:hover {
+	filter: brightness(90%);
 }
 
-.yummieOverview-details-btn {
-    background-color: #8799A5 !important;
-    color: white !important;
-    font-size: 1.5rem;
-    font-weight: 900;
-    text-align: center;
-    border: 2px solid black;
-    box-shadow: 5px 5px 0 0 #F28DE5;
-    transition: all 0.3s ease-in-out;
+.form-control {
+	border-radius: 50px !important;
 }
 
-.yummieOverview-details-btn:hover {
-    background-color: #999;
+#accountbar {
+	background-color: #FCFC7A;
+	padding: 2rem;
+	position: fixed;
+	top: var(--header-height);
+	right: calc(var(--sidebar-width) * -1);
+	width: var(--sidebar-width);
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.5s;
 }
 
-/* Afbeeldingen netjes maken */
-.yummieOverview-card img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
+#accountbar a {
+	color: #4B0082;
+	font-size: 1rem;
+	font-weight: 900;
+	text-decoration: none;
+	padding-block: 0.5rem;
 }
 
-
-
+#accountbar.active {
+	right: 0;
+}

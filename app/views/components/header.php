@@ -12,23 +12,33 @@
 
 		<div class="col-5 d-flex justify-content-end">
 			<div class="d-flex gap-4">
-				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" onclick="toggleSidebar()">
+				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" href="#">
 					<img src="/assets/icons/wishlist.svg" alt="">
 				</a>
 
-				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" onclick="toggleSidebar()">
+				<button class="nav-button nav-item-icon border-0 rounded-circle p-3" onclick="toggleAccountSidebar()">
 					<i class="fa-solid fa-user fs-2"></i>
-				</a>
+				</button>
 			</div>
 		</div>
 	</nav>
 
 	<div class="sidebar" id="sidebar">
-		<a href="#">HOME</a>
+		<a href="/">HOME</a>
 		<a href="#">JAZZ</a>
 		<a href="#">DANCE</a>
 		<a href="#">YUMMIE</a>
 		<a href="#">STROLL THROUGH HISTORY</a>
 		<a href="#">MAGIC TEYLERS</a>
+	</div>
+
+	<div id="accountbar" class="accountbar">
+		<?php if (isset($_SESSION['user'])): ?>
+			<a href="/profile">Profile</a>
+			<a href="/logout">Logout</a>
+		<?php else: ?>
+			<a href="/login">Login</a>
+			<a href="/createaccount">Create Account</a>
+		<?php endif; ?>
 	</div>
 </header>
