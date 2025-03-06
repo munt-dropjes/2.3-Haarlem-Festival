@@ -79,9 +79,9 @@ foreach ($results as $row) {
      <?php } ?>
     </div>
 </div>
-<div class="timetable-container" style="margin-top: 50px; padding: 20px; background-color: #e1fbff; border-radius: 10px;">
+<div class="timetable-container" style="max-width: 1250px; margin: 50px auto; padding: 20px; background-color: #e1fbff; border-radius: 10px;">
     <h2 class="text-center mb-4">Festival Timetable</h2>
-    <div class="timetable" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+    <div class="timetable" style="display: grid; gap: 10px;">
         <?php
         $query = "
             SELECT festival_days.date, artists.name, artists.start_time, artists.end_time
@@ -98,17 +98,25 @@ foreach ($results as $row) {
             $days[$date][] = $row;
         }
         foreach ($days as $day => $performances) {
-            echo "<div class='day-column' style='padding: 10px; background-color: #ffb6f0; border-radius: 10px;'>";
-            echo "<h3 style='margin-bottom: 10px;'>$day</h3>";
-            foreach ($performances as $performance) {
-                echo "<div class='performance' style='background-color: #9e44d6; padding: 5px; margin-bottom: 5px; border-radius: 5px; color: white;'>";
-                echo "<strong>{$performance['name']}</strong><br>";
-                echo date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time']));
-                echo "</div>";
-            }
-            echo "</div>";
+            // Dynamisch aantal kolommen gebaseerd op het aantal optredens
+            $columns = count($performances);
+        ?>
+            <div class='day-column' style='padding: 10px; background-color: #ffb6f0; border-radius: 10px;'>
+                <h3 style='margin-bottom: 10px;'><?= $day ?></h3>
+                <div class="performance-grid" style="display: grid; grid-template-columns: repeat(<?= $columns ?>, 1fr); gap: 10px;">
+                    <?php foreach ($performances as $performance) { ?>
+                        <div class='performance' style='background-color: #9e44d6; padding: 5px; border-radius: 5px; color: white;'>
+                            <strong><?= $performance['name'] ?></strong><br>
+                            <?= date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time'])) ?>
+                        </div>
+                    <?php } ?>
+                </div>
+            </div>
+        <?php
         }
         ?>
     </div>
 </div>
+
+
 </main>
