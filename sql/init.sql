@@ -26,7 +26,7 @@ CREATE TABLE `Events` (
 	`Date` DATE NOT NULL,
 	`Time` TIME NOT NULL,
 	`Location` VARCHAR(255) NOT NULL,
-	`Price` DECIMAL(10, 2) NOT NULL,
+	`Price` float(10, 2) NOT NULL,
 	`AvailableTickets` INT(11) NOT NULL
 );
 
@@ -78,7 +78,7 @@ CREATE TABLE `ShoppingCartItems` (
 
 CREATE TABLE `Stroll` (
 	`EventID` INT(11) NOT NULL,
-	`Language` VARCHAR(255) NOT NULL,
+	`Language` enum('English', 'Dutch', 'Chinese') NOT NULL,
 	`Guide` VARCHAR(255) NOT NULL
 );
 
