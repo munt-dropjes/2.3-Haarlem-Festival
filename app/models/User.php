@@ -92,6 +92,7 @@ class User {
     public function setResetToken($resetToken) {
         $this->ResetToken = $resetToken;
         return $this->ResetToken;
+    }
 
     public function getRegisteredAt() {
         return $this->RegisteredAt;
