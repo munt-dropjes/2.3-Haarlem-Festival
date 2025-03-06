@@ -79,5 +79,36 @@ foreach ($results as $row) {
      <?php } ?>
     </div>
 </div>
-
+<div class="timetable-container" style="margin-top: 50px; padding: 20px; background-color: #e1fbff; border-radius: 10px;">
+    <h2 class="text-center mb-4">Festival Timetable</h2>
+    <div class="timetable" style="display: grid; grid-template-columns: repeat(4, 1fr); gap: 10px;">
+        <?php
+        $query = "
+            SELECT festival_days.date, artists.name, artists.start_time, artists.end_time
+            FROM artists
+            JOIN festival_days ON festival_days.id = artists.day_id
+            ORDER BY festival_days.date, artists.start_time;
+        ";
+        $stmt = $pdo->prepare($query);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        $days = [];
+        foreach ($results as $row) {
+            $date = date("l d F", strtotime($row['date']));
+            $days[$date][] = $row;
+        }
+        foreach ($days as $day => $performances) {
+            echo "<div class='day-column' style='padding: 10px; background-color: #ffb6f0; border-radius: 10px;'>";
+            echo "<h3 style='margin-bottom: 10px;'>$day</h3>";
+            foreach ($performances as $performance) {
+                echo "<div class='performance' style='background-color: #9e44d6; padding: 5px; margin-bottom: 5px; border-radius: 5px; color: white;'>";
+                echo "<strong>{$performance['name']}</strong><br>";
+                echo date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time']));
+                echo "</div>";
+            }
+            echo "</div>";
+        }
+        ?>
+    </div>
+</div>
 </main>
