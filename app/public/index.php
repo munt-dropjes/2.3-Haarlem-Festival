@@ -33,6 +33,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     //home
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
+    $router->get('/yummie', 'YummieController@index');
 
     $router->get('/createaccount', 'createaccountController@index');
     $router->post('/createaccount', 'createaccountController@create');
