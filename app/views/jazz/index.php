@@ -84,10 +84,10 @@ foreach ($results as $row) {
     <div class="timetable" style="display: grid; gap: 10px;">
         <?php
         $query = "
-            SELECT festival_days.date, artists.name, artists.start_time, artists.end_time
+            SELECT festival_days.date, artists.name, artists.start_time, artists.end_time, artists.place
             FROM artists
             JOIN festival_days ON festival_days.id = artists.day_id
-            ORDER BY festival_days.date, artists.start_time;
+            ORDER BY festival_days.date, artists.place, artists.start_time;
         ";
         $stmt = $pdo->prepare($query);
         $stmt->execute();
@@ -98,25 +98,39 @@ foreach ($results as $row) {
             $days[$date][] = $row;
         }
         foreach ($days as $day => $performances) {
-            // Dynamisch aantal kolommen gebaseerd op het aantal optredens
-            $columns = count($performances);
+            // Groeperen per plaats
+            $places = [];
+            foreach ($performances as $performance) {
+                $places[$performance['place']][] = $performance;
+            }
         ?>
             <div class='day-column' style='padding: 10px; background-color: #ffb6f0; border-radius: 10px;'>
                 <h3 style='margin-bottom: 10px;'><?= $day ?></h3>
-                <div class="performance-grid" style="display: grid; grid-template-columns: repeat(<?= $columns ?>, 1fr); gap: 10px;">
-                    <?php foreach ($performances as $performance) { ?>
-                        <div class='performance' style='background-color: #9e44d6; padding: 5px; border-radius: 5px; color: white;'>
-                            <strong><?= $performance['name'] ?></strong><br>
-                            <?= date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time'])) ?>
+
+                <!-- Voor elke plaats op deze dag -->
+                <?php foreach ($places as $place => $placePerformances) { ?>
+                    <div class="place-section" style="margin-bottom: 20px;">
+                        <!-- Plaatsnaam -->
+                        <div class="place" style="background-color: #ff8c8c; padding: 10px; border-radius: 5px;">
+                            <strong><?= $place ?></strong>
                         </div>
-                    <?php } ?>
-                </div>
+
+                        <!-- Tijden voor de artiesten op deze plaats, in een grid naast elkaar -->
+                        <div class="performance-grid" style="display: grid; grid-template-columns: repeat(auto-fill, minmax(200px, 1fr)); gap: 10px; margin-top: 10px;">
+                            <?php foreach ($placePerformances as $performance) { ?>
+                                <div class='performance' style='background-color: #9e44d6; padding: 10px; border-radius: 5px; color: white;'>
+                                    <strong><?= $performance['name'] ?></strong><br>
+                                    <?= date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time'])) ?>
+                                </div>
+                            <?php } ?>
+                        </div>
+                    </div>
+                <?php } ?>
             </div>
         <?php
         }
         ?>
     </div>
 </div>
-
 
 </main>
