@@ -35,10 +35,6 @@ class CmsUserController extends Controller {
     }
 
     public function create(){
-        if (!isset($_POST['create'])) {
-            header('Location: /cms/users');
-        }
-
         $user = new User();
         $user->setRole($_POST['role']);
         $user->setName($_POST['name']);
@@ -50,18 +46,29 @@ class CmsUserController extends Controller {
     }
 
     public function update(){
+        $limit = $_GET['limit'] ?? 10;
+        $offset = $_GET['offset'] ?? 0;
+        $search = $_GET['search'] ?? '';
+
         if (!isset($_POST['edit'])) {
-            header('Location: /cms/users');
+            $this->view('cms/users/index', [
+                'users' => $this->userService->getAllUsers($limit, $offset, $search),
+                'totalEntries' => $this->userService->countTotalUsers(),
+                'limit' => $limit,
+                'offset' => $offset,
+                'search' => $search,
+                'selectedUser' => $this->userService->getUserByEmail($_GET['id'])
+            ]);
         }
 
-        $updateUser = new User();
+        $updateUser = $this->userService->getUserByEmail($_GET['id']);
         $updateUser->setRole($_POST['role']);
         $updateUser->setName($_POST['name']);
         $updateUser->setEmail($_POST['email']);
         $updateUser->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
         $updateUser->setPhone($_POST['phone']);
         $updateUser->setCountry($_POST['country']);
-        $this->userService->updateUser($updateUser, $_POST['email']);
+        $this->userService->updateUser($updateUser, $_POST['id']);
     }
 
     public function delete(){

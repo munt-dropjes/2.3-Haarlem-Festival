@@ -50,8 +50,8 @@ class UserService {
     }
 
     // ~~Update~~
-    public function updateUser($user, $email) : User {
-        return $this->userRepository->updateUser($user);
+    public function updateUser($user, $id) : User {
+        return $this->userRepository->updateUser($user, $id);
     }
 
     // ~~Delete~~

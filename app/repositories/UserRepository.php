@@ -117,11 +117,11 @@ class UserRepository extends BaseRepository{
     }
 
     // ~~Update~~
-    public function updateUser($user) : User {
+    public function updateUser($user, $id) : User {
         try{
             $sql = "UPDATE Users 
                     SET Role = ?, Name = ?, Email = ?, Password = ?, Phone = ?, Country = ?
-                    WHERE Email = ?";
+                    WHERE Id = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
                 $user->getRole(),
@@ -130,7 +130,7 @@ class UserRepository extends BaseRepository{
                 $user->getPassword(),
                 $user->getPhone(),
                 $user->getCountry(),
-                $user->getEmail()
+                $id
             ]);
             return $this->getUser($user);
         }

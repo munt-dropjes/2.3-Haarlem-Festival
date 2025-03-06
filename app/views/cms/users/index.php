@@ -39,7 +39,7 @@
                             <td><?= $user->getRole() ?></td>
                             <td><?= $user->getRegisteredAt() ?></td>
                             <td>
-                                <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="edit" data-bs-toggle="modal" data-bs-target="#updateUser"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="/cms/users/edit" class="edit" data-bs-toggle="modal" data-bs-target="#updateUser" data-updateUser="<?$user?>"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete" data-bs-toggle="modal" data-bs-target="#deleteUser"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -122,17 +122,49 @@
 <div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
   <div class="modal-dialog">
     <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="updateUserLabel">Update User</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Update User
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning">Save changes</button>
-      </div>
+        <div class="modal-header">
+            <h1 class="modal-title fs-5" id="updateUserLabel">Update User</h1>
+            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <form method="post" action="/cms/users/update">
+            <input type="hidden" name="id" id="id" value="<?= $selectedUser->getId() ?>">
+            <div class="modal-body">
+                <div class="form-content">
+                    <div class="form-group">
+                        <label for="name">Name</label>
+                        <input type="text" class="form-control" id="name" name="name" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="email">Email</label>
+                        <input type="email" class="form-control" id="email" name="email" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="phone">Phone</label>
+                        <input type="text" class="form-control" id="phone" name="phone" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="country">Country</label>
+                        <input type="text" class="form-control" id="country" name="country" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="password">Password</label>
+                        <input type="password" class="form-control" id="password" name="password" required>
+                    </div>
+                    <div class="form-group">
+                        <label for="role">Role</label>
+                        <select class="form-select" id="role" name="role">
+                            <option value="Administrator">Admin</option>
+                            <option value="Employee">Employee</option>
+                            <option value="Customer">Customer</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-warning">Save changes</button>
+            </div>
+        </form>
     </div>
   </div>
 </div>
@@ -140,11 +172,11 @@
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteUserLabel">Yeet user</h1>
+        <h1 class="modal-title fs-5" id="deleteUserLabel">Delete user</h1>
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        U sure?
+        Are you sure you want to delete: <?= $user->email ?> ?
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
