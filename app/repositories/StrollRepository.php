@@ -64,5 +64,25 @@ class StrollRepository extends BaseRepository
         $stmt->bindValue(':EventID', $event->getEventID());
         $stmt->execute();
     }
+
+    public function getRoute(){
+        $sql = 'SELECT * FROM StrollRoute';
+        $stmt = $this->connection->query($sql);
+        $result = $stmt->fetchAll();
+        return $result;
+    }
+    
+    public function getDetail($strollRouteID)
+    {
+        $sql = 'SELECT sr.*, sri.Image 
+                FROM StrollRoute sr 
+                LEFT JOIN StrollRouteImages sri ON sr.ID = sri.StrollRouteID 
+                WHERE sr.ID = :StrollRouteID';
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':StrollRouteID', $strollRouteID);
+        $stmt->execute();
+        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
+        return $result;
+    }
 }
 ?>

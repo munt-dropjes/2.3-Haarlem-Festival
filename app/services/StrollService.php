@@ -8,7 +8,7 @@ use Repositories\StrollRepository;
 class StrollService {
     private $strollRepository;
 
-    private function __construct() {
+    public function __construct() {
         $this->strollRepository = new StrollRepository();
     }
 
@@ -26,6 +26,14 @@ class StrollService {
 
     public function deleteStroll(StrollEvent $event) {
         $this->strollRepository->delete($event);
+    }
+
+    public function getDetail($detailIndex) {
+        return $this->strollRepository->getDetail($detailIndex);
+    }
+
+    public function getRoute() {
+        return $this->strollRepository->getRoute();
     }
 
 }

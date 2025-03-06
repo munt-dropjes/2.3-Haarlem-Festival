@@ -1,6 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -37,7 +38,9 @@ p {
 }
 
 h1 {
-	font-family: 'Zen Dots', sans-serif;
+	font-family: "Monoton", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 h2 {

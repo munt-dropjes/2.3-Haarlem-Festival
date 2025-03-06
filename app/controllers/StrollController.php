@@ -2,8 +2,18 @@
 
 namespace Controllers;
 
+use Services\StrollService;
+
 class StrollController extends Controller {
+    private $strollService;
+
+    public function __construct() {
+        $this->strollService = new StrollService();
+    }
     public function index() {
-        $this->view("stroll/index");
+        $data['events'] = $this->strollService->getAll();
+        $data['details'] = $this->strollService->getRoute();
+        $this->view('stroll/index', $data);
+
     }
 }

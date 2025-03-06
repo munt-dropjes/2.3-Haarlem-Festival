@@ -72,6 +72,15 @@ CREATE TABLE Stroll (
     FOREIGN KEY (EventID) REFERENCES Events(EventID)
 );
 
+CREATE TABLE StrollRoute (
+    ID INT AUTO_INCREMENT PRIMARY KEY,
+    Stop INT NOT NULL,
+    Description TEXT NOT NULL,
+    Address VARCHAR(255) NOT NULL,
+    Map BLOB NOT NULL,
+    ImageLocations STRING NOT NULL
+);
+
 CREATE TABLE Tickets (
     TicketID UUID PRIMARY KEY,
     EventID UUID NOT NULL,
