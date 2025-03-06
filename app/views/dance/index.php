@@ -1,4 +1,4 @@
-<main>
+<main id="dance">
 	<div class="top-image container-fluid p-0">
 		<img src="images/dance/dance-festival.png" class="img-fluid w-100" alt="plaatje kerk haarlem">
 	</div>
@@ -161,23 +161,23 @@
 	</script>
 
 	<style>
-		.swiper {
+		#dance .swiper {
 			width: 100%;
 			height: 100%;
 			user-select: none;
 		}
 
-		.swiper-slide-normal {
+		#dance .swiper-slide-normal {
 			height: 150px;
 		}
 
-		.swiper-slide-extended {
+		#dance .swiper-slide-extended {
 			height: calc(150px + 50px + 1rem * 2);
 			background-color: var(--background-color);
 			transition: height 0.5s;
 		}
 
-		.swiper-slide-normal img {
+		#dance .swiper-slide-normal img {
 			display: block;
 			width: 100%;
 			height: 100%;
@@ -186,20 +186,20 @@
 			/* border-radius: 1rem; */
 		}
 
-		.image-container {
+		#dance .image-container {
 			display: block;
 			width: 100%;
 			height: 150px;
 		}
 
-		.image-container img {
+		#dance .image-container img {
 			width: 100%;
 			height: 100%;
 			object-fit: cover;
 		}
 
-		.swiper-slide-normal i,
-		.swiper-slide-extended i {
+		#dance .swiper-slide-normal i,
+		#dance .swiper-slide-extended i {
 			color: #fff;
 			background-color: rgba(0, 0, 0, 0.5);
 			font-size: 1.5rem;
@@ -216,21 +216,21 @@
 			border-radius: 1rem;
 		}
 
-		.swiper-slide:hover i,
-		.swiper-slide-extended:hover i {
+		#dance .swiper-slide:hover i,
+		#dance .swiper-slide-extended:hover i {
 			display: flex;
 		}
 
-		.swiper-slide-extended button {
+		#dance .swiper-slide-extended button {
 			width: 100%;
 			height: 50px;
 		}
 
-		.swiper-slide-extended:hover {
+		#dance .swiper-slide-extended:hover {
 			height: 350px;
 		}
 
-		.swiper-pagination {
+		#dance .swiper-pagination {
 			position: unset;
 		}
 	</style>
