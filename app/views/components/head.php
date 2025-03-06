@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 
 	<!-- JS -->
-	<script src="/js/global.js"></script>
+	<script src="/js/global.js" defer></script>
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
