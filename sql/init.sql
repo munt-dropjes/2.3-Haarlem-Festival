@@ -26,7 +26,7 @@ CREATE TABLE `Events` (
 	`Date` DATE NOT NULL,
 	`Time` TIME NOT NULL,
 	`Location` VARCHAR(255) NOT NULL,
-	`Price` float(10, 2) NOT NULL,
+	`Price` FLOAT(10, 2) NOT NULL,
 	`AvailableTickets` INT(11) NOT NULL
 );
 
@@ -34,8 +34,8 @@ CREATE TABLE `Invoices` (
 	`InvoiceID` INT(11) NOT NULL,
 	`OrderID` INT(11) NOT NULL,
 	`UserID` INT(11) NOT NULL,
-	`TotalAmount` DECIMAL(10, 2) NOT NULL,
-	`VAT` DECIMAL(10, 2) NOT NULL,
+	`TotalAmount` FLOAT(10, 2) NOT NULL,
+	`VAT` FLOAT(10, 2) NOT NULL,
 	`InvoiceDate` datetime NOT NULL
 );
 
@@ -58,7 +58,7 @@ CREATE TABLE `Payments` (
 	`UserID` INT(11) NOT NULL,
 	`Status` enum('Success', 'Failed', 'Pending') NOT NULL,
 	`PaymentDate` datetime NOT NULL,
-	`Amount` DECIMAL(10, 2) NOT NULL,
+	`Amount` FLOAT(10, 2) NOT NULL,
 	`PaymentMethod` enum('iDEAL', 'CreditCard', 'PayPal') NOT NULL
 );
 
