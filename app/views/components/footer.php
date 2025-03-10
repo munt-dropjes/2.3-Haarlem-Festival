@@ -1,7 +1,7 @@
 <footer class="mt-5">
 	<img src="/assets/icons/haarlem.svg" alt="">
 
-	<div class="d-flex p-3 bg-black">
+	<div class="d-flex p-3 pt-0 bg-black">
 		<ul class="col-8 nav list-unstyled d-flex align-self-end gap-4">
 			<li>
 				<a class="text-body-secondary" href="#">
