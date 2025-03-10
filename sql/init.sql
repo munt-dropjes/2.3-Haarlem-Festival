@@ -82,6 +82,15 @@ CREATE TABLE `Stroll` (
 	`Guide` VARCHAR(255) NOT NULL
 );
 
+CREATE TABLE `StrollDetail` (
+    `EventID` INT(11) NOT NULL,
+    `StopNumber` INT(11) NOT NULL,
+    `StopName` VARCHAR(255) NOT NULL,
+    `Description` text NOT NULL,
+	`Adress` VARCHAR(255) NOT NULL,
+	`BreakLocation` BOOLEAN NOT NULL
+);
+
 CREATE TABLE `Tickets` (
 	`TicketID` INT(11) NOT NULL,
 	`EventID` INT(11) NOT NULL,
@@ -125,6 +134,27 @@ VALUES
 		'2025-03-06 12:04:16'
 	);
 
+INSERT INTO
+	`StrollDetail` (
+		`EventID`,
+		`StopNumber`,
+		`StopName`,
+		`Description`,
+		`Adress`,
+		`BreakLocation`
+	)
+VALUES
+	(1, 1, 'Bavo Church', 'Description 1', 'Grote Markt 22, 2011 RD Haarlem', FALSE),
+	(2, 2, 'Grote markt', 'Description 2', 'Grote Markt, 2011 RD Haarlem', FALSE),
+	(3, 3, 'De Hallen', 'Description 3', 'Grote Markt 16, 2011 RD Haarlem', FALSE),
+	(4, 4, 'Proveniershof', 'Description 4', 'Grote Houtstraat 134, 2011 SV Haarlem', FALSE),
+	(5, 5, 'Jopenkerk', 'Description 5', 'Gedempte Voldersgracht 2, 2011 WD Haarlem', TRUE),
+	(6, 6, 'Waalse kerk Haarlem', 'Description 6', 'Begijnhof 10, 2011 HE Haarlem', FALSE),
+	(7, 7, 'Molen de Adriaan', 'Description 7', 'Papentorenvest 1A, 2011 AV Haarlem', FALSE),
+	(8, 8, 'Amsterdamse Poort', 'Description 8' , 'Amsterdamse Poort, 2011 AV Haarlem', FALSE),
+	(9, 9, 'Hof van Bakenes', 'Description 9' , 'Warmoesstraat 13, 2011 HN Haarlem', FALSE);
+
+
 CREATE TABLE `Yummie` (
 	`EventID` INT(11) NOT NULL,
 	`StarRating` INT(11) NOT NULL,
@@ -151,6 +181,8 @@ ALTER TABLE `Tickets` ADD PRIMARY KEY (`TicketID`);
 
 ALTER TABLE `Users` ADD PRIMARY KEY (`UserID`), ADD UNIQUE KEY `Email` (`Email`);
 
+ALTER TABLE `StrollDetail` ADD PRIMARY KEY (`EventID`);
+
 
 
 ALTER TABLE `Artists` MODIFY `ArtistID` INT(11) NOT NULL AUTO_INCREMENT;
@@ -170,6 +202,8 @@ ALTER TABLE `ShoppingCartItems` MODIFY `ItemID` INT(11) NOT NULL AUTO_INCREMENT;
 ALTER TABLE `Tickets` MODIFY `TicketID` INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `Users` MODIFY `UserID` INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+
+ALTER TABLE `StrollDetail` MODIFY `EventID` INT(11) NOT NULL AUTO_INCREMENT;
 
 
 

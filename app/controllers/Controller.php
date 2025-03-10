@@ -13,7 +13,7 @@ class Controller
         require_once __DIR__ . '/../views/components/head.php';
 
         //default header
-        require_once __DIR__ . '/../views/components/header.php';
+        //require_once __DIR__ . '/../views/components/header.php';
 
         //check if the view exists
         if (file_exists(__DIR__ . '/../views/' . $viewPath . '.php')) {

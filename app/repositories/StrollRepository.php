@@ -3,6 +3,7 @@
 namespace Repositories;
 
 use Models\StrollEvent;
+use Models\StrollDetail;
 use PDO;
 
 class StrollRepository extends BaseRepository
@@ -72,17 +73,26 @@ class StrollRepository extends BaseRepository
         return $result;
     }
     
-    public function getDetail($strollRouteID)
+    public function getDetail($strollDetailStopNumber)
     {
-        $sql = 'SELECT sr.*, sri.Image 
-                FROM StrollRoute sr 
-                LEFT JOIN StrollRouteImages sri ON sr.ID = sri.StrollRouteID 
-                WHERE sr.ID = :StrollRouteID';
+        $sql = "SELECT * FROM StrollDetail WHERE StopNumber = :Stop";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindValue(':StrollRouteID', $strollRouteID);
+        $stmt->bindValue(':Stop', $strollDetailStopNumber);
         $stmt->execute();
-        $result = $stmt->fetchAll(PDO::FETCH_ASSOC);
-        return $result;
+        $result = $stmt->fetch(PDO::FETCH_ASSOC);
+
+        if ($result) {
+            $strollDetail = new StrollDetail();
+            $strollDetail->setEventId($result['EventID']);
+            $strollDetail->setStopNumber($result['StopNumber']);
+            $strollDetail->setStopName($result['StopName']);
+            $strollDetail->setDescription($result['Description']);
+            $strollDetail->setAddress($result['Adress']);
+            $strollDetail->setBreakLocation($result['BreakLocation']);
+            return $strollDetail;
+        }
+
+        return null;
     }
 }
 ?>

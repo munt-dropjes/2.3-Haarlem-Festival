@@ -3,6 +3,7 @@
 namespace Services;
 
 use Models\StrollEvent;
+use Models\StrollDetail;
 use Repositories\StrollRepository;
 
 class StrollService {
@@ -28,8 +29,8 @@ class StrollService {
         $this->strollRepository->delete($event);
     }
 
-    public function getDetail($detailIndex) {
-        return $this->strollRepository->getDetail($detailIndex);
+    public function getDetail($strollDetailStopNumber) { 
+        return $this->strollRepository->getDetail($strollDetailStopNumber);
     }
 
     public function getRoute() {
