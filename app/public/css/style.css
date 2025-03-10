@@ -70,6 +70,10 @@ h2 {
 
 }
 
+a{
+	font-family: hollywood-one-sc-regular, sans-serif;
+}
+
 .nav-button {
 	color: black;
 	background-color: #FCFC7A;
@@ -398,6 +402,46 @@ footer .footer-icon {
 	color: #FFFFFF;
 	border-radius: 50px;
 }
+
+#strollLocations{
+	margin-top:50px;
+	width: 100% !important;
+	max-width: 90% !important;
+	justify-content: center !important;
+}
+
+#strollLocations img {
+	border-radius: 30px;
+	max-width: 60%;
+	height:auto;
+}
+
+.RouteDestinations{
+	background-color: #4B0082;
+	max-width: fit-content;
+	justify-content: center!important;
+	border-radius: 50px;
+	padding: 1rem;
+}
+
+.RouteDestinations a{
+	color: #FCFC7A;
+	text-align: center;
+	justify-content: center!important;
+	text-decoration: underline;
+}
+
+.RouteDestinations a:hover{
+	color: #fcfc7ad3;
+	text-align: center;
+	justify-content: center!important;
+}
+
+.StrollStopNumber{
+	color: #FCFC7A;
+	font-family: hollywood-one-sc-regular, sans-serif;
+}
+
 /* ********************* */
 /* 		Stroll End		 */
 /* ********************* */

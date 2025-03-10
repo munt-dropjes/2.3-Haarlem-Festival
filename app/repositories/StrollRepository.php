@@ -66,11 +66,30 @@ class StrollRepository extends BaseRepository
         $stmt->execute();
     }
 
-    public function getRoute(){
-        $sql = 'SELECT * FROM StrollDetail';
-        $stmt = $this->connection->query($sql);
-        $result = $stmt->fetchAll();
-        return $result;
+    public function getRoute()
+    {
+        $sql = "SELECT * FROM StrollDetail";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        if ($results) {
+            $strollDetails = [];
+
+            foreach ($results as $row) {
+                $strollDetail = new StrollDetail();
+                $strollDetail->setEventId($row['EventID']);
+                $strollDetail->setStopNumber($row['StopNumber']);
+                $strollDetail->setStopName($row['StopName']);
+                $strollDetail->setDescription($row['Description']);
+                $strollDetail->setAddress($row['Adress']);
+                $strollDetail->setBreakLocation($row['BreakLocation']);
+                $strollDetails[] = $strollDetail;
+            }
+
+            return $strollDetails;
+        }
+        return null;
     }
     
     public function getDetail($strollDetailStopNumber)

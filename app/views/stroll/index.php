@@ -1,15 +1,21 @@
 <main>
     <img src="images/stroll/banner/strollBanner.png" alt="A stroll through history banner image." class = "Stroll_Banner">
-    <div class="container">
-        <div class="routeImage">
-            <img src="images/stroll/map/map.png" alt="A stroll through history route map.">
-        </div>
-        <div class="RouteDestinations">
-            <?php
-                foreach ($data['details'] as $destination) {
-                    echo "<a href='/stroll/" . $destination->getStopNumber() . "'>" . $destination['name'] . "</p>";
-                } 
-            ?>
+    <div class="container" id="strollLocations">
+        <div class="row align-items-start">
+        <h1>Locations</h1>
+            <div class="col">   
+                <div class="routeImage">
+                    <img src="images/stroll/map/map.png" alt="A stroll through history route map.">
+                </div>  
+            </div>
+            <div class="col">
+                <div class="RouteDestinations">
+                    <?php
+                        foreach ($data['details'] as $destination) {
+                            echo "<p class='StrollStopNumber'>" . $destination->getStopNumber() . ".  " . "<a href='/stroll/detail?location=" . $destination->getStopNumber() . "'>" . $destination->getStopName() . "</a></p>";
+                        }
+                    ?>
+                </div>
         </div>
     </div>
     <div class="container mt5">

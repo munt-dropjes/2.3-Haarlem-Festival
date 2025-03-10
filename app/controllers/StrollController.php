@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Services\StrollService;
+use Models\StrollDetail;
 
 class StrollController extends Controller {
     private $strollService;
