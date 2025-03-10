@@ -14,16 +14,30 @@ function onSubmitLogin(token) {
 
 
 function toggleAccountSidebar() {
-    document.getElementById('accountbar').classList.toggle('active');
+	document.getElementById('accountbar').classList.toggle('active');
 }
 
-document.addEventListener('DOMContentLoaded', function() {
-	const buttons = document.querySelectorAll('.languageSelectionBarButton button');
-	
-	buttons.forEach(button => {
-		button.addEventListener('click', function() {
-			buttons.forEach(btn => btn.classList.remove('selected'));
-			this.classList.add('selected');
-		});
-	});
+var swiper = new Swiper(".swiper", {
+	slidesPerView: 1,
+	spaceBetween: 10,
+	grabCursor: true,
+	setWrapperSize: true,
+	pagination: {
+		el: ".swiper-pagination",
+		clickable: true,
+	},
+	breakpoints: {
+		640: {
+			slidesPerView: 3,
+			spaceBetween: 10,
+		},
+		768: {
+			slidesPerView: 4,
+			spaceBetween: 20,
+		},
+		1024: {
+			slidesPerView: 5,
+			spaceBetween: 20,
+		},
+	},
 });

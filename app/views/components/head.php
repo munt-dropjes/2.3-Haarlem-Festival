@@ -10,7 +10,7 @@
 	<link rel="stylesheet" href="/css/style.css">
 
 	<!-- JS -->
-	<script src="/js/global.js"></script>
+	<script src="/js/global.js" defer></script>
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
@@ -19,7 +19,7 @@
 	<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon/favicon-48.png">
 
 	<!-- Bootstrap -->
-	<link rel="stylesheet" href="/css/bootstrap.min.css">
+	<!-- <link rel="stylesheet" href="/css/bootstrap.min.css"> -->
 	<script src="/js/bootstrap.bundle.min.js" defer></script>
 
 	<!-- FontAwesom -->
@@ -33,6 +33,10 @@
 
 	<!-- Google reCAPTCHA -->
 	<script src="https://www.google.com/recaptcha/api.js"></script>
+
+	<!-- Swiper -->
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.css" />
+	<script src="https://cdn.jsdelivr.net/npm/swiper@11/swiper-bundle.min.js"></script>
 </head>
 
 <body>
