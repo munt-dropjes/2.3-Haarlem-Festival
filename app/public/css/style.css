@@ -366,6 +366,10 @@ footer .footer-icon {
 	border-radius: 30px;
 }
 
+#details{
+	max-width: 80% !important;
+}
+
 .row {
     display: flex;
     flex-wrap: wrap;
@@ -375,8 +379,8 @@ footer .footer-icon {
 
 .col {
     flex: 1;
-    max-width: 45%;
-    padding: 2rem;
+    max-width: 80%;
+    padding: 3rem;
 	justify-content: center !important;
     box-sizing: border-box;
 }

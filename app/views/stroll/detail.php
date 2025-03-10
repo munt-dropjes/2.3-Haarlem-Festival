@@ -43,19 +43,20 @@
 			<span class="sr-only">Next</span>
 		</a>
 	</div>
-	
-	<div class="row" id="strollDetailMap">
-		<div class="col">
-			<h1><?php echo $detail->getStopName(); ?></h1>
-			<?php
-			$eventName = $detail->getStopName();
-			$encodedEventName = str_replace(' ', '', $eventName);
-			?>
-			<img src="/images/StrollDetails/<?php echo $encodedEventName; ?>/Map/map.png" alt="Map of <?php echo $detail->getStopName(); ?> location" class = "Stroll_Detail_Map">
-			<p>Address: <?php echo $detail->getAddress(); ?></p>
-		</div>
-		<div class="col" id ="strollDetaildescription">
-			<p><?php echo $detail->getDescription(); ?></p>
+	<div class="container" id="details">
+		<div class="row" id="strollDetailMap">
+			<div class="col">
+				<h1><?php echo $detail->getStopName(); ?></h1>
+				<?php
+				$eventName = $detail->getStopName();
+				$encodedEventName = str_replace(' ', '', $eventName);
+				?>
+				<img src="/images/StrollDetails/<?php echo $encodedEventName; ?>/Map/map.png" alt="Map of <?php echo $detail->getStopName(); ?> location" class = "Stroll_Detail_Map">
+				<p>Address: <?php echo $detail->getAddress(); ?></p>
+			</div>
+			<div class="col" id ="strollDetaildescription">
+				<p><?php echo $detail->getDescription(); ?></p>
+			</div>
 		</div>
 	</div>
 </main>
