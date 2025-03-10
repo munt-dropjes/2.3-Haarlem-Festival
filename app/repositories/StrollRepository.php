@@ -67,7 +67,7 @@ class StrollRepository extends BaseRepository
     }
 
     public function getRoute(){
-        $sql = 'SELECT * FROM StrollRoute';
+        $sql = 'SELECT * FROM StrollDetail';
         $stmt = $this->connection->query($sql);
         $result = $stmt->fetchAll();
         return $result;

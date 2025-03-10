@@ -335,3 +335,65 @@ footer .footer-icon {
 /* ********************* */
 /* 		Dance End		 */
 /* ********************* */
+
+
+/* ********************* */
+/* 		Stroll Start	 */
+/* ********************* */
+.Stroll_Banner {
+	width: 100%;
+	height: auto;
+}
+
+
+.Stroll_Detail_Map{
+	width: 50%;
+	height: auto;
+}
+
+.carousel {
+    width: 50%;
+    max-width: 800px;
+    height: 100%;
+    margin: 0 auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-bottom: 3rem;
+}
+
+.carousel img {
+	border-radius: 30px;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    max-width: 100%;
+}
+
+.col {
+    flex: 1;
+    max-width: 45%;
+    padding: 2rem;
+	justify-content: center !important;
+    box-sizing: border-box;
+}
+
+#strollDetailMap{
+	width: 100%;
+	height: 100%;
+}
+
+#strollDetaildescription{
+	width: fit-content;
+	max-width: 30%;
+	height: 100%;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	border-radius: 50px;
+}
+/* ********************* */
+/* 		Stroll End		 */
+/* ********************* */

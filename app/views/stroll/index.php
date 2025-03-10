@@ -1,12 +1,13 @@
 <main>
+    <img src="images/stroll/banner/strollBanner.png" alt="A stroll through history banner image." class = "Stroll_Banner">
     <div class="container mt5">
         <div class="routeImage">
             <img src="pic_trulli.jpg" alt="A stroll through history route map.">
         </div>
         <div class="RouteDestinations">
             <?php
-                foreach ($destinations as $destination) {
-                    echo "<a href='/stroll/" . $destination['name'] . "'>" . $destination['name'] . "</p>";
+                foreach ($data['details'] as $destination) {
+                    echo "<a href='/stroll/" . $destination->getStopNumber() . "'>" . $destination['name'] . "</p>";
                 } 
             ?>
         </div>
