@@ -408,21 +408,23 @@ footer .footer-icon {
 	width: 100% !important;
 	max-width: 90% !important;
 	justify-content: center !important;
+
 }
 
 #strollLocations img {
 	border-radius: 30px;
-	max-width: 60%;
+	max-width: 1000px;
 	height:auto;
 }
 
 .RouteDestinations{
 	background-color: #4B0082;
-	max-width: fit-content;
+	max-width: 300px;
 	justify-content: center!important;
 	border-radius: 50px;
 	padding: 1rem;
 }
+
 
 .RouteDestinations a{
 	color: #FCFC7A;
@@ -434,12 +436,64 @@ footer .footer-icon {
 .RouteDestinations a:hover{
 	color: #fcfc7ad3;
 	text-align: center;
-	justify-content: center!important;
 }
 
 .StrollStopNumber{
 	color: #FCFC7A;
 	font-family: hollywood-one-sc-regular, sans-serif;
+	text-align: center;
+	font-size: 14pt;
+}
+
+.event-card {
+    border-radius: 50px !important;
+    background-color: #4B0082;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+    max-width: fit-content;
+	background-color: transparent;
+	border: none;
+}
+
+.event-card img {
+    border-top-left-radius: 50px !important;
+    border-top-right-radius: 50px !important;
+    border-bottom-left-radius: 0 !important; 
+    border-bottom-right-radius: 0 !important;
+    width: 100%;
+    height: auto;
+    display: block;
+	max-width: 100% !important;
+	max-height: 100% !important;
+}
+
+.event-card .card-body {
+    padding: 20px;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
+.event-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.event-card .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.event-card .form-select {
+    background-color: #FCFC7A;
+	color: #000;
+    border-radius: 25px;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
 }
 
 /* ********************* */

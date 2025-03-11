@@ -80,7 +80,8 @@ class StrollEvent {
     }
 
     public function getTime() {
-        return $this->time;
+        $formattedTime = date('H:i', strtotime($this->time));
+        return $formattedTime;
     }
 
     public function setTime($time) {
