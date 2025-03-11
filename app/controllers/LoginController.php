@@ -34,7 +34,9 @@ class LoginController extends Controller {
                     try{
                         $authenticatedUser = $this->userService->login($email, $password);
                         if ($authenticatedUser) {
-                            session_start();
+                            if (session_status() == PHP_SESSION_NONE) {
+                                session_start();
+                            }
                             $_SESSION['user'] = $authenticatedUser;
                             header('Location: /home');
                             exit;
