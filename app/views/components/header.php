@@ -28,7 +28,7 @@
 		<a href="#">JAZZ</a>
 		<a href="/dance">DANCE</a>
 		<a href="#">FUNKY</a>
-		<a href="#">STROLL THROUGH HISTORY</a>
+		<a href="/stroll">STROLL THROUGH HISTORY</a>
 		<a href="#">MAGIC TEYLERS</a>
 	</div>
 

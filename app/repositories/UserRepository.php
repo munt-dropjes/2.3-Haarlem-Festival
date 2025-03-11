@@ -22,7 +22,7 @@ class UserRepository extends BaseRepository{
                 $user->getPhone(),
                 $user->getCountry()
             ]);
-            return $this->getUser($user['email']);
+            return $this->getUser($user);
         }
         catch(Exception $e){
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to create user: " . $user->email);
