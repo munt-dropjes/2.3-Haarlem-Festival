@@ -39,8 +39,8 @@
                             <td><?= $user->getRole() ?></td>
                             <td><?= $user->getRegisteredAt() ?></td>
                             <td>
-                                <a href="/cms/users/edit" class="edit" data-bs-toggle="modal" data-bs-target="#updateUser" data-updateUser="<?$user?>"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete" data-bs-toggle="modal" data-bs-target="#deleteUser"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateUser" data-bs-whatever="<?= $user->getId() ?>"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="btn" data-bs-toggle="modal" data-bs-target="#deleteUser" data-bs-whatever="<?= $user->getId() ?>><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -81,27 +81,27 @@
       <form method="post" action="/cms/users/create">
         <div class="modal-body">
             <div class="form-content">
-                <div class="form-group">
+                <div class="modal-group">
                     <label for="name">Name</label>
                     <input type="text" class="form-control" id="name" name="name" required>
                 </div>
-                <div class="form-group">
+                <div class="modal-group">
                     <label for="email">Email</label>
                     <input type="email" class="form-control" id="email" name="email" required>
                 </div>
-                <div class="form-group">
+                <div class="modal-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" name="password" required>
                 </div>
-                <div class="form-group">
+                <div class="modal-group">
                     <label for="phone">Phone</label>
                     <input type="text" class="form-control" id="phone" name="phone" required>
                 </div>
-                <div class="form-group">
+                <div class="modal-group">
                     <label for="country">Country</label>
                     <input type="text" class="form-control" id="country" name="country" required>
                 </div>
-                <div class="form-group">
+                <div class="modal-group">
                     <label for="role">Role</label>
                     <select class="form-select" id="role" name="role">
                         <option value="Administrator">Admin</option>
@@ -129,28 +129,28 @@
         <form method="post" action="/cms/users/update">
             <input type="hidden" name="id" id="id" value="<?= $selectedUser->getId() ?>">
             <div class="modal-body">
-                <div class="form-content">
-                    <div class="form-group">
+                <div class="modal-content">
+                    <div class="modal-group">
                         <label for="name">Name</label>
                         <input type="text" class="form-control" id="name" name="name" required>
                     </div>
-                    <div class="form-group">
+                    <div class="modal-group">
                         <label for="email">Email</label>
                         <input type="email" class="form-control" id="email" name="email" required>
                     </div>
-                    <div class="form-group">
+                    <div class="modal-group">
                         <label for="phone">Phone</label>
                         <input type="text" class="form-control" id="phone" name="phone" required>
                     </div>
-                    <div class="form-group">
+                    <div class="modal-group">
                         <label for="country">Country</label>
                         <input type="text" class="form-control" id="country" name="country" required>
                     </div>
-                    <div class="form-group">
+                    <div class="modal-group">
                         <label for="password">Password</label>
                         <input type="password" class="form-control" id="password" name="password" required>
                     </div>
-                    <div class="form-group">
+                    <div class="modal-group">
                         <label for="role">Role</label>
                         <select class="form-select" id="role" name="role">
                             <option value="Administrator">Admin</option>
@@ -169,20 +169,32 @@
   </div>
 </div>
 <div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
-  <div class="modal-dialog">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h1 class="modal-title fs-5" id="deleteUserLabel">Delete user</h1>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        Are you sure you want to delete: <?= $user->email ?> ?
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning">Delete user</button>
-      </div>
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="deleteUserLabel">Delete user</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <form method="post" action="/cms/users/delete">
+                <input type="hidden" name="id" id="id" value="<?= $selectedUser->getId() ?>">
+                <div class="modal-body">
+                    Are you sure you want to delete: <?= $user->email ?> ?
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-warning">Delete user</button>
+                </div>
+            </form>
+        </div>
     </div>
-  </div>
 </div>
 </main>
+
+<script>
+    const deleteUser = document.getElementById('deleteUser')
+    const deleteUserInput = document.getElementById('deleteUserInput')
+
+    deleteUser.addEventListener('shown.bs.modal', () => {
+        deleteUserInput.focus()
+    })
+</script>
