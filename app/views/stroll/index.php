@@ -66,8 +66,6 @@
                         </div>
                         <?php
                     }
-                } else {
-                    echo "<p>No events available for $day</p>";
                 }
             } else {
                 echo "<p>No events available</p>";
