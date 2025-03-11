@@ -34,14 +34,22 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
 
+    //everything account related
     $router->get('/createaccount', 'createaccountController@index');
     $router->post('/createaccount', 'createaccountController@create');
     $router->get('/login', 'LoginController@index');
     $router->post('/login', 'LoginController@login');
     $router->get('/logout', 'LogOutController@index');
+    $router->get('/forgotpassword', 'ForgotPasswordController@index');
+    $router->post('/forgotpassword', 'ForgotPasswordController@index');
+    $router->get('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
+    $router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
+	
+    //events
     $router->get('/stroll', 'StrollController@index');
     $router->get('/stroll/detail', 'StrollDetailController@index');
-	$router->get('/dance', 'DanceController@index');
+	  $router->get('/dance', 'DanceController@index');
+
 
     //cms
     $router->get('/cms', 'CmsController@index');
