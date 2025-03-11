@@ -169,15 +169,15 @@ VALUES
 
 INSERT INTO `Events` (`EventID`, `Name`, `Description`, `Date`, `Time`, `Location`, `Price`, `AvailableTickets`)
 VALUES
-(1, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-01', '10:00:00', 'Grote Markt, Haarlem', 15.00, 50),
-(2, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-02', '14:00:00', 'Grote Markt, Haarlem', 20.00, 40),
+(1, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '10:00:00', 'Grote Markt, Haarlem', 15.00, 50),
+(2, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '14:00:00', 'Grote Markt, Haarlem', 20.00, 40),
 (3, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '20:00:00', 'Grote Markt, Haarlem', 18.00, 30),
-(4, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-04', '11:00:00', 'Grote Markt, Haarlem', 25.00, 25),
+(4, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '11:00:00', 'Grote Markt, Haarlem', 25.00, 25),
 (5, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '13:00:00', 'Grote Markt, Haarlem', 30.00, 20),
 (6, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '15:00:00', 'Grote Markt, Haarlem', 35.00, 15),
-(7, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-07', '21:00:00', 'Grote Markt, Haarlem', 22.00, 10),
-(8, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-08', '12:00:00', 'Grote Markt, Haarlem', 27.00, 5),
-(9, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-09', '14:00:00', 'Grote Markt, Haarlem', 32.00, 0);
+(7, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '21:00:00', 'Grote Markt, Haarlem', 22.00, 10),
+(8, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '12:00:00', 'Grote Markt, Haarlem', 27.00, 5),
+(9, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '14:00:00', 'Grote Markt, Haarlem', 32.00, 0);
 
 
 
