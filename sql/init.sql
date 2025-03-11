@@ -99,7 +99,9 @@ CREATE TABLE `Users` (
 	`Password` VARCHAR(255) NOT NULL,
 	`Phone` VARCHAR(255) NOT NULL,
 	`Country` VARCHAR(255) NOT NULL,
-	`RegisteredAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP()
+	`RegisteredAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+	`ResetToken` VARCHAR(255) DEFAULT NULL,
+	`ResetTokenExpiration` datetime DEFAULT NULL
 );
 
 INSERT INTO

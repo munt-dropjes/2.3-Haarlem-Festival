@@ -41,6 +41,9 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/login', 'LoginController@login');
     $router->get('/logout', 'LogOutController@index');
     $router->get('/forgotpassword', 'ForgotPasswordController@index');
+    $router->post('/forgotpassword', 'ForgotPasswordController@index');
+    $router->get('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
+    $router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
 	
     //events
     $router->get('/dance', 'DanceController@index');
