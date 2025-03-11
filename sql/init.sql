@@ -1,152 +1,200 @@
 CREATE DATABASE IF NOT EXISTS thefestivaldb;
+
 USE thefestivaldb;
 
--- create the tables and their contents
-CREATE TABLE Users (
-    UserID INT AUTO_INCREMENT PRIMARY KEY,
-    Role ENUM('Customer', 'Administrator', 'Employee'),
-    Name VARCHAR(255) NOT NULL,
-    Email VARCHAR(255) NOT NULL UNIQUE,
-    Password VARCHAR(255) NOT NULL,
-    Phone VARCHAR(255) NOT NULL,
-    Country VARCHAR(255) NOT NULL,
-    RegisteredAt DATETIME NOT NULL DEFAULT current_timestamp()
+CREATE TABLE `Artists` (
+	`ArtistID` INT(11) NOT NULL,
+	`Name` VARCHAR(128) NOT NULL,
+	`About` VARCHAR(4096) NOT NULL,
+	`KnownFor` VARCHAR(4096) NOT NULL,
+	`Song1Link` VARCHAR(1024) NOT NULL,
+	`Song2Link` VARCHAR(1024) NOT NULL,
+	`Song3Link` VARCHAR(1024) NOT NULL,
+	`ImageName` VARCHAR(128) NOT NULL,
+	`Category` VARCHAR(32) NOT NULL
 );
 
-CREATE TABLE Visitors (
-    UserID INT PRIMARY KEY,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE TABLE `Dance` (
+	`ArtistID` INT(11) NOT NULL,
+	`EventID` INT(11) NOT NULL
 );
 
-CREATE TABLE Customers (
-    UserID INT PRIMARY KEY,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE TABLE `Events` (
+	`EventID` INT(11) NOT NULL,
+	`Name` VARCHAR(255) NOT NULL,
+	`Description` text NOT NULL,
+	`Date` DATE NOT NULL,
+	`Time` TIME NOT NULL,
+	`Location` VARCHAR(255) NOT NULL,
+	`Price` FLOAT(10, 2) NOT NULL,
+	`AvailableTickets` INT(11) NOT NULL
 );
 
-CREATE TABLE Employees (
-    UserID INT PRIMARY KEY,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE TABLE `Invoices` (
+	`InvoiceID` INT(11) NOT NULL,
+	`OrderID` INT(11) NOT NULL,
+	`UserID` INT(11) NOT NULL,
+	`TotalAmount` FLOAT(10, 2) NOT NULL,
+	`VAT` FLOAT(10, 2) NOT NULL,
+	`InvoiceDate` datetime NOT NULL
 );
 
-CREATE TABLE Administrators (
-    UserID INT PRIMARY KEY,
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE TABLE `Jazz` (
+	`ArtistID` INT(11) NOT NULL,
+	`EventID` INT(11) NOT NULL
 );
 
-CREATE TABLE Events (
-    EventID UUID PRIMARY KEY,
-    Name VARCHAR(255) NOT NULL,
-    Description TEXT NOT NULL,
-    Date DATE NOT NULL,
-    Time TIME NOT NULL,
-    Location VARCHAR(255) NOT NULL,
-    Price DECIMAL(10, 2) NOT NULL,
-    AvailableTickets INT NOT NULL
+CREATE TABLE `Orders` (
+	`OrderID` INT(11) NOT NULL,
+	`UserID` INT(11) NOT NULL,
+	`Status` enum('Pending', 'Paid', 'Cancelled') NOT NULL,
+	`CreatedAt` datetime NOT NULL,
+	`PaymentMethod` enum('iDEAL', 'CreditCard', 'PayPal') NOT NULL
 );
 
-CREATE TABLE Yummie (
-    EventID UUID PRIMARY KEY,
-    StarRating INT NOT NULL,
-    Cuisine VARCHAR(255) NOT NULL,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID)
+CREATE TABLE `Payments` (
+	`PaymentID` INT(11) NOT NULL,
+	`OrderID` INT(11) NOT NULL,
+	`UserID` INT(11) NOT NULL,
+	`Status` enum('Success', 'Failed', 'Pending') NOT NULL,
+	`PaymentDate` datetime NOT NULL,
+	`Amount` FLOAT(10, 2) NOT NULL,
+	`PaymentMethod` enum('iDEAL', 'CreditCard', 'PayPal') NOT NULL
 );
 
-CREATE TABLE Dance (
-    EventID UUID PRIMARY KEY,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID)
+CREATE TABLE `ShoppingCart` (
+	`CartID` INT(11) NOT NULL,
+	`UserID` INT(11) NOT NULL,
+	`CreatedAt` datetime NOT NULL
 );
 
-CREATE TABLE Jazz (
-    EventID UUID PRIMARY KEY,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID)
+CREATE TABLE `ShoppingCartItems` (
+	`ItemID` INT(11) NOT NULL,
+	`CartID` INT(11) NOT NULL,
+	`EventID` INT(11) NOT NULL,
+	`Quantity` INT(11) NOT NULL,
+	`AddedAt` datetime NOT NULL
 );
 
-CREATE TABLE Stroll (
-    EventID UUID PRIMARY KEY,
-    Language VARCHAR(255) NOT NULL,
-    Guide VARCHAR(255) NOT NULL,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID)
+CREATE TABLE `Stroll` (
+	`EventID` INT(11) NOT NULL,
+	`Language` enum('English', 'Dutch', 'Chinese') NOT NULL,
+	`Guide` VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE Tickets (
-    TicketID UUID PRIMARY KEY,
-    EventID UUID NOT NULL,
-    UserID INT NOT NULL,
-    QRCode VARCHAR(255) NOT NULL,
-    Status ENUM('Valid', 'Scanned', 'Cancelled') NOT NULL,
-    PurchasedAt DATETIME NOT NULL,
-    FOREIGN KEY (EventID) REFERENCES Events(EventID),
-    FOREIGN KEY (UserID) REFERENCES Users(UserID)
+CREATE TABLE `Tickets` (
+	`TicketID` INT(11) NOT NULL,
+	`EventID` INT(11) NOT NULL,
+	`UserID` INT(11) NOT NULL,
+	`QRCode` VARCHAR(255) NOT NULL,
+	`Status` enum('Valid', 'Scanned', 'Cancelled') NOT NULL,
+	`PurchasedAt` datetime NOT NULL
 );
 
-CREATE TABLE Orders (
-    OrderID UUID PRIMARY KEY,
-    CustomerID INT NOT NULL,
-    Status ENUM('Pending', 'Paid', 'Cancelled') NOT NULL,
-    CreatedAt DATETIME NOT NULL,
-    PaymentMethod ENUM('iDEAL', 'CreditCard', 'PayPal') NOT NULL,
-    FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
+CREATE TABLE `Users` (
+	`UserID` INT(11) NOT NULL,
+	`Role` enum('Customer', 'Administrator', 'Employee') DEFAULT NULL,
+	`Name` VARCHAR(255) NOT NULL,
+	`Email` VARCHAR(255) NOT NULL,
+	`Password` VARCHAR(255) NOT NULL,
+	`Phone` VARCHAR(255) NOT NULL,
+	`Country` VARCHAR(255) NOT NULL,
+	`RegisteredAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP()
 );
 
-CREATE TABLE ShoppingCart (
-    CartID UUID PRIMARY KEY,
-    CustomerID INT NOT NULL,
-    CreatedAt DATETIME NOT NULL,
-    FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
+INSERT INTO
+	`Users` (
+		`UserID`,
+		`Role`,
+		`Name`,
+		`Email`,
+		`Password`,
+		`Phone`,
+		`Country`,
+		`RegisteredAt`
+	)
+VALUES
+	(
+		1,
+		'Customer',
+		'Daniel Zwart',
+		'dtzwart@gmail.com',
+		'$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW',
+		'0612345678',
+		'Netherlands',
+		'2025-03-06 12:04:16'
+	);
+
+CREATE TABLE `Yummie` (
+	`EventID` INT(11) NOT NULL,
+	`StarRating` INT(11) NOT NULL,
+	`Cuisine` VARCHAR(255) NOT NULL
 );
 
-CREATE TABLE ShoppingCartItems (
-    ItemID UUID PRIMARY KEY,
-    CartID UUID NOT NULL,
-    EventID UUID NOT NULL,
-    Quantity INT NOT NULL,
-    AddedAt DATETIME NOT NULL,
-    FOREIGN KEY (CartID) REFERENCES ShoppingCart(CartID),
-    FOREIGN KEY (EventID) REFERENCES Events(EventID)
-);
 
-CREATE TABLE Payments (
-    PaymentID UUID PRIMARY KEY,
-    OrderID UUID NOT NULL,
-    CustomerID INT NOT NULL,
-    Status ENUM('Success', 'Failed', 'Pending') NOT NULL,
-    PaymentDate DATETIME NOT NULL,
-    Amount DECIMAL(10, 2) NOT NULL,
-    PaymentMethod ENUM('iDEAL', 'CreditCard', 'PayPal') NOT NULL,
-    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-    FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
-);
 
-CREATE TABLE Invoices (
-    InvoiceID UUID PRIMARY KEY,
-    OrderID UUID NOT NULL,
-    CustomerID INT NOT NULL,
-    TotalAmount DECIMAL(10, 2) NOT NULL,
-    VAT DECIMAL(10, 2) NOT NULL,
-    InvoiceDate DATETIME NOT NULL,
-    FOREIGN KEY (OrderID) REFERENCES Orders(OrderID),
-    FOREIGN KEY (CustomerID) REFERENCES Customers(UserID)
-);
+ALTER TABLE `Artists` ADD PRIMARY KEY (`ArtistID`);
 
--- add the relationships
-ALTER TABLE Customers ADD CONSTRAINT FK_Customers_Orders FOREIGN KEY (UserID) REFERENCES Users(UserID);
-ALTER TABLE Customers ADD CONSTRAINT FK_Customers_ShoppingCart FOREIGN KEY (UserID) REFERENCES Users(UserID);
-ALTER TABLE Customers ADD CONSTRAINT FK_Customers_Tickets FOREIGN KEY (UserID) REFERENCES Users(UserID);
+ALTER TABLE `Events` ADD PRIMARY KEY (`EventID`);
 
-ALTER TABLE Orders ADD CONSTRAINT FK_Orders_Tickets FOREIGN KEY (OrderID) REFERENCES Tickets(TicketID);
-ALTER TABLE Orders ADD CONSTRAINT FK_Orders_Payments FOREIGN KEY (OrderID) REFERENCES Payments(OrderID);
-ALTER TABLE Orders ADD CONSTRAINT FK_Orders_Invoices FOREIGN KEY (OrderID) REFERENCES Invoices(OrderID);
+ALTER TABLE `Invoices` ADD PRIMARY KEY (`InvoiceID`);
 
-ALTER TABLE ShoppingCart ADD CONSTRAINT FK_ShoppingCart_ShoppingCartItems FOREIGN KEY (CartID) REFERENCES ShoppingCartItems(CartID);
-ALTER TABLE ShoppingCartItems ADD CONSTRAINT FK_ShoppingCartItems_Events FOREIGN KEY (EventID) REFERENCES Events(EventID);
+ALTER TABLE `Orders` ADD PRIMARY KEY (`OrderID`);
 
-ALTER TABLE Events ADD CONSTRAINT FK_Events_Tickets FOREIGN KEY (EventID) REFERENCES Tickets(TicketID);
+ALTER TABLE `Payments` ADD PRIMARY KEY (`PaymentID`);
 
-ALTER TABLE Employees ADD CONSTRAINT FK_Employees_Tickets FOREIGN KEY (UserID) REFERENCES Users(UserID);
+ALTER TABLE `ShoppingCart` ADD PRIMARY KEY (`CartID`);
 
-ALTER TABLE Administrators ADD CONSTRAINT FK_Administrators_Events FOREIGN KEY (UserID) REFERENCES Users(UserID);
-ALTER TABLE Administrators ADD CONSTRAINT FK_Administrators_Orders FOREIGN KEY (UserID) REFERENCES Users(UserID);
+ALTER TABLE `ShoppingCartItems` ADD PRIMARY KEY (`ItemID`);
 
--- insert some data
-INSERT INTO Users (Role, Name, Email, Password, Phone, Country) 
-    VALUES ('Customer', 'Daniel Zwart', 'dtzwart@gmail.com', '$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW', '0612345678', 'Netherlands');
+ALTER TABLE `Tickets` ADD PRIMARY KEY (`TicketID`);
+
+ALTER TABLE `Users` ADD PRIMARY KEY (`UserID`), ADD UNIQUE KEY `Email` (`Email`);
+
+
+
+ALTER TABLE `Artists` MODIFY `ArtistID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Events` MODIFY `EventID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Invoices` MODIFY `InvoiceID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Orders` MODIFY `OrderID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Payments` MODIFY `PaymentID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `ShoppingCart` MODIFY `CartID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `ShoppingCartItems` MODIFY `ItemID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Tickets` MODIFY `TicketID` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE `Users` MODIFY `UserID` INT(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT = 2;
+
+
+
+ALTER TABLE `Dance` ADD FOREIGN KEY (`ArtistID`) REFERENCES `Artists`(`ArtistID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `Dance` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `Invoices` ADD FOREIGN KEY (`OrderID`) REFERENCES `Orders`(`OrderID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `Invoices` ADD FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `Jazz` ADD FOREIGN KEY (`ArtistID`) REFERENCES `Artists`(`ArtistID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `Jazz` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `Orders` ADD FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `Payments` ADD FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `Payments` ADD FOREIGN KEY (`OrderID`) REFERENCES `Orders`(`OrderID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `ShoppingCart` ADD FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `ShoppingCartItems` ADD FOREIGN KEY (`CartID`) REFERENCES `ShoppingCart`(`CartID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `ShoppingCartItems` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `Stroll` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `Tickets` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+ALTER TABLE `Tickets` ADD FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+ALTER TABLE `Yummie` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON DELETE RESTRICT ON UPDATE RESTRICT;

@@ -10,6 +10,18 @@
 :root {
 	--header-height: 7rem;
 	--sidebar-width: 20rem;
+
+	--background-color: #B2F5EA;
+}
+
+.top-image {
+	height: 350px;
+}
+
+.top-image>img {
+	height: 100%;
+	object-fit: cover;
+	object-position: bottom;
 }
 
 header {
@@ -17,7 +29,7 @@ header {
 	top: 0;
 	left: 0;
 	right: 0;
-	
+
 	z-index: 9999;
 }
 
@@ -199,3 +211,84 @@ footer .footer-icon {
 #accountbar.active {
 	right: 0;
 }
+
+/* ********************* */
+/* 		Dance Start		 */
+/* ********************* */
+
+#dance .swiper {
+	width: 100%;
+	height: 100%;
+	user-select: none;
+}
+
+#dance .swiper-slide-normal {
+	height: 150px;
+}
+
+#dance .swiper-slide-extended {
+	height: calc(150px + 50px + 1rem * 2);
+	background-color: var(--background-color);
+	transition: height 0.5s;
+}
+
+#dance .swiper-slide-normal img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+
+	/* border-radius: 1rem; */
+}
+
+#dance .image-container {
+	display: block;
+	width: 100%;
+	height: 150px;
+}
+
+#dance .image-container img {
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+}
+
+#dance .swiper-slide-normal i,
+#dance .swiper-slide-extended i {
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.5);
+	font-size: 1.5rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+
+	display: none;
+	justify-content: center;
+	align-items: center;
+
+	border-radius: 1rem;
+}
+
+#dance .swiper-slide:hover i,
+#dance .swiper-slide-extended:hover i {
+	display: flex;
+}
+
+#dance .swiper-slide-extended button {
+	width: 100%;
+	height: 50px;
+}
+
+#dance .swiper-slide-extended:hover {
+	height: 350px;
+}
+
+#dance .swiper-pagination {
+	position: unset;
+}
+
+/* ********************* */
+/* 		Dance End		 */
+/* ********************* */
