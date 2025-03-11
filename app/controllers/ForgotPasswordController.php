@@ -51,7 +51,7 @@ class ForgotPasswordController extends Controller {
                         $user->setResetToken(null);
                         $user->setResetTokenExpiration(null);
                         $this->userService->updateUser($user, $user->getId());
-                        $this->view('login/index', ['error' => 'Password reset successfully']);
+                        $this->view('login/login', ['error' => 'Password reset successfully']);
                     } else {
                         $this->view('forgotPassword/reset', ['error' => 'Invalid reset token']);
                     }
