@@ -77,9 +77,11 @@ CREATE TABLE `ShoppingCartItems` (
 );
 
 CREATE TABLE `Stroll` (
-	`EventID` INT(11) NOT NULL,
-	`Language` enum('English', 'Dutch', 'Chinese') NOT NULL,
-	`Guide` VARCHAR(255) NOT NULL
+    `EventID` INT(11) NOT NULL,
+    `Language` enum('English', 'Dutch', 'Chinese') NOT NULL,
+    `Guide` VARCHAR(255) NOT NULL,
+    `FamilyTicketPrice` FLOAT(10, 2) NOT NULL,
+    `AvailableTickets` INT(11) NOT NULL
 );
 
 CREATE TABLE `StrollDetail` (
@@ -164,6 +166,34 @@ VALUES
     (8, 8, 'Amsterdamse Poort', 'Description 8', 'Amsterdamse Poort, 2011 AV Haarlem', FALSE),
     (9, 9, 'Hof van Bakenes', 'Description 9', 'Warmoesstraat 13, 2011 HN Haarlem', FALSE);
 
+
+INSERT INTO `Events` (`EventID`, `Name`, `Description`, `Date`, `Time`, `Location`, `Price`, `AvailableTickets`)
+VALUES
+(1, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-01', '10:00:00', 'Grote Markt, Haarlem', 15.00, 50),
+(2, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-02', '14:00:00', 'Grote Markt, Haarlem', 20.00, 40),
+(3, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '20:00:00', 'Grote Markt, Haarlem', 18.00, 30),
+(4, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-04', '11:00:00', 'Grote Markt, Haarlem', 25.00, 25),
+(5, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '13:00:00', 'Grote Markt, Haarlem', 30.00, 20),
+(6, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '15:00:00', 'Grote Markt, Haarlem', 35.00, 15),
+(7, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-07', '21:00:00', 'Grote Markt, Haarlem', 22.00, 10),
+(8, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-08', '12:00:00', 'Grote Markt, Haarlem', 27.00, 5),
+(9, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-09', '14:00:00', 'Grote Markt, Haarlem', 32.00, 0);
+
+
+
+INSERT INTO `Stroll` (`EventID`, `Language`, `Guide`, `FamilyTicketPrice`, `AvailableTickets`)
+VALUES
+(1, 'English', 'John Doe', 50.00, 50),
+(2, 'Dutch', 'Jane Smith', 60.00, 40),
+(3, 'English', 'Alice Johnson', 55.00, 30),
+(4, 'Dutch', 'Bob Brown', 65.00, 25),
+(5, 'English', 'Charlie Davis', 70.00, 20),
+(6, 'Chinese', 'Eva White', 75.00, 15),
+(7, 'English', 'Frank Wilson', 80.00, 10),
+(8, 'Chinese', 'Grace Lee', 85.00, 5),
+(9, 'English', 'Henry Clark', 90.00, 0);
+
+
 CREATE TABLE `Yummie` (
 	`EventID` INT(11) NOT NULL,
 	`StarRating` INT(11) NOT NULL,
@@ -241,3 +271,4 @@ ALTER TABLE `Tickets` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`)
 ALTER TABLE `Tickets` ADD FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
 
 ALTER TABLE `Yummie` ADD FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
