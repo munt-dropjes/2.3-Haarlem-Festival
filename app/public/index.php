@@ -39,6 +39,8 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/login', 'LoginController@index');
     $router->post('/login', 'LoginController@login');
     $router->get('/logout', 'LogOutController@index');
+    $router->get('/stroll', 'StrollController@index');
+    $router->get('/stroll/detail', 'StrollDetailController@index');
 	$router->get('/dance', 'DanceController@index');
 
     //cms

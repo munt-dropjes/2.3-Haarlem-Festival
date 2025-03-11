@@ -1,4 +1,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -47,7 +50,9 @@ p {
 }
 
 h1 {
-	font-family: 'Zen Dots', sans-serif;
+	font-family: "Monoton", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 h2 {
@@ -63,6 +68,10 @@ h2 {
 	color: #000;
 	font-family: 'Zen Dots', sans-serif;
 
+}
+
+a{
+	font-family: hollywood-one-sc-regular, sans-serif;
 }
 
 .nav-button {
@@ -212,6 +221,44 @@ footer .footer-icon {
 	right: 0;
 }
 
+.languageSelectionBar{
+	background-color: #4B0082;
+	color:#FCFC7A;
+	font-size: 1rem;
+	font-style: "Zen Dots", sans-serif;
+	text-align: center;
+	border-left:#FCFC7A;
+	border-right:#FCFC7A;
+	padding: 0;
+	max-width: 800px;
+}
+
+.languageSelectionBar .col{
+	padding: 0;
+}
+
+.languageSelectionBar button {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 10px;
+	background: none;
+	color: white;
+	border: none;
+	font-style: "Zen Dots", sans-serif;
+}
+
+.languageSelectionBar button:hover {
+	background-color: #FCFC7A;
+	color: #4B0082;
+}
+
+.languageSelectionBar button.selected {
+    background-color: #FCFC7A;
+    color: #4B0082;
+}
+
 /* ********************* */
 /* 		Dance Start		 */
 /* ********************* */
@@ -291,4 +338,166 @@ footer .footer-icon {
 
 /* ********************* */
 /* 		Dance End		 */
+/* ********************* */
+
+
+/* ********************* */
+/* 		Stroll Start	 */
+/* ********************* */
+.Stroll_Banner {
+	width: 100%;
+	height: auto;
+}
+
+
+.Stroll_Detail_Map{
+	width: 50%;
+	height: auto;
+}
+
+.carousel {
+    width: 50%;
+    max-width: 800px;
+    height: 100%;
+    margin: 0 auto; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+	margin-bottom: 3rem;
+}
+
+.carousel img {
+	border-radius: 30px;
+}
+
+#details{
+	max-width: 80% !important;
+}
+
+.row {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center !important;
+    max-width: 100%;
+}
+
+.col {
+    flex: 1;
+    max-width: 80%;
+    padding: 3rem;
+	justify-content: center !important;
+    box-sizing: border-box;
+}
+
+#strollDetailMap{
+	width: 100%;
+	height: 100%;
+}
+
+#strollDetaildescription{
+	width: fit-content;
+	max-width: 30%;
+	height: 100%;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	border-radius: 50px;
+}
+
+#strollLocations{
+	margin-top:50px;
+	width: 100% !important;
+	max-width: 90% !important;
+	justify-content: center !important;
+
+}
+
+#strollLocations img {
+	border-radius: 30px;
+	max-width: 1000px;
+	height:auto;
+}
+
+.RouteDestinations{
+	background-color: #4B0082;
+	max-width: 300px;
+	justify-content: center!important;
+	border-radius: 50px;
+	padding: 1rem;
+}
+
+
+.RouteDestinations a{
+	color: #FCFC7A;
+	text-align: center;
+	justify-content: center!important;
+	text-decoration: underline;
+}
+
+.RouteDestinations a:hover{
+	color: #fcfc7ad3;
+	text-align: center;
+}
+
+.StrollStopNumber{
+	color: #FCFC7A;
+	font-family: hollywood-one-sc-regular, sans-serif;
+	text-align: center;
+	font-size: 14pt;
+}
+
+.event-card {
+    border-radius: 50px !important;
+    background-color: #4B0082;
+    color: #FFFFFF;
+    margin-bottom: 20px;
+    display: inline-block;
+    width: 100%;
+    max-width: fit-content;
+	background-color: transparent;
+	border: none;
+}
+
+.event-card img {
+    border-top-left-radius: 50px !important;
+    border-top-right-radius: 50px !important;
+    border-bottom-left-radius: 0 !important; 
+    border-bottom-right-radius: 0 !important;
+    width: 100%;
+    height: auto;
+    display: block;
+	max-width: 100% !important;
+	max-height: 100% !important;
+}
+
+.event-card .card-body {
+    padding: 20px;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
+.event-card .card-title {
+    font-size: 1.5rem;
+    font-weight: bold;
+}
+
+.event-card .card-text {
+    font-size: 1rem;
+    margin-bottom: 10px;
+}
+
+.event-card .form-select {
+    background-color: #FCFC7A;
+	color: #000;
+    border-radius: 25px;
+    padding: 10px;
+    width: 100%;
+    margin-top: 10px;
+}
+
+
+
+/* ********************* */
+/* 		Stroll End		 */
 /* ********************* */

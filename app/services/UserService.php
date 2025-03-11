@@ -17,7 +17,7 @@ class UserService {
     // ~~Create~~
     public function insertUser($user) : User {
         if ($this->userRepository->checkEmail($user)){
-            throw new \Exception("Email already exists");
+            throw new Exception("Email already exists");
         }
         return $this->userRepository->insertUser($user);        
     }
