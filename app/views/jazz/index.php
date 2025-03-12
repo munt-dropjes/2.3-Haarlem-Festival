@@ -11,11 +11,12 @@
     <h2 class="text-center mb-4">Festival Line-up</h2>
 
     <div class="accordion" id="festivalAccordion" style="position: relative; z-index: 0;">
+        <?php $i=1;  ?>
     <?php foreach ($festivalDays as $dayId => $info) { ?>
         <div class="accordion-item" style="background: none; border: none;">
             <h2 class="accordion-header" id="headingDay<?= $dayId ?>">
                 <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDay<?= $dayId ?>" aria-expanded="true" style="background-color:rgb(251, 255, 0); border-radius: 10px 10px 0 0; ">
-                    Dag <?= $dayId ?> -<?= date("l d F", strtotime($info['Date'])) ?>
+                    Dag <?= $i++  ?> - <?= date("l d F", strtotime($info['Date'])) ?>
                 </button>
             </h2>
             <div id="collapseDay<?= $dayId ?>" class="accordion-collapse collapse show">
