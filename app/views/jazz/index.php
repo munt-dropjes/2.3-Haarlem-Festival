@@ -1,6 +1,6 @@
 <main>
     <div class="container-fluid p-0">
-        <img src="images/jazz1.png" class="img-fluid w-100" alt="Plaatje Haarlem Jazz">
+        <img src="images/jazz/jazz1.png" class="img-fluid w-100" alt="Plaatje Haarlem Jazz">
     </div>
     <div class="container mt-4 text-center" style="max-width: 1425px;">
         <h1>JAZZ</h1>
@@ -23,7 +23,7 @@
                     <div class="artist-container">
                         <?php foreach ($info['artists'] as $artist) { ?>
                             <div class="artist-card">
-                                <img src="images/<?= $artist['image'] ?>" alt="<?= $artist['name'] ?>" width="406" height="225">
+                                <img src="images/jazz/<?= $artist['image'] ?>" alt="<?= $artist['name'] ?>" width="406" height="225">
                                 <div class="artist-name"><?= strtoupper($artist['name']) ?></div>
                             </div>
                         <?php } ?>
