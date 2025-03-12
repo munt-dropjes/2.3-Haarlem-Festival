@@ -10,11 +10,28 @@ class JazzController extends Controller {
     }
 
     public function index() {
-        $festivalDays = $this->model->getFestivalDaysAndArtists();
+        $festivalDaysData = $this->model->getFestivalDaysAndArtists();
         $timetable = $this->model->getFestivalTimetable();
+
+        $festivalDays = [];
+        foreach ($festivalDaysData as $row) {
+            $dayId = $row['day_id'];
+            if (!isset($festivalDays[$dayId])) {
+                $festivalDays[$dayId] = [
+                    'Date' => $row['date'],
+                    'artists' => []
+                ];
+            }
+            $festivalDays[$dayId]['artists'][] = [
+                'name' => $row['name'],
+                'image' => $row['image']
+            ];
+        }
+
         $this->view('jazz/index', [
             'festivalDays' => $festivalDays,
             'timetable' => $timetable
         ]);
     }
 }
+

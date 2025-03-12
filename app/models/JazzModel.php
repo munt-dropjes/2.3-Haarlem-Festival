@@ -18,16 +18,13 @@ class JazzModel {
         }
     }
 
-    // Haal festivaldagen en artiesten op
     public function getFestivalDaysAndArtists() {
         $query = "
-            SELECT e.EventID AS day_id, e.Date, 
-                   a.Name AS name, a.ImageName AS image
-            FROM Events e
-            JOIN Jazz j ON e.EventID = j.EventID
-            JOIN Artists a ON j.ArtistID = a.ArtistID
-            WHERE a.Category = 'Jazz'
-            ORDER BY e.Date, a.Name;
+            SELECT festival_days.id AS day_id, festival_days.date, 
+                   artists.name, artists.image
+            FROM festival_days
+            JOIN artists ON festival_days.id = artists.day_id
+            ORDER BY festival_days.date, artists.name;
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
@@ -37,12 +34,10 @@ class JazzModel {
     // Haal festival timetable op
     public function getFestivalTimetable() {
         $query = "
-            SELECT e.Date, a.Name, e.Time AS start_time, e.Location AS place
-            FROM Events e
-            JOIN Jazz j ON e.EventID = j.EventID
-            JOIN Artists a ON j.ArtistID = a.ArtistID
-            WHERE a.Category = 'Jazz'
-            ORDER BY e.Date, e.Location, e.Time;
+            SELECT festival_days.date, artists.name, artists.start_time, artists.end_time, artists.place
+            FROM artists
+            JOIN festival_days ON festival_days.id = artists.day_id
+            ORDER BY festival_days.date, artists.place, artists.start_time;
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
