@@ -15,14 +15,14 @@ class JazzController extends Controller {
 
         $festivalDays = [];
         foreach ($festivalDaysData as $row) {
-            $dayId = $row['day_id'];
-            if (!isset($festivalDays[$dayId])) {
-                $festivalDays[$dayId] = [
+            $day = $row['date'];
+            if (!isset($festivalDays[$day])) {
+                $festivalDays[$day] = [
                     'Date' => $row['date'],
                     'artists' => []
                 ];
             }
-            $festivalDays[$dayId]['artists'][] = [
+            $festivalDays[$day]['artists'][] = [
                 'name' => $row['name'],
                 'image' => $row['image']
             ];
@@ -34,4 +34,3 @@ class JazzController extends Controller {
         ]);
     }
 }
-

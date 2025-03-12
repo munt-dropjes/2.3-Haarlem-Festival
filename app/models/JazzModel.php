@@ -6,10 +6,8 @@ class JazzModel {
     private $pdo;
 
     public function __construct() {
-        // Laad de configuratie
-        require __DIR__ . '/../dbconfig.php'; // Laad de dbconfig
+        require __DIR__ . '/../dbconfig.php';
 
-        // Gebruik de variabelen uit dbconfig.php
         try {
             $this->pdo = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
             $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
@@ -20,24 +18,25 @@ class JazzModel {
 
     public function getFestivalDaysAndArtists() {
         $query = "
-            SELECT festival_days.id AS day_id, festival_days.date, 
-                   artists.name, artists.image
-            FROM festival_days
-            JOIN artists ON festival_days.id = artists.day_id
-            ORDER BY festival_days.date, artists.name;
+            SELECT E.Date AS date, A.Name AS name, A.ImageName AS image
+            FROM Events E
+            JOIN Jazz J ON E.EventID = J.EventID
+            JOIN Artists A ON J.ArtistID = A.ArtistID
+            WHERE E.Date IS NOT NULL
+            ORDER BY E.Date, A.Name;
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    // Haal festival timetable op
     public function getFestivalTimetable() {
         $query = "
-            SELECT festival_days.date, artists.name, artists.start_time, artists.end_time, artists.place
-            FROM artists
-            JOIN festival_days ON festival_days.id = artists.day_id
-            ORDER BY festival_days.date, artists.place, artists.start_time;
+            SELECT E.Date AS date, A.Name AS name, E.StartTime AS start_time, E.EndTime AS end_time, E.Location AS place
+            FROM Events E
+            JOIN Jazz J ON E.EventID = J.EventID
+            JOIN Artists A ON J.ArtistID = A.ArtistID
+            ORDER BY E.Date, E.Location, E.StartTime;
         ";
         $stmt = $this->pdo->prepare($query);
         $stmt->execute();
