@@ -78,5 +78,14 @@ class UserService {
         $user->setCountry($country); 
         return $user;
     }
+
+    public function updateExistingUser($user, $email, $name, $password, $phone, $country) {
+        $user->setEmail($email);
+        $user->setName($name);
+        $user->setPassword($password);
+        $user->setPhone($phone);
+        $user->setCountry($country); 
+        return $user;
+    }
 }
 ?>
