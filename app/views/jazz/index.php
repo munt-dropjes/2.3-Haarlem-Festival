@@ -36,35 +36,41 @@
     </div>
 </div>
 <div class="jazz-overview-timetable-container">
-    <h2 class="jazz-overview-text-center mb-4">Festival Timetable</h2>
-    <div class="jazz-overview-timetable">
- 
-            <div class='jazz-overview-day-column'>
-                <h3><?= $day ?></h3>
+        <h2 class="jazz-overview-text-center mb-4">Festival Timetable</h2>
+        <div class="jazz-overview-timetable">
+            <?php
+            $days = [];
+            foreach ($timetable as $row) {
+                $date = date("l d F", strtotime($row['date']));
+                $days[$date][] = $row;
+            }
 
-                <!-- Voor elke plaats op deze dag -->
-                <?php foreach ($places as $place => $placePerformances) { ?>
-                    <div class="jazz-overview-place-section">
-                        <!-- Plaatsnaam -->
-                        <div class="jazz-overview-place">
-                            <strong><?= $place ?></strong>
+            foreach ($days as $day => $performances) {
+                $places = [];
+                foreach ($performances as $performance) {
+                    $places[$performance['place']][] = $performance;
+                }
+            ?>
+                <div class='jazz-overview-day-column'>
+                    <h3><?= $day ?></h3>
+                    <?php foreach ($places as $place => $placePerformances) { ?>
+                        <div class="jazz-overview-place-section">
+                            <div class="jazz-overview-place">
+                                <strong><?= $place ?></strong>
+                            </div>
+                            <div class="jazz-overview-performance-grid">
+                                <?php foreach ($placePerformances as $performance) { ?>
+                                    <div class='jazz-overview-performance'>
+                                        <strong><?= $performance['name'] ?></strong><br>
+                                        <?= date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time'])) ?>
+                                    </div>
+                                <?php } ?>
+                            </div>
                         </div>
-
-                        <!-- Tijden voor de artiesten op deze plaats, in een grid naast elkaar -->
-                        <div class="jazz-overview-performance-grid">
-                            <?php foreach ($placePerformances as $performance) { ?>
-                                <div class='jazz-overview-performance'>
-                                    <strong><?= $performance['name'] ?></strong><br>
-                                    <?= date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time'])) ?>
-                                </div>
-                            <?php } ?>
-                        </div>
-                    </div>
-                <?php } ?>
-            </div>
-        <?php
-        ?>
+                    <?php } ?>
+                </div>
+            <?php } ?>
+        </div>
     </div>
-</div>
 
 </main>
