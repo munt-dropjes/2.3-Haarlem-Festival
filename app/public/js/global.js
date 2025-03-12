@@ -17,6 +17,37 @@ function toggleAccountSidebar() {
 	document.getElementById('accountbar').classList.toggle('active');
 }
 
+
+//for stroll language selection//
+function setupLanguageSelection() {
+    const buttons = document.querySelectorAll('.languageSelectionBarButton button');
+    const cards = document.querySelectorAll('.event-card');
+
+    buttons.forEach(button => {
+        button.addEventListener('click', function () {
+            buttons.forEach(btn => btn.classList.remove('selected'));
+            this.classList.add('selected');
+            const selectedLanguage = this.getAttribute('data-language');
+            cards.forEach(card => {
+                if (card.getAttribute('data-language') === selectedLanguage) {
+                    card.style.display = 'block';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+    });
+
+    document.querySelector('.languageSelectionBarButton .selected').click();
+}
+
+document.addEventListener('DOMContentLoaded', function () {
+    setupLanguageSelection();
+});
+
+/////////////////////////////
+
+
 var swiper = new Swiper(".swiper", {
 	slidesPerView: 1,
 	spaceBetween: 10,
