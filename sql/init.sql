@@ -98,7 +98,7 @@ CREATE TABLE `Tickets` (
 	`EventID` INT(11) NOT NULL,
 	`UserID` INT(11) NOT NULL,
 	`QRCode` VARCHAR(255) NOT NULL,
-	`Status` enum('Valid', 'Scanned', 'Cancelled') NOT NULL,
+	`IsScanned` BOOLEAN NOT NULL DEFAULT 0,
 	`PurchasedAt` datetime NOT NULL
 );
 

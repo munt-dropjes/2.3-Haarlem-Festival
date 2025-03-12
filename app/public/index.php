@@ -48,8 +48,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     //events
     $router->get('/stroll', 'StrollController@index');
     $router->get('/stroll/detail', 'StrollDetailController@index');
-	  $router->get('/dance', 'DanceController@index');
-
+    $router->get('/dance', 'DanceController@index');
 
     //cms
     $router->get('/cms', 'CmsController@index');
@@ -57,6 +56,9 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
     $router->post('/cms/users/edit', 'CmsUserController@update');
+
+    //qr-codes
+    $router->get('/qr', 'QrController@index');
     
 // Run the router
 $router->run();
