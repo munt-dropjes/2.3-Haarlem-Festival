@@ -6,7 +6,7 @@ use Services\UserService;
 use Models\User;
 use Services\MailerService;
 
-class AccountController extends Controller {
+class UpdateAccountController extends Controller {
 
 	private $userService;
 

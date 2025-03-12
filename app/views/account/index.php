@@ -1,7 +1,7 @@
 <main>
     <div class="container mt-5 create-account-container">
 
-        <h1 class="text-center">Create account</h1>
+        <h1 class="text-center">Update account</h1>
         <?php if(isset($error)): ?>
         <div class="alert alert-danger" role="alert">
             <?php echo htmlspecialchars($error); ?>
@@ -24,22 +24,32 @@
 
 
         <div class="mb-3">
-            <label for="email" class="form-label">Email:<span class="required">*</span></label>
-            <input type="email" class="form-control" id="email" name="email" required>
+            <label for="email" class="form-label">Email:</label>
+            <input type="email" class="form-control" id="email" name="email" value="<?php echo $user->getEmail(); ?>" required>
         </div>
         
         <div class="mb-3">
-            <label for="password" class="form-label">Password:<span class="required">*</span></label>
+            <label for="password" class="form-label">New password:</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+
+        <div class="mb-3">
+            <label for="password" class="form-label">Confirm new password:</label>
+            <input type="password" class="form-control" id="password" name="password">
+        </div>
+        
+        <div class="mb-3">
+            <label for="password" class="form-label">Current password:<span class="required">*</span></label>
             <input type="password" class="form-control" id="password" name="password" required>
         </div>
         
         <div class="mb-3">
-            <label for="phone" class="form-label">Phone:<span class="required">*</span></label>
-            <input type="tel" class="form-control" id="phone" name="phone"  required>
+            <label for="phone" class="form-label">Phone:</label>
+            <input type="tel" class="form-control" id="phone" name="phone" value="<?php echo $user->getPhone(); ?>">
         </div>
         
         <div class="mb-3">
-        <label for="country" class="form-label">Country:</label><span class="required">*</span>      
+        <label for="country" class="form-label">Country:</label></span>      
         
         <!--Oh god why-->
         <select id="country" name="country" class="form-control">
@@ -294,7 +304,7 @@
             data-callback='onSubmit'
             data-action='submit' 
             type="submit" 
-            class="">Create Account</button>
+            class="">Update Account</button>
         </form>
     </div>
 
