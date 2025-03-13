@@ -1,20 +1,24 @@
-<main>
-    <div class="container mt-5">
-        <a href="/jazz" class="btn btn-primary">Terug naar line-up</a>
-        <h1><?= htmlspecialchars($artist['name']) ?></h1>
-        <img src="/images/jazz/<?= htmlspecialchars($artist['image']) ?>" alt="<?= htmlspecialchars($artist['name']) ?>" class="img-fluid mb-4">
-        
-        <h3>Over de artiest</h3>
-        <p><?= nl2br(htmlspecialchars($artist['description'])) ?></p>
-        
-        <h3>Bekend van</h3>
-        <p><?= nl2br(htmlspecialchars($artist['known_for'])) ?></p>
-        
-        <h3>Beluister hun muziek</h3>
-        <ul>
-            <li><a href="<?= htmlspecialchars($artist['Song1Link']) ?>" target="_blank">Luister naar nummer 1</a></li>
-            <li><a href="<?= htmlspecialchars($artist['Song2Link']) ?>" target="_blank">Luister naar nummer 2</a></li>
-            <li><a href="<?= htmlspecialchars($artist['Song3Link']) ?>" target="_blank">Luister naar nummer 3</a></li>
-        </ul>
+<main id="jazzDetail">
+    <div style="display: flex; align-items: center; width: 100%; margin-bottom: 20px;">
+        <a href="/jazz" class="jazzbutton"
+            style="position: absolute; left: 20px;margin-top: 20px;background-color: grey; color: white; border-radius: 0; padding: 10px 20px;">
+            Terug naar line-up
+        </a>
+        <div style="flex-grow: 1; text-align: center;margin-top: 20px;">
+            <h1 style="margin: 0;">
+                <?= htmlspecialchars($artist['name']) ?>
+            </h1>
+        </div>
     </div>
+    <img src="/images/jazz/<?= htmlspecialchars($artist['image']) ?>" alt="<?= htmlspecialchars($artist['name']) ?>"
+        class="img-fluid mb-4" style="width: 100vw; max-width: 100%; display: block;">
+    <div class="container" style="display: flex; align-items: center;">
+        <div style="width: 50%; margin-right: 20px;">
+            <h2>A bit about <?= htmlspecialchars($artist['name']) ?></h2>
+            <p><?= htmlspecialchars($artist['description']) ?></p>
+        </div>
+        <img src="/images/jazz/detail/<?= strtolower(str_replace(' ', '', $artist['name'])) ?>/1.png" alt="<?= htmlspecialchars($artist['name']) ?>"
+            class="img-fluid mb-3" style="max-width: 40%;">
+    </div>
+
 </main>
