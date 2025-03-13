@@ -48,7 +48,7 @@ $router->before('GET|POST', '/cms/.*', function() {
 	
     //events
     $router->get('/stroll', 'StrollController@index');
-    $router->get('/stroll/detail', 'StrollDetailController@index');
+    $router->get('/stroll/detail', 'StrollController@detail');
 	  $router->get('/dance', 'DanceController@index');
 
 

@@ -18,8 +18,15 @@ class UpdateAccountController extends Controller {
 		if (session_status() == PHP_SESSION_NONE) {
 			$this->fourOFour();
 		}
-		$user = $_SESSION['user'];
-		$this->view('account/index', $user);
+		else if(!isset($_SESSION['user'])){
+			$this->fourOFour();
+			exit();
+		}
+		else{
+			echo session_status();
+			$user = $_SESSION['user'];
+			$this->view('account/index', $user);
+		}
 	}
 
 	public function updateAccount(){

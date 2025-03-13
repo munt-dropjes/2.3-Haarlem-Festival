@@ -31,7 +31,8 @@ class UserService {
         return $this->userRepository->getUserByEmail($email);
     }
 
-    private function getUser(User $user) {
+    //rename validateandgetuser
+    private function validateAndGetUser(User $user) {
         if (empty($user->getEmail()) || empty($user->getPassword())) {
             throw new \InvalidArgumentException("Email and password cannot be empty.");
         }
@@ -63,7 +64,7 @@ class UserService {
         $user = new User();
         $user->setEmail($email);
         $user->setPasswordOnLogin($password);
-        $authenticatedUser = $this->GetUser($user);
+        $authenticatedUser = $this->validateAndGetUser($user);
         return $authenticatedUser;
     }
 

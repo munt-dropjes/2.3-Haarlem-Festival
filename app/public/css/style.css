@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -58,6 +59,12 @@ h1 {
 h2 {
 	font-family: 'Zen Dots', sans-serif;
 }
+
+.zen-dots-regular {
+	font-family: "Zen Dots", sans-serif;
+	font-weight: 400;
+	font-style: normal;
+  }
 
 .navbar {
 	background-color: #4B0082;
@@ -249,6 +256,10 @@ footer .footer-icon {
 	font-style: "Zen Dots", sans-serif;
 }
 
+.languageSelectionBarButton{
+	font-style: "Zen Dots", sans-serif;
+}
+
 .languageSelectionBar button:hover {
 	background-color: #FCFC7A;
 	color: #4B0082;
@@ -349,13 +360,14 @@ footer .footer-icon {
 	height: auto;
 }
 
-
 .Stroll_Detail_Map{
-	width: 50%;
+	width:100%;
 	height: auto;
+	border-radius: 20px;
 }
 
 .carousel {
+	margin-top: 20px;
     width: 50%;
     max-width: 800px;
     height: 100%;
@@ -394,9 +406,37 @@ footer .footer-icon {
 	height: 100%;
 }
 
+#strollDetailsRow{
+	display: flex;
+    align-items: flex-start;
+	margin:0 auto;
+	width: 100%;
+}
+
+#strollDetailsCol{
+	margin-top: 0 auto;
+}
+
+#strollDetailsCol{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+	padding-top:0;
+}
+
+#strollDetaildescription {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+#strollDetailsCol h1 {
+    margin-bottom: 1rem;
+}
+
 #strollDetaildescription{
+
 	width: fit-content;
-	max-width: 30%;
 	height: 100%;
 	background-color: #4B0082;
 	color: #FFFFFF;
@@ -417,32 +457,50 @@ footer .footer-icon {
 	height:auto;
 }
 
+
+#strollDetaildescription p {
+    margin-top: 0;
+}
+
+.routeImage{
+	width: 100%;
+	height: auto;
+	border-radius: 20px;
+}
+
 .RouteDestinations{
 	background-color: #4B0082;
 	max-width: 300px;
 	justify-content: center!important;
-	border-radius: 50px;
+	border-radius: 20px;
 	padding: 1rem;
+	line-height: 1;
+	margin:0 auto;
 }
 
-
 .RouteDestinations a{
-	color: #FCFC7A;
+	color: #FFFFFF;
 	text-align: center;
 	justify-content: center!important;
 	text-decoration: underline;
+	font-family: "Holtwood One SC", serif;
+	font-size: 12pt;
 }
 
 .RouteDestinations a:hover{
-	color: #fcfc7ad3;
+	color: #FCFC7A;
 	text-align: center;
 }
 
 .StrollStopNumber{
-	color: #FCFC7A;
-	font-family: hollywood-one-sc-regular, sans-serif;
+	color: #FFFFFF;
+	font-family: "Holtwood One SC", serif;
 	text-align: center;
-	font-size: 14pt;
+	font-size: 12pt;
+}
+
+#strollTours{
+	margin-left: 5%;
 }
 
 .event-card {
