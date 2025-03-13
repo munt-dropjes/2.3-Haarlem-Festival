@@ -38,9 +38,9 @@
       let correctImage = document.getElementById('correctImage');
       let incorrectImage = document.getElementById('incorrectImage');
       let scannedImage = document.getElementById('scannedImage');
-      const ticketNumberInput = document.getElementById('ticketNumber');
-      const ticketForm = document.getElementById('ticketForm');
+      const ticket = document.getElementById('ticket');
       const correctCodes = <?php echo json_encode($qrcodes); ?>;
+
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
           scanner.start(cameras[0]);
@@ -51,11 +51,12 @@
       }).catch(function (e) {
         console.error(e);
       });
+      
       scanner.addListener('scan', function (content) {
         for (let i = 0; i < correctCodes.length; i++) {
           const decodedString = atob(content);
-          ticketNumberInput.value = decodedString;
-          if (parseInt(decodedString) == correctCodes[i].ticket) {
+          ticket.value = decodedString;
+          if (parseInt(decodedString) == correctCodes[i].TicketID) {
             if (correctCodes[i].isScanned == 1) {
               scannedImage.style.display = 'block';
               correctImage.style.display = 'none';
@@ -71,7 +72,7 @@
               });
             }
           } else {
-            console.log(parseInt(decodedString), correctCodes[i].ticket);
+            console.log(parseInt(decodedString), correctCodes[i].TicketID);
 
             correctImage.style.display = 'none';
             scannedImage.style.display = 'none';
