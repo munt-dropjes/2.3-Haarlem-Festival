@@ -20,22 +20,23 @@ class ForgotPasswordController extends Controller {
             $this->mailerService = new MailerService();
         }
     public function index() {
-        if(isset($_POST['email'])) {
-            $email = htmlspecialchars(strtolower($_POST['email']));
-            try {
-                $user = $this->userService->getUserByEmail($email);
-                if ($user) {
-                    $this->forgotPasswordService->createResetToken($user);
-                    $this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Password Reset', 'Please click the following link to reset your password: <a href="' . $_SERVER['HTTP_HOST'] . '/resetpassword/' . $user->getEmail() . '/' . $user->getResetToken() . '">Reset Password</a>');
-                    $this->view('forgotPassword/index', ['message' => 'Password reset email sent']);
-                } else {
-                    $this->view('forgotPassword/index', ['error' => 'No user found with that email']);
-                }
-            } catch(Exception $e) {
-                $this->view('forgotPassword/index', ['error' => $e->getMessage()]);
-            }
-        } else {
+        if(!isset($_POST['email'])) {
             $this->view('forgotPassword/index');
+            return;
+        }
+
+        $email = htmlspecialchars(strtolower($_POST['email']));
+        try {
+            $user = $this->userService->getUserByEmail($email);
+            if (!$user) {
+                $this->view('forgotPassword/index', ['error' => 'No user found with that email']);
+                return;
+            }
+            $this->forgotPasswordService->createResetToken($user);
+            $this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Password Reset', 'Please click the following link to reset your password: <a href="' . $_SERVER['HTTP_HOST'] . '/resetpassword/' . $user->getEmail() . '/' . $user->getResetToken() . '">Reset Password</a>');
+            $this->view('forgotPassword/index', ['message' => 'Password reset email sent']);
+        } catch(Exception $e) {
+            $this->view('forgotPassword/index', ['error' => $e->getMessage()]);
         }
     }  
 

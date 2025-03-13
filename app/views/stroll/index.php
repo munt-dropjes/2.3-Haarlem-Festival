@@ -31,9 +31,9 @@
         </div>
         <div class="container">
             <div class="row align-items-start languageSelectionBar">
-                <div class="col languageSelectionBarButton"><button class="selected" data-language="English">English</button></div>
-                <div class="col languageSelectionBarButton"><button data-language="Dutch">Dutch</button></div>
-                <div class="col languageSelectionBarButton"><button data-language="Chinese">Chinese</button></div>
+                <div class="col languageSelectionBarButton zen-dots-regular"><button class="selected" data-language="English">English</button></div>
+                <div class="col languageSelectionBarButton zen-dots-regular"><button data-language="Dutch">Dutch</button></div>
+                <div class="col languageSelectionBarButton zen-dots-regular"><button data-language="Chinese">Chinese</button></div>
             </div>
         </div>
         
