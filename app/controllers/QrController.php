@@ -30,5 +30,11 @@ class QrController extends Controller
         $this->view_clean('qr/index', ['qrcodes' => $qrcodes]);
     }
 
+    public function create()
+    {
+        $qrCode = $this->qrService->createQrCode('https://trello.com/b/CYN8S2k4/haarlem-festival');
+
+        $this->view_clean('qr/create', ['qr_code' => $qrCode]);
+    }
 
 }

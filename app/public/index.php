@@ -59,6 +59,7 @@ $router->before('GET|POST', '/cms/.*', function() {
 
     //qr-codes
     $router->get('/qr', 'QrController@index');
+    $router->get('/qr/create', 'QrController@create');
     
 // Run the router
 $router->run();

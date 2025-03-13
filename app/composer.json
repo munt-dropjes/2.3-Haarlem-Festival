@@ -13,6 +13,7 @@
   },
   "require": {
     "bramus/router": "~1.6",
-    "phpmailer/phpmailer": "^6.9.1"
+    "phpmailer/phpmailer": "^6.9.1",
+    "chillerlan/php-qrcode": "^5.0.3"
   }
 }
