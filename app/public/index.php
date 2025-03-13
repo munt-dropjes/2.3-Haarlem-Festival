@@ -33,7 +33,6 @@ $router->before('GET|POST', '/cms/.*', function() {
     //home
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
-   
 
     //everything account related
     $router->get('/createaccount', 'createaccountController@index');

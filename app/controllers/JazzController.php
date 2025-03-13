@@ -1,12 +1,12 @@
 <?php
 namespace Controllers;
-use Models\JazzModel;
+use Models\Jazz;
 
 class JazzController extends Controller {
     private $model;
 
     public function __construct() {
-        $this->model = new JazzModel();
+        $this->model = new Jazz();
     }
 
     public function index() {
