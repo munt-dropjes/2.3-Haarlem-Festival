@@ -4,8 +4,8 @@
     <div class="row">
       <div class="col-12">
         <form>
-          <label for="ticketNumber">Ticket Number:</label>
-          <input type="text" id="ticketNumber" name="ticketNumber" readonly><br><br>
+          <label for="ticket">Ticket Number:</label>
+          <input type="text" id="ticket" name="ticket"><br><br>
         </form>
       </div>
     </div>
@@ -40,14 +40,14 @@
       let scannedImage = document.getElementById('scannedImage');
       const ticketNumberInput = document.getElementById('ticketNumber');
       const ticketForm = document.getElementById('ticketForm');
-      const correctCodes = <?php echo json_encode($correctCodes); ?>;
+      const correctCodes = <?php echo json_encode($qrcodes); ?>;
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
           scanner.start(cameras[0]);
           document.getElementById('preview').style.display = 'block';
         } else {
           console.error('No cameras found.');
-        }
+        } 
       }).catch(function (e) {
         console.error(e);
       });
@@ -55,7 +55,7 @@
         for (let i = 0; i < correctCodes.length; i++) {
           const decodedString = atob(content);
           ticketNumberInput.value = decodedString;
-          if (parseInt(decodedString) == correctCodes[i].invoice_id) {
+          if (parseInt(decodedString) == correctCodes[i].ticket) {
             if (correctCodes[i].isScanned == 1) {
               scannedImage.style.display = 'block';
               correctImage.style.display = 'none';
@@ -66,12 +66,12 @@
               correctImage.style.display = 'block';
               incorrectImage.style.display = 'none';
               scannedImage.style.display = 'none';
-              fetch('/qrscanner?invoice_id=' + decodedString,{
+              fetch('/qrscanner?ticket=' + decodedString,{
                 method: 'POST',
               });
             }
           } else {
-            console.log(parseInt(decodedString), correctCodes[i].invoice_id);
+            console.log(parseInt(decodedString), correctCodes[i].ticket);
 
             correctImage.style.display = 'none';
             scannedImage.style.display = 'none';
