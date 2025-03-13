@@ -2,7 +2,7 @@
 namespace Models;
 use PDO;
 
-class JazzModel {
+class Jazz {
     private $pdo;
 
     public function __construct() {
