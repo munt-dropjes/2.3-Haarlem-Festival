@@ -23,9 +23,9 @@
                 <div class="accordion-body">
                     <div class="artist-container">
                         <?php foreach ($info['artists'] as $artist) { ?>
-                            <div class="artist-card">
+                            <div class="artist-card" onclick="location.href='/jazz/artist/<?= urlencode($artist['name']) ?>'" style="cursor: pointer;">
                                 <img src="images/jazz/<?= $artist['image'] ?>" alt="<?= $artist['name'] ?>" width="406" height="225">
-                                <div class="artist-name"><?= strtoupper($artist['name']) ?></div>
+                             <div class="artist-name"><?= strtoupper($artist['name']) ?></div>
                             </div>
                         <?php } ?>
                     </div>

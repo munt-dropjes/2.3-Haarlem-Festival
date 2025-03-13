@@ -33,7 +33,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     //home
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
-    $router->get('/jazz', 'JazzController@index');
+   
 
     //everything account related
     $router->get('/createaccount', 'createaccountController@index');
@@ -50,6 +50,8 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/stroll', 'StrollController@index');
     $router->get('/stroll/detail', 'StrollDetailController@index');
 	  $router->get('/dance', 'DanceController@index');
+      $router->get('/jazz', 'JazzController@index');
+      $router->get('/jazz/artist/{name}', 'JazzDetailController@index');
 
 
     //cms

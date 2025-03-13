@@ -42,5 +42,17 @@ class JazzModel {
         $stmt->execute();
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
+    public function getArtistByName($name) {
+        $query = "
+            SELECT A.Name AS name, A.ImageName AS image, A.About AS description,
+                   A.KnownFor AS known_for, A.Song1Link, A.Song2Link, A.Song3Link
+            FROM Artists A
+            WHERE A.Name = :name
+        ";
+        $stmt = $this->pdo->prepare($query);
+        $stmt->execute(['name' => $name]);
+        return $stmt->fetch(PDO::FETCH_ASSOC);
+    }
+    
 }
 ?>
