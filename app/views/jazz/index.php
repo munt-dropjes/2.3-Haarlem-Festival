@@ -32,7 +32,7 @@
                 </div>
             </div>
         </div>
-        <break style="padding: 10px;">   <!-- Dit is een break tussen de lagen/dagen voor ruimte --></break>
+        <break style="padding: 10px;">   </break>
      <?php } ?>
     </div>
 </div>
@@ -41,15 +41,15 @@
         <div class="jazz-overview-timetable">
             <?php
             $days = [];
-            foreach ($timetable as $row) {
-                $date = date("l d F", strtotime($row['date']));
-                $days[$date][] = $row;
+            foreach ($timetable as $performance) {
+                $date = date("l d F", strtotime($performance->getDate()));
+                $days[$date][] = $performance;
             }
 
             foreach ($days as $day => $performances) {
                 $places = [];
                 foreach ($performances as $performance) {
-                    $places[$performance['place']][] = $performance;
+                    $places[$performance->getPlace()][] = $performance;
                 }
             ?>
                 <div class='jazz-overview-day-column'>
@@ -57,13 +57,13 @@
                     <?php foreach ($places as $place => $placePerformances) { ?>
                         <div class="jazz-overview-place-section">
                             <div class="jazz-overview-place">
-                                <strong><?= $place ?></strong>
+                                <strong><?= htmlspecialchars($place) ?></strong>
                             </div>
                             <div class="jazz-overview-performance-grid">
                                 <?php foreach ($placePerformances as $performance) { ?>
                                     <div class='jazz-overview-performance'>
-                                        <strong><?= $performance['name'] ?></strong><br>
-                                        <?= date('H:i', strtotime($performance['start_time'])) . " - " . date('H:i', strtotime($performance['end_time'])) ?>
+                                        <strong><?= htmlspecialchars($performance->getName()) ?></strong><br>
+                                        <?= date('H:i', strtotime($performance->getStartTime())) . " - " . date('H:i', strtotime($performance->getEndTime())) ?>
                                     </div>
                                 <?php } ?>
                             </div>
@@ -73,5 +73,4 @@
             <?php } ?>
         </div>
     </div>
-
 </main>

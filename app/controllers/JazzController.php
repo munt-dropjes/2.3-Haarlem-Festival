@@ -1,36 +1,41 @@
 <?php
+
 namespace Controllers;
-use Models\Jazz;
+
+use Repositories\JazzRepository;
 
 class JazzController extends Controller {
-    private $model;
+    private $jazzRepository;
 
     public function __construct() {
-        $this->model = new Jazz();
+        $this->jazzRepository = new JazzRepository();
     }
 
     public function index() {
-        $festivalDaysData = $this->model->getFestivalDaysAndArtists();
-        $timetable = $this->model->getFestivalTimetable();
+        $festivalDaysData = $this->jazzRepository->getFestivalDaysAndArtists();
+        $timetable = $this->jazzRepository->getFestivalTimetable();
 
         $festivalDays = [];
-        foreach ($festivalDaysData as $row) {
-            $day = $row['date'];
+        foreach ($festivalDaysData as $jazz) {
+            $day = $jazz->getDate();
             if (!isset($festivalDays[$day])) {
                 $festivalDays[$day] = [
-                    'Date' => $row['date'],
+                    'Date' => $jazz->getDate(),
                     'artists' => []
                 ];
             }
             $festivalDays[$day]['artists'][] = [
-                'name' => $row['name'],
-                'image' => $row['image']
+                'name' => $jazz->getName(),
+                'image' => $jazz->getImage()
             ];
         }
 
+        // Toon de view met de opgehaalde gegevens
         $this->view('jazz/index', [
             'festivalDays' => $festivalDays,
             'timetable' => $timetable
         ]);
     }
 }
+
+?>

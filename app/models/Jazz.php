@@ -1,46 +1,62 @@
 <?php
+
 namespace Models;
-use PDO;
 
 class Jazz {
-    private $pdo;
+    private $date;
+    private $name;
+    private $image;
+    private $startTime;
+    private $endTime;
+    private $place;
 
-    public function __construct() {
-        require __DIR__ . '/../dbconfig.php';
-
-        try {
-            $this->pdo = new PDO("mysql:host=$servername;dbname=$database", $username, $password);
-            $this->pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-        } catch (PDOException $e) {
-            die("Fout bij verbinden met database: " . $e->getMessage());
-        }
+    public function getDate() {
+        return $this->date;
     }
 
-    public function getFestivalDaysAndArtists() {
-        $query = "
-            SELECT E.Date AS date, A.Name AS name, A.ImageName AS image
-            FROM Events E
-            JOIN Jazz J ON E.EventID = J.EventID
-            JOIN Artists A ON J.ArtistID = A.ArtistID
-            WHERE E.Date IS NOT NULL
-            ORDER BY E.Date, A.Name;
-        ";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getName() {
+        return $this->name;
     }
 
-    public function getFestivalTimetable() {
-        $query = "
-            SELECT E.Date AS date, A.Name AS name, E.StartTime AS start_time, E.EndTime AS end_time, E.Location AS place
-            FROM Events E
-            JOIN Jazz J ON E.EventID = J.EventID
-            JOIN Artists A ON J.ArtistID = A.ArtistID
-            ORDER BY E.Date, E.Location, E.StartTime;
-        ";
-        $stmt = $this->pdo->prepare($query);
-        $stmt->execute();
-        return $stmt->fetchAll(PDO::FETCH_ASSOC);
+    public function getImage() {
+        return $this->image;
+    }
+
+    public function getStartTime() {
+        return $this->startTime;
+    }
+
+    public function getEndTime() {
+        return $this->endTime;
+    }
+
+    public function getPlace() {
+        return $this->place;
+    }
+
+    public function setDate($date) {
+        $this->date = $date;
+    }
+
+    public function setName($name) {
+        $this->name = $name;
+    }
+
+    public function setImage($image) {
+        $this->image = $image;
+    }
+
+    public function setStartTime($startTime) {
+        $this->startTime = $startTime;
+    }
+
+    public function setEndTime($endTime) {
+        $this->endTime = $endTime;
+    }
+
+    public function setPlace($place) {
+        $this->place = $place;
     }
 }
+
 ?>
