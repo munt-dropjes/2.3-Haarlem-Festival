@@ -1,23 +1,30 @@
 <?php
+
 namespace Controllers;
-use Models\Jazz;
+
+use Repositories\JazzRepository;
 
 class JazzDetailController extends Controller {
-    private $model;
+    private $jazzRepository;
 
     public function __construct() {
-        $this->model = new Jazz();
+        $this->jazzRepository = new JazzRepository();
     }
 
     public function index($name) {
-        $artist = $this->model->getArtistByName(urldecode($name));
-
-        if (!$artist) {
-            http_response_code(404);
-            echo "Artiest niet gevonden";
-            return;
+           $name = str_replace('+', ' ', $name);
+            
+            $artist = $this->jazzRepository->getArtistByName($name);
+        
+            if (!$artist) {
+                http_response_code(404);
+                echo "Artiest niet gevonden!";
+                return;
+            }
+        
+            $this->view('jazz/artistDetail', ['artist' => $artist]);
         }
-
-        $this->view('jazz/artistDetail', ['artist' => $artist]);
-    }
+        
 }
+
+?>

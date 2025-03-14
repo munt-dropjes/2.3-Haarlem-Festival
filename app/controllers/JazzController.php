@@ -20,7 +20,7 @@ class JazzController extends Controller {
             $day = $jazz->getDate();
             if (!isset($festivalDays[$day])) {
                 $festivalDays[$day] = [
-                    'Date' => $jazz->getDate(),
+                    'Date' => $day,
                     'artists' => []
                 ];
             }
@@ -30,7 +30,6 @@ class JazzController extends Controller {
             ];
         }
 
-        // Toon de view met de opgehaalde gegevens
         $this->view('jazz/index', [
             'festivalDays' => $festivalDays,
             'timetable' => $timetable
