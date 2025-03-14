@@ -10,7 +10,7 @@
     <div class="container mt-5">
     <h2 class="text-center mb-4">Festival Line-up</h2>
 
-    <div class="accordion" id="festivalAccordion" style="position: relative; z-index: 0;">
+    <div class="accordion" id="festivalAccordion" >
         <?php $i=1;  ?>
     <?php foreach ($festivalDays as $dayId => $info) { ?>
         <div class="accordion-item" style="background: none; border: none;">
