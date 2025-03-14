@@ -34,6 +34,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
 
+
     //everything account related
     $router->get('/createaccount', 'createaccountController@index');
     $router->post('/createaccount', 'createaccountController@create');
@@ -50,7 +51,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/stroll', 'StrollController@index');
     $router->get('/stroll/detail', 'StrollController@detail');
 	  $router->get('/dance', 'DanceController@index');
-
+      $router->get('/jazz', 'JazzController@index');
 
     //cms
     $router->get('/cms', 'CmsController@index');
