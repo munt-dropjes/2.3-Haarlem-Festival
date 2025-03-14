@@ -87,4 +87,9 @@
             ?>
         </div>
     </div>
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+            setupLanguageSelection();
+        });
+    </script>
 </main>

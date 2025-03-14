@@ -40,6 +40,18 @@
                             <td><?= $user->getRegisteredAt() ?></td>
                             <td>
                                 <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="edit" data-bs-toggle="modal" data-bs-target="#updateUser"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
+                                <button 
+                                    type="button" 
+                                    class="btn btn-warning btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#updateUser"
+                                    data-name="<?= htmlspecialchars($user->getName()); ?>"
+                                    data-email="<?= htmlspecialchars($user->getEmail()); ?>"
+                                    data-phone="<?= htmlspecialchars($user->getPhone()); ?>"
+                                    data-country="<?= htmlspecialchars($user->getCountry()); ?>"
+                                    data-role="<?= htmlspecialchars($user->getRole()); ?>">
+                                    Edit
+                                </button>
                                 <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete" data-bs-toggle="modal" data-bs-target="#deleteUser"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
                             </td>
                         </tr>
@@ -127,7 +139,37 @@
         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
       </div>
       <div class="modal-body">
-        Update User
+        <div class="form-content">
+                <div class="form-group">
+                    <label for="name">Name</label>
+                    <input type="text" class="form-control" id="name" name="name" required>
+                </div>
+                <div class="form-group">
+                    <label for="email">Email</label>
+                    <input type="email" class="form-control" id="email" name="email" required>
+                </div>
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" class="form-control" id="password" name="password" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">Phone</label>
+                    <input type="text" class="form-control" id="phone" name="phone" required>
+                </div>
+                <div class="form-group">
+                    <label for="country">Country</label>
+                    <input type="text" class="form-control" id="country" name="country" required>
+                </div>
+                <div class="form-group">
+                    <label for="role">Role</label>
+                    <select class="form-select" id="role" name="role">
+                        <option value="Administrator">Admin</option>
+                        <option value="Employee">Employee</option>
+                        <option value="Customer">Customer</option>
+                    </select>
+                </div>
+            </div>
+        </div>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -153,4 +195,9 @@
     </div>
   </div>
 </div>
+<script>
+    document.addEventListener('DOMContentLoaded', function() {
+        loadEditModalCMS('updateUser');
+    });
+</script>
 </main>
