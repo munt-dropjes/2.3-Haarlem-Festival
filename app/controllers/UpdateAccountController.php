@@ -30,13 +30,38 @@ class UpdateAccountController extends Controller {
 	}
 
 	public function updateAccount(){
-		$oldEmail = $_SESSION['user']->getEmail();
-		$oldPassword = $_SESSION['user']->getPassword();
-		$user = $_SESSION['user'];
-		$newUser = $this->createUser($user);
-		
-		$this->userService->updateUser($newUser, $oldEmail);
-		$this->view('account/index');
+		try{
+			$user = $_SESSION['user'];
+			$oldPassword = $_POST['oldPassword'];
+			$newUser = $this->createUser($user);
+			if($newUser == null){
+				$this->view('account/index', ['error' => 'Email already exists or password is incorrect']);
+			}
+			if(!$this->checkPassword($user, $oldPassword)){
+				$this->view('account/index', ['error' => 'Password is incorrect']);
+			}
+			$this->userService->updateUser($newUser, $user->getEmail());
+			$this->view('account/index');
+		}
+		catch(\Exception $e){
+			$this->view('account/index', ['error' => $e->getMessage()]);
+		}
+	}	
+
+	//checks the entered password against the users real password to verify the user
+	private function checkPassword($user, $password) {
+		if (password_verify($password, $user->getPassword())) {
+			return true;
+		}
+		return false;
+	}
+
+	//verify the validity of the new password
+	private function verifyNewPassword($password) {
+		if (strlen($password) < 8) {
+			return false;
+		}
+		return true;
 	}
 
     private function createUser($user): User {
@@ -52,13 +77,6 @@ class UpdateAccountController extends Controller {
 			throw new \Exception("Email already exists or password is incorrect");
 		}
     }
-
-	private function checkPassword($user, $password) {
-		if (password_verify($password, $user->getPassword())) {
-			return true;
-		}
-		return false;
-	}
 
 	private function checkEmail($user, $oldEmail) {
 		$check = $this->userService->getUserByEmail($user->getEmail());
