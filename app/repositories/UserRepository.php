@@ -22,7 +22,7 @@ class UserRepository extends BaseRepository{
                 $user->getPhone(),
                 $user->getCountry()
             ]);
-            return $this->getUser($user['email']);
+            return $this->getUser($user);
         }
         catch(Exception $e){
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to create user: " . $user->email);
@@ -120,8 +120,8 @@ class UserRepository extends BaseRepository{
     public function updateUser($user, $id) : User {
         try{
             $sql = "UPDATE Users 
-                    SET Role = ?, Name = ?, Email = ?, Password = ?, Phone = ?, Country = ?
-                    WHERE Id = ?";
+                    SET Role = ?, Name = ?, Email = ?, Password = ?, Phone = ?, Country = ?, ResetToken = ?, ResetTokenExpiration = ?
+                    WHERE Email = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
                 $user->getRole(),
@@ -130,7 +130,9 @@ class UserRepository extends BaseRepository{
                 $user->getPassword(),
                 $user->getPhone(),
                 $user->getCountry(),
-                $id
+                $user->getResetToken(),
+                $user->getResetTokenExpiration(),
+                $user->getEmail()
             ]);
             return $this->getUser($user);
         }

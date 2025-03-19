@@ -17,7 +17,7 @@ class UserService {
     // ~~Create~~
     public function insertUser($user) : User {
         if ($this->userRepository->checkEmail($user)){
-            throw new \Exception("Email already exists");
+            throw new Exception("Email already exists");
         }
         return $this->userRepository->insertUser($user);        
     }
@@ -31,7 +31,8 @@ class UserService {
         return $this->userRepository->getUserByEmail($email);
     }
 
-    private function getUser(User $user) {
+    //rename validateandgetuser
+    private function validateAndGetUser(User $user) {
         if (empty($user->getEmail()) || empty($user->getPassword())) {
             throw new \InvalidArgumentException("Email and password cannot be empty.");
         }
@@ -63,7 +64,7 @@ class UserService {
         $user = new User();
         $user->setEmail($email);
         $user->setPasswordOnLogin($password);
-        $authenticatedUser = $this->GetUser($user);
+        $authenticatedUser = $this->validateAndGetUser($user);
         return $authenticatedUser;
     }
 
@@ -71,6 +72,15 @@ class UserService {
     public function create($email, $name, $password, $phone, $country) {
         $user = new User();
         $user->setRole(roleEnum::CUSTOMER);
+        $user->setEmail($email);
+        $user->setName($name);
+        $user->setPassword($password);
+        $user->setPhone($phone);
+        $user->setCountry($country); 
+        return $user;
+    }
+
+    public function updateExistingUser($user, $email, $name, $password, $phone, $country) {
         $user->setEmail($email);
         $user->setName($name);
         $user->setPassword($password);

@@ -1,7 +1,31 @@
 @import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
+
+* {
+	box-sizing: border-box;
+	margin: 0;
+	padding: 0;
+	scroll-margin-top: var(--header-height);
+}
+
 :root {
 	--header-height: 7rem;
 	--sidebar-width: 20rem;
+
+	--background-color: #B2F5EA;
+}
+
+.top-image {
+	height: 350px;
+}
+
+.top-image>img {
+	height: 100%;
+	object-fit: cover;
+	object-position: bottom;
 }
 
 header {
@@ -10,6 +34,7 @@ header {
 	left: 0;
 	right: 0;
 
+	z-index: 9999;
 }
 
 main {
@@ -17,20 +42,32 @@ main {
 	margin-top: var(--header-height);
 }
 
-body {
-	background: linear-gradient(to bottom, #F28DE5, #B2F5EA);
+.pink-to-blue {
+	background: linear-gradient(#F28DE5, #B2F5EA);
+}
+
+.pink-to-blue-rotated {
+	background: linear-gradient(90deg, #F28DE5, #B2F5EA);
 }
 
 p {
 	font-family: 'Quicksand', sans-serif;
 }
 
-h1{
-	font-family: 'Zen Dots', sans-serif;
+h1 {
+	font-family: "Monoton", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 h2 {
 	font-family: 'Zen Dots', sans-serif;
+}
+
+.zen-dots-regular {
+	font-family: "Zen Dots", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 .navbar {
@@ -42,6 +79,10 @@ h2 {
 	color: #000;
 	font-family: 'Zen Dots', sans-serif;
 
+}
+
+a{
+	font-family: hollywood-one-sc-regular, sans-serif;
 }
 
 .nav-button {
@@ -87,7 +128,6 @@ h2 {
 	font-weight: 900;
 	text-decoration: none;
 	padding-block: 0.5rem;
-
 }
 
 #sidebar.active {
@@ -126,19 +166,17 @@ footer .footer-icon {
 
 
 .create-account-container {
-    max-width: 500px;
-    margin: 0 auto; 
+	max-width: 500px;
+	margin: 0 auto;
 }
 
-.required{
-	color: red !important; 
-	display: inline; 
+.required {
+	color: red !important;
+	display: inline;
 	float: none;
 }
 
-
-
-.btn-primary{
+.btn-primary {
 	background-color: #FCFC7A !important;
 	color: #000 !important;
 	font-family: 'holtwood-one-sc-regular', sans-serif !important;
@@ -147,12 +185,12 @@ footer .footer-icon {
 	border-radius: 50px !important;
 }
 
-.create-account-container{
+.create-account-container {
 	max-width: 600px !important;
-	margin: 0 auto; 
+	margin: 0 auto;
 }
 
-.submitbtn{
+.submitbtn {
 	background-color: #FCFC7A !important;
 	color: #000 !important;
 	font-family: 'holtwood-one-sc-regular', sans-serif !important;
@@ -161,35 +199,411 @@ footer .footer-icon {
 	border-radius: 50px !important;
 }
 
-.submitbtn:hover{
+.submitbtn:hover {
 	filter: brightness(90%);
 }
 
-.form-control{
+.form-control {
 	border-radius: 50px !important;
 }
 
 #accountbar {
-    background-color: #FCFC7A;
-    padding: 2rem;
-    position: fixed;
-    top: var(--header-height);
-    right: calc(var(--sidebar-width) * -1);
-    width: var(--sidebar-width);
-    height: fit-content;
-    display: flex;
-    flex-direction: column;
-    transition: all 0.5s;
+	background-color: #FCFC7A;
+	padding: 2rem;
+	position: fixed;
+	top: var(--header-height);
+	right: calc(var(--sidebar-width) * -1);
+	width: var(--sidebar-width);
+	height: fit-content;
+	display: flex;
+	flex-direction: column;
+	transition: all 0.5s;
 }
 
 #accountbar a {
-    color: #4B0082;
-    font-size: 1rem;
-    font-weight: 900;
-    text-decoration: none;
-    padding-block: 0.5rem;
+	color: #4B0082;
+	font-size: 1rem;
+	font-weight: 900;
+	text-decoration: none;
+	padding-block: 0.5rem;
 }
 
 #accountbar.active {
-    right: 0;
+	right: 0;
 }
+
+.languageSelectionBar{
+	background-color: #4B0082;
+	color:#FCFC7A;
+	font-size: 1rem;
+	font-style: "Zen Dots", sans-serif;
+	text-align: center;
+	border-left:#FCFC7A;
+	border-right:#FCFC7A;
+	padding: 0;
+	max-width: 800px;
+}
+
+.languageSelectionBar .col{
+	padding: 0;
+}
+
+.languageSelectionBar button {
+	display: block;
+	width: 100%;
+	height: 100%;
+	text-align: center;
+	padding: 10px;
+	background: none;
+	color: white;
+	border: none;
+	font-style: "Zen Dots", sans-serif;
+}
+
+.languageSelectionBarButton{
+	font-style: "Zen Dots", sans-serif;
+}
+
+.languageSelectionBar button:hover {
+	background-color: #FCFC7A;
+	color: #4B0082;
+}
+
+.languageSelectionBar button.selected {
+	background-color: #FCFC7A;
+	color: #4B0082;
+}
+
+/* ********************* */
+/* 		Dance Start		 */
+/* ********************* */
+
+#dance .swiper {
+	width: 100%;
+	height: 100%;
+	user-select: none;
+}
+
+#dance .swiper-slide-normal {
+	height: 150px;
+}
+
+#dance .swiper-slide-extended {
+	height: calc(150px + 50px + 1rem * 2);
+	background-color: var(--background-color);
+	transition: height 0.5s;
+}
+
+#dance .swiper-slide-normal img {
+	display: block;
+	width: 100%;
+	height: 100%;
+	object-fit: cover;
+
+	/* border-radius: 1rem; */
+}
+
+#dance .image-container {
+	width: 100%;
+	height: 150px;
+}
+
+#dance .image-container img {
+	width: 100%;
+	height: 150px;
+	object-fit: cover;
+}
+
+#dance .swiper-slide-normal i,
+#dance .swiper-slide-extended i {
+	color: #fff;
+	background-color: rgba(0, 0, 0, 0.5);
+	font-size: 1.5rem;
+	position: absolute;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-direction: column;
+}
+
+#dance .swiper-slide:hover i,
+#dance .swiper-slide-extended:hover i {
+	display: flex !important;
+}
+
+#dance .swiper-slide-extended button {
+	width: 100%;
+	height: 50px;
+}
+
+#dance .swiper-slide-extended:hover {
+	height: 350px;
+}
+
+#dance .swiper-pagination {
+	/* position: unset; */
+}
+
+#dance .event-button-hover button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: none;
+}
+
+#dance .event-button-hover:hover button {
+	display: block;
+}
+
+/* ********************* */
+/* 		Dance End		 */
+/* ********************* */
+
+
+/* ***************************** */
+/* 		Dance Details Start		 */
+/* ***************************** */
+
+#dance-artist .top-image {
+	position: relative;
+}
+
+#dance-artist .top-image .buy-tickets {
+	position: absolute;
+	bottom: 2rem;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	max-width: 50%;
+}
+
+#dance-artist .schedule .events-container {
+	height: 5rem;
+}
+
+#dance-artist .schedule .events-container .event-box {
+	background-color: #D9D9D9;
+}
+
+#dance-artist .schedule .schedule-items {
+	min-width: 50rem;
+}
+
+/* ***************************** */
+/* 		Dance Details End		 */
+/* ***************************** */
+
+
+/* ********************* */
+/* 		Stroll Start	 */
+/* ********************* */
+.Stroll_Banner {
+	width: 100%;
+	height: auto;
+}
+
+.Stroll_Detail_Map{
+	width:100%;
+	height: auto;
+	border-radius: 20px;
+}
+
+.carousel {
+	margin-top: 20px;
+	width: 50%;
+	max-width: 800px;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin-bottom: 3rem;
+}
+
+.carousel img {
+	border-radius: 30px;
+}
+
+#details{
+	max-width: 80% !important;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center !important;
+	max-width: 100%;
+}
+
+.col {
+	flex: 1;
+	max-width: 80%;
+	padding: 3rem;
+	justify-content: center !important;
+	box-sizing: border-box;
+}
+
+#strollDetailMap{
+	width: 100%;
+	height: 100%;
+}
+
+#strollDetailsRow{
+	display: flex;
+	align-items: flex-start;
+	margin:0 auto;
+	width: 100%;
+}
+
+#strollDetailsCol{
+	margin-top: 0 auto;
+}
+
+#strollDetailsCol{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-top:0;
+}
+
+#strollDetaildescription {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#strollDetailsCol h1 {
+	margin-bottom: 1rem;
+}
+
+#strollDetaildescription{
+
+	width: fit-content;
+	height: 100%;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	border-radius: 50px;
+}
+
+#strollLocations{
+	margin-top:50px;
+	width: 100% !important;
+	max-width: 90% !important;
+	justify-content: center !important;
+
+}
+
+#strollLocations img {
+	border-radius: 30px;
+	max-width: 1000px;
+	height:auto;
+}
+
+
+#strollDetaildescription p {
+	margin-top: 0;
+}
+
+.routeImage{
+	width: 100%;
+	height: auto;
+	border-radius: 20px;
+}
+
+.RouteDestinations{
+	background-color: #4B0082;
+	max-width: 300px;
+	justify-content: center!important;
+	border-radius: 20px;
+	padding: 1rem;
+	line-height: 1;
+	margin:0 auto;
+}
+
+.RouteDestinations a{
+	color: #FFFFFF;
+	text-align: center;
+	justify-content: center!important;
+	text-decoration: underline;
+	font-family: "Holtwood One SC", serif;
+	font-size: 12pt;
+}
+
+.RouteDestinations a:hover{
+	color: #FCFC7A;
+	text-align: center;
+}
+
+.StrollStopNumber{
+	color: #FFFFFF;
+	font-family: "Holtwood One SC", serif;
+	text-align: center;
+	font-size: 12pt;
+}
+
+#strollTours{
+	margin-left: 5%;
+}
+
+.event-card {
+	border-radius: 50px !important;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	margin-bottom: 20px;
+	display: inline-block;
+	width: 100%;
+	max-width: fit-content;
+	background-color: transparent;
+	border: none;
+}
+
+.event-card img {
+	border-top-left-radius: 50px !important;
+	border-top-right-radius: 50px !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	width: 100%;
+	height: auto;
+	display: block;
+	max-width: 100% !important;
+	max-height: 100% !important;
+}
+
+.event-card .card-body {
+	padding: 20px;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	border-bottom-left-radius: 50px;
+	border-bottom-right-radius: 50px;
+}
+
+.event-card .card-title {
+	font-size: 1.5rem;
+	font-weight: bold;
+}
+
+.event-card .card-text {
+	font-size: 1rem;
+	margin-bottom: 10px;
+}
+
+.event-card .form-select {
+	background-color: #FCFC7A;
+	color: #000;
+	border-radius: 25px;
+	padding: 10px;
+	width: 100%;
+	margin-top: 10px;
+}
+
+
+
+/* ********************* */
+/* 		Stroll End		 */
+/* ********************* */
