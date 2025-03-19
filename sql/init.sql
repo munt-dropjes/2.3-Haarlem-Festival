@@ -11,7 +11,8 @@ CREATE TABLE `Artists` (
 	`Song2Link` VARCHAR(1024) NOT NULL,
 	`Song3Link` VARCHAR(1024) NOT NULL,
 	`ImageName` VARCHAR(128) NOT NULL,
-	`Category` VARCHAR(32) NOT NULL
+	`Category` VARCHAR(32) NOT NULL,
+	`BannerImage` VARCHAR(128) NOT NULL
 );
 
 CREATE TABLE `Dance` (
@@ -24,10 +25,13 @@ CREATE TABLE `Events` (
 	`Name` VARCHAR(255) NOT NULL,
 	`Description` text NOT NULL,
 	`Date` DATE NOT NULL,
-	`Time` TIME NOT NULL,
+	`Time` TIME DEFAULT NULL,
+	`Duration` INT(11) DEFAULT NULL,
 	`Location` VARCHAR(255) NOT NULL,
 	`Price` FLOAT(10, 2) NOT NULL,
-	`AvailableTickets` INT(11) NOT NULL
+	`AvailableTickets` INT(11) NOT NULL,
+	`ImageName` VARCHAR(128) NOT NULL,
+	`Category` enum('Jazz','Yummy','Dance','A Stroll through History','Magic@Teylers','Stories in Haarlem') DEFAULT NULL
 );
 
 CREATE TABLE `Invoices` (
@@ -168,18 +172,30 @@ VALUES
     (8, 8, 'Amsterdamse Poort', 'Description 8', 'Amsterdamse Poort, 2011 AV Haarlem', FALSE),
     (9, 9, 'Hof van Bakenes', 'Description 9', 'Warmoesstraat 13, 2011 HN Haarlem', FALSE);
 
-
-INSERT INTO `Events` (`EventID`, `Name`, `Description`, `Date`, `Time`, `Location`, `Price`, `AvailableTickets`)
+INSERT INTO `Artists` (`ArtistID`, `Name`, `About`, `KnownFor`, `Song1Link`, `Song2Link`, `Song3Link`, `ImageName`, `Category`, `BannerImage`)
 VALUES
-(1, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '10:00:00', 'Grote Markt, Haarlem', 15.00, 50),
-(2, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '14:00:00', 'Grote Markt, Haarlem', 20.00, 40),
-(3, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '20:00:00', 'Grote Markt, Haarlem', 18.00, 30),
-(4, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '11:00:00', 'Grote Markt, Haarlem', 25.00, 25),
-(5, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '13:00:00', 'Grote Markt, Haarlem', 30.00, 20),
-(6, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '15:00:00', 'Grote Markt, Haarlem', 35.00, 15),
-(7, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '21:00:00', 'Grote Markt, Haarlem', 22.00, 10),
-(8, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '12:00:00', 'Grote Markt, Haarlem', 27.00, 5),
-(9, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '14:00:00', 'Grote Markt, Haarlem', 32.00, 0);
+(1, 'Hardwell', 'Hardwell, real name Robert van de Corbo, is a world-famous DJ and music producer from the Netherlands. Known for his energetic performances and music hits like \"Spaceman\" and \"Apollo\", he has dominated the DJ Mag Top 100 charts for years. Hardwell also founded his own label, Revealed Recordings, and after a short break he is back stronger than ever, ready to conquer the electronic music world.', 'Hardwell is most recognized for his big room house anthems and electrifying festival sets. Tracks like \"Spaceman\" and \"Apollo\" have become dance music classics, solidifying his place as one of the genre’s greatest performers.', '6jmTQwFzejCurofZDz7x9k', '4cYrCTMjUzdFvMT9XcMXYu', '3Nnq6YSHQ5LwRKkioGIjhb', 'hardwell.png', 'Dance', '0');
+
+INSERT INTO `Dance` (`ArtistID`, `EventID`)
+VALUES
+(1, 10),
+(1, 11);
+
+INSERT INTO `Events` (`EventID`, `Name`, `Description`, `Date`, `Time`, `Duration`, `Location`, `Price`, `AvailableTickets`, `ImageName`, `Category`)
+VALUES
+(1, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '10:00:00', 0, 'Grote Markt, Haarlem', 15.00, 50, 'Stroll_through_history.png', 'A Stroll through History'),
+(2, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '14:00:00', 0, 'Grote Markt, Haarlem', 20.00, 40, 'Stroll_through_history.png', 'A Stroll through History'),
+(3, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '20:00:00', 0, 'Grote Markt, Haarlem', 18.00, 30, 'Stroll_through_history.png', 'A Stroll through History'),
+(4, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '11:00:00', 0, 'Grote Markt, Haarlem', 25.00, 25, 'Stroll_through_history.png', 'A Stroll through History'),
+(5, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '13:00:00', 0, 'Grote Markt, Haarlem', 30.00, 20, 'Stroll_through_history.png', 'A Stroll through History'),
+(6, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '15:00:00', 0, 'Grote Markt, Haarlem', 35.00, 15, 'Stroll_through_history.png', 'A Stroll through History'),
+(7, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '21:00:00', 0, 'Grote Markt, Haarlem', 22.00, 10, 'Stroll_through_history.png', 'A Stroll through History'),
+(8, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '12:00:00', 0, 'Grote Markt, Haarlem', 27.00, 5, 'Stroll_through_history.png', 'A Stroll through History'),
+(9, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '14:00:00', 0, 'Grote Markt, Haarlem', 32.00, 0, 'Stroll_through_history.png', 'A Stroll through History'),
+(10, 'Caprera Openluchttheater', 'Harwell\r\nMartin Garrix\r\nArmin van Buuren', '2025-03-15', '14:00:00', 540, 'Caprera Openluchttheater', 110.00, 2000, 'Caprera_Openluchttheater.png', 'Dance'),
+(11, 'Jopenkerk', 'Harwell\r\nMartin Garrix\r\nArmin van Buuren', '2025-03-14', '23:00:00', 90, 'Jopenkerk', 60.00, 300, 'Jopenkerk.png', 'Dance'),
+(12, 'Test', 'Test', '2025-03-14', '23:00:00', 90, 'Test', 60.00, 300, 'Jopenkerk.png', NULL),
+(13, 'All Access Pass', 'Grants entry to all events on Friday, Saturday, and Sunday', '2025-07-04', '00:00:00', 0, 'Festival Grounds', 120.00, 300, 'dance-festival.png', 'Dance');
 
 
 
