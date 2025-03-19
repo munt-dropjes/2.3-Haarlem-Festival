@@ -202,5 +202,8 @@
     document.addEventListener('DOMContentLoaded', function() {
         loadEditModalCMS('updateUser');
     });
+    document.addEventListener('DOMContentLoaded', function() {
+        loadDeleteModalCMS('deleteUser');
+    });
 </script>
 </main>
