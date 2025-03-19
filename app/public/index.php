@@ -50,7 +50,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/stroll', 'StrollController@index');
     $router->get('/stroll/detail', 'StrollController@detail');
 	  $router->get('/dance', 'DanceController@index');
-
+	  $router->get('/dance/{artist}', 'DanceController@artist');
 
     //cms
     $router->get('/cms', 'CmsController@index');
