@@ -25,7 +25,8 @@ class UpdateAccountController extends Controller {
 		else{
 			echo session_status();
 			$user = $_SESSION['user'];
-			$this->view('account/index', $user);
+			$data['user'] = $user;
+			$this->view('account/updateaccount', $data);
 		}
 	}
 
@@ -35,22 +36,64 @@ class UpdateAccountController extends Controller {
 			$oldPassword = $_POST['oldPassword'];
 			$newUser = $this->createUser($user);
 			if($newUser == null){
-				$this->view('account/index', ['error' => 'Email already exists or password is incorrect']);
+				$this->view('account/updateaccount', ['error' => 'Email already exists or password is incorrect']);
 			}
 			if(!$this->checkPassword($user, $oldPassword)){
-				$this->view('account/index', ['error' => 'Password is incorrect']);
+				$this->view('account/updateaccount', ['error' => 'Password is incorrect']);
 			}
 			$this->userService->updateUser($newUser, $user->getEmail());
-			$this->view('account/index');
+			$_SESSION['user'] = $newUser;
+			$this->view('account/updateaccount', ['success' => 'Account updated successfully']);
 		}
 		catch(\Exception $e){
-			$this->view('account/index', ['error' => $e->getMessage()]);
+			$this->view('account/updateaccount', ['error' => $e->getMessage()]);
 		}
 	}	
 
+    private function createUser($user): User {
+        $email = htmlspecialchars(strtolower($_POST['email']));
+        $name = htmlspecialchars($_POST['firstname'] . ' ' . $_POST['surname']);
+        $newpassword = htmlspecialchars($_POST['newpassword']);
+		$newpasswordConfirm = htmlspecialchars($_POST['newpasswordconfirm']);
+		if ($newpassword == "" && $newpasswordConfirm == "") {
+			$newpassword = $user->getPassword();
+			$newpasswordConfirm = $user->getPassword();
+		}
+		if ($newpassword != $newpasswordConfirm) {
+			throw new \Exception("New passwords do not match");
+		}
+		if (!$this->verifyNewPassword($newpassword)) {
+			throw new \Exception("Password must be at least 8 characters long");
+		}
+		$currentPassword = htmlspecialchars($_POST['currentpassword']);
+		$phone = htmlspecialchars($_POST['phone']);
+        $country = htmlspecialchars($_POST['country']);
+		if ($this->checkPassword($user, $currentPassword) && $this->checkEmail($user)) {
+        	return $this->userService->updateExistingUser($user,$email, $name, $newpassword, $phone, $country);
+		}
+		else{
+			throw new \Exception("Email already exists or password is incorrect");
+		}
+    }
+
+
+
+
+	//all the checks :)
+
+
+	//check if the email is already in use
+	private function checkEmail($user) {
+		$check = $this->userService->getUserByEmail($user->getEmail());
+		if ($check === null) {
+			return true;
+		}
+		return false;
+	}
+
 	//checks the entered password against the users real password to verify the user
-	private function checkPassword($user, $password) {
-		if (password_verify($password, $user->getPassword())) {
+	private function checkPassword($user, $currentPassword) {
+		if (password_verify($currentPassword, $user->getPassword())) {
 			return true;
 		}
 		return false;
@@ -62,31 +105,6 @@ class UpdateAccountController extends Controller {
 			preg_match('/[!@#$%^&*()_+=-{};:"<>,./?]/', $password) && 
 			preg_match('/\d/', $password)
 		) {
-			return true;
-		}
-		return false;
-	}
-
-    private function createUser($user): User {
-        $email = htmlspecialchars(strtolower($_POST['email']));
-        $name = htmlspecialchars($_POST['firstname'] . ' ' . $_POST['surname']);
-        $password = htmlspecialchars($_POST['password']);
-		if (!$this->verifyNewPassword($password)) {
-			throw new \Exception("Password must be at least 8 characters long");
-		}
-		$phone = htmlspecialchars($_POST['phone']);
-        $country = htmlspecialchars($_POST['country']);
-		if ($this->checkPassword($user, $password) && $this->checkEmail($user)) {
-        	return $this->userService->updateExistingUser($user,$email, $name, $password, $phone, $country);
-		}
-		else{
-			throw new \Exception("Email already exists or password is incorrect");
-		}
-    }
-
-	private function checkEmail($user) {
-		$check = $this->userService->getUserByEmail($user->getEmail());
-		if ($check === null) {
 			return true;
 		}
 		return false;

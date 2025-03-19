@@ -13,15 +13,14 @@
             <div class="row">
                 <div class ="col">
                     <label for="firstname" class="form-label">Firstname:<span class="required">*</span></label>
-                    <input type="text" class="form-control" id="firstname" name="firstname" required>
+                    <input type="text" class="form-control" id="firstname" name="firstname" value= "<?php $fullName = explode(" ", $user->getName()); echo $fullName[0]; ?>" required>
                 </div>
                 <div class="col">  
                     <label for="lastname" class="form-label">Lastname:<span class="required">*</span></label>
-                    <input type="text" class="form-control" id="surname" name="surname" required>
+                    <input type="text" class="form-control" id="surname" name="surname" value = "<?php echo $fullName[1]; ?>" required>
                 </div>
             </div>  
         </div>
-
 
         <div class="mb-3">
             <label for="email" class="form-label">Email:</label>
@@ -30,17 +29,17 @@
         
         <div class="mb-3">
             <label for="password" class="form-label">New password:</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="newpassword" name="password">
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Confirm new password:</label>
-            <input type="password" class="form-control" id="password" name="password">
+            <input type="password" class="form-control" id="newpasswordconfirm" name="password">
         </div>
         
         <div class="mb-3">
             <label for="password" class="form-label">Current password:<span class="required">*</span></label>
-            <input type="password" class="form-control" id="password" name="password" required>
+            <input type="password" class="form-control" id="currentpassword" name="password" required>
         </div>
         
         <div class="mb-3">
@@ -51,7 +50,7 @@
         <div class="mb-3">
         <label for="country" class="form-label">Country:</label></span>      
         
-        <!--Oh god why-->
+        <!--Oh god why--> <!--This looks so bad yet it works so good-->
         <select id="country" name="country" class="form-control">
             <option value="Afghanistan">Afghanistan</option>
             <option value="Åland Islands">Åland Islands</option>
