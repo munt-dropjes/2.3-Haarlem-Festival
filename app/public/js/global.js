@@ -75,8 +75,8 @@ function setupLanguageSelection() {
 /////////////////////////////
 
 
-var swiper = new Swiper(".swiper", {
-	slidesPerView: 1,
+var swiper = new Swiper(".dance-swiper", {
+	slidesPerView: 2,
 	spaceBetween: 10,
 	grabCursor: true,
 	setWrapperSize: true,
