@@ -56,21 +56,27 @@ class UpdateAccountController extends Controller {
 		return false;
 	}
 
-	//verify the validity of the new password
+	//verify the validity of the new password (checks if the new password has a minimum of 8 characters, a special character and a number)
 	private function verifyNewPassword($password) {
-		if (strlen($password) < 8) {
-			return false;
+		if (strlen($password) >= 8 && 
+			preg_match('/[!@#$%^&*()_+=-{};:"<>,./?]/', $password) && 
+			preg_match('/\d/', $password)
+		) {
+			return true;
 		}
-		return true;
+		return false;
 	}
 
     private function createUser($user): User {
         $email = htmlspecialchars(strtolower($_POST['email']));
         $name = htmlspecialchars($_POST['firstname'] . ' ' . $_POST['surname']);
         $password = htmlspecialchars($_POST['password']);
-        $phone = htmlspecialchars($_POST['phone']);
+		if (!$this->verifyNewPassword($password)) {
+			throw new \Exception("Password must be at least 8 characters long");
+		}
+		$phone = htmlspecialchars($_POST['phone']);
         $country = htmlspecialchars($_POST['country']);
-		if ($this->checkPassword($user, $password) && $this->checkEmail($user, $email)) {
+		if ($this->checkPassword($user, $password) && $this->checkEmail($user)) {
         	return $this->userService->updateExistingUser($user,$email, $name, $password, $phone, $country);
 		}
 		else{
@@ -78,7 +84,7 @@ class UpdateAccountController extends Controller {
 		}
     }
 
-	private function checkEmail($user, $oldEmail) {
+	private function checkEmail($user) {
 		$check = $this->userService->getUserByEmail($user->getEmail());
 		if ($check === null) {
 			return true;
