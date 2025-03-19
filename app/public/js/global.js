@@ -18,6 +18,38 @@ function toggleAccountSidebar() {
 }
 
 
+//for the cms edit modal
+function loadEditModalCMS(modalID) {
+    var updateUserModal = document.getElementById(modalID);
+
+    if (!updateUserModal) return;
+
+    updateUserModal.addEventListener('show.bs.modal', function (event) {
+        var button = event.relatedTarget;
+        if (!button) return;
+
+        var name = button.getAttribute('data-name');
+        var email = button.getAttribute('data-email');
+        var phone = button.getAttribute('data-phone');
+        var country = button.getAttribute('data-country');
+        var role = button.getAttribute('data-role');
+
+        var modalNameInput = updateUserModal.querySelector('#name');
+        var modalEmailInput = updateUserModal.querySelector('#email');
+        var modalPhoneInput = updateUserModal.querySelector('#phone');
+        var modalCountryInput = updateUserModal.querySelector('#country');
+        var modalRoleSelect = updateUserModal.querySelector('#role');
+
+        if (modalNameInput) modalNameInput.value = name;
+        if (modalEmailInput) modalEmailInput.value = email;
+        if (modalPhoneInput) modalPhoneInput.value = phone;
+        if (modalCountryInput) modalCountryInput.value = country;
+        if (modalRoleSelect) modalRoleSelect.value = role;
+    });
+}
+
+
+
 //for stroll language selection//
 function setupLanguageSelection() {
     const buttons = document.querySelectorAll('.languageSelectionBarButton button');
@@ -40,11 +72,6 @@ function setupLanguageSelection() {
 
     document.querySelector('.languageSelectionBarButton .selected').click();
 }
-
-document.addEventListener('DOMContentLoaded', function () {
-    setupLanguageSelection();
-});
-
 /////////////////////////////
 
 

@@ -2,11 +2,7 @@
 	<div id="carouselExampleIndicators" class="carousel slide" data-ride="carousel">
 		<ol class="carousel-indicators">
 			<?php
-			$eventName = $detail->getStopName();
-			$encodedEventName = str_replace(' ', '', $eventName);
-			$serverPath = $_SERVER['DOCUMENT_ROOT'] . "/images/StrollDetails/$encodedEventName/Carousel";
 			$images = glob($serverPath . "/*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}", GLOB_BRACE);
-			
 			foreach ($images as $index => $image) {
 				$activeClass = $index === 0 ? 'active' : '';
 				echo "<li data-target='#carouselExampleIndicators' data-slide-to='$index' class='$activeClass'></li>";
@@ -44,9 +40,9 @@
 		</a>
 	</div>
 	<div class="container" id="details">
-		<div class="row" id="strollDetailMap">
-			<div class="col">
-				<h1><?php echo $detail->getStopName(); ?></h1>
+		<div class="row" id="strollDetailsRow">
+		<h1><?php echo $detail->getStopName(); ?></h1>
+			<div class="col" id="strollDetailsCol">
 				<?php
 				$eventName = $detail->getStopName();
 				$encodedEventName = str_replace(' ', '', $eventName);
