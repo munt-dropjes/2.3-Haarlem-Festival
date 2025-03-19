@@ -39,8 +39,8 @@
                             <td><?= $user->getRole() ?></td>
                             <td><?= $user->getRegisteredAt() ?></td>
                             <td>
-                                <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="btn" data-bs-toggle="modal" data-bs-target="#updateUser" data-bs-whatever="<?= $user->getId() ?>"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
-                                <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="btn" data-bs-toggle="modal" data-bs-target="#deleteUser" data-bs-whatever="<?= $user->getId() ?>><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <button type="button"class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#updateUser" onclick="document.getElementById('name').value = '<?= $user->getName() ?>'; document.getElementById('email').value = '<?= $user->getEmail() ?>'; document.getElementById('phone').value = '<?= $user->getPhone() ?>'; document.getElementById('country').value = '<?= $user->getCountry() ?>'; document.getElementById('role').value = '<?= $user->getRole() ?>'; document.getElementById('id').value = '<?= $user->getId() ?>';">Edit</button>
+                                <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deleteUser" onclick="document.getElementById('id').value = '<?= $user->getId() ?>'">Delete</button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -196,5 +196,12 @@
 
     deleteUser.addEventListener('shown.bs.modal', () => {
         deleteUserInput.focus()
+    })
+
+    const updateUser = document.getElementById('updateUser')
+    const updateUserInput = document.getElementById('updateUserInput')
+
+    updateUser.addEventListener('shown.bs.modal', () => {
+        updateUserInput.focus()
     })
 </script>
