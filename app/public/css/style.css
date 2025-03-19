@@ -352,6 +352,40 @@ footer .footer-icon {
 /* ********************* */
 
 
+/* ***************************** */
+/* 		Dance Details Start		 */
+/* ***************************** */
+
+#dance-artist .top-image {
+	position: relative;
+}
+
+#dance-artist .top-image .buy-tickets {
+	position: absolute;
+	bottom: 2rem;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	max-width: 50%;
+}
+
+#dance-artist .schedule .events-container {
+	height: 5rem;
+}
+
+#dance-artist .schedule .events-container .event-box {
+	background-color: #D9D9D9;
+}
+
+#dance-artist .schedule .schedule-items {
+	min-width: 50rem;
+}
+
+/* ***************************** */
+/* 		Dance Details End		 */
+/* ***************************** */
+
+
 /* ********************* */
 /* 		Stroll Start	 */
 /* ********************* */
