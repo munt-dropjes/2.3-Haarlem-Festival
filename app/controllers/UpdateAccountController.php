@@ -36,17 +36,21 @@ class UpdateAccountController extends Controller {
 			$oldPassword = $_POST['oldPassword'];
 			$newUser = $this->createUser($user);
 			if($newUser == null){
-				$this->view('account/updateaccount', ['error' => 'Email already exists or password is incorrect']);
+				$data['error'] = 'Email already exists or password is incorrect';
+				$this->view('account/updateaccount', $data);
 			}
 			if(!$this->checkPassword($user, $oldPassword)){
-				$this->view('account/updateaccount', ['error' => 'Password is incorrect']);
+				$data['error'] = 'Password is incorrect';
+				$this->view('account/updateaccount', $data);
 			}
 			$this->userService->updateUser($newUser, $user->getEmail());
 			$_SESSION['user'] = $newUser;
-			$this->view('account/updateaccount', ['success' => 'Account updated successfully']);
+			$data['success'] = 'Account updated successfully';
+			$this->view('account/updateaccount', $data);
 		}
 		catch(\Exception $e){
-			$this->view('account/updateaccount', ['error' => $e->getMessage()]);
+			$data['error'] = $e->getMessage();
+			$this->view('account/updateaccount', $data);
 		}
 	}	
 
