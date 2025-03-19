@@ -7,6 +7,11 @@
             <?php echo htmlspecialchars($error); ?>
         </div>
         <?php endif; ?>
+        <?php if(isset($success)): ?>
+        <div class="alert alert-success" role="alert">
+            <?php echo htmlspecialchars($success); ?>
+        </div>
+        <?php endif; ?>
         <form method="POST" id="create-account-form">
 
         <div class="mb-3">
@@ -29,17 +34,17 @@
         
         <div class="mb-3">
             <label for="password" class="form-label">New password:</label>
-            <input type="password" class="form-control" id="newpassword" name="password">
+            <input type="password" class="form-control" id="newpassword" name="newpassword">
         </div>
 
         <div class="mb-3">
             <label for="password" class="form-label">Confirm new password:</label>
-            <input type="password" class="form-control" id="newpasswordconfirm" name="password">
+            <input type="password" class="form-control" id="newpasswordconfirm" name="newpasswordconfirm">
         </div>
         
         <div class="mb-3">
             <label for="password" class="form-label">Current password:<span class="required">*</span></label>
-            <input type="password" class="form-control" id="currentpassword" name="password" required>
+            <input type="password" class="form-control" id="currentpassword" name="currentpassword" required>
         </div>
         
         <div class="mb-3">
