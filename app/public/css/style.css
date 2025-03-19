@@ -42,8 +42,12 @@ main {
 	margin-top: var(--header-height);
 }
 
-body {
-	background: linear-gradient(to bottom, #F28DE5, #B2F5EA);
+.pink-to-blue {
+	background: linear-gradient(#F28DE5, #B2F5EA);
+}
+
+.pink-to-blue-rotated {
+	background: linear-gradient(90deg, #F28DE5, #B2F5EA);
 }
 
 p {
@@ -64,7 +68,7 @@ h2 {
 	font-family: "Zen Dots", sans-serif;
 	font-weight: 400;
 	font-style: normal;
-  }
+}
 
 .navbar {
 	background-color: #4B0082;
@@ -266,8 +270,8 @@ footer .footer-icon {
 }
 
 .languageSelectionBar button.selected {
-    background-color: #FCFC7A;
-    color: #4B0082;
+	background-color: #FCFC7A;
+	color: #4B0082;
 }
 
 /* ********************* */
@@ -412,13 +416,13 @@ footer .footer-icon {
 
 .carousel {
 	margin-top: 20px;
-    width: 50%;
-    max-width: 800px;
-    height: 100%;
-    margin: 0 auto; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	width: 50%;
+	max-width: 800px;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-bottom: 3rem;
 }
 
@@ -431,18 +435,18 @@ footer .footer-icon {
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center !important;
-    max-width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center !important;
+	max-width: 100%;
 }
 
 .col {
-    flex: 1;
-    max-width: 80%;
-    padding: 3rem;
+	flex: 1;
+	max-width: 80%;
+	padding: 3rem;
 	justify-content: center !important;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 #strollDetailMap{
@@ -452,7 +456,7 @@ footer .footer-icon {
 
 #strollDetailsRow{
 	display: flex;
-    align-items: flex-start;
+	align-items: flex-start;
 	margin:0 auto;
 	width: 100%;
 }
@@ -462,20 +466,20 @@ footer .footer-icon {
 }
 
 #strollDetailsCol{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 	padding-top:0;
 }
 
 #strollDetaildescription {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
 }
 
 #strollDetailsCol h1 {
-    margin-bottom: 1rem;
+	margin-bottom: 1rem;
 }
 
 #strollDetaildescription{
@@ -503,7 +507,7 @@ footer .footer-icon {
 
 
 #strollDetaildescription p {
-    margin-top: 0;
+	margin-top: 0;
 }
 
 .routeImage{
@@ -548,31 +552,31 @@ footer .footer-icon {
 }
 
 .event-card {
-    border-radius: 50px !important;
-    background-color: #4B0082;
-    color: #FFFFFF;
-    margin-bottom: 20px;
-    display: inline-block;
-    width: 100%;
-    max-width: fit-content;
+	border-radius: 50px !important;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	margin-bottom: 20px;
+	display: inline-block;
+	width: 100%;
+	max-width: fit-content;
 	background-color: transparent;
 	border: none;
 }
 
 .event-card img {
-    border-top-left-radius: 50px !important;
-    border-top-right-radius: 50px !important;
-    border-bottom-left-radius: 0 !important; 
-    border-bottom-right-radius: 0 !important;
-    width: 100%;
-    height: auto;
-    display: block;
+	border-top-left-radius: 50px !important;
+	border-top-right-radius: 50px !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	width: 100%;
+	height: auto;
+	display: block;
 	max-width: 100% !important;
 	max-height: 100% !important;
 }
 
 .event-card .card-body {
-    padding: 20px;
+	padding: 20px;
 	background-color: #4B0082;
 	color: #FFFFFF;
 	border-bottom-left-radius: 50px;
@@ -580,22 +584,22 @@ footer .footer-icon {
 }
 
 .event-card .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
+	font-size: 1.5rem;
+	font-weight: bold;
 }
 
 .event-card .card-text {
-    font-size: 1rem;
-    margin-bottom: 10px;
+	font-size: 1rem;
+	margin-bottom: 10px;
 }
 
 .event-card .form-select {
-    background-color: #FCFC7A;
+	background-color: #FCFC7A;
 	color: #000;
-    border-radius: 25px;
-    padding: 10px;
-    width: 100%;
-    margin-top: 10px;
+	border-radius: 25px;
+	padding: 10px;
+	width: 100%;
+	margin-top: 10px;
 }
 
 

@@ -46,4 +46,4 @@
 	
 </head>
 
-<body>
+<body class="pink-to-blue">
