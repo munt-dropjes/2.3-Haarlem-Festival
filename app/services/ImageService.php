@@ -31,20 +31,25 @@ class ImageService
 		// Ensure upload directory exists
 		$uploadDir = __DIR__ . '/../Public/images/uploaded/';
 
+		// If a folder name is provided, use it instead
 		if (isset($uploadFolderName)) {
 			$uploadDir = __DIR__ . '/../Public/images/' . $uploadFolderName . '/';
 		}
 
+		// Create the upload directory if it does not exist
 		if (!is_dir($uploadDir)) {
 			if (!mkdir($uploadDir, 0755, true)) {
 				throw new Exception('Failed to create upload directory.', 500);
 			}
 		}
 
-		// Validate file type
+		// Allowed file extensions
 		$allowedExtensions = ['jpg', 'jpeg', 'png', 'webp'];
+
+		// Get the file extension
 		$fileExtension = strtolower(pathinfo($file['name'], PATHINFO_EXTENSION));
 
+		// Check if the file extension is allowed
 		if (!in_array($fileExtension, $allowedExtensions)) {
 			throw new Exception('Invalid file type.', 400);
 		}
@@ -91,6 +96,7 @@ class ImageService
 		$uploadDir = __DIR__ . '/../Public/images/uploaded/';
 		$uploadPath = $uploadDir . $imageName;
 
+		// Check if the image exists
 		if (file_exists($uploadPath)) {
 			if (!unlink($uploadPath)) {
 				throw new Exception('Failed to delete image.', 500);
@@ -107,7 +113,10 @@ class ImageService
 	 */
 	private function checkFileSize(array $file, int $maxSize = 5): void
 	{
+		// Convert MB to bytes
 		$maxFileSizeCalculated = $maxSize * 1024 * 1024;
+
+		// Check if the file size exceeds the maximum file size limit
 		if ($file['size'] > $maxFileSizeCalculated) {
 			throw new Exception('File size exceeds the maximum limit.', 400);
 		}
