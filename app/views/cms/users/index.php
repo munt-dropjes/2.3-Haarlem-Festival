@@ -39,7 +39,6 @@
                             <td><?= $user->getRole() ?></td>
                             <td><?= $user->getRegisteredAt() ?></td>
                             <td>
-                                <a href="/cms/users/edit?id=<?= $user->getId() ?>" class="edit" data-bs-toggle="modal" data-bs-target="#updateUser"><i class="material-icons" data-toggle="tooltip" title="Edit">&#xE254;</i></a>
                                 <button 
                                     type="button" 
                                     class="btn btn-warning btn-sm" 
@@ -52,7 +51,15 @@
                                     data-role="<?= htmlspecialchars($user->getRole()); ?>">
                                     Edit
                                 </button>
-                                <a href="/cms/users/delete?id=<?= $user->getId() ?>" class="delete" data-bs-toggle="modal" data-bs-target="#deleteUser"><i class="material-icons" data-toggle="tooltip" title="Delete">&#xE872;</i></a>
+                                <button 
+                                    type="button" 
+                                    class="btn btn-warning btn-sm" 
+                                    data-bs-toggle="modal" 
+                                    data-bs-target="#deleteUser"
+                                    data-id="<?= $user->getId(); ?>"
+                                    data-email="<?= htmlspecialchars($user->getEmail()); ?>">
+                                    Delete
+                                </button>
                             </td>
                         </tr>
                     <?php endforeach; ?>
@@ -131,7 +138,7 @@
     </div>
   </div>
 </div>
-<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserLabel" aria-hidden="true">
+<div class="modal fade" id="updateUser" tabindex="-1" aria-labelledby="updateUserLabel">
   <div class="modal-dialog">
     <div class="modal-content">
       <div class="modal-header">
@@ -173,12 +180,12 @@
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-        <button type="button" class="btn btn-warning">Save changes</button>
+        <button type="submit" class="btn btn-warning">Save changes</button>
       </div>
     </div>
   </div>
 </div>
-<div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="deleteUserLabel" aria-hidden="true">
+<div class="modal fade" id="deleteUser" tabindex="-1" aria-labelledby="deleteUserLabel">
     <div class="modal-dialog">
         <div class="modal-content">
             <div class="modal-header">
@@ -192,7 +199,7 @@
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                    <button type="button" class="btn btn-warning">Delete user</button>
+                    <button type="submit" class="btn btn-warning">Delete user</button>
                 </div>
             </form>
         </div>
