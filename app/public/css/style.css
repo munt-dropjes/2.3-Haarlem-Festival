@@ -512,8 +512,18 @@ footer .footer-icon {
 
 .routeImage{
 	width: 100%;
-	height: auto;
-	border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.routeImage img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 20px;
 }
 
 .RouteDestinations{
