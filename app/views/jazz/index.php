@@ -1,6 +1,6 @@
 <main>
     <div class="container-fluid p-0">
-        <img src="images/jazz/jazz1.png" class="img-fluid w-100" alt="Plaatje Haarlem Jazz">
+        <img src="images/jazz/image1.jpg" class="img-fluid w-100" alt="Plaatje Haarlem Jazz">
     </div>
     <div class="container mt-4 text-center" style="max-width: 1425px;">
         <h1>JAZZ</h1>
