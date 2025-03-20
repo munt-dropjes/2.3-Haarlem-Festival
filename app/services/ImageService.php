@@ -11,10 +11,17 @@ class ImageService
 	 * 
 	 * @param array $file The file array.
 	 * @param mixed $imageName (optional) The name of the image to be removed.
+	 * @param mixed $uploadFolderName (optional) The name of the folder to upload the image to.
 	 * @return string The new file name.
-	 * @throws Exception If the file array is invalid, the file type is invalid, the file size exceeds the maximum file size limit, the file is not an actual uploaded file, the upload directory cannot be created, the file cannot be saved, or the image cannot be deleted.
+	 * @throws Exception If the file array is invalid,
+	 * the upload directory cannot be created,
+	 * the file type is invalid,
+	 * the file size exceeds the maximum file size limit,
+	 * the file is not an actual uploaded file,
+	 * a file with the same name already exists,
+	 * or the file cannot be saved.
 	 */
-	public function uploadImage(array $file, ?string $imageName = null): string
+	public function uploadImage(array $file, ?string $imageName = null, ?string $uploadFolderName = null): string
 	{
 		// Ensure the file array contains necessary keys
 		if (!isset($file['name'], $file['tmp_name'], $file['size'])) {
@@ -24,8 +31,12 @@ class ImageService
 		// Ensure upload directory exists
 		$uploadDir = __DIR__ . '/../Public/images/uploaded/';
 
+		if (isset($uploadFolderName)) {
+			$uploadDir = __DIR__ . '/../Public/images/' . $uploadFolderName . '/';
+		}
+
 		if (!is_dir($uploadDir)) {
-			if (!mkdir($uploadDir, 0755, true) && !is_dir($uploadDir)) {
+			if (!mkdir($uploadDir, 0755, true)) {
 				throw new Exception('Failed to create upload directory.', 500);
 			}
 		}
@@ -48,11 +59,17 @@ class ImageService
 
 		// Generate a unique filename
 		$newFileName = 'Image_' . time() . '.' . $fileExtension;
+
+		// If an image name is provided, use it instead
+		if (isset($imageName)) {
+			$newFileName = $imageName . '.' . $fileExtension;
+		}
+
 		$uploadPath = $uploadDir . $newFileName;
 
-		if (isset($imageName)) {
-			// Remove old image
-			$this->removeImage($imageName);
+		// Check if a file with the same name already exists
+		if (file_exists($uploadPath)) {
+			throw new Exception('File with the same name already exists.', 400);
 		}
 
 		// Move file to the correct directory
@@ -69,7 +86,7 @@ class ImageService
 	 * @param string $imageName The name of the image to be removed.
 	 * @throws Exception If the image cannot be deleted.
 	 */
-	private function removeImage(string $imageName): void
+	public function removeImage(string $imageName): void
 	{
 		$uploadDir = __DIR__ . '/../Public/images/uploaded/';
 		$uploadPath = $uploadDir . $imageName;
