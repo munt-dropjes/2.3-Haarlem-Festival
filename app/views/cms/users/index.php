@@ -192,7 +192,7 @@
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <form method="post" action="/cms/users/delete">
-                    <input type="hidden" name="id" id="id" value="9">
+                    <input type="hidden" class="form-control" name="id" id="id" required>
                     <div class="modal-body">
                         Are you sure you want to delete: 
                         <div class="form-group">

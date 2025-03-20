@@ -43,6 +43,8 @@ class CmsUserController extends Controller {
         $user->setPhone($_POST['phone']);
         $user->setCountry($_POST['country']);
         $this->userService->insertUser($user);
+
+        $this->index();
     }
 
     public function update(){
@@ -69,6 +71,7 @@ class CmsUserController extends Controller {
         $updateUser->setPhone($_POST['phone']);
         $updateUser->setCountry($_POST['country']);
         $this->userService->updateUser($updateUser, $_POST['id']);
+        $this->index();
     }
 
     public function delete(){
@@ -77,5 +80,6 @@ class CmsUserController extends Controller {
         }
 
         $this->userService->deleteUser($_GET['delete']);
+        $this->index();
     }
 }
