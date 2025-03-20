@@ -7,11 +7,10 @@ use Exception;
 class ImageService
 {
 	/**
-	 * If imageName is set, it will remove the image with that name
-	 * Then it will upload the new image and return the new file name
+	 * Uploads an image and returns the new file name.
 	 * 
 	 * @param array $file The file array.
-	 * @param mixed $imageName The name of the image to be removed.
+	 * @param mixed $imageName (optional) The name of the image to be removed.
 	 * @return string The new file name.
 	 * @throws Exception If the file array is invalid, the file type is invalid, the file size exceeds the maximum file size limit, the file is not an actual uploaded file, the upload directory cannot be created, the file cannot be saved, or the image cannot be deleted.
 	 */
@@ -70,7 +69,7 @@ class ImageService
 	 * @param string $imageName The name of the image to be removed.
 	 * @throws Exception If the image cannot be deleted.
 	 */
-	public function removeImage(string $imageName): void
+	private function removeImage(string $imageName): void
 	{
 		$uploadDir = __DIR__ . '/../Public/images/uploaded/';
 		$uploadPath = $uploadDir . $imageName;
@@ -86,10 +85,10 @@ class ImageService
 	 * Checks if the file size exceeds the maximum file size limit.
 	 *
 	 * @param array $file The file array.
-	 * @param int $maxSize The maximum file size in MB.
+	 * @param int $maxSize (optional) The maximum file size in MB. Default is 5 MB.
 	 * @throws Exception If the file size exceeds the maximum file size limit.
 	 */
-	public function checkFileSize(array $file, int $maxSize = 5): void
+	private function checkFileSize(array $file, int $maxSize = 5): void
 	{
 		$maxFileSizeCalculated = $maxSize * 1024 * 1024;
 		if ($file['size'] > $maxFileSizeCalculated) {
