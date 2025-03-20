@@ -84,6 +84,7 @@ class StrollRepository extends BaseRepository
                 $strollDetail->setDescription($row['Description']);
                 $strollDetail->setAddress($row['Adress']);
                 $strollDetail->setBreakLocation($row['BreakLocation']);
+                $strollDetail->setMapName($row['mapName']);
                 $strollDetails[] = $strollDetail;
             }
 
@@ -108,6 +109,7 @@ class StrollRepository extends BaseRepository
             $strollDetail->setDescription($result['Description']);
             $strollDetail->setAddress($result['Adress']);
             $strollDetail->setBreakLocation($result['BreakLocation']);
+            $strollDetail->setMapName($result['mapName']);
             return $strollDetail;
         }
 

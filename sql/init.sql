@@ -81,7 +81,9 @@ CREATE TABLE `Stroll` (
     `Language` enum('English', 'Dutch', 'Chinese') NOT NULL,
     `Guide` VARCHAR(255) NOT NULL,
     `FamilyTicketPrice` FLOAT(10, 2) NOT NULL,
-    `AvailableTickets` INT(11) NOT NULL
+    `AvailableTickets` INT(11) NOT NULL,
+	`BannerName` VARCHAR(255) NOT NULL,
+	`mapName` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `StrollDetail` (
@@ -90,7 +92,8 @@ CREATE TABLE `StrollDetail` (
     `StopName` VARCHAR(255) NOT NULL,
     `Description` text NOT NULL,
 	`Adress` VARCHAR(255) NOT NULL,
-	`BreakLocation` BOOLEAN NOT NULL
+	`BreakLocation` BOOLEAN NOT NULL,
+	`mapName` VARCHAR(255) NOT NULL
 );
 
 CREATE TABLE `Tickets` (
@@ -145,7 +148,8 @@ INSERT INTO
         `StopName`,
         `Description`,
         `Adress`,
-        `BreakLocation`
+        `BreakLocation`,
+		`mapName`
     )
 VALUES
     (1, 1, 'Bavo Church', 
@@ -158,15 +162,15 @@ VALUES
     Beyond its architectural beauty, the church holds immense cultural and historical importance for Haarlem. It has served as a gathering place for centuries, hosting significant religious ceremonies, civic events, and concerts. Its majestic organ, constructed by Christian Müller in 1738, is one of the most famous in the world and has been played by celebrated musicians, including Wolfgang Amadeus Mozart and George Frideric Handel.
 
     Today, the Bavo Church continues to be a vital part of Haarlem\'s identity, offering a connection to the city\'s past while remaining a vibrant venue for modern events. Visitors can explore its storied halls, admire the detailed craftsmanship, and learn about its pivotal role in Haarlem\'s history. It stands not only as a place of worship but also as a cultural and historical treasure, embodying the spirit and resilience of the city through the ages.',
-    'Grote Markt 22, 2011 RD Haarlem', FALSE),
-    (2, 2, 'Grote markt', 'Description 2', 'Grote Markt, 2011 RD Haarlem', FALSE),
-    (3, 3, 'De Hallen', 'Description 3', 'Grote Markt 16, 2011 RD Haarlem', FALSE),
-    (4, 4, 'Proveniershof', 'Description 4', 'Grote Houtstraat 134, 2011 SV Haarlem', FALSE),
-    (5, 5, 'Jopenkerk', 'Description 5', 'Gedempte Voldersgracht 2, 2011 WD Haarlem', TRUE),
-    (6, 6, 'Waalse kerk Haarlem', 'Description 6', 'Begijnhof 10, 2011 HE Haarlem', FALSE),
-    (7, 7, 'Molen de Adriaan', 'Description 7', 'Papentorenvest 1A, 2011 AV Haarlem', FALSE),
-    (8, 8, 'Amsterdamse Poort', 'Description 8', 'Amsterdamse Poort, 2011 AV Haarlem', FALSE),
-    (9, 9, 'Hof van Bakenes', 'Description 9', 'Warmoesstraat 13, 2011 HN Haarlem', FALSE);
+    'Grote Markt 22, 2011 RD Haarlem', FALSE, 'map.png'),
+    (2, 2, 'Grote markt', 'Description 2', 'Grote Markt, 2011 RD Haarlem', FALSE, 'map.png'),
+    (3, 3, 'De Hallen', 'Description 3', 'Grote Markt 16, 2011 RD Haarlem', FALSE, 'map.png'),
+    (4, 4, 'Proveniershof', 'Description 4', 'Grote Houtstraat 134, 2011 SV Haarlem', FALSE, 'map.png'),
+    (5, 5, 'Jopenkerk', 'Description 5', 'Gedempte Voldersgracht 2, 2011 WD Haarlem', TRUE, 'map.png'),
+    (6, 6, 'Waalse kerk Haarlem', 'Description 6', 'Begijnhof 10, 2011 HE Haarlem', FALSE,'map.png'),
+    (7, 7, 'Molen de Adriaan', 'Description 7', 'Papentorenvest 1A, 2011 AV Haarlem', FALSE, 'map.png'),
+    (8, 8, 'Amsterdamse Poort', 'Description 8', 'Amsterdamse Poort, 2011 AV Haarlem', FALSE, 'map.png'),
+    (9, 9, 'Hof van Bakenes', 'Description 9', 'Warmoesstraat 13, 2011 HN Haarlem', FALSE, 'map.png');
 
 
 INSERT INTO `Events` (`EventID`, `Name`, `Description`, `Date`, `Time`, `Location`, `Price`, `AvailableTickets`)

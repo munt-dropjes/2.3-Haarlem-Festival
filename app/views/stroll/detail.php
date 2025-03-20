@@ -47,7 +47,7 @@
 				$eventName = $detail->getStopName();
 				$encodedEventName = str_replace(' ', '', $eventName);
 				?>
-				<img src="/images/StrollDetails/<?php echo $encodedEventName; ?>/Map/map.png" alt="Map of <?php echo $detail->getStopName(); ?> location" class = "Stroll_Detail_Map">
+				<img src="/images/StrollDetails/<?php echo $encodedEventName; ?>/Map/<?php echo $detail->getMapName();?>" alt="Map of <?php echo $detail->getStopName(); ?> location" class = "Stroll_Detail_Map">
 				<p>Address: <?php echo $detail->getAddress(); ?></p>
 			</div>
 			<div class="col" id ="strollDetaildescription">
