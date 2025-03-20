@@ -21,10 +21,10 @@ class JazzDetailController extends Controller {
                 echo "Artiest niet gevonden!";
                 return;
             }
-        
-            $this->view('jazz/artistDetail', ['artist' => $artist]);
-        }
-        
+            $tickets = $this->jazzRepository->getAvailebleTicketsForArtist($name);
+
+            $this->view('jazz/artistDetail', ['artist' => $artist, 'tickets' => $tickets]);
+        } 
 }
 
 ?>

@@ -79,7 +79,18 @@
         <div class="card-body">
           <h2 class="card-title text-center">Koop Tickets voor <?= htmlspecialchars($artist->getName()) ?></h2>
           <div class="bg-light p-3">
-            
+          <?php if (empty($tickets)): ?>
+        <p>Er zijn momenteel geen tickets beschikbaar.</p>
+    <?php else: ?>
+        <ul>
+            <?php foreach ($tickets as $ticket): ?>
+                <li>
+                    Datum: <?= htmlspecialchars($ticket->getEventDate()) ?> - 
+                    Beschikbare tickets: <?= htmlspecialchars($ticket->getAvailableTickets()) ?>
+                </li>
+            <?php endforeach; ?>
+        </ul>
+    <?php endif; ?>
           </div>
         </div>
       </div>

@@ -5,9 +5,11 @@ namespace Repositories;
 use Models\Jazz;
 use PDO;
 
-class JazzRepository extends BaseRepository {
+class JazzRepository extends BaseRepository
+{
 
-    public function getFestivalDaysAndArtists() {
+    public function getFestivalDaysAndArtists()
+    {
         $sql = "
             SELECT E.Date AS date, A.Name AS name, A.ImageName AS image
             FROM Events E
@@ -32,7 +34,8 @@ class JazzRepository extends BaseRepository {
         return $jazzArtists;
     }
 
-    public function getFestivalTimetable() {
+    public function getFestivalTimetable()
+    {
         $sql = "
             SELECT E.Date AS date, A.Name AS name, E.StartTime AS start_time, E.EndTime AS end_time, E.Location AS place
             FROM Events E
@@ -58,7 +61,8 @@ class JazzRepository extends BaseRepository {
         return $jazzTimetable;
     }
 
-    public function getArtistByName($name) {
+    public function getArtistByName($name)
+    {
         $sql = "
             SELECT A.Name AS name, A.ImageName AS image, A.About AS description,
                    A.KnownFor AS known_for, A.Song1Link, A.Song2Link, A.Song3Link
@@ -84,6 +88,33 @@ class JazzRepository extends BaseRepository {
 
         return null;
     }
+
+    public function getAvailebleTicketsForArtist($name)
+    {
+        $sql = "
+            SELECT e.Date AS EventDate, e.AvailableTickets
+            FROM Artists a
+            JOIN Jazz j ON a.ArtistID = j.ArtistID
+            JOIN Events e ON j.EventID = e.EventID
+            WHERE a.Name = :name
+        ";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':name', $name);
+        $stmt->execute();
+
+        $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+        $tickets = [];
+        foreach ($results as $row) {
+            $jazz = new Jazz();
+            $jazz->setEventDate($row['EventDate']);
+            $jazz->setAvailableTickets($row['AvailableTickets']);
+            $tickets[] = $jazz;
+        }
+
+        return $tickets;
+    }
 }
+
 
 ?>

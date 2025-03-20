@@ -14,6 +14,8 @@ class Jazz {
     private $song1Link;
     private $song2Link;
     private $song3Link;
+    private $eventDate;
+    private $availableTickets;
 
     // Getters en Setters
     public function getDate() {
@@ -102,6 +104,21 @@ class Jazz {
 
     public function setSong3Link($song3Link) {
         $this->song3Link = $song3Link;
+    }
+    public function getEventDate() {
+        return $this->eventDate;
+    }
+
+    public function setEventDate($eventDate) {
+        $this->eventDate = $eventDate;
+    }
+
+    public function getAvailableTickets() {
+        return $this->availableTickets;
+    }
+
+    public function setAvailableTickets($availableTickets) {
+        $this->availableTickets = $availableTickets;
     }
 }
 
