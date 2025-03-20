@@ -37,7 +37,7 @@
             </div>
         </div>
         
-        <div class="container mt-5">
+        <div class="container mt-5 strollEvents">
             <?php
             $days = ['Thursday', 'Friday', 'Saturday', 'Sunday'];
             foreach ($days as $day) {

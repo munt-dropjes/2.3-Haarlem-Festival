@@ -9,6 +9,7 @@ class StrollDetail {
     private $description;
     private $address;
     private $breakLocation;
+    private $mapName;
 
     // Getters
     public function getEventId() {
@@ -58,6 +59,14 @@ class StrollDetail {
 
     public function setBreakLocation($breakLocation) {
         $this->breakLocation = $breakLocation;
+    }
+
+    public function getMapName() {
+        return $this->mapName;
+    }
+
+    public function setMapName($mapName) {
+        $this->mapName = $mapName;
     }
 }
 ?>
