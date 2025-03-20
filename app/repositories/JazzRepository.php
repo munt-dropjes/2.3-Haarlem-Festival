@@ -92,12 +92,12 @@ class JazzRepository extends BaseRepository
     public function getAvailebleTicketsForArtist($name)
     {
         $sql = "
-            SELECT e.Date AS EventDate, e.AvailableTickets
-            FROM Artists a
-            JOIN Jazz j ON a.ArtistID = j.ArtistID
-            JOIN Events e ON j.EventID = e.EventID
-            WHERE a.Name = :name
-        ";
+        SELECT e.Date AS EventDate, e.StartTime, e.EndTime, e.Price, e.AvailableTickets
+        FROM Artists a
+        JOIN Jazz j ON a.ArtistID = j.ArtistID
+        JOIN Events e ON j.EventID = e.EventID
+        WHERE a.Name = :name
+    ";
         $stmt = $this->connection->prepare($sql);
         $stmt->bindValue(':name', $name);
         $stmt->execute();
@@ -108,6 +108,9 @@ class JazzRepository extends BaseRepository
         foreach ($results as $row) {
             $jazz = new Jazz();
             $jazz->setEventDate($row['EventDate']);
+            $jazz->setStartTime($row['StartTime']);  // Voeg starttijd toe
+            $jazz->setEndTime($row['EndTime']);      // Voeg eindtijd toe
+            $jazz->setPrice($row['Price']);          // Voeg prijs toe
             $jazz->setAvailableTickets($row['AvailableTickets']);
             $tickets[] = $jazz;
         }
