@@ -85,9 +85,7 @@ CREATE TABLE `Stroll` (
     `Language` enum('English', 'Dutch', 'Chinese') NOT NULL,
     `Guide` VARCHAR(255) NOT NULL,
     `FamilyTicketPrice` FLOAT(10, 2) NOT NULL,
-    `AvailableTickets` INT(11) NOT NULL,
-	`BannerName` VARCHAR(255) NOT NULL,
-	`mapName` VARCHAR(255) NOT NULL
+    `AvailableTickets` INT(11) NOT NULL
 );
 
 CREATE TABLE `StrollDetail` (

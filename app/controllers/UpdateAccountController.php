@@ -64,7 +64,7 @@ class UpdateAccountController extends Controller {
 			$_SESSION['user'] = $newUser;
 			$data['success'] = 'Account updated successfully';
 			$data['user'] = $newUser;
-			$this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Account Created', 'Your account has been updated successfully!');
+			$this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Account Updated', 'Your account has been updated successfully!');
 			$this->view('account/updateaccount', $data);
 		}
 		catch(\Exception $e) {
