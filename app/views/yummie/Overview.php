@@ -1,86 +1,146 @@
-<body class="yummieOverview-body">
-
-<!-- Hero afbeelding -->
-<div class="yummieOverview-hero">
-    <img src="hero.jpg" alt="Stadsgezicht">
-</div>
-
-
-<!-- Filterbalk -->
-<div class="container my-4">
-    <div class="row yummieOverview-filter-bar text-center p-3">
-        <div class="col-md-2">
-            <select id="filter-duration" class="form-select filter-dropdown">
-                <option value="">Duration</option>
-                <option value="1.5">1,5 h</option>
-                <option value="2">2 h</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select id="filter-start-time" class="form-select filter-dropdown">
-                <option value="">Start time</option>
-                <option value="16:30">16:30</option>
-                <option value="17:00">17:00</option>
-                <option value="17:30">17:30</option>
-                <option value="18:00">18:00</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select id="filter-cuisine" class="form-select filter-dropdown">
-                <option value="">Cuisine</option>
-                <option value="French">French</option>
-                <option value="Dutch">Dutch</option>
-                <option value="Fish and seafood">Fish and seafood</option>
-                <option value="Modern">Modern</option>
-                <option value="European">European</option>
-                <option value="Vegan">Vegan</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select id="filter-rating" class="form-select filter-dropdown">
-                <option value="">Rating</option>
-                <option value="1">★☆☆☆☆</option>
-                <option value="2">★★☆☆☆</option>
-                <option value="3">★★★☆☆</option>
-                <option value="4">★★★★☆</option>
-                <option value="5">★★★★★</option>
-            </select>
-        </div>
-        <div class="col-md-2">
-            <select id="filter-cost" class="form-select filter-dropdown">
-                <option value="">Cost</option>
-                <option value="€">€</option>
-                <option value="€€">€€</option>
-            </select>
-        </div>
+<main>
+    <div class="yummieOverview-hero">
+        <img src="images/yummie/Grote-Markt-Haarlem.jpg" class="img-fluid w-100" alt="Stadsgezicht">
     </div>
-</div>
-<div class="container">
-    <div class="row">
-        <?php foreach ($restaurants as $restaurant): ?>
-            <div class="col-md-4 mb-4"> <!-- 3 per rij -->
-                <div class="yummieOverview-card card">
-                    <img src="<?= htmlspecialchars($restaurant->image); ?>" class="card-img-top" alt="<?= htmlspecialchars($restaurant->name); ?>">
-                    <div class="yummieOverview-card-body">
-                        <h5 class="card-title"><?= htmlspecialchars($restaurant->name); ?></h5>
-                        <p><?= $restaurant->getStarRating(); ?></p>
-                        <p><?= htmlspecialchars($restaurant->cuisine); ?></p>
-                        <p>Opens at <?= date("H:i", strtotime($restaurant->open_time)); ?></p>
-                        <div class="btn-group"> 
-                            <button class="btn yummieOverview-reserve-btn">RESERVE</button>
-                            <button class="btn yummieOverview-details-btn">DETAILS</button>
-                        </div>
-                    </div>
+    <!-- Filterbalk -->
+    <form method="GET" action="" class="container my-4">
+        <div class="row yummieOverview-filter-bar text-center p-3 justify-content-center">
+
+            <!-- Duration -->
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <button class="btn yummieOverview-dropdown dropdown-toggle w-100" type="button"
+                        id="dropdownDuration" data-bs-toggle="dropdown" aria-expanded="false">
+                        Duration
+                    </button>
+                    <ul class="dropdown-menu w-100">
+                        <?php foreach ($durations as $duration): ?>
+                            <li><a class="dropdown-item" href="javascript:void(0);"
+                                    onclick="applyFilter('duration', '<?= $duration ?>')"><?= $duration ?> h</a></li>
+                        <?php endforeach; ?>
+                    </ul>
                 </div>
             </div>
-        <?php endforeach; ?>
+            <!-- Open Time -->
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <button class="btn yummieOverview-dropdown dropdown-toggle w-100" type="button"
+                        id="dropdownOpen_time" data-bs-toggle="dropdown" aria-expanded="false">
+                        Open time
+                    </button>
+                    <ul class="dropdown-menu w-100">
+                        <?php foreach ($openTimes as $time): ?>
+                            <li><a class="dropdown-item" href="javascript:void(0);"
+                                    onclick="applyFilter('open_time', '<?= $time ?>')"><?= $time ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cuisine -->
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <button class="btn yummieOverview-dropdown dropdown-toggle w-100" type="button" id="dropdownCuisine"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Cuisine
+                    </button>
+                    <ul class="dropdown-menu w-100">
+                        <?php foreach ($cuisines as $cuisine): ?>
+                            <li><a class="dropdown-item" href="javascript:void(0);"
+                                    onclick="applyFilter('cuisine', '<?= $cuisine ?>')"><?= $cuisine ?></a></li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Rating -->
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <button class="btn yummieOverview-dropdown dropdown-toggle w-100" type="button" id="dropdownRating"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Rating
+                    </button>
+                    <ul class="dropdown-menu w-100">
+                        <?php foreach ($ratings as $rating): ?>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onclick="applyFilter('rating', '<?= $rating ?>')">
+                                    <?= str_repeat('★', $rating) . str_repeat('☆', 5 - $rating); ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Cost -->
+            <div class="col-md-2">
+                <div class="dropdown">
+                    <button class="btn yummieOverview-dropdown dropdown-toggle w-100" type="button" id="dropdownCost"
+                        data-bs-toggle="dropdown" aria-expanded="false">
+                        Cost
+                    </button>
+                    <ul class="dropdown-menu w-100">
+                        <?php foreach ($costs as $costValue => $costLabel): ?>
+                            <li>
+                                <a class="dropdown-item" href="javascript:void(0);"
+                                    onclick="applyFilter('cost', '<?= $costValue ?>')">
+                                    <?= $costLabel ?>
+                                </a>
+                            </li>
+                        <?php endforeach; ?>
+                    </ul>
+                </div>
+            </div>
+
+        </div>
+    </form>
+
+    <div class="container">
+        <div id="restaurant-list">
+            <?php require_once __DIR__ . '../../components/yummie/restaurant-list.php'; ?>
+        </div>
     </div>
-</div>
 
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const urlParams = new URLSearchParams(window.location.search);
 
+            function updateButton(filterName, defaultText) {
+                const button = document.getElementById("dropdown" + filterName.charAt(0).toUpperCase() + filterName.slice(1));
+                if (!button) return;
 
+                button.innerText = defaultText; // Toon de standaard tekst
+            }
 
+            // Update dropdown-knoppen bij het laden
+            updateButton("duration", urlParams.get("duration") ?? "Duration");
+            updateButton("open_time", urlParams.get("open_time") ?? "Open time");
+            updateButton("cuisine", urlParams.get("cuisine") ?? "Cuisine");
+            updateButton("rating", urlParams.get("rating") ?? "Rating");
+            updateButton("cost", urlParams.get("cost") ?? "Cost");
 
+            window.applyFilter = function (filterName, value) {
+                let url = new URL(window.location.href);
+                url.searchParams.set(filterName, (value));
 
+                // Verander de URL zonder de pagina te herladen
+                history.pushState({}, "", url.toString());
 
-</body>
+                // AJAX request om alleen de restaurantlijst te verversen
+                fetch(url.pathname + "?" + url.searchParams.toString(), {
+                    method: "GET",
+                    headers: { "X-Requested-With": "XMLHttpRequest" }
+                })
+                    .then(response => response.text())
+                    .then(html => {
+                        document.getElementById("restaurant-list").innerHTML = html;
+                    })
+                    .catch(error => console.error("Error:", error));
+
+                // Update de knoptekst
+                updateButton(filterName, value);
+            };
+        });
+    </script>
+</main>

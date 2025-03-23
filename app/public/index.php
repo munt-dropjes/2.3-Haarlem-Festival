@@ -6,6 +6,9 @@ require_once __DIR__ . '/../Models/User.php';
 if (session_status() == PHP_SESSION_NONE) {
     session_start();
 }
+if (!isset($_SESSION['csrf_token'])) {
+    $_SESSION['csrf_token'] = bin2hex(random_bytes(32));
+}
 
 require_once __DIR__ . '/../vendor/autoload.php';
 
@@ -34,6 +37,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
     $router->get('/yummie', 'YummieController@index');
+    $router->get('/yummie/{id}', 'YummieController@show');
 
     $router->get('/createaccount', 'createaccountController@index');
     $router->post('/createaccount', 'createaccountController@create');
@@ -47,6 +51,11 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
     $router->post('/cms/users/edit', 'CmsUserController@update');
+    
+    $router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
+    $router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
+    $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
+
     
 // Run the router
 $router->run();
