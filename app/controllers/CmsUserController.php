@@ -60,7 +60,6 @@ class CmsUserController extends Controller {
     }
 
     public function delete(){
-        print_r($_POST);
         $this->userService->deleteUser($_POST['email']);
         $this->index();
     }
