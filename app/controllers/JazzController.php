@@ -2,18 +2,18 @@
 
 namespace Controllers;
 
-use Repositories\JazzRepository;
+use Services\JazzService;
 
 class JazzController extends Controller {
-    private $jazzRepository;
+    private $jazzService;
 
     public function __construct() {
-        $this->jazzRepository = new JazzRepository();
+        $this->jazzService = new JazzService();
     }
 
     public function index() {
-        $festivalDaysData = $this->jazzRepository->getFestivalDaysAndArtists();
-        $timetable = $this->jazzRepository->getFestivalTimetable();
+        $festivalDaysData = $this->jazzService->getFestivalDaysAndArtists();
+        $timetable = $this->jazzService->getFestivalTimetable();
 
         $festivalDays = [];
         foreach ($festivalDaysData as $jazz) {
