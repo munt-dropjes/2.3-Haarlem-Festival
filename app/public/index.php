@@ -45,6 +45,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
     $router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
     $router->get('/updateaccount', 'UpdateAccountController@index');
+    $router->post('/updateaccount', 'UpdateAccountController@updateAccount');
 	
     //events
     $router->get('/stroll', 'StrollController@index');
