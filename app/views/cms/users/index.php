@@ -200,7 +200,7 @@
                     <div class="modal-body">
                         Are you sure you want to delete: 
                         <div class="form-group">
-                            <input type="text" class="form-control" id="email" name="email" disabled required>
+                            <input type="text" class="form-control" id="email" name="email" required>
                         </div>
                     </div>
                     <div class="modal-footer">

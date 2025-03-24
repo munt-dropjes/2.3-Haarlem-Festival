@@ -121,7 +121,7 @@ class UserRepository extends BaseRepository{
         try{
             $sql = "UPDATE Users 
                     SET Role = ?, Name = ?, Email = ?, Password = ?, Phone = ?, Country = ?, ResetToken = ?, ResetTokenExpiration = ?
-                    WHERE Email = ?";
+                    WHERE UserID = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
                 $user->getRole(),
@@ -132,7 +132,7 @@ class UserRepository extends BaseRepository{
                 $user->getCountry(),
                 $user->getResetToken(),
                 $user->getResetTokenExpiration(),
-                $user->getEmail()
+                $user->getID()
             ]);
             return $this->getUser($user);
         }

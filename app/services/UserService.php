@@ -57,6 +57,7 @@ class UserService {
 
     // ~~Delete~~
     public function deleteUser($email) : void {
+        print_r($email);
         $this->userRepository->deleteUser($email);
     }
 

@@ -48,10 +48,10 @@ class CmsUserController extends Controller {
     }
 
     public function update(){
-        $updateUser = $this->userService->getUserByEmail($_POST['email']);
+        $updateUser = $this->userService->getUserByEmail($_POST['oldEmail']);
         $updateUser->setRole($_POST['role']);
         $updateUser->setName($_POST['name']);
-        $updateUser->setEmail($_POST['newEmail']);
+        $updateUser->setEmail($_POST['email']);
         $updateUser->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
         $updateUser->setPhone($_POST['phone']);
         $updateUser->setCountry($_POST['country']);
@@ -60,6 +60,7 @@ class CmsUserController extends Controller {
     }
 
     public function delete(){
+        print_r($_POST);
         $this->userService->deleteUser($_POST['email']);
         $this->index();
     }

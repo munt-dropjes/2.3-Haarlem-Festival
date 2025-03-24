@@ -36,7 +36,7 @@ function loadEditModalCMS(modalID) {
         var id = button.getAttribute('data-id');
         var name = button.getAttribute('data-name');
         var email = button.getAttribute('data-email');
-        var oldEmail = button.getAttribute('data-old-email');
+        var oldEmail = button.getAttribute('data-oldEmail');
         var password = button.getAttribute('data-password');
         var phone = button.getAttribute('data-phone');
         var country = button.getAttribute('data-country');
@@ -45,7 +45,7 @@ function loadEditModalCMS(modalID) {
         var modalIDInput = updateUserModal.querySelector('#id');
         var modalNameInput = updateUserModal.querySelector('#name');
         var modalEmailInput = updateUserModal.querySelector('#email');
-        var modalOldEmailInput = updateUserModal.querySelector('#old-email');
+        var modalOldEmailInput = updateUserModal.querySelector('#oldEmail');
         var modalPasswordInput = updateUserModal.querySelector('#password');
         var modalPhoneInput = updateUserModal.querySelector('#phone');
         var modalCountryInput = updateUserModal.querySelector('#country');
