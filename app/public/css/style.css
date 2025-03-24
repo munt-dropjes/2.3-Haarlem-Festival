@@ -18,6 +18,10 @@
 	--background-color: #B2F5EA;
 }
 
+body {
+	padding-top: var(--header-height);
+}
+
 .top-image {
 	height: 350px;
 }
@@ -38,8 +42,7 @@ header {
 }
 
 main {
-	min-height: 1080px;
-	margin-top: var(--header-height);
+	min-height: calc(100vh - var(--header-height));
 }
 
 .pink-to-blue {
@@ -81,7 +84,7 @@ h2 {
 
 }
 
-a{
+a {
 	font-family: hollywood-one-sc-regular, sans-serif;
 }
 
@@ -160,8 +163,19 @@ footer .footer-icon {
 .CTA:hover {
 	background-color: #4B0082;
 	color: white;
-
 	box-shadow: 5px 5px 0 0 #FCFC7A;
+}
+
+.CTA-kakigreen {
+	background-color: #8799A5;
+	color: white;
+	box-shadow: 5px 5px 0 0 #F28DE5;
+}
+
+.CTA-kakigreen:hover {
+	background-color: #F28DE5;
+	color: white;
+	box-shadow: 5px 5px 0 0 #8799A5;
 }
 
 
@@ -232,19 +246,19 @@ footer .footer-icon {
 	right: 0;
 }
 
-.languageSelectionBar{
+.languageSelectionBar {
 	background-color: #4B0082;
-	color:#FCFC7A;
+	color: #FCFC7A;
 	font-size: 1rem;
 	font-style: "Zen Dots", sans-serif;
 	text-align: center;
-	border-left:#FCFC7A;
-	border-right:#FCFC7A;
+	border-left: #FCFC7A;
+	border-right: #FCFC7A;
 	padding: 0;
 	max-width: 800px;
 }
 
-.languageSelectionBar .col{
+.languageSelectionBar .col {
 	padding: 0;
 }
 
@@ -260,7 +274,7 @@ footer .footer-icon {
 	font-style: "Zen Dots", sans-serif;
 }
 
-.languageSelectionBarButton{
+.languageSelectionBarButton {
 	font-style: "Zen Dots", sans-serif;
 }
 
@@ -400,6 +414,46 @@ footer .footer-icon {
 /* ***************************** */
 
 
+/* ***************************** */
+/* 		Shopping Cart Start		 */
+/* ***************************** */
+
+#shopping-cart .ticket-info {
+	background-color: #d2f5e3;
+	padding: 20px;
+}
+
+#shopping-cart .btn-primary {
+	background-color: #d9534f;
+	border: none;
+	padding: 10px 20px;
+	font-weight: bold;
+}
+
+#shopping-cart .btn-primary:hover {
+	background-color: #c9302c;
+}
+
+#shopping-cart .quantity-control {
+	background-color: #4B0082;
+	border-radius: 15px;
+	color: white;
+}
+
+#shopping-cart .quantity-control button {
+	width: 25px;
+	height: 25px;
+	line-height: 0;
+	font-size: 2rem;
+	color: #4B0082;
+	background-color: #FCFC7A;
+}
+
+/* ***************************** */
+/* 		Shopping Cart End		 */
+/* ***************************** */
+
+
 /* ********************* */
 /* 		Stroll Start	 */
 /* ********************* */
@@ -408,8 +462,8 @@ footer .footer-icon {
 	height: auto;
 }
 
-.Stroll_Detail_Map{
-	width:100%;
+.Stroll_Detail_Map {
+	width: 100%;
 	height: auto;
 	border-radius: 20px;
 }
@@ -430,7 +484,7 @@ footer .footer-icon {
 	border-radius: 30px;
 }
 
-#details{
+#details {
 	max-width: 80% !important;
 }
 
@@ -449,27 +503,27 @@ footer .footer-icon {
 	box-sizing: border-box;
 }
 
-#strollDetailMap{
+#strollDetailMap {
 	width: 100%;
 	height: 100%;
 }
 
-#strollDetailsRow{
+#strollDetailsRow {
 	display: flex;
 	align-items: flex-start;
-	margin:0 auto;
+	margin: 0 auto;
 	width: 100%;
 }
 
-#strollDetailsCol{
+#strollDetailsCol {
 	margin-top: 0 auto;
 }
 
-#strollDetailsCol{
+#strollDetailsCol {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding-top:0;
+	padding-top: 0;
 }
 
 #strollDetaildescription {
@@ -482,7 +536,7 @@ footer .footer-icon {
 	margin-bottom: 1rem;
 }
 
-#strollDetaildescription{
+#strollDetaildescription {
 
 	width: fit-content;
 	height: 100%;
@@ -491,8 +545,8 @@ footer .footer-icon {
 	border-radius: 50px;
 }
 
-#strollLocations{
-	margin-top:50px;
+#strollLocations {
+	margin-top: 50px;
 	width: 100% !important;
 	max-width: 90% !important;
 	justify-content: center !important;
@@ -502,7 +556,7 @@ footer .footer-icon {
 #strollLocations img {
 	border-radius: 30px;
 	max-width: 1000px;
-	height:auto;
+	height: auto;
 }
 
 
@@ -510,44 +564,44 @@ footer .footer-icon {
 	margin-top: 0;
 }
 
-.routeImage{
+.routeImage {
 	width: 100%;
 	height: auto;
 	border-radius: 20px;
 }
 
-.RouteDestinations{
+.RouteDestinations {
 	background-color: #4B0082;
 	max-width: 300px;
-	justify-content: center!important;
+	justify-content: center !important;
 	border-radius: 20px;
 	padding: 1rem;
 	line-height: 1;
-	margin:0 auto;
+	margin: 0 auto;
 }
 
-.RouteDestinations a{
+.RouteDestinations a {
 	color: #FFFFFF;
 	text-align: center;
-	justify-content: center!important;
+	justify-content: center !important;
 	text-decoration: underline;
 	font-family: "Holtwood One SC", serif;
 	font-size: 12pt;
 }
 
-.RouteDestinations a:hover{
+.RouteDestinations a:hover {
 	color: #FCFC7A;
 	text-align: center;
 }
 
-.StrollStopNumber{
+.StrollStopNumber {
 	color: #FFFFFF;
 	font-family: "Holtwood One SC", serif;
 	text-align: center;
 	font-size: 12pt;
 }
 
-#strollTours{
+#strollTours {
 	margin-left: 5%;
 }
 
