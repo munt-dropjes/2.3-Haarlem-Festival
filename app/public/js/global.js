@@ -33,20 +33,29 @@ function loadEditModalCMS(modalID) {
         var button = event.relatedTarget;
         if (!button) return;
 
+        var id = button.getAttribute('data-id');
         var name = button.getAttribute('data-name');
         var email = button.getAttribute('data-email');
+        var oldEmail = button.getAttribute('data-old-email');
+        var password = button.getAttribute('data-password');
         var phone = button.getAttribute('data-phone');
         var country = button.getAttribute('data-country');
         var role = button.getAttribute('data-role');
 
+        var modalIDInput = updateUserModal.querySelector('#id');
         var modalNameInput = updateUserModal.querySelector('#name');
         var modalEmailInput = updateUserModal.querySelector('#email');
+        var modalOldEmailInput = updateUserModal.querySelector('#old-email');
+        var modalPasswordInput = updateUserModal.querySelector('#password');
         var modalPhoneInput = updateUserModal.querySelector('#phone');
         var modalCountryInput = updateUserModal.querySelector('#country');
         var modalRoleSelect = updateUserModal.querySelector('#role');
 
+        if (modalIDInput) modalIDInput.value = id;
         if (modalNameInput) modalNameInput.value = name;
         if (modalEmailInput) modalEmailInput.value = email;
+        if (modalOldEmailInput) modalOldEmailInput.value = oldEmail;
+        if (modalPasswordInput) modalPasswordInput.value = password;
         if (modalPhoneInput) modalPhoneInput.value = phone;
         if (modalCountryInput) modalCountryInput.value = country;
         if (modalRoleSelect) modalRoleSelect.value = role;
