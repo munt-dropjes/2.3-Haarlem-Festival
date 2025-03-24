@@ -101,46 +101,7 @@
             <?php require_once __DIR__ . '../../components/yummie/restaurant-list.php'; ?>
         </div>
     </div>
-
-    <script>
-        document.addEventListener("DOMContentLoaded", function () {
-            const urlParams = new URLSearchParams(window.location.search);
-
-            function updateButton(filterName, defaultText) {
-                const button = document.getElementById("dropdown" + filterName.charAt(0).toUpperCase() + filterName.slice(1));
-                if (!button) return;
-
-                button.innerText = defaultText; // Toon de standaard tekst
-            }
-
-            // Update dropdown-knoppen bij het laden
-            updateButton("duration", urlParams.get("duration") ?? "Duration");
-            updateButton("open_time", urlParams.get("open_time") ?? "Open time");
-            updateButton("cuisine", urlParams.get("cuisine") ?? "Cuisine");
-            updateButton("rating", urlParams.get("rating") ?? "Rating");
-            updateButton("cost", urlParams.get("cost") ?? "Cost");
-
-            window.applyFilter = function (filterName, value) {
-                let url = new URL(window.location.href);
-                url.searchParams.set(filterName, (value));
-
-                // Verander de URL zonder de pagina te herladen
-                history.pushState({}, "", url.toString());
-
-                // AJAX request om alleen de restaurantlijst te verversen
-                fetch(url.pathname + "?" + url.searchParams.toString(), {
-                    method: "GET",
-                    headers: { "X-Requested-With": "XMLHttpRequest" }
-                })
-                    .then(response => response.text())
-                    .then(html => {
-                        document.getElementById("restaurant-list").innerHTML = html;
-                    })
-                    .catch(error => console.error("Error:", error));
-
-                // Update de knoptekst
-                updateButton(filterName, value);
-            };
-        });
-    </script>
 </main>
+
+<script src="/js/common.js"></script>
+<script src="/js/yummie-overview.js"></script>

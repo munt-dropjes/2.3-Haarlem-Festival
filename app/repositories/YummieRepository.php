@@ -113,8 +113,22 @@ class YummieRepository extends BaseRepository
         $stmt = $this->connection->prepare($sql);
         $stmt->execute([':restaurant_id' => $restaurantId]);
 
-        return $stmt->fetchAll(PDO::FETCH_CLASS, MenuItemModel::class);
+        $rows = $stmt->fetchAll();
+        $menuItems = [];
+
+        foreach ($rows as $row) {
+            $menuItems[] = new MenuItemModel(
+                (int) $row['id'],
+                $restaurantId,
+                $row['category'],
+                $row['name'],
+                $row['description']
+            );
+        }
+
+        return $menuItems;
     }
+
     public function getUniqueDurations(): array
     {
         $stmt = $this->connection->query("SELECT DISTINCT duration FROM restaurants ORDER BY duration ASC");
@@ -142,12 +156,14 @@ class YummieRepository extends BaseRepository
         $stmt = $this->connection->query("SELECT DISTINCT cost FROM restaurants ORDER BY cost ASC");
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-    public function getUniqueRatings(): array {
+    public function getUniqueRatings(): array
+    {
         $stmt = $this->connection->query("SELECT DISTINCT rating FROM restaurants ORDER BY rating ASC");
         return $stmt->fetchAll(PDO::FETCH_COLUMN);
     }
-    
-    public function getImagesByRestaurantId(int $restaurantId): array {
+
+    public function getImagesByRestaurantId(int $restaurantId): array
+    {
         $stmt = $this->connection->prepare("SELECT image_path FROM restaurant_images WHERE restaurant_id = :restaurantId");
         $stmt->execute([':restaurantId' => $restaurantId]);
         return $stmt->fetchAll(PDO::FETCH_COLUMN);

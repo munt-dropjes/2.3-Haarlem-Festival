@@ -8,26 +8,26 @@
                     <tbody>
                     <tr>
                             <td>Thursday</td>
-                            <td><?= htmlspecialchars($restaurant->open_time ?? 'Closed'); ?> - <?= htmlspecialchars($restaurant->close_time ?? 'Closed'); ?></td>
+                            <td><?= $restaurant->open_time ?? 'Closed'; ?> - <?= $restaurant->close_time ?? 'Closed'; ?></td>
                         </tr>
                         <tr>
                             <td>Friday</td>
-                            <td><?= htmlspecialchars($restaurant->open_time ?? 'Closed'); ?> - <?= htmlspecialchars($restaurant->close_time ?? 'Closed'); ?></td>
+                            <td><?= $restaurant->open_time ?? 'Closed'; ?> - <?= $restaurant->close_time ?? 'Closed'; ?></td>
                         </tr>
                         <tr>
                             <td>Saturday</td>
-                            <td><?= htmlspecialchars($restaurant->open_time ?? 'Closed'); ?> - <?= htmlspecialchars($restaurant->close_time ?? 'Closed'); ?></td>
+                            <td><?= $restaurant->open_time ?? 'Closed'; ?> - <?= $restaurant->close_time ?? 'Closed'; ?></td>
                         </tr>
                         <tr>
                             <td>Sunday</td>
-                            <td><?= htmlspecialchars($restaurant->open_time ?? 'Closed'); ?> - <?= htmlspecialchars($restaurant->close_time ?? 'Closed'); ?></td>
+                            <td><?= $restaurant->open_time ?? 'Closed'; ?> - <?= $restaurant->close_time ?? 'Closed'; ?></td>
                         </tr>
                     </tbody>
                 </table>
                 <p class="address mt-4">
-                    <?= htmlspecialchars($restaurant->address ?? ''); ?><br>
-                    <?= htmlspecialchars($restaurant->zipcode ?? ''); ?><br>
-                    <?= htmlspecialchars($restaurant->city ?? ''); ?>
+                    <?= $restaurant->address ?? ''; ?><br>
+                    <?= $restaurant->zipcode ?? ''; ?><br>
+                    <?= $restaurant->city ?? ''; ?>
                 </p>
             </div>
         </div>
@@ -36,7 +36,7 @@
         <div class="col-md-6 d-flex align-items-center p-4">
             <div class="map-container w-100">
                 <iframe 
-                    src="<?= htmlspecialchars($restaurant->mapLink ?? ''); ?>"
+                    src="<?= $restaurant->mapLink ?? ''; ?>"
                     width="100%" height="350" style="border:0; border-radius: 8px;" allowfullscreen="" loading="lazy">
                 </iframe>
             </div>

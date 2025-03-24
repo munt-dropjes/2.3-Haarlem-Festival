@@ -45,65 +45,56 @@ class YummieModel {
         array $menu_items
     ) {
         $this->id = $id;
-        $this->name = $name;
+        $this->name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
         $this->rating = $rating;
-        $this->cuisine = $cuisine;
+        $this->cuisine = array_map(fn($c) => htmlspecialchars($c, ENT_QUOTES, 'UTF-8'), $cuisine);
         $this->seats = $seats;
-        $this->open_time = $open_time;
-        $this->close_time = $close_time;
+        $this->open_time = htmlspecialchars($open_time, ENT_QUOTES, 'UTF-8');
+        $this->close_time = htmlspecialchars($close_time, ENT_QUOTES, 'UTF-8');
         $this->duration = $duration;
         $this->sessions = $sessions;
         $this->cost = $cost;
-        $this->image = $image ?: 'default.jpg';
-        $this->address = $address;
-        $this->city = $city;
-        $this->zipcode = $zipcode;
-        $this->mapLink = $mapLink;
-        $this->extra_info_menu = $extra_info_menu;
+        $this->image = htmlspecialchars($image ?: 'default.jpg', ENT_QUOTES, 'UTF-8');
+        $this->address = htmlspecialchars($address, ENT_QUOTES, 'UTF-8');
+        $this->city = htmlspecialchars($city, ENT_QUOTES, 'UTF-8');
+        $this->zipcode = htmlspecialchars($zipcode, ENT_QUOTES, 'UTF-8');
+        $this->mapLink = htmlspecialchars($mapLink, ENT_QUOTES, 'UTF-8');
+        $this->extra_info_menu = htmlspecialchars($extra_info_menu, ENT_QUOTES, 'UTF-8');
         $this->menu_items = $menu_items;
-        
 
-        // Genereer de tijdsblokken op basis van open_time & duration
         $this->timeSlots = $this->generateTimeSlots();
     }
 
     public function generateTimeSlots(): array {
         $timeSlots = [];
-        
-        // ✅ Zet open_time en close_time om naar DateTime objecten
         $startTime = DateTime::createFromFormat('H:i', $this->open_time);
         $closeTime = DateTime::createFromFormat('H:i', $this->close_time);
-        
+
         if (!$startTime || !$closeTime) {
-            return []; // Als de tijden niet correct zijn, retourneer een lege array.
+            return [];
         }
-    
-        // ✅ Duration staat in uren in de database, dus omzetten naar minuten
-        $duration_minutes = $this->duration * 60; // 3 uur → 180 minuten
-    
-        // ✅ Maak een tijdsinterval van de juiste duur
-        $interval = new \DateInterval('PT' . $duration_minutes . 'M'); // 'M' staat voor minuten
-    
+
+        $duration_minutes = $this->duration * 60;
+        $interval = new \DateInterval('PT' . $duration_minutes . 'M');
+
         while ($startTime < $closeTime) {
             $endTime = clone $startTime;
             $endTime->add($interval);
-    
-            // Zorg ervoor dat we niet buiten de sluitingstijd gaan
+
             if ($endTime > $closeTime) {
                 break;
             }
-    
+
             $timeSlots[] = [
                 'start' => $startTime->format('H:i'),
                 'end' => $endTime->format('H:i')
             ];
-    
+
             $startTime->add($interval);
         }
-    
+
         return $timeSlots;
     }
-    
 
     public function getStarRating(): string {
         return str_repeat('★', $this->rating) . str_repeat('☆', 5 - $this->rating);
@@ -122,8 +113,8 @@ class YummieModel {
         We look forward to welcoming you to {$this->name}!
         TEXT;
     }
+
     public function getCuisines(): string {
         return implode(", ", $this->cuisine);
     }
-    
 }

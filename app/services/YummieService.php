@@ -7,11 +7,11 @@ use Models\YummieModel;
 
 class YummieService
 {
-    private YummieRepository $repository;
+    private $repository;
 
-    public function __construct(YummieRepository $repository)
+    public function __construct()
     {
-        $this->repository = $repository;
+        $this->repository = new YummieRepository();
     }
 
     /**

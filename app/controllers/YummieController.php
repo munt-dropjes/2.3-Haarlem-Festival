@@ -3,7 +3,6 @@
 namespace Controllers;
 
 use Services\YummieService;
-use Repositories\YummieRepository;
 
 class YummieController extends Controller
 {
@@ -11,8 +10,7 @@ class YummieController extends Controller
 
     public function __construct()
     {
-        $repository = new YummieRepository();
-        $this->service = new YummieService($repository);
+        $this->service = new YummieService(); 
     }
 
     public function index()
@@ -49,7 +47,7 @@ class YummieController extends Controller
     }
 
 
-    public function show($id)
+    public function getRestaurantById($id)
     {
         $restaurant = $this->service->getRestaurantById((int) $id);
 

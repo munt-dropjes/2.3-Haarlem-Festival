@@ -14,7 +14,7 @@
             <div class="carousel-inner">
                 <?php foreach ($images as $index => $image): ?>
                     <div class="carousel-item <?= $index === 0 ? 'active' : ''; ?>">
-                        <img class="d-block mx-auto" src="<?= htmlspecialchars($image); ?>" alt="Restaurant afbeelding">
+                        <img class="d-block mx-auto" src="<?= $image; ?>" alt="Restaurant afbeelding">
                     </div>
                 <?php endforeach; ?>
             </div>
@@ -35,10 +35,10 @@
     <?php endif; ?>
 
     <div class="yummieDetail-tab-buttons d-flex justify-content-center gap-1 p-4">
-        <button class="yummieDetail-tab-button active" onclick="openTab(event, 'information')">Information</button>
-        <button class="yummieDetail-tab-button" onclick="openTab(event, 'menu')">Menu</button>
-        <button class="yummieDetail-tab-button" onclick="openTab(event, 'location')">Location</button>
-        <button class="yummieDetail-tab-button" onclick="openTab(event, 'reservation')">Reservation</button>
+        <button class="yummieDetail-tab-button active" data-tab="information">Information</button>
+        <button class="yummieDetail-tab-button" data-tab="menu">Menu</button>
+        <button class="yummieDetail-tab-button" data-tab="location">Location</button>
+        <button class="yummieDetail-tab-button" data-tab="reservation">Reservation</button>
     </div>
 
     <?php if (isset($message)): ?>
@@ -72,34 +72,6 @@
     </div>
 </main>
 
-<script>
-    function openTab(evt, tabName) {
-        let i, tabcontent, tabbuttons;
-
-        tabcontent = document.getElementsByClassName("yummieDetail-tabcontent");
-        for (i = 0; i < tabcontent.length; i++) {
-            tabcontent[i].style.display = "none";
-        }
-
-        tabbuttons = document.getElementsByClassName("yummieDetail-tab-button");
-        for (i = 0; i < tabbuttons.length; i++) {
-            tabbuttons[i].classList.remove("active");
-        }
-        
-        let tab = document.getElementById(tabName);
-        console.log(tabName, tab)
-        tab.style.display = "block";
-        evt.currentTarget.classList.add("active");
-    }
-    document.addEventListener("DOMContentLoaded", function () {
-        const reservationButton = document.querySelector(".yummieDetail-reservation-button button");
-
-        if (reservationButton) {
-            reservationButton.addEventListener("click", function (event) {
-                openTab(event, 'reservation');
-            });
-        }
-    });
-
-
-</script>
+<script src="/js/common.js"></script>
+<script src="/js/yummie-detail.js"></script>
+<script src="/js/reservation-confirm.js"></script>

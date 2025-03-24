@@ -2,9 +2,7 @@
 
 namespace Models;
 
-use JsonSerializable;
-
-class MenuItemModel implements JsonSerializable
+class MenuItemModel 
 {
     public int $id;
     public int $restaurantId;
@@ -12,15 +10,17 @@ class MenuItemModel implements JsonSerializable
     public string $name;
     public string $description;
 
-    public function jsonSerialize(): array
-    {
-        return [
-            'id' => $this->id,
-            'restaurant_id' => $this->restaurantId,
-            'category' => $this->category,
-            'name' => $this->name,
-            'description' => $this->description,
-        ];
+    public function __construct(
+        int $id,
+        int $restaurantId,
+        string $category,
+        string $name,
+        string $description
+    ) {
+        $this->id = $id;
+        $this->restaurantId = $restaurantId;
+        $this->category = htmlspecialchars($category, ENT_QUOTES, 'UTF-8');
+        $this->name = htmlspecialchars($name, ENT_QUOTES, 'UTF-8');
+        $this->description = htmlspecialchars($description, ENT_QUOTES, 'UTF-8');
     }
 }
-

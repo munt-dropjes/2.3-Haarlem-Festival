@@ -4,10 +4,11 @@ namespace Services;
 
 use Repositories\ReservationRepository;
 use Repositories\YummieRepository;
+use Models\ReservationModel;
 
 class ReservationService {
-    private ReservationRepository $reservationRepository;
-    private YummieRepository $restaurantRepository;
+    private $reservationRepository;
+    private $restaurantRepository;
 
     public function __construct() {
         $this->reservationRepository = new ReservationRepository();
@@ -44,6 +45,10 @@ class ReservationService {
         $childPrice = $restaurant->child_price ?? 0;
         
         return ($adults * $adultPrice) + ($children * $childPrice);
+    }
+    public function addReservation(ReservationModel $reservation): void
+    {
+        $this->reservationRepository->save($reservation);
     }
 }
 

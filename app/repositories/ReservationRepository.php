@@ -7,7 +7,7 @@ use PDO;
 
 class ReservationRepository extends BaseRepository {
 
-    public function addReservation(ReservationModel $reservation): bool {
+    public function save(ReservationModel $reservation): bool {
         $sql = "INSERT INTO restaurant_reservations (restaurant_id, adults, children, day, start_time, total_price, extra_information, created_at) 
                 VALUES (:restaurant_id, :adults, :children, :day, :start_time, :total_price, :extra_information, NOW())";
         

@@ -2,22 +2,19 @@
 
 namespace Controllers;
 
-use Repositories\ReservationRepository;
 use Services\ReservationService;
-use Repositories\YummieRepository;
 use Models\ReservationModel;
+use Services\YummieService;
 
 class ReservationController extends Controller
 {
-    private ReservationService $reservationService;
-    private ReservationRepository $reservationRepository;
-    private YummieRepository $yummieRepository;
+    private $reservationService;
+    private $yummieService;
 
     public function __construct()
     {
         $this->reservationService = new ReservationService();
-        $this->reservationRepository = new ReservationRepository();
-        $this->yummieRepository = new YummieRepository();
+        $this->yummieService = new YummieService();
     }
 
     // ✅ Haal beschikbare tijdsloten op via de service
@@ -28,10 +25,7 @@ class ReservationController extends Controller
         $restaurantId = $_POST['restaurant_id'] ?? null;
         $day = $_POST['day'] ?? null;
 
-        if (!$restaurantId || !$day) {
-            echo json_encode(['error' => 'Missing parameters']);
-            exit;
-        }
+        $this->view("../locatie/view", ['error' => 'Missing parameters']);
 
         $availableSlots = $this->reservationService->getAvailableTimeSlots((int) $restaurantId, $day);
         echo json_encode(['timeslots' => $availableSlots]);
@@ -39,17 +33,17 @@ class ReservationController extends Controller
     }
 
     // ✅ Verwerk een reservering
-    public function processReservation(): void
+    public function processReservation($restaurantId): void
     {
-        $restaurant = $this->yummieRepository->getRestaurantById($_POST['restaurant_id']);
+        $restaurant = $this->yummieService->getRestaurantById($restaurantId);
         if (!$restaurant) {
             echo json_encode(['error' => 'Restaurant not found.']);
             return;
         }
 
-        $images = $this->yummieRepository->getImagesByRestaurantId($restaurant->id);
+        $images = $this->yummieService->getImagesByRestaurantId($restaurant->id);
 
-        
+
         // ✅ Sla de reservering op in de database
         $reservation = new ReservationModel();
         $reservation->restaurant_id = $_POST['restaurant_id'];
@@ -59,8 +53,8 @@ class ReservationController extends Controller
         $reservation->start_time = $_POST['start_time'];
         $reservation->total_price = ReservationService::calculateTotalPrice($restaurant, $_POST['adults'], $_POST['children']);
         $reservation->extra_information = $_POST['extra_info'];
-        
-        $this->reservationRepository->addReservation($reservation);
+
+        $this->reservationService->addReservation($reservation);
 
         $this->view('yummie/detail', [
             'restaurant' => $restaurant,

@@ -2,13 +2,13 @@
     <?php foreach ($restaurants as $restaurant): ?>
         <div class="col-md-4 mb-4">
             <div class="yummieOverview-card card">
-                <img src="images/yummie/<?= htmlspecialchars($restaurant->image); ?>" class="card-img-top"
-                    alt="<?= htmlspecialchars($restaurant->name); ?>">
+                <img src="images/yummie/<?= $restaurant->image; ?>" class="card-img-top"
+                    alt="<?= $restaurant->name; ?>">
                 <div class="yummieOverview-card-body">
-                    <h5 class="card-title"><?= htmlspecialchars($restaurant->name); ?></h5>
+                    <h5 class="card-title"><?= $restaurant->name; ?></h5>
                     <p><?= $restaurant->getStarRating(); ?></p>
-                    <p><?= htmlspecialchars($restaurant->getCuisines()); ?></p>
-                    <p>Opens at <?= htmlspecialchars_decode($restaurant->open_time); ?></p>
+                    <p><?= $restaurant->getCuisines(); ?></p>
+                    <p>Opens at <?= $restaurant->open_time; ?></p>
                     <div class="d-flex justify-content-between">
                         <a href="/yummie/<?= $restaurant->id; ?>#reservation"
                             class="btn yummieBtnPrimaryYellow px-lg-4 px-xl-5">RESERVE</a>
