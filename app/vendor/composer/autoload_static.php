@@ -10,6 +10,7 @@ class ComposerStaticInit8c9d6bbe85511cd5cb5caa87d87255b6
         'S' => 
         array (
             'Svg\\' => 4,
+            'Stripe\\' => 7,
             'Services\\' => 9,
             'Sabberworm\\CSS\\' => 15,
         ),
@@ -51,6 +52,10 @@ class ComposerStaticInit8c9d6bbe85511cd5cb5caa87d87255b6
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg',
+        ),
+        'Stripe\\' => 
+        array (
+            0 => __DIR__ . '/..' . '/stripe/stripe-php/lib',
         ),
         'Services\\' => 
         array (

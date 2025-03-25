@@ -23,7 +23,14 @@
                 <h1>Ticket</h1>
                 <p>Name: ' . $ticket->getCustomerName() . '</p>
                 <p>Event: ' . $ticket->getEventName() . '</p>
-                <p>Details: ' . $ticket->getEventDetails() . '</p>
+                <p>Details:</p>
+                <ul>';
+                //add the ticket details to the html so the details can just be stored in an array :)
+                foreach ($ticket->getEventDetails() as $key => $value) {
+                    $html .= '<li>' . htmlspecialchars($key) . ': ' . htmlspecialchars($value) . '</li>';
+                }
+
+                $html .= '</ul>
                 <img src="' . $qrCode . '" alt="QR Code" />
             </body>
             </html>';

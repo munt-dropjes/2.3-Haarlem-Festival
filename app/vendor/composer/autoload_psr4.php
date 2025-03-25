@@ -7,6 +7,7 @@ $baseDir = dirname($vendorDir);
 
 return array(
     'Svg\\' => array($vendorDir . '/dompdf/php-svg-lib/src/Svg'),
+    'Stripe\\' => array($vendorDir . '/stripe/stripe-php/lib'),
     'Services\\' => array($baseDir . '/services'),
     'Sabberworm\\CSS\\' => array($vendorDir . '/sabberworm/php-css-parser/src'),
     'Repositories\\' => array($baseDir . '/repositories'),
