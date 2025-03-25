@@ -50,7 +50,7 @@ class CmsEventController extends Controller {
     }
 
     public function update(){
-        $updateEvent = $this->eventService->getUserById($_POST['id']);
+        $updateEvent = $this->eventService->getEventById($_POST['id']);
         $updateEvent->setName($_POST['name']);
         $updateEvent->setDescription($_POST['description']);
         $updateEvent->setDate($_POST['date']);

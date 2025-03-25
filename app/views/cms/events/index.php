@@ -160,7 +160,7 @@
     <div class="modal fade" id="updateEvent" tabindex="-1" aria-labelledby="updateEventLabel">
         <div class="modal-dialog">
             <div class="modal-content">
-                <form method="post" action="/cms/evemts/edit">
+                <form method="post" action="/cms/events/edit">
                     <div class="modal-header">
                         <h1 class="modal-title fs-5" id="updateEventLabel">Update Event</h1>
                         <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
