@@ -117,7 +117,7 @@ class UserRepository extends BaseRepository{
     }
 
     // ~~Update~~
-    public function updateUser($user, $id) : User {
+    public function updateUser($user) : User {
         try{
             $sql = "UPDATE Users 
                     SET Role = ?, Name = ?, Email = ?, Password = ?, Phone = ?, Country = ?, ResetToken = ?, ResetTokenExpiration = ?
