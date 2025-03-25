@@ -35,10 +35,6 @@ class CmsUserController extends Controller {
     }
 
     public function create(){
-        if (!isset($_POST['create'])) {
-            header('Location: /cms/users');
-        }
-
         $user = new User();
         $user->setRole($_POST['role']);
         $user->setName($_POST['name']);
@@ -47,28 +43,24 @@ class CmsUserController extends Controller {
         $user->setPhone($_POST['phone']);
         $user->setCountry($_POST['country']);
         $this->userService->insertUser($user);
+
+        $this->index();
     }
 
     public function update(){
-        if (!isset($_POST['edit'])) {
-            header('Location: /cms/users');
-        }
-
-        $updateUser = new User();
+        $updateUser = $this->userService->getUserByEmail($_POST['oldEmail']);
         $updateUser->setRole($_POST['role']);
         $updateUser->setName($_POST['name']);
         $updateUser->setEmail($_POST['email']);
         $updateUser->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
         $updateUser->setPhone($_POST['phone']);
         $updateUser->setCountry($_POST['country']);
-        $this->userService->updateUser($updateUser, $_POST['email']);
+        $this->userService->updateUser($updateUser);
+        $this->index();
     }
 
     public function delete(){
-        if (!isset($_POST['delete'])) {
-            header('Location: /cms/users');
-        }
-
-        $this->userService->deleteUser($_GET['delete']);
+        $this->userService->deleteUser($_POST['email']);
+        $this->index();
     }
 }
