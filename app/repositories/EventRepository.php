@@ -13,6 +13,7 @@ class EventRepository extends BaseRepository {
             $sql = "INSERT INTO Events (Name, Description, Date, Time, Duration, Location, Price, Category) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($sql);
+            print_r($event);
             $stmt->execute([
                 $event->getName(),
                 $event->getDescription(),
@@ -23,7 +24,7 @@ class EventRepository extends BaseRepository {
                 $event->getPrice(),
                 $event->getCategory()
             ]);
-            return $this->getEventById($event->getEventID());
+            return $this->getEvent($event);
         } catch (Exception $e) {
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to create event: " . $event->name);
         }
@@ -60,6 +61,21 @@ class EventRepository extends BaseRepository {
         try {
             $stmt = $this->connection->prepare("SELECT * FROM Events WHERE EventID = :id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\Event');
+            $fetchedEvent = $stmt->fetch();
+            return $fetchedEvent ?: null;
+        } catch (Exception $e) {
+            throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get event by id: " . $id);
+        }
+    }
+
+    public function getEvent($event) : ?Event
+    {
+        try {
+            $name = $event->getName();
+            $stmt = $this->connection->prepare("SELECT * FROM Events WHERE Name = :name");
+            $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->execute();
             $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\Event');
             $fetchedEvent = $stmt->fetch();

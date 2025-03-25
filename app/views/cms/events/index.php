@@ -43,23 +43,22 @@
                                 <td><?= $event->getLocation() ?></td>
                                 <td><?= $event->getPrice() ?></td>
                                 <td><?= $event->getCategory() ?></td>
-                                <td><?= $event->getAvailableTickets() > 0 ? 'Available' : 'Sold out' ?></td>
+                                <td><?= $event->getPrice() > 0 ? 'Available' : 'Sold out' ?></td>
                                 <td>
                                     <button
                                         type="button"
                                         class="btn btn-warning btn-sm"
                                         data-bs-toggle="modal"
                                         data-bs-target="#updateEvent"
-                                        data-id="<?= $event->getId(); ?>"
+                                        data-id="<?= $event->getEventID(); ?>"
                                         data-name="<?= htmlspecialchars($event->getName()); ?>"
-                                        data-description="<?= htmlspecialchars($event->getDescription())); ?>"
+                                        data-description="<?= htmlspecialchars($event->getDescription()); ?>"
                                         data-date="<?= htmlspecialchars($event->getDate()); ?>"
                                         data-time="<?= htmlspecialchars($event->getTime()); ?>"
                                         data-duration="<?= htmlspecialchars($event->getDuration()); ?>"
                                         data-location="<?= htmlspecialchars($event->getLocation()); ?>"
                                         data-price="<?= htmlspecialchars($event->getPrice()); ?>"
-                                        data-category="<?= htmlspecialchars($event->getCategory()); ?>"
-                                        data-artists="<?= htmlspecialchars($event->getArtists()); ?>">                                       >
+                                        data-category="<?= htmlspecialchars($event->getCategory()); ?>">                                       
                                         Edit
                                     </button>
                                     <button
@@ -67,7 +66,7 @@
                                         class="btn btn-warning btn-sm"
                                         data-bs-toggle="modal"
                                         data-bs-target="#deleteEvent"
-                                        data-id="<?= $event->getId(); ?>"
+                                        data-id="<?= $event->getEventID(); ?>"
                                         data-name="<?= htmlspecialchars($event->getName()); ?>">
                                         Delete
                                     </button>
@@ -241,10 +240,10 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            loadEditModalCMS('updateEvent');
+            loadEditEventModalCMS('updateEvent');
         });
         document.addEventListener('DOMContentLoaded', function() {
-            loadDeleteModalCMS('deleteEvent');
+            loadDeleteEventModalCMS('deleteEvent');
         });
     </script>
 </main>
