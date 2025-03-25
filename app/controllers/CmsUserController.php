@@ -55,7 +55,7 @@ class CmsUserController extends Controller {
         $updateUser->setPassword(password_hash($_POST['password'], PASSWORD_DEFAULT));
         $updateUser->setPhone($_POST['phone']);
         $updateUser->setCountry($_POST['country']);
-        $this->userService->updateUser($updateUser, $updateUser->getID());
+        $this->userService->updateUser($updateUser);
         $this->index();
     }
 
