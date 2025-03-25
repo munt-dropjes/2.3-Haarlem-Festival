@@ -592,3 +592,97 @@ h3 {
 /* ********************* */
 /* 		Stroll End		 */
 /* ********************* */
+/* ********************* */
+/*	jazz detail start	 */
+/* ********************* */
+#jazzDetail {
+    /* Add your CSS styles here */
+}
+
+#jazzDetail > div:first-child{
+    display: flex; 
+    align-items: center; 
+    width: 100%; 
+    margin-bottom: 20px;
+}
+
+#jazzDetail .jazzbutton{
+    position: absolute; 
+    left: 20px;
+    margin-top: 20px;
+    background-color: grey; 
+    color: white; 
+    border-radius: 0; 
+    padding: 10px 20px;
+}
+
+#jazzDetail > div:first-child > div {
+    flex-grow: 1; 
+    text-align: center;
+    margin-top: 20px;
+}
+
+#jazzDetail > div:first-child > div > h1 {
+    margin: 0;
+}
+
+#jazzDetail img.img-fluid.mb-4{
+    width: 100vw; 
+    max-width: 100%; 
+    max-height: 317px; 
+    display: block;
+}
+
+#jazzDetail .container{
+    display: flex; 
+    align-items: center;
+}
+
+#jazzDetail .container > div:first-child {
+    width: 811px; 
+    margin-right: 20px;
+}
+
+#jazzDetail .container img.img-fluid.mb-3{
+    width: 811px; 
+    height: 377px;
+}
+
+#jazzDetail .container-fluid.py-4{
+
+}
+
+#jazzDetail #artist-photo-container img.img-fluid.rounded.object-fit-cover{
+    width: 48%; 
+    max-height: 360px; 
+    height: auto;
+}
+
+#jazzDetail #music-player-container > div{
+    gap: 5px;
+}
+
+#jazzDetail .ticket-container {
+    width: 100%; 
+    max-width: 1600px; 
+    margin: 20px auto; 
+    padding: 0 15px;
+    box-sizing: border-box; 
+}
+#jazzDetail .card.bg-custom {
+    background-color: #FCFC7A; 
+    border-radius: 8px;
+}
+
+#jazzDetail .card-title.text-center {
+
+}
+#jazzDetail .bg-light.p-3{
+
+}
+#jazzDetail .btn.btn-danger.btn-sm{
+    margin-left: 20px;
+}
+/* ********************* */
+/*	jazz detail end	     */
+/* ********************* */

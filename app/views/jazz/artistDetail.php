@@ -1,11 +1,10 @@
 <main id="jazzDetail">
-    <div style="display: flex; align-items: center; width: 100%; margin-bottom: 20px;">
-        <a href="/jazz" class="jazzbutton"
-            style="position: absolute; left: 20px;margin-top: 20px;background-color: grey; color: white; border-radius: 0; padding: 10px 20px;">
+    <div>
+        <a href="/jazz" class="jazzbutton">
             Terug naar line-up
         </a>
-        <div style="flex-grow: 1; text-align: center;margin-top: 20px;">
-            <h1 style="margin: 0;">
+        <div>
+            <h1>
                 <?= htmlspecialchars($artist->getName()) ?>
             </h1>
         </div>
@@ -13,37 +12,33 @@
     <?php $fotocounter = 0; ?>
     <?php $fotocounter++; ?>
     <img src="/images/jazz/detail/<?= strtolower(str_replace(' ', '', $artist->getName())) ?>/<?= $fotocounter ?>.png"
-        class="img-fluid mb-4" style="width: 100vw; max-width: 100%; max-height: 317px; display: block;">
-    <div class="container" style="display: flex; align-items: center;">
-        <div style="width: 811px; margin-right: 20px;">
+        class="img-fluid mb-4">
+    <div class="container">
+        <div>
             <h2>A bit about <?= htmlspecialchars($artist->getName()) ?></h2>
             <p><?= htmlspecialchars($artist->getDescription()) ?></p>
         </div>
         <?php $fotocounter++; ?>
         <img src="/images/jazz/detail/<?= strtolower(str_replace(' ', '', $artist->getName())) ?>/<?= $fotocounter ?>.png"
-            alt="<?= htmlspecialchars($artist->getName()) ?>" class="img-fluid mb-3"
-            style="width: 811px; height: 377px; ">
+            alt="<?= htmlspecialchars($artist->getName()) ?>" class="img-fluid mb-3">
     </div>
 
-    <!-- Artist Photo & Music Container -->
     <div class="container-fluid py-4">
         <div class="row g-2 align-items-stretch">
 
-            <!-- Artist Photo Container -->
             <div class="col-md-6" id="artist-photo-container">
                 <div class="d-flex h-100 gap-1">
                     <?php for ($i = 1; $i <= 2; $i++) {
                         $fotocounter++; ?>
                         <img src="/images/jazz/detail/<?= strtolower(str_replace(' ', '', $artist->getName())) ?>/<?= $fotocounter ?>.png"
                             alt="<?= htmlspecialchars($artist->getName()) ?>" class="img-fluid rounded object-fit-cover"
-                            id="artist-photo-<?= $i ?>" style="width: 48%; max-height: 360px; height: auto;">
+                            id="artist-photo-<?= $i ?>">
                     <?php } ?>
                 </div>
             </div>
 
-            <!-- Music Player Container -->
             <div class="col-md-6" id="music-player-container">
-                <div class="d-flex flex-column h-100" style="gap: 5px;">
+                <div class="d-flex flex-column h-100">
                     <?php
                     for ($i = 1; $i <= 3; $i++) {
 
@@ -74,10 +69,10 @@
         </div>
     </div>
 
-    <div class="container" style="max-width: 1600px; ">
+    <div class="ticket-container">
         <div class="row justify-content-center">
             <div class="col-md-8">
-                <div class="card bg-custom" style="background-color: #FCFC7A; border-radius: 8px;">
+                <div class="card bg-custom">
                     <div class="card-body">
                         <h2 class="card-title text-center">Koop Tickets voor <?= htmlspecialchars($artist->getName()) ?>
                         </h2>
@@ -97,6 +92,9 @@
                                             $formattedendTime = $endTime->format('H:i');
                                             echo htmlspecialchars($formattedDate . ' - ' . $formattedstartTime . ' - ' . $formattedendTime . ' - €' . $ticket->getPrice());
                                             ?>
+                                            <button class="btn btn-danger btn-sm">
+                                                <i class="fas fa-shopping-cart"></i>
+                                            </button>
                                         </p>
                                     <?php endforeach; ?>
                                 </ul>
