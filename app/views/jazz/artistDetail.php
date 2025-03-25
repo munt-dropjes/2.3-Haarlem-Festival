@@ -80,7 +80,6 @@
                             <p>Er zijn momenteel geen tickets beschikbaar.</p>
                         <?php else: ?>
                             <div class="row">
-                                <!-- Artiest Tickets - Links -->
                                 <div class="col-md-6">
                                    
                                     <?php foreach ($tickets as $ticket): ?>
@@ -101,7 +100,6 @@
                                     <?php endforeach; ?>
                                 </div>
 
-                                <!-- All Access Tickets - Rechts -->
                                 <div class="col-md-6">
                                    
                                     <p>
@@ -123,6 +121,10 @@
                                 </div>
                             </div>
                         <?php endif; ?>
+                        <p class="mt-4">All performances Thursday, Friday and Saturday are in the Patronaat: <br> Zijlsingel 2, 2013DN Haarlem</p>
+                        <button class="btn btn-danger see-program-btn">
+                            See Personal Program
+                        </button>
                     </div>
                 </div>
             </div>

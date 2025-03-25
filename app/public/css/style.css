@@ -673,6 +673,12 @@ h3 {
     background-color: #FCFC7A; 
     border-radius: 8px;
 }
+#jazzDetail .see-program-btn {
+    position: absolute;
+    bottom: 10px;
+    right: 10px;
+    z-index: 10;
+}
 
 #jazzDetail .card-title.text-center {
 
