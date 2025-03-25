@@ -59,6 +59,12 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
     $router->post('/cms/users/edit', 'CmsUserController@update');
+
+    //payment with stripe / shoppingcart routes
+    $router->get('/checkout', 'PaymentController@index');
+    $router->post('/checkout/create-session', 'PaymentController@createSession');
+    $router->get('/checkout/success', 'PaymentController@success');
+    $router->get('/checkout/cancel', 'PaymentController@cancel');
     
 // Run the router
 $router->run();

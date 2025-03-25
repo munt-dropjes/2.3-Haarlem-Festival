@@ -99,3 +99,31 @@ var swiper = new Swiper(".dance-swiper", {
 		},
 	},
 });
+
+
+
+//stripe payment function
+function initiateStripePayment(publicKey, amount, createSessionUrl) {
+    const stripe = Stripe(publicKey);
+    const handlePayment = async () => {
+        try {
+            const response = await fetch(createSessionUrl, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ amount: amount }) 
+            });
+            if (!response.ok) {
+                throw new Error('Failed to create a checkout session');
+            }
+            const session = await response.json();
+            const result = await stripe.redirectToCheckout({ sessionId: session.id });
+            if (result.error) {
+                console.error('Stripe Checkout error:', result.error.message);
+            }
+        } catch (error) {
+            console.error('Error initiating Stripe payment:', error);
+        }
+    };
+    return handlePayment;
+}
+/////////////////////////////
