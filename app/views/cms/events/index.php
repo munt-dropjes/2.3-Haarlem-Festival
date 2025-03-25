@@ -139,6 +139,10 @@
                                 <input type="text" class="form-control" id="price" name="price" required>
                             </div>
                             <div class="modal-group">
+                                <label for="availableTickets">Available Tickets</label>
+                                <input type="text" class="form-control" id="availableTickets" name="availableTickets" required>
+                            </div>
+                            <div class="modal-group">
                                 <label for="category">Category</label>
                                 <select class="form-select" id="category" name="category">
                                     <option value="Jazz">Jazz</option>
