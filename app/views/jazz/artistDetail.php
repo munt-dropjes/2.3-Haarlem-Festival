@@ -70,17 +70,19 @@
     </div>
 
     <div class="ticket-container">
-        <div class="row justify-content-center">
-            <div class="col-md-8">
-                <div class="card bg-custom">
-                    <div class="card-body">
-                        <h2 class="card-title text-center">Koop Tickets voor <?= htmlspecialchars($artist->getName()) ?>
-                        </h2>
-                        <div class="bg-light p-3">
-                            <?php if (empty($tickets)): ?>
-                                <p>Er zijn momenteel geen tickets beschikbaar.</p>
-                            <?php else: ?>
-                                <ul>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="card bg-custom">
+                <div class="card-body">
+                    <h2 class="card-title text-center">Koop Tickets voor <?= htmlspecialchars($artist->getName()) ?></h2>
+                    <div class="bg-light p-3">
+                        <?php if (empty($tickets) && empty($allAccessTickets)): ?>
+                            <p>Er zijn momenteel geen tickets beschikbaar.</p>
+                        <?php else: ?>
+                            <div class="row">
+                                <!-- Artiest Tickets - Links -->
+                                <div class="col-md-6">
+                                   
                                     <?php foreach ($tickets as $ticket): ?>
                                         <p>
                                             <?php
@@ -97,12 +99,35 @@
                                             </button>
                                         </p>
                                     <?php endforeach; ?>
-                                </ul>
-                            <?php endif; ?>
-                        </div>
+                                </div>
+
+                                <!-- All Access Tickets - Rechts -->
+                                <div class="col-md-6">
+                                   
+                                    <p>
+                                        <?= htmlspecialchars('Weekend All Access - €80') ?>
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </p>
+                                    <p>
+                                        <?php
+                                        $eventDate = new DateTime($ticket->getEventDate());
+                                        $formattedDate = $eventDate->format('l');
+                                        echo htmlspecialchars($formattedDate . ' All Access - €35.-');
+                                        ?>
+                                        <button class="btn btn-danger btn-sm">
+                                            <i class="fas fa-shopping-cart"></i>
+                                        </button>
+                                    </p>
+                                </div>
+                            </div>
+                        <?php endif; ?>
                     </div>
                 </div>
             </div>
         </div>
     </div>
+</div>
+
 </main>
