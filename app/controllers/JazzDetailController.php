@@ -2,29 +2,30 @@
 
 namespace Controllers;
 
-use Repositories\JazzRepository;
+use Services\JazzService;
 
 class JazzDetailController extends Controller {
-    private $jazzRepository;
+    private $jazzService;
 
     public function __construct() {
-        $this->jazzRepository = new JazzRepository();
+        $this->jazzService = new JazzService();
     }
 
     public function index($name) {
-           $name = str_replace('+', ' ', $name);
-            
-            $artist = $this->jazzRepository->getArtistByName($name);
-        
-            if (!$artist) {
-                http_response_code(404);
-                echo "Artiest niet gevonden!";
-                return;
-            }
-            $tickets = $this->jazzRepository->getAvailebleTicketsForArtist($name);
+        $name = str_replace('+', ' ', $name);
 
-            $this->view('jazz/artistDetail', ['artist' => $artist, 'tickets' => $tickets]);
-        } 
+        $artist = $this->jazzService->getArtistByName($name);
+
+        if (!$artist) {
+            http_response_code(404);
+            echo "Artiest niet gevonden!";
+            return;
+        }
+
+        $tickets = $this->jazzService->getAvailebleTicketsForArtist($name);
+
+        $this->view('jazz/artistDetail', ['artist' => $artist, 'tickets' => $tickets]);
+    }
 }
 
 ?>

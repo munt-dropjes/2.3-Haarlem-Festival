@@ -18,6 +18,14 @@ class JazzService {
     public function getFestivalTimetable() {
         return $this->jazzRepository->getFestivalTimetable();
     }
+
+    public function getArtistByName($name) {
+        return $this->jazzRepository->getArtistByName($name);
+    }
+
+    public function getAvailebleTicketsForArtist($name) {
+        return $this->jazzRepository->getAvailebleTicketsForArtist($name);
+    }
 }
 
 ?>
