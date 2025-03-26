@@ -13,26 +13,21 @@ class PaymentService
         Stripe::setApiKey(StripeConfig::STRIPE_SECRET_KEY);
     }
 
-    public function createCheckoutSession($amount, $currency, $successUrl, $cancelUrl, $orderId)
+    public function createIntent($amount, $orderId)
     {
-        return Session::create([
-            'payment_method_types' => ['card', 'ideal'], //the payment options
-            'line_items' => [[
-                'price_data' => [
-                    'currency' => $currency,
-                    'product_data' => [
-                        'name' => 'Haarlem Festival Ticket',
-                    ],
-                    'unit_amount' => $amount * 100, // amount in cents
-                ],
-                'quantity' => 1,
-            ]],
-            'mode' => 'payment',
-            'success_url' => $successUrl,
-            'cancel_url' => $cancelUrl,
+        $intent = \Stripe\PaymentIntent::create([
+            'amount' => $amount,
+            'currency' => 'eur',
             'metadata' => [
                 'order_id' => $orderId,
             ],
         ]);
+
+        return $intent->client_secret;
     }
+
+    
+
+
+    
 }

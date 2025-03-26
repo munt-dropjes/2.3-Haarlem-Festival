@@ -13,28 +13,25 @@ class PaymentController extends Controller
         $this->paymentService = new PaymentService();
     }
 
-    public function index()
-    {
-        $this->view('payment/index');
-    }
-
     public function createSession()
     {
-        $amount = $_POST['amount']; 
-        $orderId = $_POST['order_id'];
-        $currency = 'eur';
-        $successUrl = 'http://localhost/success'; 
-        $cancelUrl = 'http://localhost/cancel';
+        $amount = 1000; 
+        $orderId = 1;
+    
+        try {
+            $clientSecret = $this->paymentService->createIntent($amount, $orderId);
 
-        $session = $this->paymentService->createCheckoutSession($amount, $currency, $successUrl, $cancelUrl, $orderId);
-
-        header('Content-Type: application/json');
-        echo json_encode(['id' => $session->id]);
+            $this->view('payment/index', ['clientSecret' => $clientSecret]);
+            
+        } catch (\Exception $e) {
+            http_response_code(500);
+            echo json_encode(['error' => $e->getMessage()]);
+        }
     }
 
     public function success()
     {
-        $this->view('payment/success');
+        $this->view('payment/complete');
     }
 
     public function cancel()
@@ -44,45 +41,47 @@ class PaymentController extends Controller
 
     public function webhook()
     {
-        // Retrieve the raw body from the request
         $payload = @file_get_contents('php://input');
         $sigHeader = $_SERVER['HTTP_STRIPE_SIGNATURE'];
-        $endpointSecret = 'your_webhook_secret_here'; // Replace with your Stripe webhook secret
+        $endpointSecret = 'whsec_0fdd77140fca310bb9f6faddd183d471bdeedeeb9157163087c220079fe6ed10';
 
         try {
-            // Verify the webhook signature
             $event = \Stripe\Webhook::constructEvent(
                 $payload,
                 $sigHeader,
                 $endpointSecret
             );
 
-            // Handle the event
             switch ($event->type) {
                 case 'checkout.session.completed':
-                    $session = $event->data->object; // Contains the session data
+                    $session = $event->data->object; 
                     $this->handleSuccessfulPayment($session);
                     break;
 
                 case 'payment_intent.payment_failed':
-                    $paymentIntent = $event->data->object; // Contains the payment intent data
+                    $paymentIntent = $event->data->object; 
                     $this->handleFailedPayment($paymentIntent);
                     break;
                 
-                
-                // Add more cases for other event types if needed
+                case 'payment_intent.succeeded':
+                    $paymentIntent = $event->data->object; 
+                    $this->handleSuccessfulPayment($paymentIntent);
+                    break;
+
+                case 'payment_intent.processing':
+                    $paymentIntent = $event->data->object; 
+                    $this->handleProcessingPayment($paymentIntent);
+                    break;
                 default:
                     http_response_code(200);
                     exit();
             }
 
-            http_response_code(200); // Acknowledge receipt of the event
+            http_response_code(200);
         } catch (\UnexpectedValueException $e) {
-            // Invalid payload
             http_response_code(400);
             exit();
         } catch (\Stripe\Exception\SignatureVerificationException $e) {
-            // Invalid signature
             http_response_code(400);
             exit();
         }
@@ -96,6 +95,11 @@ class PaymentController extends Controller
     }
 
     private function handleFailedPayment($paymentIntent)
+    {
+        // Handle failed payment (e.g., notify the user, log the error)
+    }
+
+    private function handleprocessingPayment($paymentIntent)
     {
         // Handle failed payment (e.g., notify the user, log the error)
     }

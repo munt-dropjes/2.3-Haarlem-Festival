@@ -58,6 +58,16 @@ class StrollRepository extends BaseRepository
         $stmt->execute();
     }
 
+    public function updateAvailableTickets($eventID, $availableTickets)
+    {
+        $sql = "UPDATE Events SET AvailableTickets = :AvailableTickets WHERE EventID = :EventID AND Category = :category";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':EventID', $eventID);
+        $stmt->bindValue(':category', 'A Stroll through History');
+        $stmt->bindValue(':AvailableTickets', $availableTickets);
+        $stmt->execute();
+    }
+
     public function delete(StrollEvent $event)
     {
         $sql = "DELETE FROM Stroll WHERE EventID = :EventID";

@@ -67,7 +67,7 @@ class Event implements JsonSerializable
 	}
 	public function getPrice(): float
 	{
-		return $this->Price;
+		return round($this->Price, 2);
 	}
 	public function getAvailableTickets(): int
 	{

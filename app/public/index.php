@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED);
 use Bramus\Router\Router;
 
 require_once __DIR__ . '/../Models/User.php';
@@ -61,9 +63,8 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/edit', 'CmsUserController@update');
 
     //payment with stripe / shoppingcart routes
-    $router->get('/checkout', 'PaymentController@index');
-    $router->post('/checkout/create-session', 'PaymentController@createSession');
-    $router->get('/checkout/success', 'PaymentController@success');
+    $router->get('/checkout', 'PaymentController@createSession');
+    $router->get('/checkout/complete', 'PaymentController@success');
     $router->get('/checkout/cancel', 'PaymentController@cancel');
     
 

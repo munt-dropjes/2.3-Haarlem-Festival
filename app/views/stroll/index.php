@@ -31,9 +31,16 @@
         </div>
         <div class="container">
             <div class="row align-items-start languageSelectionBar">
-                <div class="col languageSelectionBarButton zen-dots-regular"><button class="selected" data-language="English">English</button></div>
-                <div class="col languageSelectionBarButton zen-dots-regular"><button data-language="Dutch">Dutch</button></div>
-                <div class="col languageSelectionBarButton zen-dots-regular"><button data-language="Chinese">Chinese</button></div>
+                <?php
+                $selectedLanguage = $_GET['language'] ?? 'English';
+                $languages = ['English', 'Dutch', 'Chinese'];
+                foreach ($languages as $language) {
+                    $isSelected = ($language === $selectedLanguage) ? 'selected' : '';
+                    echo "<div class='col languageSelectionBarButton zen-dots-regular'>
+                            <button class='$isSelected' data-language='$language'>$language</button>
+                          </div>";
+                }
+                ?>
             </div>
         </div>
         
@@ -43,8 +50,8 @@
             foreach ($days as $day) {
                 echo "<div class='row align-items-start'><div class='col'><h2>$day</h2></div></div>";
                 if ($events != null) {
-                    $filteredEvents = array_filter($events, function ($event) use ($day) {
-                        return date('l', strtotime($event->getDate())) == $day;
+                    $filteredEvents = array_filter($events, function ($event) use ($day, $selectedLanguage) {
+                        return date('l', strtotime($event->getDate())) == $day && $event->getLanguage() === $selectedLanguage;
                     });
                     
                     // Maintain the sorting by time
@@ -55,8 +62,10 @@
                     if (count($filteredEvents) > 0) {
                         // Create a flex container for horizontal display
                         echo "<div class='d-flex flex-row flex-nowrap overflow-auto'>";
+                        $cardCount = 0;
                         foreach ($filteredEvents as $event) {
                             ?>
+                            
                             <div class="card event-card me-3" data-language="<?php echo $event->getLanguage(); ?>">
                                 <img src="images/stroll/tourcovers/<?php echo $event->getLanguage(); ?>.png" alt="Image of <?php echo $event->getName(); ?>">
                                 <div class="card-body">
@@ -70,13 +79,17 @@
                                             <option value="" selected disabled>No tickets available</option>
                                         <?php }else {?>
                                             <option value="" selected disabled>Select option</option>
-                                            <option value="regular">Regular Price: €<?php echo $event->getPrice(); ?></option>
-                                            <option value="family">Family Price: €<?php echo $event->getFamilyTicketPrice(); ?></option>
+                                            <option value="regular">Regular Price: €<?php echo number_format($event->getPrice(), 2, '.', ''); ?></option>
+                                            <option value="family">Family Price: €<?php echo number_format($event->getFamilyTicketPrice(), 2, '.', ''); ?></option>
                                         <?php } ?>
                                     </select>
                                 </div>
                             </div>
-                            <?php
+                            <?php 
+                            $cardCount++;
+                            if ($cardCount % 3 == 0) {
+                                echo "</div><div class='d-flex flex-row flex-nowrap overflow-auto'>";
+                            }
                         }
                         echo "</div>";
                     }
