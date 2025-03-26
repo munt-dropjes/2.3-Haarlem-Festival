@@ -63,6 +63,7 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/events/create', 'CmsEventController@create');
     $router->post('/cms/events/delete', 'CmsEventController@delete');
     $router->post('/cms/events/edit', 'CmsEventController@update');
+    $router->get('/cms/orders', 'CmsOrderController@index');
     
 // Run the router
 $router->run();
