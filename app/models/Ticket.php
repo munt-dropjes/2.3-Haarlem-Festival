@@ -1,5 +1,7 @@
 <?php
 
+namespace models;
+
 class Ticket {
     private $ticketID;
     private $eventID;

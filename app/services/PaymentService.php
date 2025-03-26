@@ -13,7 +13,7 @@ class PaymentService
         Stripe::setApiKey(StripeConfig::STRIPE_SECRET_KEY);
     }
 
-    public function createCheckoutSession($amount, $currency, $successUrl, $cancelUrl)
+    public function createCheckoutSession($amount, $currency, $successUrl, $cancelUrl, $orderId)
     {
         return Session::create([
             'payment_method_types' => ['card', 'ideal'], //the payment options
@@ -30,6 +30,9 @@ class PaymentService
             'mode' => 'payment',
             'success_url' => $successUrl,
             'cancel_url' => $cancelUrl,
+            'metadata' => [
+                'order_id' => $orderId,
+            ],
         ]);
     }
 }

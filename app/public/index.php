@@ -66,5 +66,11 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/checkout/success', 'PaymentController@success');
     $router->get('/checkout/cancel', 'PaymentController@cancel');
     
+
+    //test remove before merging
+    $router->get('/test', 'TestController@index');
+    $router->get('/download-ticket', 'TestController@downloadTicket');
+    $router->get('/download-invoice', 'TestController@downloadInvoice');
+
 // Run the router
 $router->run();

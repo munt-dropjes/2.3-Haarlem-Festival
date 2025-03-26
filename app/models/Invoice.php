@@ -1,4 +1,7 @@
 <?php
+
+namespace models;
+
 class Invoice {
     private $invoiceNumber;
     private $invoiceDate;
