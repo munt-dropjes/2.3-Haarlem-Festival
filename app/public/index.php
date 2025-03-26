@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED);
 use Bramus\Router\Router;
 
 require_once __DIR__ . '/../Models/User.php';
@@ -59,11 +61,26 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
     $router->post('/cms/users/edit', 'CmsUserController@update');
+
+
+    //payment with stripe / shoppingcart routes
+    $router->get('/checkout', 'PaymentController@createSession');
+    $router->get('/checkout/complete', 'PaymentController@success');
+    $router->get('/checkout/cancel', 'PaymentController@cancel');
+    $router->post('/checkout/webhook', 'PaymentController@webhook');
+
     $router->get('/cms/events', 'CmsEventController@index');
     $router->post('/cms/events/create', 'CmsEventController@create');
     $router->post('/cms/events/delete', 'CmsEventController@delete');
     $router->post('/cms/events/edit', 'CmsEventController@update');
     $router->get('/cms/orders', 'CmsOrderController@index');
+
     
+
+    //test remove before merging is to test the pdf generation and sending it through email
+    $router->get('/test', 'TestController@index');
+    $router->get('/download-ticket', 'TestController@downloadTicket');
+    $router->get('/download-invoice', 'TestController@downloadInvoice');
+
 // Run the router
 $router->run();

@@ -40,7 +40,7 @@ class StrollEvent {
     }
 
     public function getFamilyTicketPrice() {
-        return $this->familyTicketPrice;
+        return round($this->familyTicketPrice, 2);
     }
 
     public function setFamilyTicketPrice($familyTicketPrice) {
