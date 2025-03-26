@@ -18,10 +18,10 @@ $router->before('GET|POST', '/cms/.*', function() {
         return;
     }
     
-    // if (!isset($_SESSION['user'])) {
-    //     header('Location: /login');
-    //     exit();
-    // }
+    if (!isset($_SESSION['user'])) {
+        header('Location: /login');
+        exit();
+    }
 });
 
 // for more info visit: https://github.com/bramus/router
@@ -55,6 +55,7 @@ $router->before('GET|POST', '/cms/.*', function() {
 
     //cms
     $router->get('/cms', 'CmsController@index');
+    $router->post('/cms', 'CmsController@login');
     $router->get('/cms/users', 'CmsUserController@index');
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
