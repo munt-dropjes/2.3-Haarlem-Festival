@@ -13,13 +13,14 @@ $router = new Router();
 $router->setNamespace('\Controllers');
 
 // for cms routes, we will check for authentication
-$router->before('GET|POST', '/cms/.*', function() {
-    if (str_contains($_SERVER['REQUEST_URI'], '/cms/login') || str_contains($_SERVER['REQUEST_URI'], '/cms/logout')) {
-        return;
-    }
-    
+$router->before('GET|POST', '/cms/.*', function() { 
     if (!isset($_SESSION['user'])) {
-        header('Location: /login');
+        header('Location: /cms');
+        exit();
+    }
+
+    if ($_SESSION['user']->getRole() != 'Administrator') {
+        header('Location: /home');
         exit();
     }
 });
