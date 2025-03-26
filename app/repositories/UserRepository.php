@@ -5,7 +5,6 @@ namespace Repositories;
 use Exception;
 use PDO;
 use Models\User;
-use Services\UserService;
 
 class UserRepository extends BaseRepository{
     // ~~Create~~
@@ -31,8 +30,6 @@ class UserRepository extends BaseRepository{
 
     // ~~Read~~
     public function getAllUsers($limit, $offset, $search) : array {
-        $userService = new UserService();
-
         try{
             $sql = "SELECT * 
                     FROM Users 
@@ -121,7 +118,7 @@ class UserRepository extends BaseRepository{
         try{
             $sql = "UPDATE Users 
                     SET Role = ?, Name = ?, Email = ?, Password = ?, Phone = ?, Country = ?, ResetToken = ?, ResetTokenExpiration = ?
-                    WHERE Email = ?";
+                    WHERE UserID = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
                 $user->getRole(),
@@ -132,7 +129,7 @@ class UserRepository extends BaseRepository{
                 $user->getCountry(),
                 $user->getResetToken(),
                 $user->getResetTokenExpiration(),
-                $user->getEmail()
+                $user->getID()
             ]);
             return $this->getUser($user);
         }

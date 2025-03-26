@@ -11,6 +11,7 @@
 
 	<!-- JS -->
 	<script src="/js/global.js" defer></script>
+	<script src="/js/cms.js" defer></script>
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
