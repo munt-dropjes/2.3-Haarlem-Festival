@@ -29,6 +29,7 @@ class StrollController extends Controller {
         $eventName = $detail->getStopName();
 		$encodedEventName = str_replace(' ', '', $eventName);
 		$serverPath = $_SERVER['DOCUMENT_ROOT'] . "/images/StrollDetails/$encodedEventName/Carousel";
-        $this->view('stroll/detail', ['detail' => $detail, 'serverPath' => $serverPath, 'eventName' => $eventName]);
+        $images = glob($serverPath . "/*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}", GLOB_BRACE);
+        $this->view('stroll/detail', ['detail' => $detail, 'images' => $images, 'eventName' => $eventName]);
     }
 }
