@@ -1,3 +1,4 @@
+//doesn't work yet
 async function initialize($clientSecret) {
     const clientSecret = "<?php echo $clientSecret; ?>";
 
