@@ -66,9 +66,10 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/checkout', 'PaymentController@createSession');
     $router->get('/checkout/complete', 'PaymentController@success');
     $router->get('/checkout/cancel', 'PaymentController@cancel');
+    $router->post('/checkout/webhook', 'PaymentController@webhook');
     
 
-    //test remove before merging
+    //test remove before merging is to test the pdf generation and sending it through email
     $router->get('/test', 'TestController@index');
     $router->get('/download-ticket', 'TestController@downloadTicket');
     $router->get('/download-invoice', 'TestController@downloadInvoice');

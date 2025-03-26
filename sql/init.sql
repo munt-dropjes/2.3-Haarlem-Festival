@@ -103,7 +103,8 @@ CREATE TABLE `Tickets` (
 	`UserID` INT(11) NOT NULL,
 	`QRCode` VARCHAR(255) NOT NULL,
 	`Status` enum('Valid', 'Scanned', 'Cancelled') NOT NULL,
-	`PurchasedAt` datetime NOT NULL
+	`PurchasedAt` datetime NOT NULL,
+	`PaymentStatus'` enum('Completed', 'Failed', 'Pending') NOT NULL
 );
 
 CREATE TABLE `Users` (

@@ -3,16 +3,24 @@
 namespace Controllers;
 
 use Services\PaymentService;
+use Services\TicketService;
+use Enums\paymentEnum;
 
 class PaymentController extends Controller
 {
     private $paymentService;
+    private $ticketService;
 
     public function __construct()
     {
         $this->paymentService = new PaymentService();
+        $this->ticketService = new TicketService();
+
     }
 
+
+    //make this a private function later when the front end is ready
+    //pass the amount and order id from the front end
     public function createSession()
     {
         $amount = 1000; 
@@ -55,7 +63,7 @@ class PaymentController extends Controller
             switch ($event->type) {
                 case 'checkout.session.completed':
                     $session = $event->data->object; 
-                    $this->handleSuccessfulPayment($session);
+                    $this->handleSuccessfulCheckout($session);
                     break;
 
                 case 'payment_intent.payment_failed':
@@ -87,20 +95,31 @@ class PaymentController extends Controller
         }
     }
 
-    private function handleSuccessfulPayment($session)
+    private function handleSuccessfulPayment($paymentIntent)
     {
-        // Update your database to mark the payment as successful
-        $orderId = $session->metadata->order_id; // Example: Retrieve custom metadata
-        // Update the order status in your database
+        $orderId = $paymentIntent->metadata->order_id;
+        $this->ticketService->updatePaymentStatus($orderId, paymentEnum::COMPLETED);
+        file_put_contents('webhook.log', "Payment successful for order ID: $orderId" . PHP_EOL, FILE_APPEND);
     }
 
     private function handleFailedPayment($paymentIntent)
     {
-        // Handle failed payment (e.g., notify the user, log the error)
+        $orderId = $paymentIntent->metadata->order_id;
+        $this->ticketService->updatePaymentStatus($orderId, paymentEnum::FAILED);
+        file_put_contents('webhook.log', "Payment failed for order ID: $orderId" . PHP_EOL, FILE_APPEND);
     }
 
-    private function handleprocessingPayment($paymentIntent)
+    private function handleProcessingPayment($paymentIntent)
     {
-        // Handle failed payment (e.g., notify the user, log the error)
+        $orderId = $paymentIntent->metadata->order_id;
+        $this->ticketService->updatePaymentStatus($orderId, paymentEnum::PENDING);
+        file_put_contents('webhook.log', "Payment processing for order ID: $orderId" . PHP_EOL, FILE_APPEND);
+    }
+
+    private function handleSuccessfulCheckout($session)
+    {
+        $orderId = $session->metadata->order_id;
+        $this->ticketService->updatePaymentStatus($orderId, paymentEnum::PENDING);
+        file_put_contents('webhook.log', "Checkout session completed for order ID: $orderId" . PHP_EOL, FILE_APPEND);
     }
 }

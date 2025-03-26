@@ -289,14 +289,6 @@
         </form>
     </div>
 
-    <style>
-        .line {
-            border-bottom: 1px solid #ccc;
-
-            border-radius: 20px;
-        }
-    </style>
-
     <script>
         const stripe = Stripe('pk_test_51R67PHCQMRACvY5RjFwUVmY6iv5rQPQN01H2mLgD2wJr1hKe4jcgPUX7hWEmPPK2nnHuvNHqfG3Eo1gQVeiA6z0y001sUcmIZR');
 
