@@ -43,7 +43,7 @@ class TestController extends Controller
         $this->downloadPDF($pdf2, 'Invoice.pdf');
     }
     private function sendEmail($attachment) {
-        $this->mailerService->sendMail('toast3347@gmail.com', 'test', 'test', 'test', $attachment);
+        $this->mailerService->sendMail('insert email here to test', 'test', 'test', 'test', $attachment);
     }
 
     private function createTicket() {

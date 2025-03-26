@@ -57,7 +57,7 @@
                         echo "<div class='d-flex flex-row flex-nowrap overflow-auto'>";
                         foreach ($filteredEvents as $event) {
                             ?>
-                            <div class="card event-card me-3" style="min-width: 18rem; max-width: 18rem;" data-language="<?php echo $event->getLanguage(); ?>">
+                            <div class="card event-card me-3" data-language="<?php echo $event->getLanguage(); ?>">
                                 <img src="images/stroll/tourcovers/<?php echo $event->getLanguage(); ?>.png" alt="Image of <?php echo $event->getName(); ?>">
                                 <div class="card-body">
                                     <p class="card-text">Time: <?php echo $event->getTime(); ?></p>

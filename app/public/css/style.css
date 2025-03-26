@@ -612,7 +612,10 @@ footer .footer-icon {
 	margin-top: 10px;
 }
 
-
+.stroll-swiper {
+	margin:auto;
+	max-width:77%;
+}
 
 
 /* ********************* */

@@ -72,6 +72,33 @@ function setupLanguageSelection() {
 
     document.querySelector('.languageSelectionBarButton .selected').click();
 }
+
+//for stroll swiper
+
+var swiper = new Swiper(".stroll-swiper", {
+	slidesPerView: 2,
+	spaceBetween: 10,
+	grabCursor: true,
+	setWrapperSize: true,
+	pagination: {
+		el: ".swiper-pagination",
+		clickable: true,
+	},
+	breakpoints: {
+		640: {
+			slidesPerView: 3,
+			spaceBetween: 10,
+		},
+		768: {
+			slidesPerView: 4,
+			spaceBetween: 20,
+		},
+		1024: {
+			slidesPerView: 5,
+			spaceBetween: 20,
+		},
+	},
+});
 /////////////////////////////
 
 
