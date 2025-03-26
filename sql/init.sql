@@ -134,7 +134,7 @@ INSERT INTO
 VALUES
 	(
 		1,
-		'Customer',
+		'Administrator',
 		'Daniel Zwart',
 		'dtzwart@gmail.com',
 		'$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW',

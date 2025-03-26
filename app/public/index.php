@@ -50,8 +50,8 @@ $router->before('GET|POST', '/cms/.*', function() {
     //events
     $router->get('/stroll', 'StrollController@index');
     $router->get('/stroll/detail', 'StrollController@detail');
-	  $router->get('/dance', 'DanceController@index');
-	  $router->get('/dance/{artist}', 'DanceController@artist');
+	$router->get('/dance', 'DanceController@index');
+	$router->get('/dance/{artist}', 'DanceController@artist');
 
     //cms
     $router->get('/cms', 'CmsController@index');
@@ -59,6 +59,10 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
     $router->post('/cms/users/edit', 'CmsUserController@update');
+    $router->get('/cms/events', 'CmsEventController@index');
+    $router->post('/cms/events/create', 'CmsEventController@create');
+    $router->post('/cms/events/delete', 'CmsEventController@delete');
+    $router->post('/cms/events/edit', 'CmsEventController@update');
     
 // Run the router
 $router->run();

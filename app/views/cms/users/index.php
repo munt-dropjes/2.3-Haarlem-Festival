@@ -213,10 +213,10 @@
     </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-            loadEditModalCMS('updateUser');
+            loadEditUserModalCMS('updateUser');
         });
         document.addEventListener('DOMContentLoaded', function() {
-            loadDeleteModalCMS('deleteUser');
+            loadDeleteUserModalCMS('deleteUser');
         });
     </script>
 </main>
