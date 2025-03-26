@@ -59,6 +59,8 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
     $router->post('/cms/users/edit', 'CmsUserController@update');
+    //download excel/csv
+    $router->get('/export/orders', '');
     
 // Run the router
 $router->run();
