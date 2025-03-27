@@ -37,4 +37,14 @@ class ShoppingCartService
 	{
 		$this->shoppingCartRepository->removeItem($userID, $itemID);
 	}
+
+	public function selectItem(int $userID, int $itemID, bool $selected): void
+	{
+		$this->shoppingCartRepository->selectItem($userID, $itemID, $selected);
+	}
+
+	public function selectAll(int $userID, bool $selected): void
+	{
+		$this->shoppingCartRepository->selectAll($userID, $selected);
+	}
 }

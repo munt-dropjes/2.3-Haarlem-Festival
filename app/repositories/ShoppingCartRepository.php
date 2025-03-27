@@ -16,7 +16,7 @@ class ShoppingCartRepository extends BaseRepository
 		try {
 			$sql = "SELECT
 				SC.`CartID`, SC.`UserID`,
-				SCI.`ItemID`, SCI.`CartID`, SCI.`EventID`, SCI.`Quantity`, SCI.`AddedAt`,
+				SCI.`ItemID`, SCI.`CartID`, SCI.`EventID`, SCI.`Quantity`, SCI.`Selected`, SCI.`AddedAt`,
 				E.`Name`, E.`Date`, E.`Time`, E.`Duration`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
 			FROM
 				ShoppingCart AS SC
@@ -46,6 +46,7 @@ class ShoppingCartRepository extends BaseRepository
 				$shoppingCartItem->setCartID($row['CartID']);
 				$shoppingCartItem->setEventID($row['EventID']);
 				$shoppingCartItem->setQuantity($row['Quantity']);
+				$shoppingCartItem->setSelected($row['Selected']);
 				$shoppingCartItem->setAddedAt($row['AddedAt']);
 
 				$event = new Event();
@@ -115,6 +116,52 @@ class ShoppingCartRepository extends BaseRepository
 			}
 		} catch (PDOException $e) {
 			throw new Exception("Error code: " . $e->getCode() . " - Something went wrong trying to remove the item.");
+		}
+	}
+
+	public function selectItem(int $userID, int $itemID, bool $selected): void
+	{
+		try {
+			// Check if the item belongs to the given user
+			$sql = "UPDATE ShoppingCartItems 
+				SET Selected = :selected 
+				WHERE ItemID = :itemID 
+				AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)";
+
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([
+				':selected' => (int) $selected,
+				':itemID' => $itemID,
+				':userID' => $userID
+			]);
+
+			if ($stmt->rowCount() === 0) {
+				throw new Exception("No items were updated.");
+			}
+		} catch (PDOException $e) {
+			throw new Exception("Error code: " . $e->getCode() . " - Something went wrong trying to select the item.");
+		}
+	}
+
+	public function selectAll(int $userID, bool $selected): void
+	{
+		try {
+			// Check if the item belongs to the given user
+			$sql = "UPDATE ShoppingCartItems 
+				SET Selected = :selected 
+				WHERE CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)";
+
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([
+				':selected' => (int) $selected,
+				':userID' => $userID
+			]);
+
+			if ($stmt->rowCount() === 0) {
+				throw new Exception("No items were updated.");
+			}
+		} catch (PDOException $e) {
+			throw new Exception("Error code: " . $e->getCode() . " - Something went wrong trying to select the item.");
 		}
 	}
 }

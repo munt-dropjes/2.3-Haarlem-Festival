@@ -2,9 +2,9 @@
 	<h1 class="w-100 text-center">Personal program</h1>
 
 	<div class="m-0 mt-5 row">
-		<button class="CTA CTA-kakigreen col-5">Select all items</button>
+		<button class="select-all CTA CTA-kakigreen col-5">Select all items</button>
 		<span class="col-2"></span>
-		<button class="CTA CTA-kakigreen col-5">Pay selected items</button>
+		<button class="pay-for-selected CTA CTA-kakigreen col-5">Pay selected items</button>
 	</div>
 
 	<section class="shopping-cart-items mt-4 container">
@@ -12,16 +12,18 @@
 		foreach ($ShoppingCartItems as $item):
 			/** @var \Models\ShoppingCartItem $item */
 			?>
-			<div class="ticket container-fluid row align-items-center gap-4 rounded-3 p-3 bg-white m-0 mb-4"
+			<div class="ticket row align-items-center gap-3 rounded-3 p-3 bg-white m-0 mb-5 position-relative"
 				data-item-id="<?= $item->getItemID() ?>" data-cart-id="<?= $item->getCartID() ?>"
 				data-event-id="<?= $item->getEventID() ?>" data-quantity="<?= $item->getQuantity() ?>"
 				data-price="<?= $item->getEvent()->getPrice() ?>">
-				<div class="col-4 p-0">
+
+				<div class="col-12 col-md-4 p-0">
 					<img src="/images/<?= $item->getEvent()->getImageName() ?>" class="img-fluid ticket-image rounded-3"
 						alt="<?= $item->getEvent()->getName() ?>">
 				</div>
-				<div class="col-8 rounded-3 row ticket-info p-4">
-					<div class="col-7">
+
+				<div class="col rounded-3 row ticket-info p-4 mx-0 position-static">
+					<div class="col-12 col-md-7">
 						<h3 class="fw-bold"><?= $item->getEvent()->getName() ?></h3>
 						<p>&#128205; <?= $item->getEvent()->getLocation() ?></p>
 						<p>&#128197;
@@ -36,7 +38,7 @@
 						</p>
 					</div>
 
-					<div class="col-5 d-flex flex-row justify-content-center align-items-center">
+					<div class="col d-flex flex-row justify-content-center align-items-center">
 						<!-- <p class="price">&euro;
 							<?= number_format($item->getEvent()->getPrice(), 2) ?>
 						</p> -->
@@ -53,6 +55,16 @@
 							</div>
 						</div>
 					</div>
+
+					<div class="add-to-selected-container p-0 top-100 translate-middle-y">
+						<?php if ($item->getSelected()): ?>
+							<button class="add-to-selected btn btn-danger w-100" data-selected="true">
+								Remove from shopping cart</button>
+						<?php else: ?>
+							<button class="add-to-selected btn btn-success w-100" data-selected="false">
+								Add to shopping cart</button>
+						<?php endif; ?>
+					</div>
 				</div>
 			</div>
 			<?php
@@ -61,8 +73,8 @@
 	</section>
 
 	<div class="m-0 mt-5 row">
-		<button class="CTA CTA-kakigreen col-5">Select all items</button>
+		<button class="select-all CTA CTA-kakigreen col-5">Select all items</button>
 		<span class="col-2"></span>
-		<button class="CTA CTA-kakigreen col-5">Pay selected items</button>
+		<button class="pay-for-selected CTA CTA-kakigreen col-5">Pay selected items</button>
 	</div>
 </main>

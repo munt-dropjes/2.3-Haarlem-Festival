@@ -66,4 +66,36 @@ class ShoppingCartController extends Controller
 			exit();
 		}
 	}
+
+	public function selectItem(int $itemID, mixed $selected)
+	{
+		try {
+			// Normalize the boolean value
+			$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
+
+			$this->shoppingCart->selectItem($this->user->getID(), $itemID, $selected);
+
+			echo json_encode(['success' => true]);
+			exit();
+		} catch (Exception $e) {
+			echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+			exit();
+		}
+	}
+
+	public function selectAll(mixed $selected = true)
+	{
+		try {
+			// Normalize the boolean value
+			$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
+
+			$this->shoppingCart->selectAll($this->user->getID(), $selected);
+
+			echo json_encode(['success' => true]);
+			exit();
+		} catch (Exception $e) {
+			echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+			exit();
+		}
+	}
 }

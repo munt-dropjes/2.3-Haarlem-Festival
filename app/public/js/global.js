@@ -74,33 +74,74 @@ function setupLanguageSelection() {
 }
 /////////////////////////////
 
-
-var swiper = new Swiper(".dance-swiper", {
-	slidesPerView: 2,
-	spaceBetween: 10,
-	grabCursor: true,
-	setWrapperSize: true,
-	pagination: {
-		el: ".swiper-pagination",
-		clickable: true,
-	},
-	breakpoints: {
-		640: {
-			slidesPerView: 3,
-			spaceBetween: 10,
+try {
+	var swiper = new Swiper(".dance-swiper", {
+		slidesPerView: 2,
+		spaceBetween: 10,
+		grabCursor: true,
+		setWrapperSize: true,
+		pagination: {
+			el: ".swiper-pagination",
+			clickable: true,
 		},
-		768: {
-			slidesPerView: 4,
-			spaceBetween: 20,
+		breakpoints: {
+			640: {
+				slidesPerView: 3,
+				spaceBetween: 10,
+			},
+			768: {
+				slidesPerView: 4,
+				spaceBetween: 20,
+			},
+			1024: {
+				slidesPerView: 5,
+				spaceBetween: 20,
+			},
 		},
-		1024: {
-			slidesPerView: 5,
-			spaceBetween: 20,
-		},
-	},
-});
+	});
+} catch (error) {
+	console.log("Failed to load swiperJS: " + error);
+}
 
 document.addEventListener("DOMContentLoaded", function () {
+	document.querySelectorAll(".select-all").forEach(function (control) {
+		control.addEventListener("click", function () {
+			fetch(`/shopping-cart/select-all`, {
+				method: "GET"
+			})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						document.querySelectorAll(".add-to-selected").forEach(function (control) {
+							control.setAttribute("data-selected", true);
+							selectButtonChange(control, true)
+						});
+					} else {
+						alert("Failed to update cart.");
+					}
+				})
+				.catch(error => console.error("Error:", error));
+		});
+	});
+
+	document.querySelectorAll(".pay-for-selected").forEach(function (control) {
+		control.addEventListener("click", function () {
+			fetch(`/shopping-cart/pay-for-selected`, {
+				method: "GET"
+			})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						ticketQuantity = newQuantity;
+						quantitySpan.textContent = newQuantity;
+					} else {
+						alert("Failed to update cart.");
+					}
+				})
+				.catch(error => console.error("Error:", error));
+		});
+	});
+
 	document.querySelectorAll(".quantity-control").forEach(function (control) {
 		// Get the main element of the ticket
 		let ticket = control.closest(".ticket");
@@ -165,4 +206,44 @@ document.addEventListener("DOMContentLoaded", function () {
 			}
 		});
 	});
+
+	document.querySelectorAll(".add-to-selected").forEach(function (control) {
+		let ticket = control.closest(".ticket");
+
+		let itemId = ticket.getAttribute("data-item-id");
+
+		function changeSelected(selected) {
+			fetch(`/shopping-cart/select-item/${itemId}/${!selected}`, {
+				method: "PATCH"
+			})
+				.then(response => response.json())
+				.then(data => {
+					if (data.success) {
+						control.setAttribute("data-selected", !selected);
+
+						selectButtonChange(control, !selected)
+					} else {
+						alert("Failed to update cart.");
+					}
+				})
+				.catch(error => console.error("Error:", error));
+		}
+
+		control.addEventListener("click", function () {
+			let dataSelected = control.getAttribute("data-selected") === "true";
+			changeSelected(dataSelected);
+		})
+	});
+
+	function selectButtonChange(element, selected) {
+		if (selected) {
+			element.textContent = "Remove from shopping cart"
+			element.classList.remove("btn-success");
+			element.classList.add("btn-danger");
+		} else {
+			element.textContent = "Add to shopping cart"
+			element.classList.remove("btn-danger");
+			element.classList.add("btn-success");
+		}
+	}
 });

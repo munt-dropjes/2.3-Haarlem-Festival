@@ -66,6 +66,8 @@ $router->get('/shopping-cart', 'ShoppingCartController@index');
 // shopping cart actions
 $router->get('/shopping-cart/update-quantity/{itemID}/{quantity}', 'ShoppingCartController@updateQuantity');
 $router->get('/shopping-cart/remove-item/{itemID}', 'ShoppingCartController@removeItem');
+$router->patch('/shopping-cart/select-item/{itemID}/{selected}', 'ShoppingCartController@selectItem');
+$router->get('/shopping-cart/select-all', 'ShoppingCartController@selectAll');
 
 // Run the router
 $router->run();

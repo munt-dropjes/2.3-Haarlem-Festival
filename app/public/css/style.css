@@ -449,6 +449,14 @@ footer .footer-icon {
 	background-color: #FCFC7A;
 }
 
+@media (min-width:768px) {
+	#shopping-cart .add-to-selected-container {
+		position: absolute;
+		width: 15rem;
+		right: -3rem;
+	}
+}
+
 /* ***************************** */
 /* 		Shopping Cart End		 */
 /* ***************************** */

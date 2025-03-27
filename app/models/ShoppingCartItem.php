@@ -9,6 +9,7 @@ class ShoppingCartItem implements JsonSerializable
 	private int $CartID;
 	private int $EventID;
 	private int $Quantity;
+	private bool $Selected;
 	private string $AddedAt;
 	private Event $Event;
 
@@ -19,6 +20,7 @@ class ShoppingCartItem implements JsonSerializable
 			'CartID' => $this->CartID,
 			'EventID' => $this->EventID,
 			'Quantity' => $this->Quantity,
+			'Selected' => $this->Selected,
 			'AddedAt' => $this->AddedAt,
 			'Event' => $this->Event,
 		];
@@ -40,6 +42,10 @@ class ShoppingCartItem implements JsonSerializable
 	public function getQuantity(): int
 	{
 		return $this->Quantity;
+	}
+	public function getSelected(): bool
+	{
+		return $this->Selected;
 	}
 	public function getAddedAt(): string
 	{
@@ -67,6 +73,10 @@ class ShoppingCartItem implements JsonSerializable
 	{
 		$this->Quantity = $Quantity;
 	}
+	public function setSelected(bool $Selected): void
+	{
+		$this->Selected = $Selected;
+	}
 	public function setAddedAt(string $AddedAt): void
 	{
 		$this->AddedAt = $AddedAt;
@@ -77,4 +87,8 @@ class ShoppingCartItem implements JsonSerializable
 	}
 
 	// Additional utilitys
+	public function getSelectedString(): string
+	{
+		return $this->Selected ? 'true' : 'false';
+	}
 }
