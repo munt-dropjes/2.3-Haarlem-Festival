@@ -52,18 +52,19 @@ $router->before('GET|POST', '/cms/.*', function() {
 	
     //events
     $router->get('/stroll', 'StrollController@index');
-
     $router->get('/stroll/detail', 'StrollDetailController@index');
-	  $router->get('/dance', 'DanceController@index');
-      $router->get('/jazz', 'JazzController@index');
-      $router->get('/jazz/artist/{name}', 'JazzDetailController@index');
-
-
+	$router->get('/dance', 'DanceController@index');
+    $router->get('/jazz', 'JazzController@index');
+    $router->get('/jazz/artist/{name}', 'JazzDetailController@index');
     $router->get('/stroll/detail', 'StrollController@detail');
 	$router->get('/dance', 'DanceController@index');
 	$router->get('/dance/{artist}', 'DanceController@artist');
-
-
+    $router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
+    $router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
+    $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
+    $router->get('/yummie', 'YummieController@index');
+    $router->get('/yummie/{id}', 'YummieController@getRestaurantById');
+    
     //cms
     $router->get('/cms', 'CmsController@index');
     $router->post('/cms', 'CmsController@login');

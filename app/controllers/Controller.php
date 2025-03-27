@@ -4,8 +4,8 @@ namespace Controllers;
 
 class Controller
 {
-    public function view($viewPath, $data = []) : void
-    {        
+    public function view($viewPath, $data = []): void
+    {
         //extract variables to be used in the view
         extract($data);
 
@@ -26,7 +26,7 @@ class Controller
         require_once __DIR__ . '/../views/components/footer.php';
     }
 
-    public function fourOFour() : void
+    public function fourOFour(): void
     {
         $this->view('404/index');
     }

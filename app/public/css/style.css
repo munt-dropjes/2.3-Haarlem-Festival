@@ -325,6 +325,172 @@ h3 {
 	right: 0;
 }
 
+/* ============================= */
+/* YUMMIE  				         */
+/* ============================= */
+
+.yummieOverview-dropdown {
+	background-color: #FCFC7A !important;
+
+}
+
+.dropdown-menu {
+	background-color: #FCFC7A !important;
+	color: black !important;
+	font-size: 1.5rem;
+	font-weight: 900;
+	text-align: center;
+}
+
+.yummieOverview-dropdown:hover {
+	background-color: #DBDB05 !important;
+}
+
+.dropdown-item:hover {
+	background-color: #DBDB05 !important;
+	/* Dezelfde hover-kleur als de knop */
+}
+
+.yummieOverview-container {
+	padding: 2rem 0;
+	display: flex;
+	justify-content: center;
+}
+
+.yummieOverview-grid {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+}
+
+.yummieOverview-card {
+
+	background: white;
+	border-radius: 10px;
+	overflow: hidden;
+	transition: transform 0.3s ease, box-shadow 0.3s ease;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	border: 1px solid #ddd;
+	z-index: 1;
+}
+
+.yummieOverview-card-body {
+	padding: 1rem;
+}
+
+.yummieBtnPrimaryYellow {
+	background-color: #FCFC7A !important;
+	color: black !important;
+	font-size: 1.5rem;
+	font-weight: 900;
+	text-align: center;
+	border: 2px solid black;
+	box-shadow: 5px 5px 0 0 #4B0082;
+	transition: all 0.3s ease-in-out;
+}
+
+.yummieBtnPrimaryYellow:hover {
+	background-color: #4B0082 !important;
+	color: white !important;
+	box-shadow: 5px 5px 0 0 #FCFC7A;
+}
+
+.yummieBtnPrimaryGray {
+	background-color: #8799A5 !important;
+	color: white !important;
+	font-size: 1.5rem;
+	font-weight: 900;
+	text-align: center;
+	border: 2px solid black;
+	box-shadow: 5px 5px 0 0 #F28DE5;
+	transition: all 0.3s ease-in-out;
+}
+
+.yummieBtnPrimaryGray:hover {
+	background-color: #F28DE5 !important;
+	color: white !important;
+	box-shadow: 5px 5px 0 0 #8799A5;
+}
+
+.yummieOverview-card img {
+	width: 100%;
+	height: 250px;
+	object-fit: cover;
+	padding: 0;
+	margin: 0;
+}
+
+.yummieDetail-backbutton {
+	padding-top: 20px;
+	padding-bottom: 20px;
+}
+
+.yummieDetail-btn-back {
+	background-color: #4B0082 !important;
+	color: white !important;
+	font-size: 1.5rem;
+	font-weight: 500;
+	text-align: center;
+	border: 2px solid black;
+	box-shadow: 5px 5px 0 0 #FCFC7A;
+	transition: all 0.3s ease-in-out;
+	margin-left: 20px;
+	padding-left: 50px;
+	padding-right: 50px;
+
+}
+
+.yummieDetail-btn-back:hover {
+	background-color: #FCFC7A !important;
+	color: white !important;
+	box-shadow: 5px 5px 0 0 #4B0082;
+}
+
+.yummieDetail-tab-button {
+	background-color: #FEFEC8 !important;
+	height: 100px;
+	width: 250px;
+}
+
+.yummieDetail-tab-button:active {
+	background-color: #FAFA33 !important;
+}
+
+.yummieDetail-tabcontent-box {
+	background-color: #E8EBEE !important;
+	padding: 50px !important;
+	margin-top: 20px;
+}
+
+.yummieDetail-reservation-button {
+	padding: 50px;
+}
+
+/* Standaard knoppenstijl */
+.btn-day, .btn-time {
+    background: #F700FF !important;
+    color: white !important;
+    border-radius: 10px;
+    padding: 10px 20px;
+    transition: all 0.3s ease;
+}
+
+/* Wanneer een knop geselecteerd is */
+.form-btn-selected {
+    background-color: #4B0082 !important;
+    color: white !important;
+    border: 2px solid #FCFC7A !important;
+    box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.3);
+}
+.carousel-inner img {
+    max-height: 500px !important; /* Pas dit aan naar wens */
+	width: auto !important;
+    object-fit: cover; /* Zorgt ervoor dat de afbeelding mooi blijft */
+    width: 100%; /* Zorgt ervoor dat de afbeelding altijd past */
+}
+
 .languageSelectionBar{
 	background-color: #4B0082;
 	color:#FCFC7A;
