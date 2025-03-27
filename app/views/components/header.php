@@ -25,8 +25,8 @@
 
 	<div class="sidebar" id="sidebar">
 		<a href="/">HOME</a>
-		<a href="#">JAZZ</a>
 		<a href="/yummie">YUMMIE</a>
+		<a href="/jazz">JAZZ</a>
 		<a href="/dance">DANCE</a>
 		<a href="/stroll">STROLL THROUGH HISTORY</a>
 	</div>

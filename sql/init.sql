@@ -25,8 +25,14 @@ CREATE TABLE `Events` (
 	`Name` VARCHAR(255) NOT NULL,
 	`Description` text NOT NULL,
 	`Date` DATE NOT NULL,
+
+	`StartTime` TIME  NULL,
+	`EndTime` TIME  NULL,
+	`Time` TIME  NULL,
+
 	`Time` TIME DEFAULT NULL,
 	`Duration` INT(11) DEFAULT NULL,
+
 	`Location` VARCHAR(255) NOT NULL,
 	`Price` FLOAT(10, 2) NOT NULL,
 	`AvailableTickets` INT(11) NOT NULL,
