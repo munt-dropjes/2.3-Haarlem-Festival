@@ -58,6 +58,16 @@ class StrollRepository extends BaseRepository
         $stmt->execute();
     }
 
+    public function updateAvailableTickets($eventID, $availableTickets)
+    {
+        $sql = "UPDATE Events SET AvailableTickets = :AvailableTickets WHERE EventID = :EventID AND Category = :category";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':EventID', $eventID);
+        $stmt->bindValue(':category', 'A Stroll through History');
+        $stmt->bindValue(':AvailableTickets', $availableTickets);
+        $stmt->execute();
+    }
+
     public function delete(StrollEvent $event)
     {
         $sql = "DELETE FROM Stroll WHERE EventID = :EventID";
@@ -84,6 +94,7 @@ class StrollRepository extends BaseRepository
                 $strollDetail->setDescription($row['Description']);
                 $strollDetail->setAddress($row['Adress']);
                 $strollDetail->setBreakLocation($row['BreakLocation']);
+                $strollDetail->setMapName($row['mapName']);
                 $strollDetails[] = $strollDetail;
             }
 
@@ -108,6 +119,7 @@ class StrollRepository extends BaseRepository
             $strollDetail->setDescription($result['Description']);
             $strollDetail->setAddress($result['Adress']);
             $strollDetail->setBreakLocation($result['BreakLocation']);
+            $strollDetail->setMapName($result['mapName']);
             return $strollDetail;
         }
 

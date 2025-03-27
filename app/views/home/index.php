@@ -10,7 +10,7 @@
 			Foodies will delight in Yummy, the festival's culinary hub, offering a diverse array of delicious flavors.
 			Families can explore the enchanting Magic@Teylers, a special program for kids hosted at the historic Teylers
 			Museum. With its diverse lineup, the Haarlem Festival promises an unforgettable experience for all ages, set
-			against the charming backdrop of Haarlem's historic streets.</p>
+			against the charming backdrop of Haarlem's historic streets.
 	</div>
 	<div class="container mt-4 d-flex justify-content-between align-items-center">
 		<div class="col-md-6"style="padding: 20px;">

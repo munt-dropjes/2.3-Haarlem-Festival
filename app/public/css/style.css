@@ -2,6 +2,7 @@
 @import url('https://fonts.googleapis.com/css2?family=Quicksand&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Zen+Dots&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Monoton&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Holtwood+One+SC&display=swap');
 
 * {
 	box-sizing: border-box;
@@ -41,8 +42,12 @@ main {
 	margin-top: var(--header-height);
 }
 
-body {
-	background: linear-gradient(to bottom, #F28DE5, #B2F5EA);
+.pink-to-blue {
+	background: linear-gradient(#F28DE5, #B2F5EA);
+}
+
+.pink-to-blue-rotated {
+	background: linear-gradient(90deg, #F28DE5, #B2F5EA);
 }
 
 p {
@@ -53,6 +58,12 @@ h1 {
 }
 h2 {
 	font-family: 'Zen Dots', sans-serif;
+}
+
+.zen-dots-regular {
+	font-family: "Zen Dots", sans-serif;
+	font-weight: 400;
+	font-style: normal;
 }
 
 .navbar {
@@ -148,6 +159,7 @@ footer .footer-icon {
 
 	box-shadow: 5px 5px 0 0 #FCFC7A;
 }
+
 
 .artist-container {
 	display: flex;  /* Zorgt ervoor dat de artiesten naast elkaar staan */
@@ -250,6 +262,7 @@ h3 {
 	margin: 0 auto;
 }
 
+
 .required {
 	color: red !important;
 	display: inline;
@@ -340,14 +353,18 @@ h3 {
 	font-style: "Zen Dots", sans-serif;
 }
 
+.languageSelectionBarButton{
+	font-style: "Zen Dots", sans-serif;
+}
+
 .languageSelectionBar button:hover {
 	background-color: #FCFC7A;
 	color: #4B0082;
 }
 
 .languageSelectionBar button.selected {
-    background-color: #FCFC7A;
-    color: #4B0082;
+	background-color: #FCFC7A;
+	color: #4B0082;
 }
 
 /* ********************* */
@@ -380,14 +397,13 @@ h3 {
 }
 
 #dance .image-container {
-	display: block;
 	width: 100%;
 	height: 150px;
 }
 
 #dance .image-container img {
 	width: 100%;
-	height: 100%;
+	height: 150px;
 	object-fit: cover;
 }
 
@@ -401,17 +417,15 @@ h3 {
 	left: 0;
 	right: 0;
 	bottom: 0;
-
-	display: none;
+	display: flex;
 	justify-content: center;
 	align-items: center;
-
-	border-radius: 1rem;
+	flex-direction: column;
 }
 
 #dance .swiper-slide:hover i,
 #dance .swiper-slide-extended:hover i {
-	display: flex;
+	display: flex !important;
 }
 
 #dance .swiper-slide-extended button {
@@ -424,12 +438,59 @@ h3 {
 }
 
 #dance .swiper-pagination {
-	position: unset;
+	/* position: unset; */
+}
+
+#dance .event-button-hover button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: none;
+}
+
+#dance .event-button-hover:hover button {
+	display: block;
 }
 
 /* ********************* */
 /* 		Dance End		 */
 /* ********************* */
+
+
+/* ***************************** */
+/* 		Dance Details Start		 */
+/* ***************************** */
+
+#dance-artist .top-image {
+	position: relative;
+}
+
+#dance-artist .top-image .buy-tickets {
+	position: absolute;
+	bottom: 2rem;
+	left: 0;
+	right: 0;
+	margin: 0 auto;
+	max-width: 50%;
+}
+
+#dance-artist .schedule .events-container {
+	height: 5rem;
+}
+
+#dance-artist .schedule .events-container .event-box {
+	background-color: #D9D9D9;
+}
+
+#dance-artist .schedule .schedule-items {
+	min-width: 50rem;
+}
+
+/* ***************************** */
+/* 		Dance Details End		 */
+/* ***************************** */
 
 
 /* ********************* */
@@ -440,20 +501,21 @@ h3 {
 	height: auto;
 }
 
-
 .Stroll_Detail_Map{
-	width: 50%;
+	width:100%;
 	height: auto;
+	border-radius: 20px;
 }
 
 .carousel {
-    width: 50%;
-    max-width: 800px;
-    height: 100%;
-    margin: 0 auto; 
-    display: flex;
-    justify-content: center;
-    align-items: center;
+	margin-top: 20px;
+	width: 50%;
+	max-width: 800px;
+	height: 100%;
+	margin: 0 auto;
+	display: flex;
+	justify-content: center;
+	align-items: center;
 	margin-bottom: 3rem;
 }
 
@@ -466,18 +528,18 @@ h3 {
 }
 
 .row {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: center !important;
-    max-width: 100%;
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center !important;
+	max-width: 100%;
 }
 
 .col {
-    flex: 1;
-    max-width: 80%;
-    padding: 3rem;
+	flex: 1;
+	max-width: 80%;
+	padding: 3rem;
 	justify-content: center !important;
-    box-sizing: border-box;
+	box-sizing: border-box;
 }
 
 #strollDetailMap{
@@ -485,9 +547,37 @@ h3 {
 	height: 100%;
 }
 
+#strollDetailsRow{
+	display: flex;
+	align-items: flex-start;
+	margin:0 auto;
+	width: 100%;
+}
+
+#strollDetailsCol{
+	margin-top: 0 auto;
+}
+
+#strollDetailsCol{
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	padding-top:0;
+}
+
+#strollDetaildescription {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+
+#strollDetailsCol h1 {
+	margin-bottom: 1rem;
+}
+
 #strollDetaildescription{
+
 	width: fit-content;
-	max-width: 30%;
 	height: 100%;
 	background-color: #4B0082;
 	color: #FFFFFF;
@@ -508,60 +598,89 @@ h3 {
 	height:auto;
 }
 
+
+#strollDetaildescription p {
+	margin-top: 0;
+}
+
+.routeImage{
+	width: 100%;
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.routeImage img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 20px;
+}
+
 .RouteDestinations{
 	background-color: #4B0082;
 	max-width: 300px;
 	justify-content: center!important;
-	border-radius: 50px;
+	border-radius: 20px;
 	padding: 1rem;
+	line-height: 1;
+	margin:0 auto;
 }
 
-
 .RouteDestinations a{
-	color: #FCFC7A;
+	color: #FFFFFF;
 	text-align: center;
 	justify-content: center!important;
 	text-decoration: underline;
+	font-family: "Holtwood One SC", serif;
+	font-size: 12pt;
 }
 
 .RouteDestinations a:hover{
-	color: #fcfc7ad3;
+	color: #FCFC7A;
 	text-align: center;
 }
 
 .StrollStopNumber{
-	color: #FCFC7A;
-	font-family: hollywood-one-sc-regular, sans-serif;
+	color: #FFFFFF;
+	font-family: "Holtwood One SC", serif;
 	text-align: center;
-	font-size: 14pt;
+	font-size: 12pt;
+}
+
+#strollTours{
+	margin-left: 5%;
 }
 
 .event-card {
-    border-radius: 50px !important;
-    background-color: #4B0082;
-    color: #FFFFFF;
-    margin-bottom: 20px;
-    display: inline-block;
-    width: 100%;
-    max-width: fit-content;
+	border-radius: 50px !important;
+	background-color: #4B0082;
+	color: #FFFFFF;
+	margin-bottom: 20px;
+	display: inline-block;
+	width: 100%;
+	min-width: 300px !important;
+	max-width: fit-content;
 	background-color: transparent;
 	border: none;
 }
 
 .event-card img {
-    border-top-left-radius: 50px !important;
-    border-top-right-radius: 50px !important;
-    border-bottom-left-radius: 0 !important; 
-    border-bottom-right-radius: 0 !important;
-    width: 100%;
-    height: auto;
-    display: block;
+	border-top-left-radius: 50px !important;
+	border-top-right-radius: 50px !important;
+	border-bottom-left-radius: 0 !important;
+	border-bottom-right-radius: 0 !important;
+	width: 100%;
+	height: auto;
+	display: block;
 	max-width: 100% !important;
 	max-height: 100% !important;
 }
 
 .event-card .card-body {
-    padding: 20px;
+	padding: 20px;
 	background-color: #4B0082;
 	color: #FFFFFF;
 	border-bottom-left-radius: 50px;
@@ -569,24 +688,55 @@ h3 {
 }
 
 .event-card .card-title {
-    font-size: 1.5rem;
-    font-weight: bold;
+	font-size: 1.5rem;
+	font-weight: bold;
 }
 
 .event-card .card-text {
-    font-size: 1rem;
-    margin-bottom: 10px;
+	font-size: 1rem;
+	margin-bottom: 10px;
 }
 
 .event-card .form-select {
-    background-color: #FCFC7A;
+	background-color: #FCFC7A;
 	color: #000;
-    border-radius: 25px;
-    padding: 10px;
-    width: 100%;
-    margin-top: 10px;
+	border-radius: 25px;
+	padding: 10px;
+	width: 100%;
+	margin-top: 10px;
 }
 
+
+.stroll-swiper .swiper {
+	padding-top: 50px;
+	padding-bottom: 50px;
+    max-width: 77%; 
+    margin: auto; 
+}
+
+.stroll-swiper .swiper-slide {
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    transform: scale(0.8); 
+}
+
+.stroll-swiper .swiper-slide.center-slide {
+    transform: scale(1.2); 
+    z-index: 10; 
+}
+
+.stroll-swiper .swiper-slide.prev-slide,
+.stroll-swiper .swiper-slide.next-slide {
+    transform: scale(0.9);
+    z-index: 5; 
+}
+
+.stroll-swiper .swiper-slide img {
+    display: block;
+    max-width: 100%;
+    max-height: 400px; 
+    object-fit: contain;
+	border-radius: 50px;
+}
 
 
 /* ********************* */

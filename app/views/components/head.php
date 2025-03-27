@@ -11,6 +11,7 @@
 
 	<!-- JS -->
 	<script src="/js/global.js" defer></script>
+	<script src="/js/cms.js" defer></script>
 
 	<!-- Favicon -->
 	<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
@@ -44,6 +45,11 @@
 	<script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
 	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 	
+
+	<!-- stripe payment -->
+	<script src="https://js.stripe.com/v3/"></script>
+
+	
 </head>
 
-<body>
+<body class="pink-to-blue">
