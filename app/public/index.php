@@ -1,5 +1,7 @@
 <?php
-
+ini_set('display_errors', 1);
+ini_set('display_startup_errors', 1);
+error_reporting(E_ALL & ~E_DEPRECATED);
 use Bramus\Router\Router;
 
 require_once __DIR__ . '/../Models/User.php';
@@ -36,11 +38,27 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/yummie', 'YummieController@index');
     $router->get('/yummie/{id}', 'YummieController@getRestaurantById');
 
+    //everything account related
     $router->get('/createaccount', 'createaccountController@index');
     $router->post('/createaccount', 'createaccountController@create');
     $router->get('/login', 'LoginController@index');
     $router->post('/login', 'LoginController@login');
     $router->get('/logout', 'LogOutController@index');
+    $router->get('/forgotpassword', 'ForgotPasswordController@index');
+    $router->post('/forgotpassword', 'ForgotPasswordController@index');
+    $router->get('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
+    $router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
+    $router->get('/updateaccount', 'UpdateAccountController@index');
+    $router->post('/updateaccount', 'UpdateAccountController@updateAccount');
+	
+    //events
+    $router->get('/stroll', 'StrollController@index');
+    $router->get('/stroll/detail', 'StrollController@detail');
+	$router->get('/dance', 'DanceController@index');
+	$router->get('/dance/{artist}', 'DanceController@artist');
+    $router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
+    $router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
+    $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
 
     //cms
     $router->get('/cms', 'CmsController@index');
@@ -48,11 +66,24 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
     $router->post('/cms/users/edit', 'CmsUserController@update');
-    
-    $router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
-    $router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
-    $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
 
-    
+
+    //payment with stripe / shoppingcart routes
+    $router->get('/checkout', 'PaymentController@createSession');
+    $router->get('/checkout/complete', 'PaymentController@success');
+    $router->get('/checkout/cancel', 'PaymentController@cancel');
+    $router->post('/checkout/webhook', 'PaymentController@webhook');
+
+    $router->get('/cms/events', 'CmsEventController@index');
+    $router->post('/cms/events/create', 'CmsEventController@create');
+    $router->post('/cms/events/delete', 'CmsEventController@delete');
+    $router->post('/cms/events/edit', 'CmsEventController@update');
+    $router->get('/cms/orders', 'CmsOrderController@index');
+
+    //test remove before merging is to test the pdf generation and sending it through email
+    $router->get('/test', 'TestController@index');
+    $router->get('/download-ticket', 'TestController@downloadTicket');
+    $router->get('/download-invoice', 'TestController@downloadInvoice');
+
 // Run the router
 $router->run();

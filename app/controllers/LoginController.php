@@ -8,6 +8,7 @@ use Services\UserService;
 
 class LoginController extends Controller {
     private $userService;
+    private $failedLoginMessage = "Invalid email or password";
     function __construct()
         {
             $this->userService = new UserService();
@@ -34,7 +35,9 @@ class LoginController extends Controller {
                     try{
                         $authenticatedUser = $this->userService->login($email, $password);
                         if ($authenticatedUser) {
-                            session_start();
+                            if (session_status() == PHP_SESSION_NONE) {
+                                session_start();
+                            }
                             $_SESSION['user'] = $authenticatedUser;
                             header('Location: /home');
                             exit;
@@ -43,10 +46,10 @@ class LoginController extends Controller {
                         }
                     }
                     catch(\Exception $e){
-                        $this->view('login/login', ['error' => $e->getMessage()]);
+                        $this->view('login/login', ['error' => 'Invalid email or password']);
                     }
                 } catch (\Exception $e) {
-                    $this->view('login/login', ['error' => $e->getMessage()]);
+                    $this->view('login/login', ['error' => 'Invalid email or password']);
                 }
             }
         }

@@ -10,6 +10,8 @@ class User {
     private $Phone;
     private $Country;
     private $Verified;
+    private $ResetToken;
+    private $ResetTokenExpiration;
     private $RegisteredAt;
 
     public function getID() {
@@ -84,6 +86,24 @@ class User {
         return $this->Verified;
     }
 
+    public function getResetToken() {
+        return $this->ResetToken;
+    }
+
+    public function setResetToken($resetToken) {
+        $this->ResetToken = $resetToken;
+        return $this->ResetToken;
+    }
+
+    public function getResetTokenExpiration() {
+        return $this->ResetTokenExpiration;
+    }
+
+    public function setResetTokenExpiration($resetTokenExpiration) {
+        $this->ResetTokenExpiration = $resetTokenExpiration;
+        return $this->ResetTokenExpiration;
+    }
+
     public function getRegisteredAt() {
         return $this->RegisteredAt;
     }
@@ -92,6 +112,5 @@ class User {
         $this->RegisteredAt = $registeredAt;
         return $this->RegisteredAt;
     }
-
 }
 ?>

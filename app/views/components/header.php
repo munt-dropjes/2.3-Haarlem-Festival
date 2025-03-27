@@ -26,10 +26,9 @@
 	<div class="sidebar" id="sidebar">
 		<a href="/">HOME</a>
 		<a href="#">JAZZ</a>
-		<a href="#">DANCE</a>
-		<a href="#">YUMMIE</a>
-		<a href="#">STROLL THROUGH HISTORY</a>
-		<a href="#">MAGIC TEYLERS</a>
+		<a href="/yummie">YUMMIE</a>
+		<a href="/dance">DANCE</a>
+		<a href="/stroll">STROLL THROUGH HISTORY</a>
 	</div>
 
 	<div id="accountbar" class="accountbar">

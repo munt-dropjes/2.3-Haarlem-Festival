@@ -31,8 +31,13 @@
             type="submit" 
             class="">Login</button>
         </div>
-        <div class="mb-3">
-        <a href="/createaccount" class="submitbtn btn w-100">Create Account</a>
+        <div class="row">
+          <div class="mb-3 col-6">
+            <a href="/createaccount" class="submitbtn btn w-100">Create Account</a>
+          </div>
+          <div class="mb-3 col-6">
+            <a href="/forgotpassword" class="submitbtn btn w-100">Forgot Password</a>
+          </div>
         </div>
       </form>
     </div>
