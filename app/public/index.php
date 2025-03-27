@@ -15,15 +15,16 @@ $router = new Router();
 $router->setNamespace('\Controllers');
 
 // for cms routes, we will check for authentication
-$router->before('GET|POST', '/cms/.*', function() {
-    if (str_contains($_SERVER['REQUEST_URI'], '/cms/login') || str_contains($_SERVER['REQUEST_URI'], '/cms/logout')) {
-        return;
+$router->before('GET|POST', '/cms/.*', function() { 
+    if (!isset($_SESSION['user'])) {
+        header('Location: /cms');
+        exit();
     }
-    
-    // if (!isset($_SESSION['user'])) {
-    //     header('Location: /login');
-    //     exit();
-    // }
+
+    if ($_SESSION['user']->getRole() != 'Administrator') {
+        header('Location: /home');
+        exit();
+    }
 });
 
 // for more info visit: https://github.com/bramus/router
@@ -65,6 +66,7 @@ $router->before('GET|POST', '/cms/.*', function() {
 
     //cms
     $router->get('/cms', 'CmsController@index');
+    $router->post('/cms', 'CmsController@login');
     $router->get('/cms/users', 'CmsUserController@index');
     $router->post('/cms/users/create', 'CmsUserController@create');
     $router->post('/cms/users/delete', 'CmsUserController@delete');
