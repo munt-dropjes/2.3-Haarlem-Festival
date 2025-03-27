@@ -25,8 +25,12 @@ class ReservationController extends Controller
         $restaurantId = $_POST['restaurant_id'] ?? null;
         $day = $_POST['day'] ?? null;
 
-        $this->view("../locatie/view", ['error' => 'Missing parameters']);
-
+        if (!$restaurantId || !$day) {
+            http_response_code(400);
+            echo json_encode(['error' => 'Missing parameters']);
+            exit;
+        }
+        
         $availableSlots = $this->reservationService->getAvailableTimeSlots((int) $restaurantId, $day);
         echo json_encode(['timeslots' => $availableSlots]);
         exit;

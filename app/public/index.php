@@ -35,8 +35,6 @@ $router->before('GET|POST', '/cms/.*', function() {
     //home
     $router->get('/', 'HomeController@index');
     $router->get('/home', 'HomeController@index');
-    $router->get('/yummie', 'YummieController@index');
-    $router->get('/yummie/{id}', 'YummieController@getRestaurantById');
 
     //everything account related
     $router->get('/createaccount', 'createaccountController@index');
@@ -59,7 +57,9 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
     $router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
     $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
-
+    $router->get('/yummie', 'YummieController@index');
+    $router->get('/yummie/{id}', 'YummieController@getRestaurantById');
+    
     //cms
     $router->get('/cms', 'CmsController@index');
     $router->get('/cms/users', 'CmsUserController@index');

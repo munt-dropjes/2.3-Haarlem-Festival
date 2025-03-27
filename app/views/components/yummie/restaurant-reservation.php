@@ -1,8 +1,3 @@
-<?php
-use Repositories\ReservationRepository;
-$reservationRepo = new ReservationRepository();
-$max_capacity = $restaurant->seats;
-?>
 
 <div class="yummieDetail-tabcontent-box container py-5">
     <div class="row">
