@@ -178,12 +178,6 @@ footer .footer-icon {
 	box-shadow: 5px 5px 0 0 #8799A5;
 }
 
-
-.create-account-container {
-	max-width: 500px;
-	margin: 0 auto;
-}
-
 .required {
 	color: red !important;
 	display: inline;
@@ -572,10 +566,20 @@ footer .footer-icon {
 	margin-top: 0;
 }
 
-.routeImage {
+.routeImage{
 	width: 100%;
-	height: auto;
-	border-radius: 20px;
+    max-width: 100%;
+    height: auto;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.routeImage img {
+    width: 100%;
+    height: auto;
+    max-width: 100%;
+    border-radius: 20px;
 }
 
 .RouteDestinations {
@@ -620,6 +624,7 @@ footer .footer-icon {
 	margin-bottom: 20px;
 	display: inline-block;
 	width: 100%;
+	min-width: 300px !important;
 	max-width: fit-content;
 	background-color: transparent;
 	border: none;
@@ -665,6 +670,36 @@ footer .footer-icon {
 }
 
 
+.stroll-swiper .swiper {
+	padding-top: 50px;
+	padding-bottom: 50px;
+    max-width: 77%; 
+    margin: auto; 
+}
+
+.stroll-swiper .swiper-slide {
+    transition: transform 0.3s ease, opacity 0.3s ease; 
+    transform: scale(0.8); 
+}
+
+.stroll-swiper .swiper-slide.center-slide {
+    transform: scale(1.2); 
+    z-index: 10; 
+}
+
+.stroll-swiper .swiper-slide.prev-slide,
+.stroll-swiper .swiper-slide.next-slide {
+    transform: scale(0.9);
+    z-index: 5; 
+}
+
+.stroll-swiper .swiper-slide img {
+    display: block;
+    max-width: 100%;
+    max-height: 400px; 
+    object-fit: contain;
+	border-radius: 50px;
+}
 
 
 /* ********************* */

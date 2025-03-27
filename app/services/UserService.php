@@ -51,7 +51,7 @@ class UserService {
     }
 
     // ~~Update~~
-    public function updateUser($user, $email) : User {
+    public function updateUser($user) : User {
         return $this->userRepository->updateUser($user);
     }
 

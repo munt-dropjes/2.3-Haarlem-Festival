@@ -84,8 +84,7 @@ CREATE TABLE `Stroll` (
     `EventID` INT(11) NOT NULL,
     `Language` enum('English', 'Dutch', 'Chinese') NOT NULL,
     `Guide` VARCHAR(255) NOT NULL,
-    `FamilyTicketPrice` FLOAT(10, 2) NOT NULL,
-    `AvailableTickets` INT(11) NOT NULL
+    `FamilyTicketPrice` FLOAT(10, 2) NOT NULL
 );
 
 CREATE TABLE `StrollDetail` (
@@ -104,7 +103,8 @@ CREATE TABLE `Tickets` (
 	`UserID` INT(11) NOT NULL,
 	`QRCode` VARCHAR(255) NOT NULL,
 	`Status` enum('Valid', 'Scanned', 'Cancelled') NOT NULL,
-	`PurchasedAt` datetime NOT NULL
+	`PurchasedAt` datetime NOT NULL,
+	`PaymentStatus'` enum('Completed', 'Failed', 'Pending') NOT NULL
 );
 
 CREATE TABLE `Users` (
@@ -134,7 +134,7 @@ INSERT INTO
 VALUES
 	(
 		1,
-		'Customer',
+		'Administrator',
 		'Daniel Zwart',
 		'dtzwart@gmail.com',
 		'$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW',
@@ -185,33 +185,96 @@ VALUES
 
 INSERT INTO `Events` (`EventID`, `Name`, `Description`, `Date`, `Time`, `Duration`, `Location`, `Price`, `AvailableTickets`, `ImageName`, `Category`)
 VALUES
-(1, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '10:00:00', 0, 'Grote Markt, Haarlem', 15.00, 50, 'Stroll_through_history.png', 'A Stroll through History'),
-(2, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '14:00:00', 0, 'Grote Markt, Haarlem', 20.00, 40, 'Stroll_through_history.png', 'A Stroll through History'),
-(3, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '20:00:00', 0, 'Grote Markt, Haarlem', 18.00, 30, 'Stroll_through_history.png', 'A Stroll through History'),
-(4, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '11:00:00', 0, 'Grote Markt, Haarlem', 25.00, 25, 'Stroll_through_history.png', 'A Stroll through History'),
-(5, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '13:00:00', 0, 'Grote Markt, Haarlem', 30.00, 20, 'Stroll_through_history.png', 'A Stroll through History'),
-(6, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '15:00:00', 0, 'Grote Markt, Haarlem', 35.00, 15, 'Stroll_through_history.png', 'A Stroll through History'),
-(7, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-05', '21:00:00', 0, 'Grote Markt, Haarlem', 22.00, 10, 'Stroll_through_history.png', 'A Stroll through History'),
-(8, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-03', '12:00:00', 0, 'Grote Markt, Haarlem', 27.00, 5, 'Stroll_through_history.png', 'A Stroll through History'),
-(9, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-04-06', '14:00:00', 0, 'Grote Markt, Haarlem', 32.00, 0, 'Stroll_through_history.png', 'A Stroll through History'),
+(1, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-24', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(2, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-24', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(3, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-24', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(4, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-24', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(5, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-24', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(6, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-24', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(7, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-25', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(8, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-25', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(9, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-25', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
 (10, 'Caprera Openluchttheater', 'Harwell\r\nMartin Garrix\r\nArmin van Buuren', '2025-03-15', '14:00:00', 540, 'Caprera Openluchttheater', 110.00, 2000, 'Caprera_Openluchttheater.png', 'Dance'),
 (11, 'Jopenkerk', 'Harwell\r\nMartin Garrix\r\nArmin van Buuren', '2025-03-14', '23:00:00', 90, 'Jopenkerk', 60.00, 300, 'Jopenkerk.png', 'Dance'),
 (12, 'Test', 'Test', '2025-03-14', '23:00:00', 90, 'Test', 60.00, 300, 'Jopenkerk.png', NULL),
-(13, 'All Access Pass', 'Grants entry to all events on Friday, Saturday, and Sunday', '2025-07-04', '00:00:00', 0, 'Festival Grounds', 120.00, 300, 'dance-festival.png', 'Dance');
+(13, 'All Access Pass', 'Grants entry to all events on Friday, Saturday, and Sunday', '2025-07-04', '00:00:00', 0, 'Festival Grounds', 120.00, 300, 'dance-festival.png', 'Dance'),
+(14, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-25', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(15, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-25', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(16, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-25', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(17, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-25', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(18, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(19, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(20, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(21, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(22, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(23, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(24, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(25, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(26, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(27, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(28, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(29, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-26', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(30, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(31, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(32, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(33, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(34, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(35, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(36, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(37, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(38, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(39, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(40, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(41, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '16:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(42, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '10:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(43, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History'),
+(44, 'Stroll through history', 'Explore the beautiful city of Haarlem with a guided walk.', '2025-07-27', '13:00:00', 0, 'Grote Markt, Haarlem', 17.50, 12, 'Stroll_through_history.png', 'A Stroll through History');
 
 
 
-INSERT INTO `Stroll` (`EventID`, `Language`, `Guide`, `FamilyTicketPrice`, `AvailableTickets`)
+
+INSERT INTO `Stroll` (`EventID`, `Language`, `Guide`, `FamilyTicketPrice`)
 VALUES
-(1, 'English', 'John Doe', 50.00, 50),
-(2, 'Dutch', 'Jane Smith', 60.00, 40),
-(3, 'English', 'Alice Johnson', 55.00, 30),
-(4, 'Dutch', 'Bob Brown', 65.00, 25),
-(5, 'English', 'Charlie Davis', 70.00, 20),
-(6, 'Chinese', 'Eva White', 75.00, 15),
-(7, 'English', 'Frank Wilson', 80.00, 10),
-(8, 'Chinese', 'Grace Lee', 85.00, 5),
-(9, 'English', 'Henry Clark', 90.00, 0);
+(1, 'English', 'Frederick', 60.00),
+(2, 'English', 'Frederick', 60.00),
+(3, 'English', 'Frederick', 60.00),
+(4, 'Dutch', 'Jan-Willem', 60.00),
+(5, 'Dutch', 'Jan-Willem', 60.00),
+(6, 'Dutch', 'Jan-Willem', 60.00),
+(7, 'English', 'William', 60.00),
+(8, 'English', 'William', 60.00),
+(9, 'English', 'William', 60.00),
+(14, 'Dutch', 'Annet', 60.00),
+(15, 'Dutch', 'Annet', 60.00),
+(16, 'Dutch', 'Annet', 60.00),
+(17, 'Chinese', 'Kim', 60.00),
+(18, 'English', 'Frederick', 60.00),
+(19, 'English', 'William', 60.00),
+(20, 'English', 'Frederick', 60.00),
+(21, 'English', 'William', 60.00),
+(22, 'English', 'William', 60.00),
+(23, 'Dutch', 'Jan-Willem', 60.00),
+(24, 'Dutch', 'Annet', 60.00),
+(25, 'Dutch', 'Jan-Willem', 60.00),
+(26, 'Dutch', 'Annet', 60.00),
+(27, 'Dutch', 'Annet', 60.00),
+(28, 'Chinese', 'Kim', 60.00),
+(29, 'Chinese', 'Kim', 60.00),
+(30, 'English', 'Frederick', 60.00),
+(31, 'English', 'William', 60.00),
+(32, 'English', 'Frederick', 60.00),
+(33, 'English', 'William', 60.00),
+(34, 'English', 'Deirdre', 60.00),
+(35, 'English', 'Frederick', 60.00),
+(36, 'Dutch', 'Jan-Willem', 60.00),
+(37, 'Dutch', 'Annet', 60.00),
+(38, 'Dutch', 'Jan-Willem', 60.00),
+(39, 'Dutch', 'Annet', 60.00),
+(40, 'Dutch', 'Lisa', 60.00),
+(41, 'Dutch', 'Jan-Willem', 60.00),
+(42, 'Chinese', 'Kim', 60.00),
+(43, 'Chinese', 'Kim', 60.00),
+(44, 'Chinese', 'Susan', 60.00);
 
 
 CREATE TABLE `Yummie` (
