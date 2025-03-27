@@ -1,5 +1,19 @@
 <main>
     <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/cms/users">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cms/events">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cms/orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Tickets</a>
+            </li>
+        </ul>
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="col-sm-6">
