@@ -1,3 +1,5 @@
+START TRANSACTION;
+
 CREATE DATABASE IF NOT EXISTS thefestivaldb;
 
 USE thefestivaldb;
@@ -24,15 +26,8 @@ CREATE TABLE `Events` (
 	`EventID` INT(11) NOT NULL,
 	`Name` VARCHAR(255) NOT NULL,
 	`Description` text NOT NULL,
-	`Date` DATE NOT NULL,
-
-	`StartTime` TIME NULL,
-	`EndTime` TIME NULL,
-	`Time` TIME NULL,
-
-	`Time` TIME DEFAULT NULL,
-	`Duration` INT(11) DEFAULT NULL,
-	
+	`StartTime` DATETIME NULL,
+	`EndTime` DATETIME NULL,
 	`Location` VARCHAR(255) NOT NULL,
 	`Price` FLOAT(10, 2) NOT NULL,
 	`AvailableTickets` INT(11) NOT NULL,
@@ -140,44 +135,49 @@ CREATE TABLE `menu_items` (
 	`category` VARCHAR(225) NOT NULL,
 	`name` VARCHAR(255) NOT NULL,
 	`description` text NOT NULL
-)
+);
 
 CREATE TABLE `restaurants` (
-	`id` int(11) NOT NULL,
-	`name` varchar(255) NOT NULL,
-	`rating` int(11) NOT NULL,
-	`seats` int(11) NOT NULL,
+	`id` INT(11) NOT NULL,
+	`name` VARCHAR(255) NOT NULL,
+	`rating` INT(11) NOT NULL,
+	`seats` INT(11) NOT NULL,
 	`cuisine` longtext CHARACTER SET utf8mb4 COLLATE utf8mb4_bin NOT NULL,
-	`open_time` varchar(255) NOT NULL,
-	`close_time` varchar(255) NOT NULL,
-	`cost` float NOT NULL,
-	`image` varchar(255) NOT NULL,
-	`duration` float NOT NULL,
-	`sessions` int(11) NOT NULL,
-	`address` varchar(255) DEFAULT NULL,
-	`city` varchar(255) DEFAULT NULL,
-	`zipcode` varchar(255) DEFAULT NULL,
+	`open_time` VARCHAR(255) NOT NULL,
+	`close_time` VARCHAR(255) NOT NULL,
+	`cost` FLOAT(10,2) NOT NULL,
+	`image` VARCHAR(255) NOT NULL,
+	`duration` FLOAT NOT NULL,
+	`sessions` INT(11) NOT NULL,
+	`address` VARCHAR(255) DEFAULT NULL,
+	`city` VARCHAR(255) DEFAULT NULL,
+	`zipcode` VARCHAR(255) DEFAULT NULL,
 	`map_link` text DEFAULT NULL,
 	`extra_info_menu` text NOT NULL
-)
+);
 
 CREATE TABLE `restaurant_images` (
-	`id` int(11) NOT NULL,
-	`restaurant_id` int(11) NOT NULL,
-	`image_path` varchar(255) DEFAULT NULL
-)
+	`id` INT(11) NOT NULL,
+	`restaurant_id` INT(11) NOT NULL,
+	`image_path` VARCHAR(255) DEFAULT NULL
+);
 
 CREATE TABLE `restaurant_reservations` (
-	`id` int(11) NOT NULL,
-	`restaurant_id` int(11) NOT NULL,
-	`adults` int(11) NOT NULL,
-	`children` int(11) NOT NULL,
-	`day` varchar(255) NOT NULL,
-	`start_time` varchar(255) NOT NULL,
+	`id` INT(11) NOT NULL,
+	`restaurant_id` INT(11) NOT NULL,
+	`adults` INT(11) NOT NULL,
+	`children` INT(11) NOT NULL,
+	`day` VARCHAR(255) NOT NULL,
+	`start_time` VARCHAR(255) NOT NULL,
 	`extra_information` text NOT NULL,
-	`total_price` float NOT NULL,
+	`total_price` FLOAT(10,2) NOT NULL,
 	`created_at` timestamp NOT NULL DEFAULT current_timestamp()
-)
+);
+
+CREATE TABLE `Yummie` (
+	`RestaurantID` INT(11) NOT NULL,
+	`EventID` INT(11) NOT NULL
+);
 
 INSERT INTO
 	`Users` (
@@ -191,16 +191,7 @@ INSERT INTO
 		`RegisteredAt`
 	)
 VALUES
-	(
-		1,
-		'Administrator',
-		'Daniel Zwart',
-		'dtzwart@gmail.com',
-		'$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW',
-		'0612345678',
-		'Netherlands',
-		'2025-03-06 12:04:16'
-	);
+	(1, 'Administrator', 'Daniel Zwart', 'dtzwart@gmail.com', '$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW', '0612345678', 'Netherlands', '2025-03-06 12:04:16');
 
 INSERT INTO
 	`StrollDetail` (
@@ -341,9 +332,8 @@ INSERT INTO
 		`EventID`,
 		`Name`,
 		`Description`,
-		`Date`,
-		`Time`,
-		`Duration`,
+		`StartTime`,
+		`EndTime`,
 		`Location`,
 		`Price`,
 		`AvailableTickets`,
@@ -355,9 +345,8 @@ VALUES
 		1,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-24',
-		'10:00:00',
-		0,
+		'2025-07-24 10:00:00',
+		'2025-07-24 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -368,9 +357,8 @@ VALUES
 		2,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-24',
-		'13:00:00',
-		0,
+		'2025-07-24 13:00:00',
+		'2025-07-24 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -381,9 +369,8 @@ VALUES
 		3,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-24',
-		'16:00:00',
-		0,
+		'2025-07-24 16:00:00',
+		'2025-07-24 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -394,9 +381,8 @@ VALUES
 		4,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-24',
-		'10:00:00',
-		0,
+		'2025-07-24 10:00:00',
+		'2025-07-24 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -407,9 +393,8 @@ VALUES
 		5,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-24',
-		'13:00:00',
-		0,
+		'2025-07-24 13:00:00',
+		'2025-07-24 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -420,9 +405,8 @@ VALUES
 		6,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-24',
-		'16:00:00',
-		0,
+		'2025-07-24 16:00:00',
+		'2025-07-24 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -433,9 +417,8 @@ VALUES
 		7,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25',
-		'10:00:00',
-		0,
+		'2025-07-25 10:00:00',
+		'2025-07-25 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -446,9 +429,8 @@ VALUES
 		8,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25',
-		'13:00:00',
-		0,
+		'2025-07-25 13:00:00',
+		'2025-07-25 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -459,9 +441,8 @@ VALUES
 		9,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25',
-		'16:00:00',
-		0,
+		'2025-07-25 16:00:00',
+		'2025-07-25 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -472,9 +453,8 @@ VALUES
 		10,
 		'Caprera Openluchttheater',
 		'Harwell\r\nMartin Garrix\r\nArmin van Buuren',
-		'2025-03-15',
-		'14:00:00',
-		540,
+		'2025-03-15 14:00:00',
+		'2025-03-15 23:00:00',
 		'Caprera Openluchttheater',
 		110.00,
 		2000,
@@ -485,9 +465,8 @@ VALUES
 		11,
 		'Jopenkerk',
 		'Harwell\r\nMartin Garrix\r\nArmin van Buuren',
-		'2025-03-14',
-		'23:00:00',
-		90,
+		'2025-03-14 23:00:00',
+		'2025-03-15 00:30:00',
 		'Jopenkerk',
 		60.00,
 		300,
@@ -498,9 +477,8 @@ VALUES
 		12,
 		'Test',
 		'Test',
-		'2025-03-14',
-		'23:00:00',
-		90,
+		'2025-03-14 23:00:00',
+		'2025-03-15 00:30:00',
 		'Test',
 		60.00,
 		300,
@@ -511,9 +489,8 @@ VALUES
 		13,
 		'All Access Pass',
 		'Grants entry to all events on Friday, Saturday, and Sunday',
-		'2025-07-04',
-		'00:00:00',
-		0,
+		'2025-07-04 00:00:00',
+		'2025-07-04 00:00:00',
 		'Festival Grounds',
 		120.00,
 		300,
@@ -524,9 +501,8 @@ VALUES
 		14,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25',
-		'10:00:00',
-		0,
+		'2025-07-25 10:00:00',
+		'2025-07-25 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -537,9 +513,8 @@ VALUES
 		15,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25',
-		'13:00:00',
-		0,
+		'2025-07-25 13:00:00',
+		'2025-07-25 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -550,9 +525,8 @@ VALUES
 		16,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25',
-		'16:00:00',
-		0,
+		'2025-07-25 16:00:00',
+		'2025-07-25 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -563,9 +537,8 @@ VALUES
 		17,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25',
-		'13:00:00',
-		0,
+		'2025-07-25 13:00:00',
+		'2025-07-25 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -576,9 +549,8 @@ VALUES
 		18,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'10:00:00',
-		0,
+		'2025-07-26 10:00:00',
+		'2025-07-26 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -589,9 +561,8 @@ VALUES
 		19,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'10:00:00',
-		0,
+		'2025-07-26 10:00:00',
+		'2025-07-26 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -602,9 +573,8 @@ VALUES
 		20,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'13:00:00',
-		0,
+		'2025-07-26 13:00:00',
+		'2025-07-26 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -615,9 +585,8 @@ VALUES
 		21,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'13:00:00',
-		0,
+		'2025-07-26 13:00:00',
+		'2025-07-26 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -628,9 +597,8 @@ VALUES
 		22,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'16:00:00',
-		0,
+		'2025-07-26 16:00:00',
+		'2025-07-26 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -641,9 +609,8 @@ VALUES
 		23,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'10:00:00',
-		0,
+		'2025-07-26 10:00:00',
+		'2025-07-26 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -654,9 +621,8 @@ VALUES
 		24,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'10:00:00',
-		0,
+		'2025-07-26 10:00:00',
+		'2025-07-26 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -667,9 +633,8 @@ VALUES
 		25,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'13:00:00',
-		0,
+		'2025-07-26 13:00:00',
+		'2025-07-26 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -680,9 +645,8 @@ VALUES
 		26,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'13:00:00',
-		0,
+		'2025-07-26 13:00:00',
+		'2025-07-26 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -693,9 +657,8 @@ VALUES
 		27,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'16:00:00',
-		0,
+		'2025-07-26 16:00:00',
+		'2025-07-26 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -706,9 +669,8 @@ VALUES
 		28,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'13:00:00',
-		0,
+		'2025-07-26 13:00:00',
+		'2025-07-26 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -719,9 +681,8 @@ VALUES
 		29,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26',
-		'16:00:00',
-		0,
+		'2025-07-26 16:00:00',
+		'2025-07-26 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -732,9 +693,8 @@ VALUES
 		30,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'10:00:00',
-		0,
+		'2025-07-27 10:00:00',
+		'2025-07-27 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -745,9 +705,8 @@ VALUES
 		31,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'10:00:00',
-		0,
+		'2025-07-27 10:00:00',
+		'2025-07-27 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -758,9 +717,8 @@ VALUES
 		32,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -771,9 +729,8 @@ VALUES
 		33,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -784,9 +741,8 @@ VALUES
 		34,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -797,9 +753,8 @@ VALUES
 		35,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'16:00:00',
-		0,
+		'2025-07-27 16:00:00',
+		'2025-07-27 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -810,9 +765,8 @@ VALUES
 		36,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'10:00:00',
-		0,
+		'2025-07-27 10:00:00',
+		'2025-07-27 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -823,9 +777,8 @@ VALUES
 		37,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'10:00:00',
-		0,
+		'2025-07-27 10:00:00',
+		'2025-07-27 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -836,9 +789,8 @@ VALUES
 		38,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -849,9 +801,8 @@ VALUES
 		39,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -862,9 +813,8 @@ VALUES
 		40,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -875,9 +825,8 @@ VALUES
 		41,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'16:00:00',
-		0,
+		'2025-07-27 16:00:00',
+		'2025-07-27 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -888,9 +837,8 @@ VALUES
 		42,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'10:00:00',
-		0,
+		'2025-07-27 10:00:00',
+		'2025-07-27 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -901,9 +849,8 @@ VALUES
 		43,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -914,9 +861,8 @@ VALUES
 		44,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-27',
-		'13:00:00',
-		0,
+		'2025-07-27 13:00:00',
+		'2025-07-27 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -1087,12 +1033,6 @@ VALUES
 	(3, 1, 0, 0, 'Saturday', '18:30', '', 0, '2025-03-20 11:23:05'),
 	(4, 1, 2, 2, 'Sunday', '21:30', '', 0, '2025-03-23 17:24:40');
 
-CREATE TABLE `Yummie` (
-	`EventID` INT(11) NOT NULL,
-	`StarRating` INT(11) NOT NULL,
-	`Cuisine` VARCHAR(255) NOT NULL
-);
-
 ALTER TABLE
 	`Artists`
 ADD
@@ -1211,16 +1151,34 @@ MODIFY
 	`EventID` INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `menu_items`
-	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+	MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `restaurants`
-	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+	MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `restaurant_images`
-	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+	MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT;
 
 ALTER TABLE `restaurant_reservations`
-	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+	MODIFY `id` INT(11) NOT NULL AUTO_INCREMENT;
+
+ALTER TABLE
+	`Yummie`
+ADD
+	FOREIGN KEY (`RestaurantID`) REFERENCES `restaurants`(`id`) ON
+DELETE
+	RESTRICT ON
+UPDATE
+	RESTRICT;
+
+ALTER TABLE
+	`Yummie`
+ADD
+	FOREIGN KEY (`EventID`) REFERENCES `Events`(`EventID`) ON
+DELETE
+	RESTRICT ON
+UPDATE
+	RESTRICT;
 
 ALTER TABLE
 	`Dance`
@@ -1367,10 +1325,12 @@ UPDATE
 	RESTRICT;
 
 ALTER TABLE `menu_items`
-	ADD FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE;
+	ADD FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 ALTER TABLE `restaurant_images`
-	ADD FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE;
+	ADD FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE CASCADE ON UPDATE RESTRICT;
 
 ALTER TABLE `restaurant_reservations`
 	ADD FOREIGN KEY (`restaurant_id`) REFERENCES `restaurants` (`id`) ON DELETE RESTRICT ON UPDATE RESTRICT;
+
+commit;
