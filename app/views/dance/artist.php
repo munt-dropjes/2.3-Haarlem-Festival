@@ -4,7 +4,7 @@
 
 <main id="dance-artist">
 	<div class="top-image container-fluid p-0 mb-5">
-		<img src="/images/dance/<?= $artist->getBannerImage() ?>" class="img-fluid w-100" alt="foto van artist">
+		<img src="/images/<?= $artist->getBannerImage() ?>" class="img-fluid w-100" alt="foto van artist">
 		<a href="#schedule" class="buy-tickets button CTA">Buy Tickets</a>
 	</div>
 
@@ -13,7 +13,7 @@
 			<h2 class="col-12 text-center mb-2">Career Highlights</h2>
 
 			<div class="col-12 col-sm-4">
-				<img class="w-100" src="/images/dance/hardwell.png" alt="">
+				<img class="w-100" src="/images/hardwell.png" alt="">
 			</div>
 
 			<div class="col-12 col-sm-8 d-flex align-items-center">
