@@ -8,9 +8,8 @@ class Event implements JsonSerializable
 	private int $EventID;
 	private string $Name;
 	private string $Description;
-	private string $Date;
-	private string $Time;
-	private int $Duration;
+	private string $StartTime;
+	private string $EndTime;
 	private string $Location;
 	private float $Price;
 	private int $AvailableTickets;
@@ -24,9 +23,8 @@ class Event implements JsonSerializable
 			'EventID' => $this->EventID,
 			'Name' => $this->Name,
 			'Description' => $this->Description,
-			'Date' => $this->Date,
-			'Time' => $this->Time,
-			'Duration' => $this->Duration,
+			'StartTime' => $this->StartTime,
+			'EndTime' => $this->EndTime,
 			'Location' => $this->Location,
 			'Price' => $this->Price,
 			'AvailableTickets' => $this->AvailableTickets,
@@ -49,17 +47,13 @@ class Event implements JsonSerializable
 	{
 		return $this->Description;
 	}
-	public function getDate(): string
+	public function getStartTime(): string
 	{
-		return $this->Date;
+		return $this->StartTime;
 	}
-	public function getTime(): string
+	public function getEndTime(): string
 	{
-		return $this->Time;
-	}
-	public function getDuration(): int
-	{
-		return $this->Duration;
+		return $this->EndTime;
 	}
 	public function getLocation(): string
 	{
@@ -67,7 +61,7 @@ class Event implements JsonSerializable
 	}
 	public function getPrice(): float
 	{
-		return $this->Price;
+		return round($this->Price, 2);
 	}
 	public function getAvailableTickets(): int
 	{
@@ -99,17 +93,13 @@ class Event implements JsonSerializable
 	{
 		$this->Description = $Description;
 	}
-	public function setDate(string $Date): void
+	public function setStartTime(string $StartTime): void
 	{
-		$this->Date = $Date;
+		$this->StartTime = $StartTime;
 	}
-	public function setTime(string $Time): void
+	public function setEndTime(string $EndTime): void
 	{
-		$this->Time = $Time;
-	}
-	public function setDuration(int $Duration): void
-	{
-		$this->Duration = $Duration;
+		$this->EndTime = $EndTime;
 	}
 	public function setLocation(string $Location): void
 	{
@@ -137,6 +127,21 @@ class Event implements JsonSerializable
 	}
 
 	// Additional utilitys
+	public function getDate(): string
+	{
+		// Get date from start time
+		$date = date('Y-m-d', strtotime($this->StartTime));
+		return $date;
+	}
+	public function getDuration(): int
+	{
+		// calculate duration in minutes
+		$startTime = strtotime($this->StartTime);
+		$endTime = strtotime($this->EndTime);
+		$duration = ($endTime - $startTime) / 60;
+		return $duration;
+	}
+
 	public function addArtist(Artist $artist): void
 	{
 		$this->Artists[] = $artist;

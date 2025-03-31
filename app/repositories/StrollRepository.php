@@ -21,7 +21,7 @@ class StrollRepository extends BaseRepository
 
     public function getAll()
     {
-        $sql = "SELECT s.*, e.Name, e.Description, e.Date, e.Time, e.Location, e.Price, e.AvailableTickets 
+        $sql = "SELECT s.*, e.Name, e.Description, StartTime, EndTime, e.Location, e.Price, e.AvailableTickets 
                 FROM Stroll s 
                 JOIN Events e ON s.EventID = e.EventID";
         $stmt = $this->connection->query($sql);
@@ -55,6 +55,16 @@ class StrollRepository extends BaseRepository
         $stmt->bindValue(':Language', $event->getLanguage());
         $stmt->bindValue(':Guide', $event->getGuide());
         $stmt->bindValue(':FamilyTicketPrice', $event->getFamilyTicketPrice());
+        $stmt->execute();
+    }
+
+    public function updateAvailableTickets($eventID, $availableTickets)
+    {
+        $sql = "UPDATE Events SET AvailableTickets = :AvailableTickets WHERE EventID = :EventID AND Category = :category";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindValue(':EventID', $eventID);
+        $stmt->bindValue(':category', 'A Stroll through History');
+        $stmt->bindValue(':AvailableTickets', $availableTickets);
         $stmt->execute();
     }
 

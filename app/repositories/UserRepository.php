@@ -5,7 +5,6 @@ namespace Repositories;
 use Exception;
 use PDO;
 use Models\User;
-use Services\UserService;
 
 class UserRepository extends BaseRepository{
     // ~~Create~~
@@ -31,8 +30,6 @@ class UserRepository extends BaseRepository{
 
     // ~~Read~~
     public function getAllUsers($limit, $offset, $search) : array {
-        $userService = new UserService();
-
         try{
             $sql = "SELECT * 
                     FROM Users 
