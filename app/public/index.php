@@ -37,52 +37,57 @@ $router->before('GET|POST', '/cms/.*', function () {
 $router->get('/', 'HomeController@index');
 $router->get('/home', 'HomeController@index');
 
-//everything account related
-$router->get('/createaccount', 'createaccountController@index');
-$router->post('/createaccount', 'createaccountController@create');
-$router->get('/login', 'LoginController@index');
-$router->post('/login', 'LoginController@login');
-$router->get('/logout', 'LogOutController@index');
-$router->get('/forgotpassword', 'ForgotPasswordController@index');
-$router->post('/forgotpassword', 'ForgotPasswordController@index');
-$router->get('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
-$router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
-$router->get('/updateaccount', 'UpdateAccountController@index');
-$router->post('/updateaccount', 'UpdateAccountController@updateAccount');
+    //everything account related
+    $router->get('/createaccount', 'createaccountController@index');
+    $router->post('/createaccount', 'createaccountController@create');
+    $router->get('/login', 'LoginController@index');
+    $router->post('/login', 'LoginController@login');
+    $router->get('/logout', 'LogOutController@index');
+    $router->get('/forgotpassword', 'ForgotPasswordController@index');
+    $router->post('/forgotpassword', 'ForgotPasswordController@index');
+    $router->get('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
+    $router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
+    $router->get('/updateaccount', 'UpdateAccountController@index');
+    $router->post('/updateaccount', 'UpdateAccountController@updateAccount');
+    $router->get('/profile', 'ProfileController@index');
+	
+    //events
+    $router->get('/stroll', 'StrollController@index');
+    $router->get('/stroll/detail', 'StrollController@detail');
+	$router->get('/dance', 'DanceController@index');
+    $router->get('/jazz', 'JazzController@index');
+    $router->get('/jazz/artist/{name}', 'JazzDetailController@index');
+    $router->get('/stroll/detail', 'StrollController@detail');
+	$router->get('/dance', 'DanceController@index');
+	$router->get('/dance/{artist}', 'DanceController@artist');
+    $router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
+    $router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
+    $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
+    $router->get('/yummie', 'YummieController@index');
+    $router->get('/yummie/{id}', 'YummieController@getRestaurantById');
+    
+    //cms
+    $router->get('/cms', 'CmsController@index');
+    $router->post('/cms', 'CmsController@login');
+    $router->get('/cms/users', 'CmsUserController@index');
+    $router->post('/cms/users/create', 'CmsUserController@create');
+    $router->post('/cms/users/delete', 'CmsUserController@delete');
+    $router->post('/cms/users/edit', 'CmsUserController@update');
+    $router->get('/cms/events', 'CmsEventController@index');
+    $router->post('/cms/events/create', 'CmsEventController@create');
+    $router->post('/cms/events/delete', 'CmsEventController@delete');
+    $router->post('/cms/events/edit', 'CmsEventController@update');
+    $router->get('/cms/orders', 'CmsOrderController@index');
 
-//events
-$router->get('/stroll', 'StrollController@index');
-$router->get('/stroll/detail', 'StrollDetailController@index');
-$router->get('/dance', 'DanceController@index');
-$router->get('/jazz', 'JazzController@index');
-$router->get('/jazz/artist/{name}', 'JazzDetailController@index');
-$router->get('/stroll/detail', 'StrollController@detail');
-$router->get('/dance', 'DanceController@index');
-$router->get('/dance/{artist}', 'DanceController@artist');
-$router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
-$router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
-$router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
-$router->get('/yummie', 'YummieController@index');
-$router->get('/yummie/{id}', 'YummieController@getRestaurantById');
+    //payment with stripe / shoppingcart routes
+    $router->get('/checkout', 'PaymentController@createSession');
+    $router->get('/checkout/complete', 'PaymentController@success');
+    $router->get('/checkout/cancel', 'PaymentController@cancel');
+    $router->post('/checkout/webhook', 'PaymentController@webhook');
+    
+    //test routes pdf
 
-//cms
-$router->get('/cms', 'CmsController@index');
-$router->post('/cms', 'CmsController@login');
-$router->get('/cms/users', 'CmsUserController@index');
-$router->post('/cms/users/create', 'CmsUserController@create');
-$router->post('/cms/users/delete', 'CmsUserController@delete');
-$router->post('/cms/users/edit', 'CmsUserController@update');
-$router->get('/cms/events', 'CmsEventController@index');
-$router->post('/cms/events/create', 'CmsEventController@create');
-$router->post('/cms/events/delete', 'CmsEventController@delete');
-$router->post('/cms/events/edit', 'CmsEventController@update');
-$router->get('/cms/orders', 'CmsOrderController@index');
-
-//payment with stripe / shoppingcart routes
-$router->get('/checkout', 'PaymentController@createSession');
-$router->get('/checkout/complete', 'PaymentController@success');
-$router->get('/checkout/cancel', 'PaymentController@cancel');
-$router->post('/checkout/webhook', 'PaymentController@webhook');
+    $router->get('/pdf', 'TestController@index');
 
 // shopping cart
 $router->get('/shopping-cart', 'ShoppingCartController@index');

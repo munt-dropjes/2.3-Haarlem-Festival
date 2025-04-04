@@ -966,6 +966,29 @@ h3 {
 	border-radius: 50px;
 }
 
+.StrollDetail-btn-back {
+	background-color: #FCFC7A !important;
+	color: black !important;
+	font-size: 1.5rem;
+	margin-top: 25px;
+	padding:5px;
+	font-family: 'holtwood-one-sc-regular', sans-serif !important;
+	font-weight: 500;
+	text-align: center;
+	border: 2px solid black;
+	box-shadow: 5px 5px 0 0 #4B0082;
+	transition: all 0.3s ease-in-out;
+	margin-left: 20px;
+	padding-left: 50px;
+	padding-right: 50px;
+
+}
+
+.StrollDetail-btn-back:hover {
+	background-color: #4B0082 !important;
+	color: white !important;
+	box-shadow: 5px 5px 0 0 #FCFC7A;
+}
 
 /* ********************* */
 /* 		Stroll End		 */
