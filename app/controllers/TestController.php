@@ -27,7 +27,9 @@ class TestController extends Controller
 
         $pdf1 = $this->pdfService->generateTicketPDF($ticket);
         $pdf2 = $this->pdfService->generateInvoicePDF($invoice);
+        
 
+        //fix this, don't save, just keep in system memory
         $ticketFilePath = sys_get_temp_dir() . '/Ticket.pdf';
         $invoiceFilePath = sys_get_temp_dir() . '/Invoice.pdf';
         file_put_contents($ticketFilePath, $pdf1);
@@ -43,7 +45,7 @@ class TestController extends Controller
         $this->downloadPDF($pdf2, 'Invoice.pdf');
     }
     private function sendEmail($attachment) {
-        $this->mailerService->sendMail('insert email here to test', 'test', 'test', 'test', $attachment);
+        $this->mailerService->sendMail('toast3347@gmail.com', 'test', 'test', 'test', $attachment);
     }
 
     private function createTicket() {

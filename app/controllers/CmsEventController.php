@@ -19,6 +19,7 @@ class CmsEventController extends Controller {
         $search = $_GET['search'] ?? '';
 
         // check if the limit and offset are valid
+        //if not valid still search
         if ((!is_numeric($offset) || !is_numeric($limit)) || ($offset < 0 || $limit < 1)) {
             $currentUri = $_SERVER['REQUEST_URI'];
             $search = explode('search=', $currentUri)[1] ?? "";
@@ -34,6 +35,7 @@ class CmsEventController extends Controller {
         ]);
     }
 
+    //add html special chars
     public function create(){
         $event = new Event();
         $event->setName($_POST['name']);
@@ -50,6 +52,7 @@ class CmsEventController extends Controller {
         $this->index();
     }
 
+    //see above
     public function update(){
         $updateEvent = $this->eventService->getEventById($_POST['id']);
         $updateEvent->setName($_POST['name']);
@@ -64,6 +67,8 @@ class CmsEventController extends Controller {
         $this->index();
     }
 
+
+    //again
     public function delete(){
         $this->eventService->deleteEvent($_POST['id']);
         $this->index();

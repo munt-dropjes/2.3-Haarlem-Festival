@@ -82,7 +82,11 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/checkout', 'PaymentController@createSession');
     $router->get('/checkout/complete', 'PaymentController@success');
     $router->get('/checkout/cancel', 'PaymentController@cancel');
-    $router->post('/checkout/webhook', 'PaymentController@webhook');    
+    $router->post('/checkout/webhook', 'PaymentController@webhook');
+    
+    //test routes pdf
+
+    $router->get('/pdf', 'TestController@index');
 
 // Run the router
 $router->run();
