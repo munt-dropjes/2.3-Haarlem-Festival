@@ -49,10 +49,11 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
     $router->get('/updateaccount', 'UpdateAccountController@index');
     $router->post('/updateaccount', 'UpdateAccountController@updateAccount');
+    $router->get('/profile', 'ProfileController@index');
 	
     //events
     $router->get('/stroll', 'StrollController@index');
-    $router->get('/stroll/detail', 'StrollDetailController@index');
+    $router->get('/stroll/detail', 'StrollController@detail');
 	$router->get('/dance', 'DanceController@index');
     $router->get('/jazz', 'JazzController@index');
     $router->get('/jazz/artist/{name}', 'JazzDetailController@index');
@@ -82,7 +83,11 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/checkout', 'PaymentController@createSession');
     $router->get('/checkout/complete', 'PaymentController@success');
     $router->get('/checkout/cancel', 'PaymentController@cancel');
-    $router->post('/checkout/webhook', 'PaymentController@webhook');    
+    $router->post('/checkout/webhook', 'PaymentController@webhook');
+    
+    //test routes pdf
+
+    $router->get('/pdf', 'TestController@index');
 
 // Run the router
 $router->run();
