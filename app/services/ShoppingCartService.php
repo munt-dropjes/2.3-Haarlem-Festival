@@ -24,6 +24,15 @@ class ShoppingCartService
 		return $shoppingCartItems;
 	}
 
+	public function getMultipleEventsById(array $ids): array
+	{
+		if (empty($ids)) {
+			return [];
+		}
+
+		return $this->shoppingCartRepository->getMultipleEventsById($ids);
+	}
+
 	public function updateQuantity(int $userID, int $itemID, int $quantity): int
 	{
 		if ($quantity < 1) {

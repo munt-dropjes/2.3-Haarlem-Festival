@@ -17,22 +17,41 @@ class ShoppingCartController extends Controller
 			session_start();
 		}
 
-		// Check if user is logged in
-		if (!isset($_SESSION['user'])) {
-			header("Location: /login"); // Redirect to login page
-			exit();
-		}
-
-		$this->user = $_SESSION['user'];
-
 		$this->shoppingCart = new ShoppingCartService();
+
+		// example session data for testing
+		// $_SESSION['shoppingCart'] = [
+		// 	[
+		// 		'eventID' => 10,
+		// 		'quantity' => 2,
+		// 		'selected' => true
+		// 	],
+		// 	[
+		// 		'eventID' => 11,
+		// 		'quantity' => 1,
+		// 		'selected' => false
+		// 	],
+		// 	[
+		// 		'eventID' => 3,
+		// 		'quantity' => 4,
+		// 		'selected' => true
+		// 	]
+		// ];
 	}
 
 	public function index()
 	{
-		$data = [
-			'ShoppingCartItems' => $this->shoppingCart->getUserShoppingCartItems($this->user->getID()),
-		];
+		$data = [];
+
+		if (!isset($_SESSION['user'])) {
+			// Use session shopping cart for guests
+			$_SESSION['shoppingCart'] = $_SESSION['shoppingCart'] ?? [];
+			$data['ShoppingCartItems'] = $this->shoppingCart->getMultipleEventsById($_SESSION['shoppingCart']);
+		} else {
+			// Use database shopping cart for logged-in users
+			$this->user = $_SESSION['user'];
+			$data['ShoppingCartItems'] = $this->shoppingCart->getUserShoppingCartItems($this->user->getID());
+		}
 
 		$this->view('shopping-cart/index', $data);
 	}
@@ -44,10 +63,34 @@ class ShoppingCartController extends Controller
 				throw new Exception("Quantity cannot be less than 1");
 			}
 
-			$newQuantity = $this->shoppingCart->updateQuantity($this->user->getID(), $itemID, $quantity);
+			if (!isset($_SESSION['user'])) {
+				// If the user is not logged in, update the session shopping cart
+				if (!isset($_SESSION['shoppingCart'])) {
+					throw new Exception("Shopping cart is empty");
+				}
 
-			echo json_encode(['success' => true, 'newQuantity' => $newQuantity]);
-			exit();
+				$found = false;
+				foreach ($_SESSION['shoppingCart'] as &$item) {
+					if ($item['eventID'] === $itemID) {
+						$item['quantity'] = $quantity;
+						$found = true;
+						break;
+					}
+				}
+
+				if (!$found) {
+					throw new Exception("Item not found in the shopping cart");
+				}
+
+				echo json_encode(['success' => true, 'newQuantity' => $quantity]);
+				exit();
+			} else {
+				// If the user is logged in, update the database shopping cart
+				$newQuantity = $this->shoppingCart->updateQuantity($this->user->getID(), $itemID, $quantity);
+
+				echo json_encode(['success' => true, 'newQuantity' => $newQuantity]);
+				exit();
+			}
 		} catch (Exception $e) {
 			echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 			exit();
@@ -57,10 +100,34 @@ class ShoppingCartController extends Controller
 	public function removeItem(int $itemID)
 	{
 		try {
-			$this->shoppingCart->removeItem($this->user->getID(), $itemID);
+			if (!isset($_SESSION['user'])) {
+				// If the user is not logged in, remove the item from the session shopping cart
+				if (!isset($_SESSION['shoppingCart'])) {
+					throw new Exception("Shopping cart is empty");
+				}
 
-			echo json_encode(['success' => true]);
-			exit();
+				$found = false;
+				foreach ($_SESSION['shoppingCart'] as $key => $item) {
+					if ($item['eventID'] === $itemID) {
+						unset($_SESSION['shoppingCart'][$key]);
+						$found = true;
+						break;
+					}
+				}
+
+				if (!$found) {
+					throw new Exception("Item not found in the shopping cart");
+				}
+
+				echo json_encode(['success' => true]);
+				exit();
+			} else {
+				// If the user is logged in, remove the item from the database shopping cart
+				$this->shoppingCart->removeItem($this->user->getID(), $itemID);
+
+				echo json_encode(['success' => true]);
+				exit();
+			}
 		} catch (Exception $e) {
 			echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 			exit();
@@ -73,10 +140,34 @@ class ShoppingCartController extends Controller
 			// Normalize the boolean value
 			$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
 
-			$this->shoppingCart->selectItem($this->user->getID(), $itemID, $selected);
+			if (!isset($_SESSION['user'])) {
+				// If the user is not logged in, update the session shopping cart
+				if (!isset($_SESSION['shoppingCart'])) {
+					throw new Exception("Shopping cart is empty");
+				}
 
-			echo json_encode(['success' => true]);
-			exit();
+				$found = false;
+				foreach ($_SESSION['shoppingCart'] as &$item) {
+					if ($item['eventID'] === $itemID) {
+						$item['selected'] = $selected;
+						$found = true;
+						break;
+					}
+				}
+
+				if (!$found) {
+					throw new Exception("Item not found in the shopping cart");
+				}
+
+				echo json_encode(['success' => true, 'selected' => $selected]);
+				exit();
+			} else {
+				// If the user is logged in, update the database shopping cart
+				$this->shoppingCart->selectItem($this->user->getID(), $itemID, $selected);
+
+				echo json_encode(['success' => true, 'selected' => $selected]);
+				exit();
+			}
 		} catch (Exception $e) {
 			echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 			exit();
@@ -89,10 +180,25 @@ class ShoppingCartController extends Controller
 			// Normalize the boolean value
 			$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
 
-			$this->shoppingCart->selectAll($this->user->getID(), $selected);
+			if (!isset($_SESSION['user'])) {
+				// If the user is not logged in, update the session shopping cart
+				if (!isset($_SESSION['shoppingCart'])) {
+					throw new Exception("Shopping cart is empty");
+				}
 
-			echo json_encode(['success' => true]);
-			exit();
+				foreach ($_SESSION['shoppingCart'] as &$item) {
+					$item['selected'] = $selected;
+				}
+
+				echo json_encode(['success' => true]);
+				exit();
+			} else {
+				// If the user is logged in, update the database shopping cart
+				$this->shoppingCart->selectAll($this->user->getID(), $selected);
+
+				echo json_encode(['success' => true]);
+				exit();
+			}
 		} catch (Exception $e) {
 			echo json_encode(['success' => false, 'message' => $e->getMessage()]);
 			exit();

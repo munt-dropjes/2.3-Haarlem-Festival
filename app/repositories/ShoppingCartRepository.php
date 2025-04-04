@@ -16,8 +16,8 @@ class ShoppingCartRepository extends BaseRepository
 		try {
 			$sql = "SELECT
 				SC.`CartID`, SC.`UserID`,
-				SCI.`ItemID`, SCI.`CartID`, SCI.`EventID`, SCI.`Quantity`, SCI.`Selected`, SCI.`AddedAt`,
-				E.`Name`, E.`Date`, E.`Time`, E.`Duration`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
+				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`AddedAt`,
+				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
 			FROM
 				ShoppingCart AS SC
 			INNER JOIN
@@ -52,9 +52,8 @@ class ShoppingCartRepository extends BaseRepository
 				$event = new Event();
 				$event->setEventID($row['EventID']);
 				$event->setName($row['Name']);
-				$event->setDate($row['Date']);
-				$event->setTime($row['Time']);
-				$event->setDuration($row['Duration']);
+				$event->setStartTime($row['StartTime']);
+				$event->setEndTime($row['EndTime']);
 				$event->setLocation($row['Location']);
 				$event->setPrice($row['Price']);
 				$event->setImageName($row['ImageName']);
@@ -68,6 +67,61 @@ class ShoppingCartRepository extends BaseRepository
 			return $items;
 		} catch (Exception $e) {
 			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all shopping cart items");
+		}
+	}
+
+	public function getMultipleEventsById(array $ids): array
+	{
+		try {
+			$inQuery = implode(',', array_fill(0, count($ids), '?'));
+
+			$sql = "SELECT
+				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
+			FROM
+				Events AS E
+			WHERE
+				EventID IN ($inQuery)
+			";
+
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute(array_column($ids, 'eventID'));
+			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			$cartMap = [];
+			foreach ($_SESSION['shoppingCart'] as $item) {
+				$cartMap[$item['eventID']] = $item;
+			}
+
+			$items = [];
+			foreach ($results as $row) {
+				$shoppingCartItem = new ShoppingCartItem();
+				$shoppingCartItem->setItemID($row['EventID']);
+				$shoppingCartItem->setCartID(0);
+				$shoppingCartItem->setEventID($row['EventID']);
+				if (isset($cartMap[$row['EventID']])) {
+					$cartItem = $cartMap[$row['EventID']];
+					$shoppingCartItem->setQuantity($cartItem['quantity']);
+					$shoppingCartItem->setSelected($cartItem['selected']);
+				}
+
+				$event = new Event();
+				$event->setEventID($row['EventID']);
+				$event->setName($row['Name']);
+				$event->setStartTime($row['StartTime']);
+				$event->setEndTime($row['EndTime']);
+				$event->setLocation($row['Location']);
+				$event->setPrice($row['Price']);
+				$event->setImageName($row['ImageName']);
+				$event->setCategory($row['Category']);
+
+				$shoppingCartItem->setEvent($event);
+
+				$items[] = $shoppingCartItem;
+			}
+
+			return $items;
+		} catch (Exception $e) {
+			throw new Exception("Error code: " . $e->getMessage() . " -  Something went wrong trying to get all shopping cart items");
 		}
 	}
 

@@ -29,11 +29,11 @@
 						<p>&#128197;
 							<!-- Friday 27 July 18:00-22:00 -->
 							<?= date('l j F', strtotime($item->getEvent()->getDate())) ?>
-							<?= date('H:i', strtotime($item->getEvent()->getTime())) ?>
+							<?= date('H:i', strtotime($item->getEvent()->getStartTime())) ?>
 							<!-- if duration is more than 0, add "- [time when it ends]" -->
 							<?php if ($item->getEvent()->getDuration() > 0): ?>
 								-
-								<?= date('H:i', strtotime($item->getEvent()->getTime() . ' + ' . $item->getEvent()->getDuration() . ' minutes')) ?>
+								<?= date('H:i', strtotime($item->getEvent()->getEndTime())) ?>
 							<?php endif; ?>
 						</p>
 					</div>
