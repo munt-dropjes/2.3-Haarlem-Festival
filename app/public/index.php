@@ -16,14 +16,15 @@ $router->setNamespace('\Controllers');
 
 // for cms routes, we will check for authentication
 $router->before('GET|POST', '/cms/.*', function () {
-	if (str_contains($_SERVER['REQUEST_URI'], '/cms/login') || str_contains($_SERVER['REQUEST_URI'], '/cms/logout')) {
-		return;
+	if (!isset($_SESSION['user'])) {
+		header('Location: /cms');
+		exit();
 	}
 
-	// if (!isset($_SESSION['user'])) {
-	//     header('Location: /login');
-	//     exit();
-	// }
+	if ($_SESSION['user']->getRole() != 'Administrator') {
+		header('Location: /home');
+		exit();
+	}
 });
 
 // for more info visit: https://github.com/bramus/router
@@ -51,30 +52,37 @@ $router->post('/updateaccount', 'UpdateAccountController@updateAccount');
 
 //events
 $router->get('/stroll', 'StrollController@index');
+$router->get('/stroll/detail', 'StrollDetailController@index');
+$router->get('/dance', 'DanceController@index');
+$router->get('/jazz', 'JazzController@index');
+$router->get('/jazz/artist/{name}', 'JazzDetailController@index');
 $router->get('/stroll/detail', 'StrollController@detail');
 $router->get('/dance', 'DanceController@index');
 $router->get('/dance/{artist}', 'DanceController@artist');
+$router->post('/reservation/process', 'ReservationController@processReservation'); // Verwerkt de reservering
+$router->post('/reservation/add-to-wishlist', 'ReservationController@addToWishlist'); // Opslaan in database
+$router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
+$router->get('/yummie', 'YummieController@index');
+$router->get('/yummie/{id}', 'YummieController@getRestaurantById');
 
 //cms
 $router->get('/cms', 'CmsController@index');
+$router->post('/cms', 'CmsController@login');
 $router->get('/cms/users', 'CmsUserController@index');
 $router->post('/cms/users/create', 'CmsUserController@create');
 $router->post('/cms/users/delete', 'CmsUserController@delete');
 $router->post('/cms/users/edit', 'CmsUserController@update');
-
-
-//payment with stripe / shoppingcart routes
-$router->get('/checkout', 'PaymentController@createSession');
-$router->get('/checkout/complete', 'PaymentController@success');
-$router->get('/checkout/cancel', 'PaymentController@cancel');
-$router->post('/checkout/webhook', 'PaymentController@webhook');
-
 $router->get('/cms/events', 'CmsEventController@index');
 $router->post('/cms/events/create', 'CmsEventController@create');
 $router->post('/cms/events/delete', 'CmsEventController@delete');
 $router->post('/cms/events/edit', 'CmsEventController@update');
 $router->get('/cms/orders', 'CmsOrderController@index');
 
+//payment with stripe / shoppingcart routes
+$router->get('/checkout', 'PaymentController@createSession');
+$router->get('/checkout/complete', 'PaymentController@success');
+$router->get('/checkout/cancel', 'PaymentController@cancel');
+$router->post('/checkout/webhook', 'PaymentController@webhook');
 
 //test remove before merging is to test the pdf generation and sending it through email
 $router->get('/test', 'TestController@index');
@@ -89,7 +97,6 @@ $router->get('/shopping-cart/update-quantity/{itemID}/{quantity}', 'ShoppingCart
 $router->get('/shopping-cart/remove-item/{itemID}', 'ShoppingCartController@removeItem');
 $router->patch('/shopping-cart/select-item/{itemID}/{selected}', 'ShoppingCartController@selectItem');
 $router->get('/shopping-cart/select-all', 'ShoppingCartController@selectAll');
-
 
 // Run the router
 $router->run();

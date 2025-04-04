@@ -1,5 +1,19 @@
 <main>
     <div class="container">
+        <ul class="nav nav-tabs">
+            <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="/cms/users">Users</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cms/events">Events</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cms/orders">Orders</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="#">Tickets</a>
+            </li>
+        </ul>
         <div class="table-wrapper">
             <div class="table-title">
                 <div class="col-sm-6">
@@ -58,7 +72,7 @@
                                         data-duration="<?= htmlspecialchars($event->getDuration()); ?>"
                                         data-location="<?= htmlspecialchars($event->getLocation()); ?>"
                                         data-price="<?= htmlspecialchars($event->getPrice()); ?>"
-                                        data-category="<?= htmlspecialchars($event->getCategory()); ?>">                                       
+                                        data-category="<?= htmlspecialchars($event->getCategory()); ?>">
                                         Edit
                                     </button>
                                     <button
@@ -229,7 +243,7 @@
                 <form method="post" action="/cms/events/delete">
                     <input type="hidden" class="form-control" name="id" id="id" required>
                     <div class="modal-body">
-                        Are you sure you want to delete: 
+                        Are you sure you want to delete:
                         <div class="form-group">
                             <input type="text" class="form-control" id="name" name="name" required>
                         </div>
