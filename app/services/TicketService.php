@@ -16,4 +16,9 @@ class TicketService
     {
         $this->ticketRepository->updatePaymentStatus($orderId, $status);
     }
+
+    public function getTicketsByUserId($userId)
+    {
+        return $this->ticketRepository->getTicketsByUserId($userId);
+    }
 }

@@ -95,7 +95,7 @@ class PaymentController extends Controller
         }
     }
 
-    //fix, maybe add full path
+    //fix, maybe add full path to file_put_contents
     private function handleSuccessfulPayment($paymentIntent)
     {
         $orderId = $paymentIntent->metadata->order_id;

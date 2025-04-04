@@ -51,12 +51,12 @@
                 echo "<div class='row align-items-start'><div class='col'><h2>$day</h2></div></div>";
                 if ($events != null) {
                     $filteredEvents = array_filter($events, function ($event) use ($day, $selectedLanguage) {
-                        return date('l', strtotime($event->getDate())) == $day && $event->getLanguage() === $selectedLanguage;
+                        return date('l', strtotime($event->getStartTime())) == $day && $event->getLanguage() === $selectedLanguage;
                     });
                     
                     // Maintain the sorting by time
                     usort($filteredEvents, function ($a, $b) {
-                        return strtotime($a->getTime()) - strtotime($b->getTime());
+                        return strtotime($a->getStartTime()) - strtotime($b->getStartTime());
                     });
                     
                     if (count($filteredEvents) > 0) {
@@ -69,7 +69,7 @@
                             <div class="card event-card me-3" data-language="<?php echo $event->getLanguage(); ?>">
                                 <img src="images/stroll/tourcovers/<?php echo $event->getLanguage(); ?>.png" alt="Image of <?php echo $event->getName(); ?>">
                                 <div class="card-body">
-                                    <p class="card-text">Time: <?php echo $event->getTime(); ?></p>
+                                    <p class="card-text">Time: <?php echo date('H:i', strtotime($event->getStartTime())); ?></p>
                                     <p class="card-text">Language: <?php echo $event->getLanguage(); ?></p>
                                     <p class="card-text">Start Location: <?php echo $event->getLocation(); ?></p>
                                     <p class="card-text">Guide: <?php echo $event->getGuide(); ?></p>
