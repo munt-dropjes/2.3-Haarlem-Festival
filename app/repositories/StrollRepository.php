@@ -21,7 +21,7 @@ class StrollRepository extends BaseRepository
 
     public function getAll()
     {
-        $sql = "SELECT s.*, e.Name, e.Description, e.Date, e.Time, e.Location, e.Price, e.AvailableTickets 
+        $sql = "SELECT s.*, e.Name, e.Description, StartTime, EndTime, e.Location, e.Price, e.AvailableTickets 
                 FROM Stroll s 
                 JOIN Events e ON s.EventID = e.EventID";
         $stmt = $this->connection->query($sql);

@@ -39,7 +39,7 @@ class DanceRepository extends BaseRepository
 	{
 		try {
 			$sql = "SELECT 
-				Events.`EventID`, Events.`Name` AS `EventName`, `Description`, `Date`, `Time`, `Duration`, `Location`, `Price`, `AvailableTickets`, Events.`ImageName` AS EventImage,
+				Events.`EventID`, Events.`Name` AS `EventName`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `AvailableTickets`, Events.`ImageName` AS EventImage,
 				Artists.`ArtistID`, Artists.`Name` AS ArtistName, Artists.`ImageName` AS ArtistImage
 			FROM Dance LEFT JOIN Events ON Dance.EventID = Events.EventID LEFT JOIN Artists ON Dance.ArtistID = Artists.ArtistID";
 			$stmt = $this->connection->prepare($sql);
@@ -57,9 +57,8 @@ class DanceRepository extends BaseRepository
 					$event->setEventID($eventID);
 					$event->setName($eventData['EventName']);
 					$event->setDescription($eventData['Description']);
-					$event->setDate($eventData['Date']);
-					$event->setTime($eventData['Time']);
-					$event->setDuration($eventData['Duration']);
+					$event->setStartTime($eventData['StartTime']);
+					$event->setEndTime($eventData['EndTime']);
 					$event->setLocation($eventData['Location']);
 					$event->setPrice($eventData['Price']);
 					$event->setAvailableTickets($eventData['AvailableTickets']);
@@ -88,7 +87,7 @@ class DanceRepository extends BaseRepository
 	public function getDanceArtistEventsById(int $id): array
 	{
 		try {
-			$sql = "SELECT Events.`EventID`, `Name`, `Description`, `Date`, `Time`, `Location`, `Price`, `AvailableTickets` FROM Dance INNER JOIN Events ON Dance.EventID = Events.EventID WHERE Dance.ArtistID = :id";
+			$sql = "SELECT Events.`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `AvailableTickets` FROM Dance INNER JOIN Events ON Dance.EventID = Events.EventID WHERE Dance.ArtistID = :id";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute(['id' => $id]);
 			$obj = $stmt->fetchAll(PDO::FETCH_CLASS, Event::class);
