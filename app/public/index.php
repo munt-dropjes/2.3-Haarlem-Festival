@@ -6,7 +6,7 @@ use Bramus\Router\Router;
 
 require_once __DIR__ . '/../Models/User.php';
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+	session_start();
 }
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -15,16 +15,16 @@ $router = new Router();
 $router->setNamespace('\Controllers');
 
 // for cms routes, we will check for authentication
-$router->before('GET|POST', '/cms/.*', function() { 
-    if (!isset($_SESSION['user'])) {
-        header('Location: /cms');
-        exit();
-    }
+$router->before('GET|POST', '/cms/.*', function () {
+	if (!isset($_SESSION['user'])) {
+		header('Location: /cms');
+		exit();
+	}
 
-    if ($_SESSION['user']->getRole() != 'Administrator') {
-        header('Location: /home');
-        exit();
-    }
+	if ($_SESSION['user']->getRole() != 'Administrator') {
+		header('Location: /home');
+		exit();
+	}
 });
 
 // for more info visit: https://github.com/bramus/router
@@ -33,9 +33,9 @@ $router->before('GET|POST', '/cms/.*', function() {
 
 // Add your routes here:
 // default route
-    //home
-    $router->get('/', 'HomeController@index');
-    $router->get('/home', 'HomeController@index');
+//home
+$router->get('/', 'HomeController@index');
+$router->get('/home', 'HomeController@index');
 
     //everything account related
     $router->get('/createaccount', 'createaccountController@index');
@@ -88,6 +88,15 @@ $router->before('GET|POST', '/cms/.*', function() {
     //test routes pdf
 
     $router->get('/pdf', 'TestController@index');
+
+// shopping cart
+$router->get('/shopping-cart', 'ShoppingCartController@index');
+
+// shopping cart actions
+$router->get('/shopping-cart/update-quantity/{itemID}/{quantity}', 'ShoppingCartController@updateQuantity');
+$router->get('/shopping-cart/remove-item/{itemID}', 'ShoppingCartController@removeItem');
+$router->patch('/shopping-cart/select-item/{itemID}/{selected}', 'ShoppingCartController@selectItem');
+$router->get('/shopping-cart/select-all', 'ShoppingCartController@selectAll');
 
 // Run the router
 $router->run();
