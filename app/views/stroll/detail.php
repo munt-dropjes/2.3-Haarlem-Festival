@@ -4,22 +4,22 @@
         <div class="swiper">
             <div class="swiper-wrapper">
                 <?php
-                if (count($images) > 0) {
-                    foreach ($images as $index => $image) {
-                        $imagePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $image);
-                        echo "
-                            <div class='swiper-slide'>
-                                <img src='$imagePath' class='d-block w-100' alt='Carousel image of $eventName'>
-                            </div>";
-                    }
-                } else {
-                    echo "
-                        <div class='swiper-slide'>
-                            <div class='d-flex justify-content-center align-items-center bg-light' style='height: 400px;'>
-                                <p class='text-muted'>No images available for this location</p>
-                            </div>
-                        </div>";
-                }
+                // if (count($images) > 0) {
+                //     foreach ($images as $index => $image) {
+                //         $imagePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $image);
+                //         echo "
+                //             <div class='swiper-slide'>
+                //                 <img src='$imagePath' class='d-block w-100' alt='Carousel image of $eventName'>
+                //             </div>";
+                //     }
+                // } else {
+                //     echo "
+                //         <div class='swiper-slide'>
+                //             <div class='d-flex justify-content-center align-items-center bg-light' style='height: 400px;'>
+                //                 <p class='text-muted'>No images available for this location</p>
+                //             </div>
+                //         </div>";
+                // }
                 ?>
             </div>
             <div class="swiper-button-next"></div>
@@ -32,7 +32,7 @@
             <div class="swiper-wrapper">
                 <?php
                 if (count($images) > 0) {
-                    foreach ($images as $index => $image) {
+                    foreach ($images as $image) {
                         $imagePath = str_replace($_SERVER['DOCUMENT_ROOT'], '', $image);
                         echo "
                             <div class='swiper-slide'>
@@ -72,4 +72,5 @@
             </div>
         </div>
     </div>
+    <script src="strollSwiper.js"></script>
 </main>
