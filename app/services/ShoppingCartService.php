@@ -13,6 +13,15 @@ class ShoppingCartService
 		$this->shoppingCartRepository = new ShoppingCartRepository();
 	}
 
+	public function addItem(int $userID, int $eventID, int $quantity): int
+	{
+		if ($quantity < 1) {
+			$quantity = 1;
+		}
+
+		return $this->shoppingCartRepository->addItem($userID, $eventID, $quantity);
+	}
+
 	public function getUserShoppingCartItems(int $userID): array
 	{
 		$shoppingCartItems = $this->shoppingCartRepository->getUserShoppingCartItems($userID);

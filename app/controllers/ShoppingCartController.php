@@ -63,6 +63,55 @@ class ShoppingCartController extends Controller
 		$this->view('shopping-cart/index', $data);
 	}
 
+	public function addItem(int $eventID, int $quantity = 1)
+	{
+		try {
+			if ($quantity < 1) {
+				throw new Exception("Quantity cannot be less than 1");
+			}
+
+			if ($eventID < 1) {
+				throw new Exception("Invalid event ID");
+			}
+
+			if (!isset($this->user)) {
+				// If the user is not logged in, add the item to the session shopping cart
+				if (!isset($_SESSION['shoppingCart'])) {
+					$_SESSION['shoppingCart'] = [];
+				}
+
+				$found = false;
+				foreach ($_SESSION['shoppingCart'] as &$item) {
+					if ($item['eventID'] === $eventID) {
+						$item['quantity'] += $quantity;
+						$found = true;
+						break;
+					}
+				}
+
+				if (!$found) {
+					$_SESSION['shoppingCart'][] = [
+						'eventID' => $eventID,
+						'quantity' => $quantity,
+						'selected' => true
+					];
+				}
+
+				echo json_encode(['success' => true]);
+				exit();
+			} else {
+				// If the user is logged in, add the item to the database shopping cart
+				$this->shoppingCart->addItem($this->user->getID(), $eventID, $quantity);
+
+				echo json_encode(['success' => true]);
+				exit();
+			}
+		} catch (Exception $e) {
+			echo json_encode(['success' => false, 'message' => $e->getMessage()]);
+			exit();
+		}
+	}
+
 	public function updateQuantity(int $itemID, int $quantity)
 	{
 		try {

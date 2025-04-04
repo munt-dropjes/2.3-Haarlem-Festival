@@ -11,6 +11,60 @@ use PDOException;
 
 class ShoppingCartRepository extends BaseRepository
 {
+	public function addItem(int $userID, int $eventID, int $quantity): int
+	{
+		try {
+			$this->connection->beginTransaction();
+
+			// Check if the user has an active shopping cart
+			$sql = "SELECT CartID FROM ShoppingCart WHERE UserID = :userID";
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([':userID' => $userID]);
+			$cart = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			// If no active shopping cart exists, create one
+			if (!$cart) {
+				$sql = "INSERT INTO ShoppingCart (UserID) VALUES (:userID)";
+				$stmt = $this->connection->prepare($sql);
+				$stmt->execute([':userID' => $userID]);
+				$cartID = $this->connection->lastInsertId();
+			} else {
+				$cartID = $cart['CartID'];
+			}
+
+			// Check if the item already exists in the shopping cart
+			$sql = "SELECT ItemID, Quantity FROM ShoppingCartItems WHERE CartID = :cartID AND EventID = :eventID";
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([
+				':cartID' => $cartID,
+				':eventID' => $eventID
+			]);
+			$item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			if ($item) {
+				// If the item exists, update its quantity using the updateQuantity method
+				$this->updateQuantity($userID, $item['ItemID'], $item['Quantity'] + $quantity);
+			} else {
+				// If the item does not exist, add it to the shopping cart
+				$sql = "INSERT INTO ShoppingCartItems (CartID, EventID, Quantity, Selected, AddedAt) 
+						VALUES (:cartID, :eventID, :quantity, 0, NOW())";
+				$stmt = $this->connection->prepare($sql);
+				$stmt->execute([
+					':cartID' => $cartID,
+					':eventID' => $eventID,
+					':quantity' => $quantity
+				]);
+			}
+
+			$this->connection->commit();
+
+			return $this->connection->lastInsertId();
+		} catch (PDOException $e) {
+			$this->connection->rollBack();
+			throw new Exception("Error code: " . $e->getCode() . " - Something went wrong trying to add the item to the shopping cart.");
+		}
+	}
+
 	public function getUserShoppingCartItems(int $userID): array
 	{
 		try {
@@ -121,7 +175,7 @@ class ShoppingCartRepository extends BaseRepository
 
 			return $items;
 		} catch (Exception $e) {
-			throw new Exception("Error code: " . $e->getMessage() . " -  Something went wrong trying to get all shopping cart items");
+			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all shopping cart items");
 		}
 	}
 
