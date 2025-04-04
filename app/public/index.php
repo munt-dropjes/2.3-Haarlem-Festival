@@ -84,11 +84,6 @@ $router->get('/checkout/complete', 'PaymentController@success');
 $router->get('/checkout/cancel', 'PaymentController@cancel');
 $router->post('/checkout/webhook', 'PaymentController@webhook');
 
-//test remove before merging is to test the pdf generation and sending it through email
-$router->get('/test', 'TestController@index');
-$router->get('/download-ticket', 'TestController@downloadTicket');
-$router->get('/download-invoice', 'TestController@downloadInvoice');
-
 // shopping cart
 $router->get('/shopping-cart', 'ShoppingCartController@index');
 
