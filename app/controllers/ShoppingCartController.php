@@ -17,6 +17,13 @@ class ShoppingCartController extends Controller
 			session_start();
 		}
 
+		// Check if user is logged in
+		if (isset($_SESSION['user'])) {
+			$this->user = $_SESSION['user'];
+		} else {
+			$this->user = null;
+		}
+
 		$this->shoppingCart = new ShoppingCartService();
 
 		// example session data for testing
@@ -43,7 +50,7 @@ class ShoppingCartController extends Controller
 	{
 		$data = [];
 
-		if (!isset($_SESSION['user'])) {
+		if (!isset($this->user)) {
 			// Use session shopping cart for guests
 			$_SESSION['shoppingCart'] = $_SESSION['shoppingCart'] ?? [];
 			$data['ShoppingCartItems'] = $this->shoppingCart->getMultipleEventsById($_SESSION['shoppingCart']);
@@ -63,7 +70,7 @@ class ShoppingCartController extends Controller
 				throw new Exception("Quantity cannot be less than 1");
 			}
 
-			if (!isset($_SESSION['user'])) {
+			if (!isset($this->user)) {
 				// If the user is not logged in, update the session shopping cart
 				if (!isset($_SESSION['shoppingCart'])) {
 					throw new Exception("Shopping cart is empty");
@@ -100,7 +107,7 @@ class ShoppingCartController extends Controller
 	public function removeItem(int $itemID)
 	{
 		try {
-			if (!isset($_SESSION['user'])) {
+			if (!isset($this->user)) {
 				// If the user is not logged in, remove the item from the session shopping cart
 				if (!isset($_SESSION['shoppingCart'])) {
 					throw new Exception("Shopping cart is empty");
@@ -140,7 +147,7 @@ class ShoppingCartController extends Controller
 			// Normalize the boolean value
 			$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
 
-			if (!isset($_SESSION['user'])) {
+			if (!isset($this->user)) {
 				// If the user is not logged in, update the session shopping cart
 				if (!isset($_SESSION['shoppingCart'])) {
 					throw new Exception("Shopping cart is empty");
@@ -180,7 +187,7 @@ class ShoppingCartController extends Controller
 			// Normalize the boolean value
 			$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
 
-			if (!isset($_SESSION['user'])) {
+			if (!isset($this->user)) {
 				// If the user is not logged in, update the session shopping cart
 				if (!isset($_SESSION['shoppingCart'])) {
 					throw new Exception("Shopping cart is empty");
