@@ -1,5 +1,7 @@
 <main>
 
+    <button class="StrollDetail-btn-back" id="backButton" onclick="history.back()">&#11207 Back</button>
+
     <div class="stroll-swiper">
         <div class="swiper">
             <div class="swiper-wrapper">

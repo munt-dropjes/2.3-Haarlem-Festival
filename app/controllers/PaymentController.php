@@ -62,7 +62,7 @@ class PaymentController extends Controller
             );
 
             switch ($event->type) {
-                case 'checkout.session.completed':
+                case 'payment_intent.created':
                     $session = $event->data->object;
                     $this->handleSuccessfulCheckout($session);
                     break;
@@ -77,7 +77,7 @@ class PaymentController extends Controller
                     $this->handleSuccessfulPayment($paymentIntent);
                     break;
 
-                case 'payment_intent.processing':
+                case 'payment_intent.requires_action':
                     $paymentIntent = $event->data->object;
                     $this->handleProcessingPayment($paymentIntent);
                     break;
@@ -96,38 +96,28 @@ class PaymentController extends Controller
         }
     }
 
-    //fix, maybe add full path to file_put_contents
     private function handleSuccessfulPayment($paymentIntent)
     {
         $orderId = $paymentIntent->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::COMPLETED);
-        $this->logWebhookEvent("Payment successful for order ID: $orderId");
     }
 
     private function handleFailedPayment($paymentIntent)
     {
         $orderId = $paymentIntent->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::FAILED);
-        $this->logWebhookEvent("Payment failed for order ID: $orderId");
     }
 
     private function handleProcessingPayment($paymentIntent)
     {
         $orderId = $paymentIntent->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::PENDING);
-        $this->logWebhookEvent("Payment processing for order ID: $orderId");
     }
 
     private function handleSuccessfulCheckout($session)
     {
         $orderId = $session->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::PENDING);
-        $this->logWebhookEvent("Checkout session completed for order ID: $orderId");
     }
 
-    private function logWebhookEvent($message)
-    {
-        $logFilePath = __DIR__ . '/../../logs/webhook.log';
-        file_put_contents($logFilePath, $message . PHP_EOL, FILE_APPEND);
-    }
 }
