@@ -6,7 +6,7 @@ use Bramus\Router\Router;
 
 require_once __DIR__ . '/../Models/User.php';
 if (session_status() == PHP_SESSION_NONE) {
-    session_start();
+	session_start();
 }
 
 require_once __DIR__ . '/../vendor/autoload.php';
@@ -15,16 +15,16 @@ $router = new Router();
 $router->setNamespace('\Controllers');
 
 // for cms routes, we will check for authentication
-$router->before('GET|POST', '/cms/.*', function() { 
-    if (!isset($_SESSION['user'])) {
-        header('Location: /cms');
-        exit();
-    }
+$router->before('GET|POST', '/cms/.*', function () {
+	if (!isset($_SESSION['user'])) {
+		header('Location: /cms');
+		exit();
+	}
 
-    if ($_SESSION['user']->getRole() != 'Administrator') {
-        header('Location: /home');
-        exit();
-    }
+	if ($_SESSION['user']->getRole() != 'Administrator') {
+		header('Location: /home');
+		exit();
+	}
 });
 
 // for more info visit: https://github.com/bramus/router
@@ -33,9 +33,9 @@ $router->before('GET|POST', '/cms/.*', function() {
 
 // Add your routes here:
 // default route
-    //home
-    $router->get('/', 'HomeController@index');
-    $router->get('/home', 'HomeController@index');
+//home
+$router->get('/', 'HomeController@index');
+$router->get('/home', 'HomeController@index');
 
     //everything account related
     $router->get('/createaccount', 'createaccountController@index');
@@ -49,10 +49,11 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->post('/resetpassword/{email}/{resetToken}', 'ForgotPasswordController@reset');
     $router->get('/updateaccount', 'UpdateAccountController@index');
     $router->post('/updateaccount', 'UpdateAccountController@updateAccount');
+    $router->get('/profile', 'ProfileController@index');
 	
     //events
     $router->get('/stroll', 'StrollController@index');
-    $router->get('/stroll/detail', 'StrollDetailController@index');
+    $router->get('/stroll/detail', 'StrollController@detail');
 	$router->get('/dance', 'DanceController@index');
     $router->get('/jazz', 'JazzController@index');
     $router->get('/jazz/artist/{name}', 'JazzDetailController@index');
@@ -82,7 +83,20 @@ $router->before('GET|POST', '/cms/.*', function() {
     $router->get('/checkout', 'PaymentController@createSession');
     $router->get('/checkout/complete', 'PaymentController@success');
     $router->get('/checkout/cancel', 'PaymentController@cancel');
-    $router->post('/checkout/webhook', 'PaymentController@webhook');    
+    $router->post('/checkout/webhook', 'PaymentController@webhook');
+    
+    //test routes pdf
+
+    $router->get('/pdf', 'TestController@index');
+
+// shopping cart
+$router->get('/shopping-cart', 'ShoppingCartController@index');
+
+// shopping cart actions
+$router->get('/shopping-cart/update-quantity/{itemID}/{quantity}', 'ShoppingCartController@updateQuantity');
+$router->get('/shopping-cart/remove-item/{itemID}', 'ShoppingCartController@removeItem');
+$router->patch('/shopping-cart/select-item/{itemID}/{selected}', 'ShoppingCartController@selectItem');
+$router->get('/shopping-cart/select-all', 'ShoppingCartController@selectAll');
 
 // Run the router
 $router->run();
