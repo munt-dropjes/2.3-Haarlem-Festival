@@ -11,13 +11,67 @@ use PDOException;
 
 class ShoppingCartRepository extends BaseRepository
 {
+	public function addItem(int $userID, int $eventID, int $quantity): int
+	{
+		try {
+			$this->connection->beginTransaction();
+
+			// Check if the user has an active shopping cart
+			$sql = "SELECT CartID FROM ShoppingCart WHERE UserID = :userID";
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([':userID' => $userID]);
+			$cart = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			// If no active shopping cart exists, create one
+			if (!$cart) {
+				$sql = "INSERT INTO ShoppingCart (UserID) VALUES (:userID)";
+				$stmt = $this->connection->prepare($sql);
+				$stmt->execute([':userID' => $userID]);
+				$cartID = $this->connection->lastInsertId();
+			} else {
+				$cartID = $cart['CartID'];
+			}
+
+			// Check if the item already exists in the shopping cart
+			$sql = "SELECT ItemID, Quantity FROM ShoppingCartItems WHERE CartID = :cartID AND EventID = :eventID";
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([
+				':cartID' => $cartID,
+				':eventID' => $eventID
+			]);
+			$item = $stmt->fetch(PDO::FETCH_ASSOC);
+
+			if ($item) {
+				// If the item exists, update its quantity using the updateQuantity method
+				$this->updateQuantity($userID, $item['ItemID'], $item['Quantity'] + $quantity);
+			} else {
+				// If the item does not exist, add it to the shopping cart
+				$sql = "INSERT INTO ShoppingCartItems (CartID, EventID, Quantity, Selected, AddedAt) 
+						VALUES (:cartID, :eventID, :quantity, 0, NOW())";
+				$stmt = $this->connection->prepare($sql);
+				$stmt->execute([
+					':cartID' => $cartID,
+					':eventID' => $eventID,
+					':quantity' => $quantity
+				]);
+			}
+
+			$this->connection->commit();
+
+			return $this->connection->lastInsertId();
+		} catch (PDOException $e) {
+			$this->connection->rollBack();
+			throw new Exception("Error code: " . $e->getCode() . " - Something went wrong trying to add the item to the shopping cart.");
+		}
+	}
+
 	public function getUserShoppingCartItems(int $userID): array
 	{
 		try {
 			$sql = "SELECT
 				SC.`CartID`, SC.`UserID`,
-				SCI.`ItemID`, SCI.`CartID`, SCI.`EventID`, SCI.`Quantity`, SCI.`Selected`, SCI.`AddedAt`,
-				E.`Name`, E.`Date`, E.`Time`, E.`Duration`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
+				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`AddedAt`,
+				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
 			FROM
 				ShoppingCart AS SC
 			INNER JOIN
@@ -52,9 +106,63 @@ class ShoppingCartRepository extends BaseRepository
 				$event = new Event();
 				$event->setEventID($row['EventID']);
 				$event->setName($row['Name']);
-				$event->setDate($row['Date']);
-				$event->setTime($row['Time']);
-				$event->setDuration($row['Duration']);
+				$event->setStartTime($row['StartTime']);
+				$event->setEndTime($row['EndTime']);
+				$event->setLocation($row['Location']);
+				$event->setPrice($row['Price']);
+				$event->setImageName($row['ImageName']);
+				$event->setCategory($row['Category']);
+
+				$shoppingCartItem->setEvent($event);
+
+				$items[] = $shoppingCartItem;
+			}
+
+			return $items;
+		} catch (Exception $e) {
+			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all shopping cart items");
+		}
+	}
+
+	public function getMultipleEventsById(array $ids): array
+	{
+		try {
+			$inQuery = implode(',', array_fill(0, count($ids), '?'));
+
+			$sql = "SELECT
+				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
+			FROM
+				Events AS E
+			WHERE
+				EventID IN ($inQuery)
+			";
+
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute(array_column($ids, 'eventID'));
+			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			$cartMap = [];
+			foreach ($_SESSION['shoppingCart'] as $item) {
+				$cartMap[$item['eventID']] = $item;
+			}
+
+			$items = [];
+			foreach ($results as $row) {
+				$shoppingCartItem = new ShoppingCartItem();
+				$shoppingCartItem->setItemID($row['EventID']);
+				$shoppingCartItem->setCartID(0);
+				$shoppingCartItem->setEventID($row['EventID']);
+				if (isset($cartMap[$row['EventID']])) {
+					$cartItem = $cartMap[$row['EventID']];
+					$shoppingCartItem->setQuantity($cartItem['quantity']);
+					$shoppingCartItem->setSelected($cartItem['selected']);
+				}
+
+				$event = new Event();
+				$event->setEventID($row['EventID']);
+				$event->setName($row['Name']);
+				$event->setStartTime($row['StartTime']);
+				$event->setEndTime($row['EndTime']);
 				$event->setLocation($row['Location']);
 				$event->setPrice($row['Price']);
 				$event->setImageName($row['ImageName']);
