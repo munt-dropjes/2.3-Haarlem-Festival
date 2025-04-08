@@ -12,7 +12,7 @@
 
 		<div class="col-5 d-flex justify-content-end">
 			<div class="d-flex gap-4">
-				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" href="#">
+				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" href="/shopping-cart">
 					<img src="/assets/icons/wishlist.svg" alt="">
 				</a>
 
