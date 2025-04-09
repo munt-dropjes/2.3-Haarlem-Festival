@@ -373,3 +373,19 @@ document.addEventListener("DOMContentLoaded", function () {
 
 
 /////////////////////////////
+
+// Add items to shopping cart
+function addToCart(itemId, quantity = 1, isFamilyTicket = false) {
+	fetch(`/shopping-cart/add-item/${itemId}/${quantity}/${isFamilyTicket}`, {
+		method: "GET"
+	})
+		.then(response => response.json())
+		.then(data => {
+			if (data.success) {
+				alert("Item added to cart!");
+			} else {
+				alert("Failed to add item to cart.");
+			}
+		})
+		.catch(error => console.error("Error:", error));
+}
