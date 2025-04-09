@@ -107,5 +107,4 @@
             setupLanguageSelection();
         });
     </script>
-    <script src="global.js"></script>
 </main>
