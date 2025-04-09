@@ -24,4 +24,13 @@ class TicketRepository extends BaseRepository
         $stmt->execute();
         return $stmt->fetchAll(\PDO::FETCH_CLASS, Ticket::class);
     }
+
+    public function getTicketsByOrderId($orderId)
+    {
+        $sql = "SELECT * FROM Tickets WHERE OrderId = :order_id";
+        $stmt = $this->connection->prepare($sql);
+        $stmt->bindParam(':order_id', $orderId);
+        $stmt->execute();
+        return $stmt->fetchAll(\PDO::FETCH_CLASS, Ticket::class);
+    }
 }

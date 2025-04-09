@@ -43,12 +43,16 @@ CREATE TABLE `Events` (
 );
 
 CREATE TABLE `Invoices` (
-	`InvoiceID` INT(11) NOT NULL,
-	`OrderID` INT(11) NOT NULL,
-	`UserID` INT(11) NOT NULL,
-	`TotalAmount` DECIMAL(10, 2) NOT NULL,
-	`VAT` DECIMAL(10, 2) NOT NULL,
-	`InvoiceDate` datetime NOT NULL DEFAULT current_timestamp()
+    `InvoiceID` INT(11) NOT NULL,
+    `OrderID` INT(11) NOT NULL,
+    `UserID` INT(11) NOT NULL,
+    `TotalAmount` DECIMAL(10, 2) NOT NULL,
+    `VAT` DECIMAL(10, 2) NOT NULL,
+    `InvoiceDate` DATETIME NOT NULL DEFAULT CURRENT_TIMESTAMP(),
+    `Subtotal` DECIMAL(10, 2) NOT NULL,
+    `Vat21` DECIMAL(10, 2) NOT NULL,
+    `Vat9` DECIMAL(10, 2) NOT NULL,
+    `PaymentDate` DATETIME NOT NULL
 );
 
 CREATE TABLE `Jazz` (

@@ -21,4 +21,8 @@ class OrderService {
     public function countTotalOrders() : int {
         return $this->orderRepository->countTotalOrders();
     }
+
+    public function updateOrderStatus($orderId, $status) : void {
+        $this->orderRepository->updateOrderStatus($orderId, $status);
+    }
 }

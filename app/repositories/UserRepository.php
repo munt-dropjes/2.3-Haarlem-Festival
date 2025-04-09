@@ -150,4 +150,19 @@ class UserRepository extends BaseRepository{
         }
     }
 
+    public function getUserById($userId): ?User
+    {
+        try{
+            $stmt = $this->connection->prepare("SELECT * FROM Users WHERE UserID = :user_id");
+            $stmt->bindParam(':user_id', $userId, PDO::PARAM_INT);
+            $stmt->execute();
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\User');
+            $fetchedUser = $stmt->fetch();
+            return $fetchedUser ?: null;
+        }
+        catch(Exception $e){
+            throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get user with ID: " . $userId);
+        }
+    }
+
 }

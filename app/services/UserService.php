@@ -88,5 +88,9 @@ class UserService {
         $user->setCountry($country); 
         return $user;
     }
+
+    public function getUserById($id) : ?User {
+        return $this->userRepository->getUserById($id);
+    }
 }
 ?>
