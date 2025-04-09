@@ -6,7 +6,7 @@ use Services\DanceService;
 
 class DanceController extends Controller
 {
-	private $danceService;
+	private DanceService $danceService;
 
 	public function __construct()
 	{

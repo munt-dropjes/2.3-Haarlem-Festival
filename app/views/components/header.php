@@ -6,7 +6,7 @@
 			</button>
 		</div>
 
-		<a class="col-2 d-flex justify-content-center logo" href="">
+		<a class="col-2 d-flex justify-content-center logo" href="/">
 			<img src="/assets/logo/logo.svg" alt="">
 		</a>
 

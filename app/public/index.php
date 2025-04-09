@@ -94,6 +94,7 @@ $router->get('/home', 'HomeController@index');
 $router->get('/shopping-cart', 'ShoppingCartController@index');
 
 // shopping cart actions
+$router->get('/shopping-cart/add-item/{itemID}/{quantity}/{isFamilyTicket}', 'ShoppingCartController@addItem');
 $router->get('/shopping-cart/add-item/{itemID}/{quantity}', 'ShoppingCartController@addItem');
 $router->get('/shopping-cart/update-quantity/{itemID}/{quantity}', 'ShoppingCartController@updateQuantity');
 $router->get('/shopping-cart/remove-item/{itemID}', 'ShoppingCartController@removeItem');
