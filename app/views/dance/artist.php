@@ -4,7 +4,7 @@
 
 <main id="dance-artist">
 	<div class="top-image container-fluid p-0 mb-5">
-		<img src="/images/<?= $artist->getBannerImage() ?>" class="img-fluid w-100" alt="foto van artist">
+		<img src="/images/dance/<?= $artist->getBannerImage() ?>" class="img-fluid w-100" alt="foto van artist">
 		<a href="#schedule" class="buy-tickets button CTA">Buy Tickets</a>
 	</div>
 
@@ -77,14 +77,15 @@
 						<div class="col-1 px-2"><strong><?= $day ?></strong></div>
 						<?php
 						foreach (["14:00", "19:00", "21:00", "22:00", "23:00"] as $time):
-							$event = array_filter($events, fn($e) => date('l', strtotime($e->getDate())) === $day && date("H:i", strtotime($e->getTime())) === $time);
+							$event = array_filter($events, fn($e) => date('l', strtotime($e->getDate())) === $day && date("H:i", strtotime($e->getStartTime())) === $time);
 							/** @var \Models\Event $event */
 
-							echo '<div class="col py-0 px-2">';
+							echo '<div class="col py-0 px-2 event-button-hover">';
 
 							if (!empty($event)) {
 								$event = reset($event);
-								echo '<div class="event-box p-2 text-center">' . $event->getLocation() . '</div>';
+								echo '<div class="event-box p-2 d-flex flex-fill h-100 justify-content-center align-items-center text-center">' . $event->getLocation() . '</div>';
+								echo '<button onclick="addToCart(' . $event->getEventID() . ')" class="button CTA CTA-small">Buy Tickets</button>';
 							}
 
 							echo '</div>';
