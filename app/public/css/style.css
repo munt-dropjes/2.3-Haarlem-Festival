@@ -961,9 +961,9 @@ h3 {
 .stroll-swiper .swiper-slide img {
     display: block;
     max-width: 100% !important;
-    max-height: 400px; 
-    object-fit: contain;
-	border-radius: 50px;
+    max-height: auto !important; 
+    object-fit: fill;
+	border-radius: 30px;
 }
 
 .StrollDetail-btn-back {
@@ -1029,7 +1029,7 @@ h3 {
 
 #jazzDetail img.img-fluid.mb-4{
     width: 100vw; 
-    max-width: 100%; 
+    max-width: 70%; 
     max-height: 317px; 
     display: block;
 }
