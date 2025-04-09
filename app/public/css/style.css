@@ -156,6 +156,14 @@ footer .footer-icon {
 	transition-duration: 300ms;
 }
 
+.CTA.CTA-small {
+	width: 80%;
+	font-size: 1rem;
+	text-wrap: nowrap;
+	padding: 0.25rem;
+	box-shadow: 2px 2px 0 0 #4B0082;
+}
+
 .CTA:hover {
 	background-color: #4B0082;
 	color: white;
@@ -666,6 +674,19 @@ h3 {
 
 #dance-artist .schedule .schedule-items {
 	min-width: 50rem;
+}
+
+#dance-artist .schedule .schedule-items .event-button-hover button {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
+
+	display: none;
+}
+
+#dance-artist .schedule .schedule-items .event-button-hover:hover button {
+	display: block;
 }
 
 /* ***************************** */

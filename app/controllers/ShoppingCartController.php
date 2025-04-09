@@ -63,14 +63,18 @@ class ShoppingCartController extends Controller
 		$this->view('shopping-cart/index', $data);
 	}
 
-	public function addItem(int $eventID, int $quantity = 1)
+	public function addItem(int $eventID, int $quantity = 1, $isFamilyTicket = false)
 	{
 		try {
-			if ($quantity < 1) {
+			if (isset($isFamilyTicket)) {
+				$isFamilyTicket = filter_var($isFamilyTicket, FILTER_VALIDATE_BOOL);
+			}
+
+			if ($quantity < 0) {
 				throw new Exception("Quantity cannot be less than 1");
 			}
 
-			if ($eventID < 1) {
+			if ($eventID < 0) {
 				throw new Exception("Invalid event ID");
 			}
 
@@ -93,7 +97,8 @@ class ShoppingCartController extends Controller
 					$_SESSION['shoppingCart'][] = [
 						'eventID' => $eventID,
 						'quantity' => $quantity,
-						'selected' => true
+						'selected' => false,
+						'isFamilyTicket' => $isFamilyTicket
 					];
 				}
 
@@ -101,7 +106,7 @@ class ShoppingCartController extends Controller
 				exit();
 			} else {
 				// If the user is logged in, add the item to the database shopping cart
-				$this->shoppingCart->addItem($this->user->getID(), $eventID, $quantity);
+				$this->shoppingCart->addItem($this->user->getID(), $eventID, $quantity, $isFamilyTicket);
 
 				echo json_encode(['success' => true]);
 				exit();
