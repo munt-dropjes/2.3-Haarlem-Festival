@@ -133,11 +133,11 @@
                             </div>
                             <div class="modal-group">
                                 <label for="date">Starttime</label>
-                                <input type="datetime" class="form-control" id="starttime" name="starttime" required>
+                                <input type="datetime-local" class="form-control" id="starttime" name="starttime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="date">Endtime</label>
-                                <input type="datetime" class="form-control" id="endtime" name="endtime" required>
+                                <input type="datetime-local" class="form-control" id="endtime" name="endtime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="duration">Location</label>
@@ -191,11 +191,11 @@
                             </div>
                             <div class="modal-group">
                                 <label for="date">Starttime</label>
-                                <input type="datetime" class="form-control" id="starttime" name="starttime" required>
+                                <input type="datetime-local" class="form-control" id="starttime" name="starttime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="date">Endtime</label>
-                                <input type="datetime" class="form-control" id="endtime" name="endtime" required>
+                                <input type="datetime-local" class="form-control" id="endtime" name="endtime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="duration">Location</label>
