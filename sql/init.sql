@@ -86,6 +86,7 @@ CREATE TABLE `ShoppingCartItems` (
 	`EventID` INT(11) NOT NULL,
 	`Quantity` INT(11) NOT NULL,
 	`Selected` TINYINT(1) NOT NULL DEFAULT 0,
+	`isFamilyTicket` TINYINT(1) NOT NULL DEFAULT 0,
 	`AddedAt` datetime NOT NULL DEFAULT current_timestamp()
 );
 
@@ -406,9 +407,9 @@ VALUES
 		'6jmTQwFzejCurofZDz7x9k',
 		'4cYrCTMjUzdFvMT9XcMXYu',
 		'3Nnq6YSHQ5LwRKkioGIjhb',
-		'hardwell.png',
+		'dance/hardwell.png',
 		'Dance',
-		'0'
+		'dance/Hardwell dj.png'
 	);
 
 INSERT INTO `Events`
@@ -531,7 +532,7 @@ VALUES
 		'Caprera Openluchttheater',
 		110.00,
 		2000,
-		'Caprera_Openluchttheater.png',
+		'dance/Caprera_Openluchttheater.png',
 		'Dance'
 	),
 	(
@@ -540,7 +541,7 @@ VALUES
 		'Harwell\r\nMartin Garrix\r\nArmin van Buuren',
 		'2025-03-14 23:00:00',
 		'2025-03-15 00:30:00',
-		'Jopenkerk',
+		'dance/Jopenkerk',
 		60.00,
 		300,
 		'Jopenkerk.png',
@@ -567,7 +568,7 @@ VALUES
 		'Festival Grounds',
 		120.00,
 		300,
-		'dance-festival.png',
+		'dance/dance-festival.png',
 		'Dance'
 	),
 	(

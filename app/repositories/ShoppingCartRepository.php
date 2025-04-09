@@ -46,13 +46,14 @@ class ShoppingCartRepository extends BaseRepository
 				$this->updateQuantity($userID, $item['ItemID'], $item['Quantity'] + $quantity);
 			} else {
 				// If the item does not exist, add it to the shopping cart
-				$sql = "INSERT INTO ShoppingCartItems (CartID, EventID, Quantity, Selected, AddedAt) 
-						VALUES (:cartID, :eventID, :quantity, 0, NOW())";
+				$sql = "INSERT INTO ShoppingCartItems (CartID, EventID, Quantity, Selected, isFamilyTicket, AddedAt) 
+						VALUES (:cartID, :eventID, :quantity, 0, :isFamilyTicket, NOW())";
 				$stmt = $this->connection->prepare($sql);
 				$stmt->execute([
 					':cartID' => $cartID,
 					':eventID' => $eventID,
-					':quantity' => $quantity
+					':quantity' => $quantity,
+					':isFamilyTicket' => (int) $isFamilyTicket
 				]);
 			}
 
@@ -70,21 +71,22 @@ class ShoppingCartRepository extends BaseRepository
 		try {
 			$sql = "SELECT
 				SC.`CartID`, SC.`UserID`,
-				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`AddedAt`,
-				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
+				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`isFamilyTicket`, SCI.`AddedAt`,
+				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, 
+				IF(SCI.`isFamilyTicket` = 1 AND S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS Price,
+				E.`ImageName`, E.`Category`
 			FROM
 				ShoppingCart AS SC
 			INNER JOIN
-				ShoppingCartItems AS SCI
-			ON
-				SC.CartID = SCI.CartID
+				ShoppingCartItems AS SCI ON SC.CartID = SCI.CartID
 			INNER JOIN
-				Events AS E
-			ON
-				SCI.EventID = E.EventID
+				Events AS E ON SCI.EventID = E.EventID
+			LEFT JOIN
+				Stroll AS S ON E.EventID = S.EventID
 			WHERE
 				SC.UserID = :userID
-			ORDER BY SCI.AddedAt DESC
+			ORDER BY
+				SCI.AddedAt DESC
 			";
 
 			$stmt = $this->connection->prepare($sql);
