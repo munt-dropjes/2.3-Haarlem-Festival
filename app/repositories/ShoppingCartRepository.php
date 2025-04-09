@@ -11,7 +11,7 @@ use PDOException;
 
 class ShoppingCartRepository extends BaseRepository
 {
-	public function addItem(int $userID, int $eventID, int $quantity): int
+	public function addItem(int $userID, int $eventID, int $quantity, bool $isFamilyTicket): int
 	{
 		try {
 			$this->connection->beginTransaction();
