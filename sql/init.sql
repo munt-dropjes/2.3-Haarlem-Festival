@@ -86,6 +86,7 @@ CREATE TABLE `ShoppingCartItems` (
 	`EventID` INT(11) NOT NULL,
 	`Quantity` INT(11) NOT NULL,
 	`Selected` TINYINT(1) NOT NULL DEFAULT 0,
+	`isFamilyTicket` TINYINT(1) NOT NULL DEFAULT 0,
 	`AddedAt` datetime NOT NULL DEFAULT current_timestamp()
 );
 
@@ -406,9 +407,9 @@ VALUES
 		'6jmTQwFzejCurofZDz7x9k',
 		'4cYrCTMjUzdFvMT9XcMXYu',
 		'3Nnq6YSHQ5LwRKkioGIjhb',
-		'hardwell.png',
+		'dance/hardwell.png',
 		'Dance',
-		'0'
+		'dance/Hardwell dj.png'
 	);
 
 INSERT INTO `Events`
@@ -531,7 +532,7 @@ VALUES
 		'Caprera Openluchttheater',
 		110.00,
 		2000,
-		'Caprera_Openluchttheater.png',
+		'dance/Caprera_Openluchttheater.png',
 		'Dance'
 	),
 	(
@@ -543,7 +544,7 @@ VALUES
 		'Jopenkerk',
 		60.00,
 		300,
-		'Jopenkerk.png',
+		'dance/Jopenkerk.png',
 		'Dance'
 	),
 	(
@@ -555,8 +556,8 @@ VALUES
 		'Test',
 		60.00,
 		300,
-		'Jopenkerk.png',
-		NULL
+		'dance/Jopenkerk.png',
+		'Dance'
 	),
 	(
 		13,
@@ -567,7 +568,7 @@ VALUES
 		'Festival Grounds',
 		120.00,
 		300,
-		'dance-festival.png',
+		'dance/dance-festival.png',
 		'Dance'
 	),
 	(
