@@ -10,9 +10,6 @@
             <li class="nav-item">
                 <a class="nav-link active" href="/cms/orders">Orders</a>
             </li>
-            <li class="nav-item">
-                <a class="nav-link" href="/cms/tickets">Tickets</a>
-            </li>
         </ul>
         <div class="table-wrapper">
             <div class="table-title">
