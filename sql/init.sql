@@ -541,10 +541,10 @@ VALUES
 		'Harwell\r\nMartin Garrix\r\nArmin van Buuren',
 		'2025-03-14 23:00:00',
 		'2025-03-15 00:30:00',
-		'dance/Jopenkerk',
+		'Jopenkerk',
 		60.00,
 		300,
-		'Jopenkerk.png',
+		'dance/Jopenkerk.png',
 		'Dance'
 	),
 	(
@@ -556,8 +556,8 @@ VALUES
 		'Test',
 		60.00,
 		300,
-		'Jopenkerk.png',
-		NULL
+		'dance/Jopenkerk.png',
+		'Dance'
 	),
 	(
 		13,
