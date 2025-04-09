@@ -4,7 +4,7 @@
 
 <main id="dance-artist">
 	<div class="top-image container-fluid p-0 mb-5">
-		<img src="/images/<?= $artist->getBannerImage() ?>" class="img-fluid w-100" alt="foto van artist">
+		<img src="/images/dance/<?= $artist->getBannerImage() ?>" class="img-fluid w-100" alt="foto van artist">
 		<a href="#schedule" class="buy-tickets button CTA">Buy Tickets</a>
 	</div>
 
