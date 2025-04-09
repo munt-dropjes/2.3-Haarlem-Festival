@@ -95,8 +95,8 @@ function loadEditEventModalCMS(modalID) {
         var id = button.getAttribute('data-id');
         var name = button.getAttribute('data-name');
         var description = button.getAttribute('data-description');
-        var date = button.getAttribute('data-date');
-        var time = button.getAttribute('data-time');
+        var starttime = button.getAttribute('data-starttime');
+        var endtime = button.getAttribute('data-endtime');
         var duration = button.getAttribute('data-duration');
         var location = button.getAttribute('data-location');
         var price = button.getAttribute('data-price');
@@ -105,8 +105,8 @@ function loadEditEventModalCMS(modalID) {
         var modalIDInput = updateEventModal.querySelector('#id');
         var modalNameInput = updateEventModal.querySelector('#name');
         var modalDescriptionInput = updateEventModal.querySelector('#description');
-        var modalDateInput = updateEventModal.querySelector('#date');
-        var modalTimeInput = updateEventModal.querySelector('#time');
+        var modalStarttimeInput = updateEventModal.querySelector('#starttime');
+        var modalEndtimeInput = updateEventModal.querySelector('#endtime');
         var modalDurationInput = updateEventModal.querySelector('#duration');
         var modalLocationInput = updateEventModal.querySelector('#location');
         var modalPriceInput = updateEventModal.querySelector('#price');
@@ -115,8 +115,8 @@ function loadEditEventModalCMS(modalID) {
         if (modalIDInput) modalIDInput.value = id;
         if (modalNameInput) modalNameInput.value = name;
         if (modalDescriptionInput) modalDescriptionInput.value = description;
-        if (modalDateInput) modalDateInput.value = date;
-        if (modalTimeInput) modalTimeInput.value = time;
+        if (modalStarttimeInput) modalStarttimeInput.value = starttime;
+        if (modalEndtimeInput) modalEndtimeInput.value = endtime;
         if (modalDurationInput) modalDurationInput.value = duration;
         if (modalLocationInput) modalLocationInput.value = location;
         if (modalPriceInput) modalPriceInput.value = price;

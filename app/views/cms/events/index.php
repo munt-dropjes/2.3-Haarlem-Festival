@@ -2,16 +2,16 @@
     <div class="container">
         <ul class="nav nav-tabs">
             <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="/cms/users">Users</a>
+                <a class="nav-link" aria-current="page" href="/cms/users">Users</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="/cms/events">Events</a>
+                <a class="nav-link active" href="/cms/events">Events</a>
             </li>
             <li class="nav-item">
                 <a class="nav-link" href="/cms/orders">Orders</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" href="#">Tickets</a>
+                <a class="nav-link" href="/cms/tickets">Tickets</a>
             </li>
         </ul>
         <div class="table-wrapper">
@@ -39,7 +39,7 @@
                         <tr>
                             <th>Name</th>
                             <th>Description</th>
-                            <th>Date - Time</th>
+                            <th>Starttime - Endtime</th>
                             <th>Location</th>
                             <th>Price</th>
                             <th>Category</th>
@@ -53,7 +53,7 @@
                             <tr>
                                 <td><?= $event->getName() ?></td>
                                 <td><?= $event->getDescription() ?></td>
-                                <td><?= $event->getDate() ?> - <?= $event->getTime() ?></td>
+                                <td><?= $event->getStartTime() ?> - <?= $event->getEndTime() ?></td>
                                 <td><?= $event->getLocation() ?></td>
                                 <td><?= $event->getPrice() ?></td>
                                 <td><?= $event->getCategory() ?></td>
@@ -67,8 +67,8 @@
                                         data-id="<?= $event->getEventID(); ?>"
                                         data-name="<?= htmlspecialchars($event->getName()); ?>"
                                         data-description="<?= htmlspecialchars($event->getDescription()); ?>"
-                                        data-date="<?= htmlspecialchars($event->getDate()); ?>"
-                                        data-time="<?= htmlspecialchars($event->getTime()); ?>"
+                                        data-starttime="<?= htmlspecialchars($event->getStartTime()); ?>"
+                                        data-endtime="<?= htmlspecialchars($event->getEndTime()); ?>"
                                         data-duration="<?= htmlspecialchars($event->getDuration()); ?>"
                                         data-location="<?= htmlspecialchars($event->getLocation()); ?>"
                                         data-price="<?= htmlspecialchars($event->getPrice()); ?>"
@@ -133,12 +133,12 @@
                                 <input type="text" class="form-control" id="description" name="description" required>
                             </div>
                             <div class="modal-group">
-                                <label for="date">Date</label>
-                                <input type="date" class="form-control" id="date" name="date" required>
+                                <label for="date">Starttime</label>
+                                <input type="datetime" class="form-control" id="starttime" name="starttime" required>
                             </div>
                             <div class="modal-group">
-                                <label for="time">Time</label>
-                                <input type="time" class="form-control" id="time" name="time" required>
+                                <label for="date">Endtime</label>
+                                <input type="datetime" class="form-control" id="endtime" name="endtime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="duration">Duration</label>
@@ -195,12 +195,12 @@
                                 <input type="text" class="form-control" id="description" name="description" required>
                             </div>
                             <div class="modal-group">
-                                <label for="date">Date</label>
-                                <input type="date" class="form-control" id="date" name="date" required>
+                                <label for="date">Starttime</label>
+                                <input type="datetime" class="form-control" id="starttime" name="starttime" required>
                             </div>
                             <div class="modal-group">
-                                <label for="time">Time</label>
-                                <input type="time" class="form-control" id="time" name="time" required>
+                                <label for="date">Endtime</label>
+                                <input type="datetime" class="form-control" id="endtime" name="endtime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="duration">Duration</label>

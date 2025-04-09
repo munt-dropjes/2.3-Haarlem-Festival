@@ -291,6 +291,10 @@ INSERT INTO `Users`
 	(`UserID`, `Role`, `Name`, `Email`, `Password`, `Phone`, `Country`, `RegisteredAt`)
 VALUES
 	(1, 'Administrator', 'Daniel Zwart', 'dtzwart@gmail.com', '$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW', '0612345678', 'Netherlands', '2025-03-06 12:04:16');
+	(2, 'Customer', 'Customer Test', 'customer@testmail.com', '$2y$12$ZD4gbCVRRPtxROkN44iMMeBhmQgmOO4BuRVr.flrrNIqmrJDo3AkK', '0612345678', 'Netherlands', '2025-04-09 22:28:06', NULL, NULL),
+	(3, 'Administrator', 'Admin Test', 'admin@testmail.com', '$2y$12$5DP89FRGtloS2e1wCEt6.uK1SmoxWN/wboWlFe3KxXKqMT3DPqwly', '0612345678', 'Netherlands', '2025-04-09 22:29:14', NULL, NULL),
+	(4, 'Employee', 'Employee Test', 'employee@testmail.com', '$2y$12$GerAwBwcN9tcM89MY0RWhuvFTY6duamEBCh9WrdmQuSWFcgrif1oG', '0612345678', 'Netherlands', '2025-04-09 22:29:45', NULL, NULL);
+
 
 INSERT INTO `StrollDetail`
 	(`EventID`, `StopNumber`, `StopName`, `Description`, `Adress`, `BreakLocation`, `mapName`)
@@ -548,18 +552,6 @@ VALUES
 	),
 	(
 		12,
-		'Test',
-		'Test',
-		'2025-03-14 23:00:00',
-		'2025-03-15 00:30:00',
-		'Test',
-		60.00,
-		300,
-		'Jopenkerk.png',
-		NULL
-	),
-	(
-		13,
 		'All Access Pass',
 		'Grants entry to all events on Friday, Saturday, and Sunday',
 		'2025-07-04 00:00:00',
@@ -571,11 +563,23 @@ VALUES
 		'Dance'
 	),
 	(
-		14,
+		13,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
 		'2025-07-25 10:00:00',
 		'2025-07-25 10:00:00',
+		'Grote Markt, Haarlem',
+		17.50,
+		12,
+		'Stroll_through_history.png',
+		'A Stroll through History'
+	),
+	(
+		14,
+		'Stroll through history',
+		'Explore the beautiful city of Haarlem with a guided walk.',
+		'2025-07-25 13:00:00',
+		'2025-07-25 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -586,8 +590,8 @@ VALUES
 		15,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25 13:00:00',
-		'2025-07-25 13:00:00',
+		'2025-07-25 16:00:00',
+		'2025-07-25 16:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -598,8 +602,8 @@ VALUES
 		16,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25 16:00:00',
-		'2025-07-25 16:00:00',
+		'2025-07-25 13:00:00',
+		'2025-07-25 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -610,8 +614,8 @@ VALUES
 		17,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-25 13:00:00',
-		'2025-07-25 13:00:00',
+		'2025-07-26 10:00:00',
+		'2025-07-26 10:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -634,8 +638,8 @@ VALUES
 		19,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26 10:00:00',
-		'2025-07-26 10:00:00',
+		'2025-07-26 13:00:00',
+		'2025-07-26 13:00:00',
 		'Grote Markt, Haarlem',
 		17.50,
 		12,
@@ -656,18 +660,6 @@ VALUES
 	),
 	(
 		21,
-		'Stroll through history',
-		'Explore the beautiful city of Haarlem with a guided walk.',
-		'2025-07-26 13:00:00',
-		'2025-07-26 13:00:00',
-		'Grote Markt, Haarlem',
-		17.50,
-		12,
-		'Stroll_through_history.png',
-		'A Stroll through History'
-	),
-	(
-		22,
 		'Stroll through history',
 		'Explore the beautiful city of Haarlem with a guided walk.',
 		'2025-07-26 16:00:00',

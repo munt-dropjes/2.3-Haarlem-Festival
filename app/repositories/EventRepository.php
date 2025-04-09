@@ -41,7 +41,7 @@ class EventRepository extends BaseRepository {
                         OR UPPER(Location) LIKE UPPER(CONCAT('%', :search, '%'))
                         OR UPPER(Category) LIKE UPPER(CONCAT('%', :search, '%'))
                     )
-                    ORDER BY Date
+                    ORDER BY StartTime
                     LIMIT :limit
                     OFFSET :offset;";
             $stmt = $this->connection->prepare($sql);
