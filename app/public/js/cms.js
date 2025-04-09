@@ -97,7 +97,7 @@ function loadEditEventModalCMS(modalID) {
         var description = button.getAttribute('data-description');
         var starttime = button.getAttribute('data-starttime');
         var endtime = button.getAttribute('data-endtime');
-        var duration = button.getAttribute('data-duration');
+        var tickets = button.getAttribute('data-tickets');
         var location = button.getAttribute('data-location');
         var price = button.getAttribute('data-price');
         var category = button.getAttribute('data-category');
@@ -107,7 +107,7 @@ function loadEditEventModalCMS(modalID) {
         var modalDescriptionInput = updateEventModal.querySelector('#description');
         var modalStarttimeInput = updateEventModal.querySelector('#starttime');
         var modalEndtimeInput = updateEventModal.querySelector('#endtime');
-        var modalDurationInput = updateEventModal.querySelector('#duration');
+        var modalTicketsInput = updateEventModal.querySelector('#tickets');
         var modalLocationInput = updateEventModal.querySelector('#location');
         var modalPriceInput = updateEventModal.querySelector('#price');
         var modalCategorySelect = updateEventModal.querySelector('#role');
@@ -117,7 +117,7 @@ function loadEditEventModalCMS(modalID) {
         if (modalDescriptionInput) modalDescriptionInput.value = description;
         if (modalStarttimeInput) modalStarttimeInput.value = starttime;
         if (modalEndtimeInput) modalEndtimeInput.value = endtime;
-        if (modalDurationInput) modalDurationInput.value = duration;
+        if (modalTicketsInput) modalTicketsInput.value = tickets;
         if (modalLocationInput) modalLocationInput.value = location;
         if (modalPriceInput) modalPriceInput.value = price;
         if (modalCategorySelect) modalCategorySelect.value = category;

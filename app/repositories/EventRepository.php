@@ -10,6 +10,7 @@ class EventRepository extends BaseRepository {
     // ~~Create~~
     public function insertEvent($event) : Event {
         try {
+            print_r($event);
             $sql = "INSERT INTO Events (Name, Description, StartTime, EndTime, Location, Price, Category, AvailableTickets, ImageName) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($sql);

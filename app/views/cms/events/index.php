@@ -43,6 +43,7 @@
                             <th>Location</th>
                             <th>Price</th>
                             <th>Category</th>
+                            <th>Available Tickets</th>
                             <th>Status</th>
                             <th>Actions</th>
                         </tr>
@@ -57,6 +58,7 @@
                                 <td><?= $event->getLocation() ?></td>
                                 <td><?= $event->getPrice() ?></td>
                                 <td><?= $event->getCategory() ?></td>
+                                <td><?= $event->getAvailableTickets() ?></td>
                                 <td><?= $event->getPrice() > 0 ? 'Available' : 'Sold out' ?></td>
                                 <td>
                                     <button
@@ -69,9 +71,9 @@
                                         data-description="<?= htmlspecialchars($event->getDescription()); ?>"
                                         data-starttime="<?= htmlspecialchars($event->getStartTime()); ?>"
                                         data-endtime="<?= htmlspecialchars($event->getEndTime()); ?>"
-                                        data-duration="<?= htmlspecialchars($event->getDuration()); ?>"
                                         data-location="<?= htmlspecialchars($event->getLocation()); ?>"
                                         data-price="<?= htmlspecialchars($event->getPrice()); ?>"
+                                        data-tickets="<?= htmlspecialchars($event->getAvailableTickets()); ?>"
                                         data-category="<?= htmlspecialchars($event->getCategory()); ?>">
                                         Edit
                                     </button>
@@ -141,10 +143,6 @@
                                 <input type="datetime" class="form-control" id="endtime" name="endtime" required>
                             </div>
                             <div class="modal-group">
-                                <label for="duration">Duration</label>
-                                <input type="text" class="form-control" id="duration" name="duration" required>
-                            </div>
-                            <div class="modal-group">
                                 <label for="duration">Location</label>
                                 <input type="text" class="form-control" id="location" name="location" required>
                             </div>
@@ -203,16 +201,16 @@
                                 <input type="datetime" class="form-control" id="endtime" name="endtime" required>
                             </div>
                             <div class="modal-group">
-                                <label for="duration">Duration</label>
-                                <input type="text" class="form-control" id="duration" name="duration" required>
-                            </div>
-                            <div class="modal-group">
                                 <label for="duration">Location</label>
                                 <input type="text" class="form-control" id="location" name="location" required>
                             </div>
                             <div class="modal-group">
                                 <label for="price">Price</label>
                                 <input type="text" class="form-control" id="price" name="price" required>
+                            </div>
+                            <div class="modal-group">
+                                <label for="duration">Available Tickets</label>
+                                <input type="text" class="form-control" id="tickets" name="tickets" required>
                             </div>
                             <div class="modal-group">
                                 <label for="category">Category</label>
