@@ -960,9 +960,11 @@ h3 {
 
 .stroll-swiper .swiper-slide img {
     display: block;
-    max-width: 70% !important;
+    max-width: 80% !important;
     max-height: auto !important; 
     object-fit: fill;
+	object-position: center;
+	margin: 0 auto; 
 	border-radius: 30px;
 }
 
