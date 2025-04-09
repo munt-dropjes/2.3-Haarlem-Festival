@@ -39,16 +39,4 @@ class StrollController extends Controller
         $images = glob($serverPath . "/*.{jpg,jpeg,png,gif,JPG,JPEG,PNG,GIF}", GLOB_BRACE);
         $this->view('stroll/detail', ['detail' => $detail, 'images' => $images, 'eventName' => $eventName]);
     }
-
-    public function addEvent()
-    {
-        if ($_SERVER['REQUEST_METHOD'] = 'POST') {
-            $userID = $_SESSION['user']->getId();
-            $eventID = $_POST['eventID'];
-            $quantity = $_POST['quantity'];
-            $this->shoppingCartService->addItem($userID, $eventID, $quantity);
-            header('Location: /shoppingcart');
-            exit();
-        }
-    }
 }

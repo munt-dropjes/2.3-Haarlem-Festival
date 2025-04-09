@@ -389,3 +389,21 @@ function addToCart(itemId, quantity = 1, isFamilyTicket = false) {
 		})
 		.catch(error => console.error("Error:", error));
 }
+
+
+// stroll buy button hide/show
+
+function toggleBuyButton(selectElement, eventID) {
+    const selectedValue = selectElement.value;
+    const buyButton = document.getElementById(`buy-button-${eventID}`);
+
+    if (selectedValue === "regular") {
+        buyButton.setAttribute("onclick", `addToCart(${eventID}, 1, false)`);
+        buyButton.style.display = "block";
+    } else if (selectedValue === "family") {
+        buyButton.setAttribute("onclick", `addToCart(${eventID}, 1, true)`);
+        buyButton.style.display = "block";
+    } else {
+        buyButton.style.display = "none";
+    }
+}
