@@ -61,6 +61,7 @@ class ComposerStaticInit8c9d6bbe85511cd5cb5caa87d87255b6
         'chillerlan\\QRCode\\' => 
         array (
             0 => __DIR__ . '/..' . '/chillerlan/php-qrcode/src',
+        ),
         'Svg\\' => 
         array (
             0 => __DIR__ . '/..' . '/dompdf/php-svg-lib/src/Svg',
@@ -120,7 +121,7 @@ class ComposerStaticInit8c9d6bbe85511cd5cb5caa87d87255b6
         'Config\\' => 
         array (
             0 => __DIR__ . '/../..' . '/config',
-        ),
+        )
     );
 
     public static $prefixesPsr0 = array (
