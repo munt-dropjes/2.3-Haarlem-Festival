@@ -88,7 +88,7 @@ class DanceRepository extends BaseRepository
 	public function getDanceArtistEventsById(int $id): array
 	{
 		try {
-			$sql = "SELECT Events.`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `AvailableTickets` FROM Dance INNER JOIN Events ON Dance.EventID = Events.EventID WHERE Dance.ArtistID = :id";
+			$sql = "SELECT Events.`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets` FROM Dance INNER JOIN Events ON Dance.EventID = Events.EventID WHERE Dance.ArtistID = :id";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute(['id' => $id]);
 			$obj = $stmt->fetchAll(PDO::FETCH_CLASS, Event::class);

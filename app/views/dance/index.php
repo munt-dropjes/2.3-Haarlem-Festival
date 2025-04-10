@@ -13,7 +13,7 @@
 				<div class="swiper-wrapper">
 					<?php foreach ($artists as $artist):
 						/** @var \Models\Artist $artist */ ?>
-						<a href="/dance/hardwell" class="swiper-slide swiper-slide-normal card overflow-hidden rounded-4">
+						<a href="/dance/<?= $artist->getName() ?>" class="swiper-slide swiper-slide-normal card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
 								<img class="ArtistImage card-image-top" src="/images/<?= $artist->getImageName() ?>"
 									alt="">
