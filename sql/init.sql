@@ -124,10 +124,10 @@ CREATE TABLE `Tickets` (
 	`UserID` INT(11) NOT NULL,
 	`isFamilyTicket` TINYINT(1) NOT NULL DEFAULT 0,
 	`Quantity` INT(11) NOT NULL,
-	`QRCode` VARCHAR(255) NOT NULL DEFAULT NULL,
+	`QRCode` VARCHAR(255) NULL DEFAULT NULL,
 	`IsScanned` BOOLEAN NOT NULL DEFAULT 0,
 	`Status` enum('Valid', 'Scanned', 'Cancelled') NOT NULL,
-	`PurchasedAt` datetime NOT NULL,
+	`PurchasedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
 	`PaymentStatus'` enum('Completed', 'Failed', 'Pending') NOT NULL
 );
 
