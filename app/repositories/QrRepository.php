@@ -15,7 +15,7 @@ class QrRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getQrCodeByTicket($ticket) : ?Ticket
+    public function getQrCodeByTicket($ticket)
     {
         $sql = "SELECT * FROM Tickets WHERE TicketID = :ticketID";
         $stmt = $this->connection->prepare($sql);
