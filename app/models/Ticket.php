@@ -2,27 +2,63 @@
 
 namespace models;
 
-class Ticket {
+class Ticket implements \JsonSerializable{
     private $ticketID;
     private $eventID;
     private $userID;
     private $qrCode;
+    private $IsScanned;
     private $status;
     private $purchasedAt;
     private $eventName;
     private $eventDetails = [];
 
-    public function __construct($ticketID, $eventID, $userID, $qrCode, $status, $purchasedAt, $eventName, $eventDetails = []) {
+    public function __construct($ticketID, $eventID, $userID, $qrCode, $IsScanned, $status, $purchasedAt, $eventName, $eventDetails = []) {
         $this->ticketID = $ticketID;
         $this->eventID = $eventID;
         $this->userID = $userID;
         $this->qrCode = $qrCode;
+        $this->IsScanned = $IsScanned;
         $this->status = $status;
         $this->purchasedAt = $purchasedAt;
         $this->eventName = $eventName;
         $this->eventDetails = $eventDetails;
     }
 
+    public function jsonSerialize(): array {
+        return [
+            'ticketID' => $this->ticketID,
+            'eventID' => $this->eventID,
+            'userID' => $this->userID,
+            'qrCode' => $this->qrCode,
+            'IsScanned' => $this->IsScanned,
+            'status' => $this->status,
+            'purchasedAt' => $this->purchasedAt,
+            'eventName' => $this->eventName,
+            'eventDetails' => $this->eventDetails,
+        ];
+    }
+
+    public static function unserialize(array $data): self {
+        return new self(
+            $data['ticketID'] ?? null,
+            $data['eventID'] ?? null,
+            $data['userID'] ?? null,
+            $data['qrCode'] ?? null,
+            $data['IsScanned'] ?? null,
+            $data['status'] ?? null,
+            $data['purchasedAt'] ?? null,
+            $data['eventName'] ?? null,
+            $data['eventDetails'] ?? []
+        );
+    }
+
+    public function setIsScanned($IsScanned) {
+        $this->IsScanned = $IsScanned;
+    }
+    public function getIsScanned() {
+        return $this->IsScanned;
+    }
     public function getTicketID() {
         return $this->ticketID;
     }
