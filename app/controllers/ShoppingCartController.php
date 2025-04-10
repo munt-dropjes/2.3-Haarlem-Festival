@@ -54,7 +54,6 @@ class ShoppingCartController extends Controller
 			// Use session shopping cart for guests
 			$_SESSION['shoppingCart'] = $_SESSION['shoppingCart'] ?? [];
 			$data['ShoppingCartItems'] = $this->shoppingCart->getMultipleEventsById($_SESSION['shoppingCart']);
-			print_r($_SESSION['shoppingCart']);
 		} else {
 			// Use database shopping cart for logged-in users
 			$this->user = $_SESSION['user'];

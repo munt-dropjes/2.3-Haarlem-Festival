@@ -81,6 +81,11 @@ $router->get('/home', 'HomeController@index');
     $router->get('/cms/homepage', 'HomeController@wysiwig');
     $router->post('/cms/homepage', 'HomeController@wysiwig');
 
+    //qr-codes
+    $router->get('/qr', 'QrController@index');
+    $router->get('/qr/create', 'QrController@create');
+    $router->post('/api/check-ticket', 'QrController@checkTicket');
+
     //payment with stripe / shoppingcart routes
     $router->get('/checkout', 'PaymentController@createSession');
     $router->get('/checkout/complete', 'PaymentController@success');

@@ -116,9 +116,9 @@ class ShoppingCartService
 		$this->shoppingCartRepository->selectAll($userID, $selected);
 	}
 
-	public function createPurchasedTickets(int $userID): void
+	public function createTickets(int $userID): void
 	{
-		$this->shoppingCartRepository->createPurchasedTickets($userID);
+		$this->shoppingCartRepository->createTickets($userID);
 	}
 
 	public function clearUserShoppingCartSelectedItems(int $userID): void
