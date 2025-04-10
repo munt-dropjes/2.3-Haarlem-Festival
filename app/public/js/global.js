@@ -145,19 +145,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
 	document.querySelectorAll(".pay-for-selected").forEach(function (control) {
 		control.addEventListener("click", function () {
-			fetch(`/shopping-cart/pay-for-selected`, {
-				method: "GET"
-			})
-				.then(response => response.json())
-				.then(data => {
-					if (data.success) {
-						ticketQuantity = newQuantity;
-						quantitySpan.textContent = newQuantity;
-					} else {
-						alert("Failed to update cart.");
-					}
-				})
-				.catch(error => console.error("Error:", error));
+			window.location.href = "/payment/checkout";
 		});
 	});
 
