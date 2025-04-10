@@ -4,18 +4,20 @@ namespace Controllers;
 
 use Services\PaymentService;
 use Services\TicketService;
+use Services\pdfService;
 use Enums\paymentEnum;
 
 class PaymentController extends Controller
 {
     private $paymentService;
     private $ticketService;
+    private $pdfService;
 
     public function __construct()
     {
         $this->paymentService = new PaymentService();
         $this->ticketService = new TicketService();
-
+        $this->pdfService = new pdfService();
     }
 
 
@@ -23,14 +25,13 @@ class PaymentController extends Controller
     //pass the amount and order id from the front end
     public function createSession()
     {
-        $amount = 1000; 
+        $amount = 1000;
         $orderId = 1;
-    
+
         try {
             $clientSecret = $this->paymentService->createIntent($amount, $orderId);
 
             $this->view('payment/index', ['clientSecret' => $clientSecret]);
-            
         } catch (\Exception $e) {
             http_response_code(500);
             echo json_encode(['error' => $e->getMessage()]);
@@ -61,23 +62,23 @@ class PaymentController extends Controller
             );
 
             switch ($event->type) {
-                case 'checkout.session.completed':
-                    $session = $event->data->object; 
+                case 'payment_intent.created':
+                    $session = $event->data->object;
                     $this->handleSuccessfulCheckout($session);
                     break;
 
                 case 'payment_intent.payment_failed':
-                    $paymentIntent = $event->data->object; 
+                    $paymentIntent = $event->data->object;
                     $this->handleFailedPayment($paymentIntent);
                     break;
-                
+
                 case 'payment_intent.succeeded':
-                    $paymentIntent = $event->data->object; 
+                    $paymentIntent = $event->data->object;
                     $this->handleSuccessfulPayment($paymentIntent);
                     break;
 
-                case 'payment_intent.processing':
-                    $paymentIntent = $event->data->object; 
+                case 'payment_intent.requires_action':
+                    $paymentIntent = $event->data->object;
                     $this->handleProcessingPayment($paymentIntent);
                     break;
                 default:
@@ -99,27 +100,24 @@ class PaymentController extends Controller
     {
         $orderId = $paymentIntent->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::COMPLETED);
-        file_put_contents('webhook.log', "Payment successful for order ID: $orderId" . PHP_EOL, FILE_APPEND);
     }
 
     private function handleFailedPayment($paymentIntent)
     {
         $orderId = $paymentIntent->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::FAILED);
-        file_put_contents('webhook.log', "Payment failed for order ID: $orderId" . PHP_EOL, FILE_APPEND);
     }
 
     private function handleProcessingPayment($paymentIntent)
     {
         $orderId = $paymentIntent->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::PENDING);
-        file_put_contents('webhook.log', "Payment processing for order ID: $orderId" . PHP_EOL, FILE_APPEND);
     }
 
     private function handleSuccessfulCheckout($session)
     {
         $orderId = $session->metadata->order_id;
         $this->ticketService->updatePaymentStatus($orderId, paymentEnum::PENDING);
-        file_put_contents('webhook.log', "Checkout session completed for order ID: $orderId" . PHP_EOL, FILE_APPEND);
     }
+
 }

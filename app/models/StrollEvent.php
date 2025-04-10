@@ -14,6 +14,10 @@ class StrollEvent {
     private $time;
     private $location;
     private $price;
+    private $startTime;
+    private $endTime;
+    private $imageName;
+    private $category;
 
     public function getEventID() {
         return $this->eventID;
@@ -102,6 +106,35 @@ class StrollEvent {
 
     public function setPrice($price) {
         $this->price = $price;
+    }
+
+
+    public function getStartTime() {
+        return $this->startTime;
+    }
+
+    public function setStartTime($startTime) {
+        $this->startTime = $startTime;
+    }
+    public function getEndTime() {
+        return $this->endTime;
+    }
+
+    public function setEndTime($endTime) {
+        $this->endTime = $endTime;
+    }
+
+    public function getImageName() {
+        return $this->imageName;
+    }
+    public function setImageName($imageName) {
+        $this->imageName = $imageName;
+    }
+    public function getCategory() {
+        return $this->category;
+    }
+    public function setCategory($category) {
+        $this->category = $category;
     }
 }
 ?>

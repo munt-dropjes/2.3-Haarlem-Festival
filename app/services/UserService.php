@@ -27,7 +27,7 @@ class UserService {
         return $this->userRepository->getAllUsers($limit, $offset, $search);
     }
 
-    public function getUserByEmail($email) : User {
+    public function getUserByEmail($email) : ?User {
         return $this->userRepository->getUserByEmail($email);
     }
 

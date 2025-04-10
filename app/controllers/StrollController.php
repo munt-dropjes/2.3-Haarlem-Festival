@@ -17,6 +17,7 @@ class StrollController extends Controller {
             $data['details'] = $this->strollService->getRoute();
         }catch(\Exception $e){
             $this->fourOFour();
+            return;
         }
         $this->view('stroll/index', $data);
 

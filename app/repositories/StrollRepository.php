@@ -21,9 +21,24 @@ class StrollRepository extends BaseRepository
 
     public function getAll()
     {
-        $sql = "SELECT s.*, e.Name, e.Description, e.Date, e.Time, e.Location, e.Price, e.AvailableTickets 
-                FROM Stroll s 
-                JOIN Events e ON s.EventID = e.EventID";
+        $sql = "SELECT 
+                s.EventID,
+                s.Language,
+                s.Guide,
+                s.FamilyTicketPrice,
+                e.Name,
+                e.Description,
+                e.StartTime,
+                e.EndTime,
+                e.Location,
+                e.Price,
+                e.AvailableTickets,
+                e.ImageName,
+                e.Category
+            FROM Stroll s
+            JOIN Events e ON s.EventID = e.EventID
+            WHERE e.Category = 'A Stroll through History'";
+
         $stmt = $this->connection->query($sql);
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
 
@@ -36,11 +51,13 @@ class StrollRepository extends BaseRepository
             $strollEvent->setFamilyTicketPrice($row['FamilyTicketPrice']);
             $strollEvent->setName($row['Name']);
             $strollEvent->setDescription($row['Description']);
-            $strollEvent->setDate($row['Date']);
-            $strollEvent->setTime($row['Time']);
+            $strollEvent->setStartTime($row['StartTime']);
+            $strollEvent->setEndTime($row['EndTime']);
             $strollEvent->setLocation($row['Location']);
             $strollEvent->setPrice($row['Price']);
             $strollEvent->setAvailableTickets($row['AvailableTickets']);
+            $strollEvent->setImageName($row['ImageName']);
+            $strollEvent->setCategory($row['Category']);
             $strollEvents[] = $strollEvent;
         }
 
@@ -78,31 +95,36 @@ class StrollRepository extends BaseRepository
 
     public function getRoute()
     {
-        $sql = "SELECT * FROM StrollDetail";
+        $sql = "SELECT 
+                EventID,
+                StopNumber,
+                StopName,
+                Description,
+                Adress AS Address,
+                BreakLocation,
+                mapName
+            FROM StrollDetail";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-
         if ($results) {
             $strollDetails = [];
-
             foreach ($results as $row) {
                 $strollDetail = new StrollDetail();
                 $strollDetail->setEventId($row['EventID']);
                 $strollDetail->setStopNumber($row['StopNumber']);
                 $strollDetail->setStopName($row['StopName']);
                 $strollDetail->setDescription($row['Description']);
-                $strollDetail->setAddress($row['Adress']);
+                $strollDetail->setAddress($row['Address']); // Corrected column alias
                 $strollDetail->setBreakLocation($row['BreakLocation']);
                 $strollDetail->setMapName($row['mapName']);
                 $strollDetails[] = $strollDetail;
             }
-
             return $strollDetails;
         }
         return null;
     }
-    
+
     public function getDetail($strollDetailStopNumber)
     {
         $sql = "SELECT * FROM StrollDetail WHERE StopNumber = :Stop";
@@ -126,4 +148,3 @@ class StrollRepository extends BaseRepository
         return null;
     }
 }
-?>

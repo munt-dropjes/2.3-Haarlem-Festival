@@ -43,7 +43,8 @@
 							</div>
 
 							<div class="card-body pt-0 fw-bold">
-								<button class="CTA my-3 py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)"
+									class="CTA my-3 py-2 px-5">Buy</button>
 								<p class="card-text">Duration: <?= $event->getDuration() ?></p>
 								<p class="card-text">Tickets avilable: <?= $event->getAvailableTickets() ?></p>
 								<p class="card-text">Price: &euro;<?= $event->getPrice() ?></p>
@@ -73,7 +74,8 @@
 							</div>
 
 							<div class="card-body pt-0 fw-bold">
-								<button class="CTA my-3 py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)"
+									class="CTA my-3 py-2 px-5">Buy</button>
 								<p class="card-text">Duration: <?= $event->getDuration() ?></p>
 								<p class="card-text">Tickets avilable: <?= $event->getAvailableTickets() ?></p>
 								<p class="card-text">Price: &euro;<?= $event->getPrice() ?></p>
@@ -103,7 +105,8 @@
 							</div>
 
 							<div class="card-body pt-0 fw-bold">
-								<button class="CTA my-3 py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)"
+									class="CTA my-3 py-2 px-5">Buy</button>
 								<p class="card-text">Duration: <?= $event->getDuration() ?></p>
 								<p class="card-text">Tickets avilable: <?= $event->getAvailableTickets() ?></p>
 								<p class="card-text">Price: &euro;<?= $event->getPrice() ?></p>
@@ -137,7 +140,7 @@
 										&euro;<?= $event->getPrice() ?>
 									</span>
 								</i>
-								<button class="CTA py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)" class="CTA py-2 px-5">Buy</button>
 							</div>
 						</div>
 					<?php endforeach; ?>

@@ -34,6 +34,12 @@ class CreateAccountController extends Controller {
 
             if($recaptcha['success'] == 1 AND $recaptcha['score'] >= 0.5 AND $recaptcha['action'] == 'submit'){
                 try{
+                    if (!$this->checkEmail(htmlspecialchars(strtolower($_POST['email'])))) {
+                        throw new \Exception('Email already in use!');
+                    }
+                    if (!$this->verifyNewPassword(htmlspecialchars($_POST['password']))) {
+                        throw new \Exception('Password must be at least 8 characters long and contain at least one special character and one number!');
+                    }
                     $user = $this->createUser();
                     $this->userService->insertUser($user);
                     $this->mailerService->sendMail($user->getEmail(), $user->getName(), 'Account Created', 'Your account has been created successfully!');
@@ -55,5 +61,27 @@ class CreateAccountController extends Controller {
         $country = htmlspecialchars($_POST['country']);
         return $this->userService->create($email, $name, $password, $phone, $country);
     }
+
+    
+	private function verifyNewPassword($password)
+	{
+		if (
+			strlen($password) >= 8 &&
+			preg_match('/[!@#$%^&*()_+=\-{};:"<>,.\/?]/', $password) &&
+			preg_match('/\d/', $password)
+		) {
+			return true;
+		}
+		return false;
+	}
+
+    private function checkEmail($email)
+	{
+		$check = $this->userService->getUserByEmail($email);
+		if ($check === null) {
+			return true;
+		}
+		return false;
+	}
 }
 ?>

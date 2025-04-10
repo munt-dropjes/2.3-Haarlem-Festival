@@ -10,15 +10,14 @@ class EventRepository extends BaseRepository {
     // ~~Create~~
     public function insertEvent($event) : Event {
         try {
-            $sql = "INSERT INTO Events (Name, Description, Date, Time, Duration, Location, Price, Category, AvailableTickets, ImageName) 
+            $sql = "INSERT INTO Events (Name, Description, StartTime, EndTime, Location, Price, Category, AvailableTickets, ImageName) 
                     VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
                 $event->getName(),
                 $event->getDescription(),
-                $event->getDate(),
-                $event->getTime(),
-                $event->getDuration(),
+                $event->getStartTime(),
+                $event->getEndTime(),
                 $event->getLocation(),
                 $event->getPrice(),
                 $event->getCategory(),
@@ -100,15 +99,14 @@ class EventRepository extends BaseRepository {
     public function updateEvent($event) : Event {
         try {
             $sql = "UPDATE Events 
-                    SET Name = ?, Description = ?, Date = ?, Time = ?, Duration = ?, Location = ?, Price = ?, Category = ?
+                    SET Name = ?, Description = ?, StartTime = ?, EndTime = ?, Location = ?, Price = ?, Category = ?
                     WHERE EventID = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
                 $event->getName(),
                 $event->getDescription(),
-                $event->getDate(),
-                $event->getTime(),
-                $event->getDuration(),
+                $event->getStartTime(),
+                $event->getEndTime(),
                 $event->getLocation(),
                 $event->getPrice(),
                 $event->getCategory(),
