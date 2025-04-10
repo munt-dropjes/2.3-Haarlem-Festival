@@ -81,7 +81,7 @@ class EventRepository extends BaseRepository {
             $fetchedEvent = $stmt->fetch();
             return $fetchedEvent ?: null;
         } catch (Exception $e) {
-            throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get event by id: " . $id);
+            throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get event by id: " . $event->getEventID());
         }
     }
 
