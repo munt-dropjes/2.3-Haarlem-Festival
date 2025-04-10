@@ -54,6 +54,7 @@ class ShoppingCartController extends Controller
 			// Use session shopping cart for guests
 			$_SESSION['shoppingCart'] = $_SESSION['shoppingCart'] ?? [];
 			$data['ShoppingCartItems'] = $this->shoppingCart->getMultipleEventsById($_SESSION['shoppingCart']);
+			print_r($_SESSION['shoppingCart']);
 		} else {
 			// Use database shopping cart for logged-in users
 			$this->user = $_SESSION['user'];
@@ -70,11 +71,11 @@ class ShoppingCartController extends Controller
 				$isFamilyTicket = filter_var($isFamilyTicket, FILTER_VALIDATE_BOOL);
 			}
 
-			if ($quantity < 0) {
+			if ($quantity < 1) {
 				throw new Exception("Quantity cannot be less than 1");
 			}
 
-			if ($eventID < 0) {
+			if ($eventID < 1) {
 				throw new Exception("Invalid event ID");
 			}
 
@@ -85,8 +86,10 @@ class ShoppingCartController extends Controller
 				}
 
 				$found = false;
+
 				foreach ($_SESSION['shoppingCart'] as &$item) {
-					if ($item['eventID'] === $eventID) {
+					if ($item['eventID'] === $eventID && filter_var($item['isFamilyTicket'], FILTER_VALIDATE_BOOL) === $isFamilyTicket) {
+						// If the item already exists in the cart, update the quantity
 						$item['quantity'] += $quantity;
 						$found = true;
 						break;
@@ -97,8 +100,8 @@ class ShoppingCartController extends Controller
 					$_SESSION['shoppingCart'][] = [
 						'eventID' => $eventID,
 						'quantity' => $quantity,
-						'selected' => false,
-						'isFamilyTicket' => $isFamilyTicket
+						'selected' => "false",
+						'isFamilyTicket' => $isFamilyTicket ? "true" : "false"
 					];
 				}
 
@@ -117,11 +120,19 @@ class ShoppingCartController extends Controller
 		}
 	}
 
-	public function updateQuantity(int $itemID, int $quantity)
+	public function updateQuantity(int $eventID, int $quantity, $isFamilyTicket = false)
 	{
 		try {
+			if (isset($isFamilyTicket)) {
+				$isFamilyTicket = filter_var($isFamilyTicket, FILTER_VALIDATE_BOOL);
+			}
+
 			if ($quantity < 1) {
 				throw new Exception("Quantity cannot be less than 1");
+			}
+
+			if ($eventID < 1) {
+				throw new Exception("Invalid item ID");
 			}
 
 			if (!isset($this->user)) {
@@ -131,8 +142,9 @@ class ShoppingCartController extends Controller
 				}
 
 				$found = false;
+
 				foreach ($_SESSION['shoppingCart'] as &$item) {
-					if ($item['eventID'] === $itemID) {
+					if ($item['eventID'] === $eventID && filter_var($item['isFamilyTicket'], FILTER_VALIDATE_BOOL) === $isFamilyTicket) {
 						$item['quantity'] = $quantity;
 						$found = true;
 						break;
@@ -147,7 +159,7 @@ class ShoppingCartController extends Controller
 				exit();
 			} else {
 				// If the user is logged in, update the database shopping cart
-				$newQuantity = $this->shoppingCart->updateQuantity($this->user->getID(), $itemID, $quantity);
+				$newQuantity = $this->shoppingCart->updateQuantity($this->user->getID(), $eventID, $quantity, $isFamilyTicket);
 
 				echo json_encode(['success' => true, 'newQuantity' => $newQuantity]);
 				exit();
@@ -158,9 +170,17 @@ class ShoppingCartController extends Controller
 		}
 	}
 
-	public function removeItem(int $itemID)
+	public function removeItem(int $itemID, $isFamilyTicket = false)
 	{
 		try {
+			if (isset($isFamilyTicket)) {
+				$isFamilyTicket = filter_var($isFamilyTicket, FILTER_VALIDATE_BOOL);
+			}
+
+			if ($itemID < 1) {
+				throw new Exception("Invalid item ID");
+			}
+
 			if (!isset($this->user)) {
 				// If the user is not logged in, remove the item from the session shopping cart
 				if (!isset($_SESSION['shoppingCart'])) {
@@ -169,7 +189,7 @@ class ShoppingCartController extends Controller
 
 				$found = false;
 				foreach ($_SESSION['shoppingCart'] as $key => $item) {
-					if ($item['eventID'] === $itemID) {
+					if ($item['eventID'] === $itemID && filter_var($item['isFamilyTicket'], FILTER_VALIDATE_BOOL) === $isFamilyTicket) {
 						unset($_SESSION['shoppingCart'][$key]);
 						$found = true;
 						break;
@@ -184,7 +204,7 @@ class ShoppingCartController extends Controller
 				exit();
 			} else {
 				// If the user is logged in, remove the item from the database shopping cart
-				$this->shoppingCart->removeItem($this->user->getID(), $itemID);
+				$this->shoppingCart->removeItem($this->user->getID(), $itemID, $isFamilyTicket);
 
 				echo json_encode(['success' => true]);
 				exit();
@@ -195,11 +215,22 @@ class ShoppingCartController extends Controller
 		}
 	}
 
-	public function selectItem(int $itemID, mixed $selected)
+	public function selectItem(int $itemID, mixed $selected, $isFamilyTicket = false)
 	{
 		try {
-			// Normalize the boolean value
-			$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
+			if (isset($isFamilyTicket)) {
+				$isFamilyTicket = filter_var($isFamilyTicket, FILTER_VALIDATE_BOOL);
+			}
+
+			if ($itemID < 1) {
+				throw new Exception("Invalid item ID");
+			}
+
+			if (!isset($selected)) {
+				throw new Exception("Selected value is required");
+			} else {
+				$selected = filter_var($selected, FILTER_VALIDATE_BOOL);
+			}
 
 			if (!isset($this->user)) {
 				// If the user is not logged in, update the session shopping cart
@@ -209,8 +240,8 @@ class ShoppingCartController extends Controller
 
 				$found = false;
 				foreach ($_SESSION['shoppingCart'] as &$item) {
-					if ($item['eventID'] === $itemID) {
-						$item['selected'] = $selected;
+					if ($item['eventID'] === $itemID && filter_var($item['isFamilyTicket'], FILTER_VALIDATE_BOOL) === $isFamilyTicket) {
+						$item['selected'] = $selected ? "true" : "false";
 						$found = true;
 						break;
 					}
@@ -224,7 +255,7 @@ class ShoppingCartController extends Controller
 				exit();
 			} else {
 				// If the user is logged in, update the database shopping cart
-				$this->shoppingCart->selectItem($this->user->getID(), $itemID, $selected);
+				$this->shoppingCart->selectItem($this->user->getID(), $itemID, $selected, $isFamilyTicket);
 
 				echo json_encode(['success' => true, 'selected' => $selected]);
 				exit();
