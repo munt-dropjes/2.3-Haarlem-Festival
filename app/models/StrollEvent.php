@@ -7,7 +7,8 @@ class StrollEvent {
     private $language;
     private $guide;
     private $familyTicketPrice;
-    private $availableTickets;
+    private int $TotalTickets;
+	private int $SoldTickets;
     private $name;
     private $description;
     private $date;
@@ -51,13 +52,19 @@ class StrollEvent {
         $this->familyTicketPrice = $familyTicketPrice;
     }
 
-    public function getAvailableTickets() {
-        return $this->availableTickets;
+    public function setTotalTickets($TotalTickets) {
+        $this->TotalTickets = $TotalTickets;
     }
 
-    public function setAvailableTickets($availableTickets) {
-        $this->availableTickets = $availableTickets;
+    public function setSoldTickets($SoldTickets) {
+        $this->SoldTickets = $SoldTickets;
     }
+
+    public function getAvailableTickets(): int
+	{
+		$AvailableTickets = $this->TotalTickets - $this->SoldTickets;
+		return $AvailableTickets < 0 ? 0 : $AvailableTickets;
+	}
 
     public function getName() {
         return $this->name;
