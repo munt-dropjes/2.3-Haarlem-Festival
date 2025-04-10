@@ -129,9 +129,11 @@ CREATE TABLE `Tickets` (
 
 Create Table `PurchasedTickets` (
 	`id` INT(11) NOT NULL,
+	`OrderID` INT(11) NOT NULL,
+	`UserID` INT(11) NOT NULL,
 	`EventID` INT(11) NOT NULL,
-	`UserId` INT(11) NOT NULL,
 	`Quantity` INT(11) NOT NULL,
+	`isFamilyTicket` TINYINT(1) NOT NULL DEFAULT 0,
 	`PurchasedAt` datetime NOT NULL DEFAULT current_timestamp()
 );
 

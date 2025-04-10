@@ -13,6 +13,11 @@ class ShoppingCartService
 		$this->shoppingCartRepository = new ShoppingCartRepository();
 	}
 
+	public function makeOrder(int $userID): int
+	{
+		return $this->shoppingCartRepository->makeOrder($userID);
+	}
+
 	public function addItem(int $userID, int $eventID, int $quantity, bool $isFamilyTicket): int
 	{
 		if ($quantity < 1) {
@@ -20,6 +25,17 @@ class ShoppingCartService
 		}
 
 		return $this->shoppingCartRepository->addItem($userID, $eventID, $quantity, $isFamilyTicket);
+	}
+
+	public function getUserShoppingCartOrder(int $userID): array
+	{
+		$shoppingCartItems = $this->shoppingCartRepository->getUserShoppingCartItems($userID);
+
+		if (!$shoppingCartItems) {
+			return [];
+		}
+
+		return $shoppingCartItems;
 	}
 
 	public function getUserShoppingCartItems(int $userID): array
@@ -64,5 +80,20 @@ class ShoppingCartService
 	public function selectAll(int $userID, bool $selected): void
 	{
 		$this->shoppingCartRepository->selectAll($userID, $selected);
+	}
+
+	public function createPurchasedTickets(int $userID): void
+	{
+		$this->shoppingCartRepository->createPurchasedTickets($userID);
+	}
+
+	public function clearUserShoppingCartSelectedItems(int $userID): void
+	{
+		$this->shoppingCartRepository->clearUserShoppingCartSelectedItems($userID);
+	}
+
+	public function clearUserShoppingCart(int $userID): void
+	{
+		$this->shoppingCartRepository->clearShoppingCart($userID);
 	}
 }

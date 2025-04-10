@@ -63,19 +63,19 @@ class ShoppingCartController extends Controller
 		$this->view('shopping-cart/index', $data);
 	}
 
-	public function checkout()
-	{
-		$data = [];
+	// public function checkout()
+	// {
+	// 	$data = [];
 
-		if (!isset($this->user)) {
-			header('Location: /login');
-		}
+	// 	if (!isset($this->user)) {
+	// 		header('Location: /login');
+	// 	}
 
-		$this->user = $_SESSION['user'];
-		$data['ShoppingCartItems'] = $this->shoppingCart->getUserShoppingCartItems($this->user->getID());
+	// 	$this->user = $_SESSION['user'];
+	// 	$data['ShoppingCartItems'] = $this->shoppingCart->getUserShoppingCartItems($this->user->getID());
 
-		$this->view('shopping-cart/checkout', $data);
-	}
+	// 	$this->view('shopping-cart/checkout', $data);
+	// }
 
 	public function addItem(int $eventID, int $quantity = 1, $isFamilyTicket = false)
 	{

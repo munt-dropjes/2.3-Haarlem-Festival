@@ -18,7 +18,7 @@
 					</div>
 
 					<div class="col rounded-3 row ticket-info p-4 mx-0 position-static">
-						<div class="col-12 col-md-7">
+						<div class="col-12">
 							<h3 class="fw-bold"><?= $item->getEvent()->getName() ?></h3>
 							<p>&#128205; <?= $item->getEvent()->getLocation() ?></p>
 							<p>&#128197;
@@ -31,24 +31,6 @@
 									<?= date('H:i', strtotime($item->getEvent()->getEndTime())) ?>
 								<?php endif; ?>
 							</p>
-						</div>
-
-						<div class="col d-flex flex-row justify-content-center align-items-center">
-							<!-- <p class="price">&euro;
-								<?= number_format($item->getEvent()->getPrice(), 2) ?>
-							</p> -->
-
-							<div class="d-flex align-items-center gap-3">
-								<span class="price fw-bold">
-									&euro; <?= number_format($item->getEvent()->getPrice(), 2) ?>
-								</span>
-
-								<div class="quantity-control d-flex align-items-center">
-									<button class="btn btn-increase rounded-circle p-0 fw-bold">+</button>
-									<span class="mx-2 fw-bold quantity"><?= $item->getQuantity() ?></span>
-									<button class="btn btn-decrease rounded-circle p-0 fw-bold">−</button>
-								</div>
-							</div>
 						</div>
 					</div>
 				</div>

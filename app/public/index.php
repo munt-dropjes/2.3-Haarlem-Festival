@@ -93,7 +93,7 @@ $router->get('/home', 'HomeController@index');
 
 // shopping cart
 $router->get('/shopping-cart', 'ShoppingCartController@index');
-$router->get('/shopping-cart/checkout', 'ShoppingCartController@checkout');
+$router->get('/payment/checkout', 'PaymentController@checkout');
 
 // shopping cart actions
 $router->get('/shopping-cart/add-item/{itemID}/{quantity}/{isFamilyTicket}', 'ShoppingCartController@addItem');
