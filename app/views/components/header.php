@@ -12,7 +12,7 @@
 
 		<div class="col-5 d-flex justify-content-end">
 			<div class="d-flex gap-4">
-				<a class="nav-button nav-item-icon border-0 rounded-circle p-3" href="/shopping-cart">
+				<a class="nav-button nav-item-icon border-0 rounded-circle p-3 d-none d-md-block" href="/shopping-cart">
 					<img src="/assets/icons/wishlist.svg" alt="">
 				</a>
 
@@ -39,5 +39,6 @@
 			<a href="/login">Login</a>
 			<a href="/createaccount">Create Account</a>
 		<?php endif; ?>
+		<a class="d-block d-md-none" href="/shopping-cart">Shopping cart</a>
 	</div>
 </header>

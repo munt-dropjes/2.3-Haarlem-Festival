@@ -31,11 +31,11 @@
             type="submit" 
             class="">Login</button>
         </div>
-        <div class="row">
-          <div class="mb-3 col-6">
+        <div class="row gap-3 m-0">
+          <div class="mb-3 p-0 col">
             <a href="/createaccount" class="submitbtn btn w-100">Create Account</a>
           </div>
-          <div class="mb-3 col-6">
+          <div class="mb-3 p-0 col">
             <a href="/forgotpassword" class="submitbtn btn w-100">Forgot Password</a>
           </div>
         </div>
