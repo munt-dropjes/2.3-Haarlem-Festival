@@ -3,17 +3,19 @@
 namespace Repositories;
 
 use Models\Home;
+use PDO;
 
 class HomeRepository extends BaseRepository
 {
-    public function getContent(): string
+    public function getContent(): Home
     {
         try {
 			$sql = "SELECT * FROM HomePage";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute();
-			$obj = $stmt->fetchAll(PDO::FETCH_CLASS, 'Models\Home');
-			return $obj;
+            $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\Home');
+            $homepage = $stmt->fetch();
+            return $homepage ?: null;
 		} catch (Exception $e) {
 			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get the homepage");
 		}

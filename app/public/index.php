@@ -78,6 +78,8 @@ $router->get('/home', 'HomeController@index');
     $router->post('/cms/events/delete', 'CmsEventController@delete');
     $router->post('/cms/events/edit', 'CmsEventController@update');
     $router->get('/cms/orders', 'CmsOrderController@index');
+    $router->get('/cms/homepage', 'HomeController@wysiwig');
+    $router->post('/cms/homepage', 'HomeController@wysiwig');
 
     //payment with stripe / shoppingcart routes
     $router->get('/checkout', 'PaymentController@createSession');

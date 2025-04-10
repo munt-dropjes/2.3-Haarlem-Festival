@@ -3,23 +3,24 @@
 namespace Services;
 
 use Models\Home;
+use Repositories\HomeRepository;
 
 class HomeService
 {
-    private Home $homeModel;
+    private HomeRepository $homeRepository;
 
     public function __construct()
     {
-        $this->homeModel = new Home();
+        $this->homeRepository = new HomeRepository();
     }
 
-    public function getContent(): string
+    public function getContent(): Home
     {
-        return $this->homeModel->getData();
+        return $this->homeRepository->getContent();
     }
 
     public function saveContent(string $data): void
     {
-        $this->homeModel->setData($data);
+        $this->homeRepository->saveContent($data);
     }
 }

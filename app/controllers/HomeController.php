@@ -15,13 +15,15 @@ class HomeController extends Controller {
     }
 
     public function index() {
-        $this->view('home/index', $this->homeService->getContent());
+        $this->view('home/index', ['homepage' => $this->homeService->getContent()]);
     }
 
     public function wysiwig() {
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             $this->homeService->saveContent($_POST['wysiwyg']);
         }
-        $this->wysiwygService->render($this->homeService->getContent(), '/home/wysiwig');
+        $homepage = $this->homeService->getContent();
+
+        $this->wysiwygService->render($homepage->getData(), '/home/wysiwig');
     }
 }

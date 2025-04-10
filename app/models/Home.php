@@ -3,15 +3,16 @@
 namespace Models;
 
 class Home{
-    private string $pageContent;
+    private int $id;
+    private string $data;
 
     public function getData(): string
     {
-        return $this->pageContent;
+        return $this->data;
     }
 
     public function setData(string $data): void
     {
-        $this->pageContent = $data;
+        $this->data = $data;
     }
 }
