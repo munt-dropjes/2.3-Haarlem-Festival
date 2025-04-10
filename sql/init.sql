@@ -449,13 +449,12 @@ VALUES
 (18, 'The Nordanians', 'Informatie over The Nordanians.', 'Genre of bekendheid', 'https://open.spotify.com/track/example49', 'https://soundcloud.com/example49', 'https://open.spotify.com/track/example51', 0, 'Jazz', 0),
 (19, 'Lilith Merlot', 'Informatie over Lilith Merlot.', 'Genre of bekendheid', 'https://open.spotify.com/track/example52', 'https://soundcloud.com/example52', 'https://open.spotify.com/track/example54', 0, 'Jazz', 0),
 
-(20, 'Nicky Romero', 'Nicky Romero, geboren als Nick Rotteveel, is een Nederlandse DJ en muziekproducent uit Amerongen. Hij staat bekend om zijn energieke optredens en samenwerkingen met artiesten als Avicii en David Guetta.', 'Bekend van hits als "Toulouse" en "I Could Be The One".', 'https://open.spotify.com/track/1l6G6h6g6l6G6l6G6l6G6G', 'https://open.spotify.com/track/2m6M6m6m6M6m6M6m6M6m6M', 'https://open.spotify.com/track/3n6N6n6n6N6n6N6n6N6n6N', 'dance/armin-van-buuren.png', 'Dance', '0'),
-(21, 'Afrojack', 'Afrojack, geboren als Nick van de Wall, is een Nederlandse DJ en muziekproducent uit Spijkenisse. Hij staat bekend om zijn dynamische performances en diverse muziekstijl.', 'Bekend van tracks als "Take Over Control" en "Ten Feet Tall".', 'https://open.spotify.com/track/4o6O6o6o6O6o6O6o6O6o6O', 'https://open.spotify.com/track/5p6P6p6p6P6p6P6p6P6p6P', 'https://open.spotify.com/track/6q6Q6q6q6Q6q6Q6q6Q6q6Q', '0', 'Dance', '0'),
-(22, 'Tiësto', 'Tiësto, geboren als Tijs Michiel Verwest, is een legendarische Nederlandse DJ en muziekproducent uit Breda. Hij wordt beschouwd als een pionier in de elektronische dansmuziek.', 'Hits zoals "Red Lights" en "Wasted" hebben zijn status als top DJ bevestigd.', 'https://open.spotify.com/track/7r6R6r6r6R6r6R6r6R6r6R', 'https://open.spotify.com/track/8s6S6s6s6S6s6S6s6S6s6S', 'https://open.spotify.com/track/9t6T6t6t6T6t6T6t6T6t6T', '0', 'Dance', '0'),
-(23, 'Hardwell', 'Hardwell, geboren als Robbert van de Corput, is een Nederlandse DJ en muziekproducent uit Breda. Hij staat bekend om zijn energieke mainstage-optredens en big room house geluid.', 'Bekend van nummers als "Spaceman" en "Apollo".', 'https://open.spotify.com/track/1u6U6u6u6U6u6U6u6U6u6U', 'https://open.spotify.com/track/2v6V6v6v6V6v6V6v6V6v6V', 'https://open.spotify.com/track/3w6W6w6w6W6w6W6w6W6w6W', '0', 'Dance', '0'),
-(24, 'Armin van Buuren', 'Armin van Buuren is een invloedrijke Nederlandse DJ en muziekproducent uit Leiden, bekend om zijn wekelijkse radioshow "A State of Trance" en zijn bijdragen aan de trance muziek.', 'Hits zoals "This Is What It Feels Like" en "Blah Blah Blah" hebben zijn populariteit vergroot.', 'https://open.spotify.com/track/4x6X6x6x6X6x6X6x6X6x6X', 'https://open.spotify.com/track/5y6Y6y6y6Y6y6Y6y6Y6y6Y', 'https://open.spotify.com/track/6z6Z6z6z6Z6z6Z6z6Z6z6Z', '0', 'Dance', '0'),
-(25, 'Martin Garrix', 'Martin Garrix, geboren als Martijn Gerard Garritsen, is een Nederlandse DJ en muziekproducent uit Amstelveen. Hij staat bekend om zijn progressive house en big room house tracks.', 'Bekend van hits als "Animals" en "In the Name of Love".', 'https://open.spotify.com/track/7a6A6a6a6A6a6A6a6A6a6A', 'https://open.spotify.com/track/8b6B6b6b6B6b6B6b6B6b6B', 'https://open.spotify.com/track/9c6C6c6c6C6c6C6c6C6c6C', '0', 'Dance', '0');
-
+(20, 'Nicky Romero', 'Nicky Romero, geboren als Nick Rotteveel, is een Nederlandse DJ en muziekproducent uit Amerongen. Hij staat bekend om zijn energieke optredens en samenwerkingen met artiesten als Avicii en David Guetta.', 'Bekend van hits als "Toulouse" en "I Could Be The One".', 'https://open.spotify.com/track/1l6G6h6g6l6G6l6G6l6G6G', 'https://open.spotify.com/track/2m6M6m6m6M6m6M6m6M6m6M', 'https://open.spotify.com/track/3n6N6n6n6N6n6N6n6N6n6N', 'dance/nicky-artist.png', 'Dance', 'dance/nicky-banner.png'),
+(21, 'Afrojack', 'Afrojack, geboren als Nick van de Wall, is een Nederlandse DJ en muziekproducent uit Spijkenisse. Hij staat bekend om zijn dynamische performances en diverse muziekstijl.', 'Bekend van tracks als "Take Over Control" en "Ten Feet Tall".', 'https://open.spotify.com/track/4o6O6o6o6O6o6O6o6O6o6O', 'https://open.spotify.com/track/5p6P6p6p6P6p6P6p6P6p6P', 'https://open.spotify.com/track/6q6Q6q6q6Q6q6Q6q6Q6q6Q', 'dance/afro-artist.png', 'Dance', 'dance/afro-banner.png'),
+(22, 'Tiësto', 'Tiësto, geboren als Tijs Michiel Verwest, is een legendarische Nederlandse DJ en muziekproducent uit Breda. Hij wordt beschouwd als een pionier in de elektronische dansmuziek.', 'Hits zoals "Red Lights" en "Wasted" hebben zijn status als top DJ bevestigd.', 'https://open.spotify.com/track/7r6R6r6r6R6r6R6r6R6r6R', 'https://open.spotify.com/track/8s6S6s6s6S6s6S6s6S6s6S', 'https://open.spotify.com/track/9t6T6t6t6T6t6T6t6T6t6T', 'dance/tiesto-artist.png', 'Dance', 'dance/tiesto-banner.png'),
+(23, 'Hardwell', 'Hardwell, geboren als Robbert van de Corput, is een Nederlandse DJ en muziekproducent uit Breda. Hij staat bekend om zijn energieke mainstage-optredens en big room house geluid.', 'Bekend van nummers als "Spaceman" en "Apollo".', 'https://open.spotify.com/track/1u6U6u6u6U6u6U6u6U6u6U', 'https://open.spotify.com/track/2v6V6v6v6V6v6V6v6V6v6V', 'https://open.spotify.com/track/3w6W6w6w6W6w6W6w6W6w6W', 'dance/hardwell-artist.png', 'Dance', 'dance/hardwell-banner.png'),
+(24, 'Armin van Buuren', 'Armin van Buuren is een invloedrijke Nederlandse DJ en muziekproducent uit Leiden, bekend om zijn wekelijkse radioshow "A State of Trance" en zijn bijdragen aan de trance muziek.', 'Hits zoals "This Is What It Feels Like" en "Blah Blah Blah" hebben zijn populariteit vergroot.', 'https://open.spotify.com/track/4x6X6x6x6X6x6X6x6X6x6X', 'https://open.spotify.com/track/5y6Y6y6y6Y6y6Y6y6Y6y6Y', 'https://open.spotify.com/track/6z6Z6z6z6Z6z6Z6z6Z6z6Z', 'dance/armin-artist.png', 'Dance', 'dance/armin-banner.png'),
+(25, 'Martin Garrix', 'Martin Garrix, geboren als Martijn Gerard Garritsen, is een Nederlandse DJ en muziekproducent uit Amstelveen. Hij staat bekend om zijn progressive house en big room house tracks.', 'Bekend van hits als "Animals" en "In the Name of Love".', 'https://open.spotify.com/track/7a6A6a6a6A6a6A6a6A6a6A', 'https://open.spotify.com/track/8b6B6b6b6B6b6B6b6B6b6B', 'https://open.spotify.com/track/9c6C6c6c6C6c6C6c6C6c6C', 'dance/martin-artist.png', 'Dance', 'dance/martin-banner.png');
 
 
 INSERT INTO `Events`
@@ -578,7 +577,7 @@ VALUES
 		'Caprera Openluchttheater',
 		110.00,
 		2000,
-		'dance/Caprera_Openluchttheater.png',
+		'dance/event-caprera.png',
 		'Dance'
 	),
 	(
@@ -590,19 +589,7 @@ VALUES
 		'Jopenkerk',
 		60.00,
 		300,
-		'dance/Jopenkerk.png',
-		'Dance'
-	),
-	(
-		13,
-		'All Access Pass',
-		'Grants entry to all events on Friday, Saturday, and Sunday',
-		'2025-07-04 00:00:00',
-		'2025-07-04 00:00:00',
-		'Festival Grounds',
-		120.00,
-		300,
-		'dance/dance-festival.png',
+		'dance/event-jopenkerk.png',
 		'Dance'
 	),
 	(
@@ -1009,21 +996,119 @@ VALUES
 	(68, 'Gare du Nord', '', '2025-07-27 20:00:00', '2025-07-27 21:00:00', 'Grote Markt', 0.00, 0, '', 'Jazz'),
 
 	-- Dance
-	(69, 'Nicky Romero / Afrojack', 'Back2Back show', '2025-07-25 20:00:00', '2025-07-25 02:00:00', 'Lichtfabriek', 75.00, 1500, 'default.jpg', 'Dance'),
-	(70, 'Tiësto', 'Club night', '2025-07-25 22:00:00', '2025-07-26 00:30:00', 'Slachthuis', 60.00, 200, 'default.jpg', 'Dance'),
-	(71, 'Hardwell', 'Club night', '2025-07-25 23:00:00', '2025-07-26 00:30:00', 'Jopenkerk', 60.00, 300, 'default.jpg', 'Dance'),
-	(72, 'Armin van Buuren', 'Club night', '2025-07-25 22:00:00', '2025-07-26 00:30:00', 'XO the Club', 60.00, 200, 'default.jpg', 'Dance'),
-	(73, 'Martin Garrix', 'Club night', '2025-07-25 22:00:00', '2025-07-26 00:30:00', 'Puncher comedy club', 60.00, 200, 'default.jpg', 'Dance'),
+	(69, 'Nicky Romero / Afrojack', 'Back2Back show', '2025-07-25 20:00:00', '2025-07-25 02:00:00', 'Lichtfabriek', 75.00, 1500, 'dance/event-licht.png', 'Dance'),
+	(70, 'Tiësto', 'Club night', '2025-07-25 22:00:00', '2025-07-26 00:30:00', 'Slachthuis', 60.00, 200, 'dance/event-slachthuis.png', 'Dance'),
+	(71, 'Hardwell', 'Club night', '2025-07-25 23:00:00', '2025-07-26 00:30:00', 'Jopenkerk', 60.00, 300, 'dance/event-jopenkerk.png', 'Dance'),
+	(72, 'Armin van Buuren', 'Club night', '2025-07-25 22:00:00', '2025-07-26 00:30:00', 'XO the Club', 60.00, 200, 'dance/event-xo.png', 'Dance'),
+	(73, 'Martin Garrix', 'Club night', '2025-07-25 22:00:00', '2025-07-26 00:30:00', 'Puncher comedy club', 60.00, 200, 'dance/event-puncher.png', 'Dance'),
 
-	(74, 'Harwell / Martin Garrix / Armin van Buuren', 'Back2Back outdoor show', '2025-07-26 14:00:00', '2025-07-26 23:00:00', 'Caprera Openluchttheater', 110.00, 2000, 'default.jpg', 'Dance'),
-	(75, 'Afrojack', 'Club night', '2025-07-26 22:00:00', '2025-07-27 00:30:00', 'Jopenkerk', 60.00, 300, 'default.jpg', 'Dance'),
-	(76, 'Tiësto', 'TiëstoWorld**', '2025-07-26 21:00:00', '2025-07-27 01:00:00', 'Lichtfabriek', 75.00, 1500, 'default.jpg', 'Dance'),
-	(77, 'Nicky Romero', 'Club night', '2025-07-26 23:00:00', '2025-07-27 00:30:00', 'Slachthuis', 60.00, 200, 'default.jpg', 'Dance'),
+	(74, 'Harwell / Martin Garrix / Armin van Buuren', 'Back2Back outdoor show', '2025-07-26 14:00:00', '2025-07-26 23:00:00', 'Caprera Openluchttheater', 110.00, 2000, 'dance/event-caprera.png', 'Dance'),
+	(75, 'Afrojack', 'Club night', '2025-07-26 22:00:00', '2025-07-27 00:30:00', 'Jopenkerk', 60.00, 300, 'dance/event-jopenkerk.png', 'Dance'),
+	(76, 'Tiësto', 'TiëstoWorld**', '2025-07-26 21:00:00', '2025-07-27 01:00:00', 'Lichtfabriek', 75.00, 1500, 'dance/event-licht.png', 'Dance'),
+	(77, 'Nicky Romero', 'Club night', '2025-07-26 23:00:00', '2025-07-27 00:30:00', 'Slachthuis', 60.00, 200, 'dance/event-slachthuis.png', 'Dance'),
 
-	(78, 'Afrojack / Tiësto / Nicky Romero', 'Back2Back outdoor show', '2025-07-27 14:00:00', '2025-07-27 23:00:00', 'Caprera Openluchttheater', 110.00, 2000, 'default.jpg', 'Dance'),
-	(79, 'Armin van Buuren', 'Club night', '2025-07-27 19:00:00', '2025-07-27 20:30:00', 'Jopenkerk', 60.00, 300, 'default.jpg', 'Dance'),
-	(80, 'Hardwell', 'Club night', '2025-07-27 21:00:00', '2025-07-27 22:30:00', 'XO the Club', 90.00, 1500, 'default.jpg', 'Dance'),
-	(81, 'Martin Garrix', 'Club night', '2025-07-27 18:00:00', '2025-07-27 19:30:00', 'Slachthuis', 60.00, 200, 'default.jpg', 'Dance');
+	(78, 'Afrojack / Tiësto / Nicky Romero', 'Back2Back outdoor show', '2025-07-27 14:00:00', '2025-07-27 23:00:00', 'Caprera Openluchttheater', 110.00, 2000, 'dance/event-caprera.png', 'Dance'),
+	(79, 'Armin van Buuren', 'Club night', '2025-07-27 19:00:00', '2025-07-27 20:30:00', 'Jopenkerk', 60.00, 300, 'dance/event-jopenkerk.png', 'Dance'),
+	(80, 'Hardwell', 'Club night', '2025-07-27 21:00:00', '2025-07-27 22:30:00', 'XO the Club', 90.00, 1500, 'dance/event-xo.png', 'Dance'),
+	(81, 'Martin Garrix', 'Club night', '2025-07-27 18:00:00', '2025-07-27 19:30:00', 'Slachthuis', 60.00, 200, 'dance/event-slachthuis.png', 'Dance'),
+
+	(
+		82,
+		'All Access Pass Dance',
+		'Grants entry to all dance events on Friday, Saturday, and Sunday',
+		'2025-07-25 00:00:01',
+		'2025-07-27 23:59:59',
+		'Festival Grounds',
+		250.00,
+		300,
+		'dance/dance-festival.png',
+		'Dance'
+	),
+		(
+		83,
+		'Day Pass Friday Dance',
+		'Grants entry to all dance events on Friday, Saturday, and Sunday',
+		'2025-07-25 00:00:01',
+		'2025-07-25 23:59:59',
+		'Festival Grounds',
+		250.00,
+		300,
+		'dance/dance-festival.png',
+		'Dance'
+	),
+		(
+		84,
+		'Day Pass Saturday Dance',
+		'Grants entry to all dance events on Friday, Saturday, and Sunday',
+		'2025-07-26 00:00:01',
+		'2025-07-26 23:59:59',
+		'Festival Grounds',
+		250.00,
+		300,
+		'dance/dance-festival.png',
+		'Dance'
+	),
+		(
+		85,
+		'Day Pass Sunday Dance',
+		'Grants entry to all dance events on Friday, Saturday, and Sunday',
+		'2025-07-27 00:00:01',
+		'2025-07-27 23:59:59',
+		'Festival Grounds',
+		250.00,
+		300,
+		'dance/dance-festival.png',
+		'Dance'
+	),
+	-- Jazz
+	(
+		86,
+		'All Access Pass Jazz',
+		'Grants entry to all jazz events on Friday, Saturday, and Sunday',
+		'2025-07-25 00:00:01',
+		'2025-07-27 23:59:59',
+		'Patronaat',
+		80.00,
+		300,
+		'jazz/image1.jpg',
+		'Jazz'
+	),
+		(
+		87,
+		'Day Pass Friday Jazz',
+		'Grants entry to all jazz events on Friday, Saturday, and Sunday',
+		'2025-07-25 00:00:01',
+		'2025-07-25 23:59:59',
+		'Patronaat',
+		35.00,
+		300,
+		'jazz/image1.jpg',
+		'Jazz'
+	),
+		(
+		88,
+		'Day Pass Saturday Jazz',
+		'Grants entry to all jazz events on Friday, Saturday, and Sunday',
+		'2025-07-26 00:00:01',
+		'2025-07-26 23:59:59',
+		'Patronaat',
+		35.00,
+		300,
+		'jazz/image1.jpg',
+		'Jazz'
+	),
+		(
+		89, 
+		'Day Pass Sunday Jazz',
+		'Grants entry to all jazz events on Friday, Saturday, and Sunday',
+		'2025-07-27 00:00:01',
+		'2025-07-27 23:59:59',
+		'Patronaat',
+		35.00,
+		300,
+		'jazz/image1.jpg',
+		'Jazz'
+	);
 
 INSERT INTO `Dance`
 	(`ArtistID`, `EventID`)
