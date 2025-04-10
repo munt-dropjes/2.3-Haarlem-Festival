@@ -58,13 +58,13 @@ class QrService
             if (!$ticketData) 
                 return ['status' => 'incorrect'];
 
-            if ($ticketData['IsScanned'] != 0) 
+            if ($ticketData->getStatus() != 0) 
                 return ['status' => 'scanned'];
 
-            if ($ticketData['QRCode'] != $ticket) 
+            if ($ticketData->getQrCode() != $ticket['qrCode']) 
                 return ['status' => 'incorrect'];
 
-            $this->setTicketScanned($ticketData['TicketID']);
+            $this->setTicketScanned($ticketData->getTicketID());
             return ['status' => 'correct'];
         } catch (\Exception $e) {
             return ['status' => 'error', 'message' => $e->getMessage()];

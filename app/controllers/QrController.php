@@ -42,7 +42,7 @@ class QrController extends Controller
         header('Content-Type: application/json');
 
         try {
-            $input = json_decode(file_get_contents('php://input'), true);
+            $input = $this->parseJson(file_get_contents('php://input'));
 
             if (!isset($input['ticket'])) {
                 echo json_encode(['status' => 'error', 'message' => 'No ticket provided']);
@@ -51,11 +51,31 @@ class QrController extends Controller
 
             $ticket = $input['ticket'];
             $result = $this->qrService->checkTicket($ticket);
-            echo json_encode($result);
             echo json_encode(['status' => $result]);
         } catch (Exception $e) {
             echo json_encode(['status' => 'error', 'message' => $e->getMessage()]);
         }
+    }
+
+    private function parseJson($input) {
+        $trimmedInput = trim($input);
+    
+        $decoded = json_decode($trimmedInput, true);
+    
+        if (json_last_error() !== JSON_ERROR_NONE) {
+            echo "Error parsing JSON: " . json_last_error_msg() . "\n";
+            
+            $lastIndex = strrpos($trimmedInput, '}');
+            $validJson = substr($trimmedInput, 0, $lastIndex + 1);
+            
+            $decoded = json_decode($validJson, true);
+            if (json_last_error() === JSON_ERROR_NONE) {
+                echo "Valid JSON extracted and parsed successfully.\n";
+                return $decoded;
+            }
+        }
+    
+        return $decoded;
     }
 
 
@@ -64,16 +84,16 @@ class QrController extends Controller
         $ticketID = 1; 
         $eventID = 1; 
         $userID = 1; 
-        $qrCode = ''; 
-        $IsScanned = '0';
-        $status = 'Valid'; 
+        $qrCode = null; 
+        $IsScanned = 0;
+        $status = "Valid"; 
         $purchasedAt = date('d-m-Y H:i:s');
-        $eventName = 'Haarlem Festival Event'; 
+        $eventName = "Haarlem Festival Event"; 
         $eventDetails = [
-            'Date' => date('d-m-Y', strtotime('+7 days')),
-            'Time' => '20:00', 
-            'Location' => 'Haarlem Grote Markt', 
-            'Duration' => '2 hours' 
+            "Date" => date('d-m-Y', strtotime('+7 days')),
+            "Time" => "20:00", 
+            "Location" => "Haarlem Grote Markt", 
+            "Duration" => "2 hours" 
         ];
         return new Ticket($ticketID, $eventID, $userID, $qrCode,$IsScanned, $status, $purchasedAt, $eventName, $eventDetails);
     }

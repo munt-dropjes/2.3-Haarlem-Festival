@@ -2,6 +2,7 @@
 
 namespace Repositories;
 
+use models\Ticket;
 use PDO;
 
 class QrRepository extends BaseRepository
@@ -14,13 +15,15 @@ class QrRepository extends BaseRepository
         return $stmt->fetchAll(PDO::FETCH_ASSOC);
     }
 
-    public function getQrCodeByTicket($ticketID)
+    public function getQrCodeByTicket($ticket) : ?Ticket
     {
         $sql = "SELECT * FROM Tickets WHERE TicketID = :ticketID";
         $stmt = $this->connection->prepare($sql);
-        $stmt->bindParam(':ticketID', $ticketID);
+        $stmt->bindParam(':ticketID', $ticket->getTicketID());
         $stmt->execute();
-        return $stmt->fetch(PDO::FETCH_ASSOC);
+        $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\Ticket');
+        $fetchedTicket = $stmt->fetch();
+        return $fetchedTicket ?: null;
     }
 
     public function setTicketScanned($ticket)
