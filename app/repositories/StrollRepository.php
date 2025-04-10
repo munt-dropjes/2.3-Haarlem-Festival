@@ -32,7 +32,8 @@ class StrollRepository extends BaseRepository
                 e.EndTime,
                 e.Location,
                 e.Price,
-                e.AvailableTickets,
+                e.TotalTickets,
+                e.SoldTickets,
                 e.ImageName,
                 e.Category
             FROM Stroll s
@@ -55,7 +56,8 @@ class StrollRepository extends BaseRepository
             $strollEvent->setEndTime($row['EndTime']);
             $strollEvent->setLocation($row['Location']);
             $strollEvent->setPrice($row['Price']);
-            $strollEvent->setAvailableTickets($row['AvailableTickets']);
+            $strollEvent->setTotalTickets($row['TotalTickets']);
+            $strollEvent->setSoldTickets($row['SoldTickets']);
             $strollEvent->setImageName($row['ImageName']);
             $strollEvent->setCategory($row['Category']);
             $strollEvents[] = $strollEvent;
