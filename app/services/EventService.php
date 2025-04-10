@@ -31,7 +31,7 @@ class EventService {
         return $this->eventRepository->countTotalEvents();
     }
 
-    public function getAvailibility($eventId, $quantity) : boolval {
+    public function getAvailibility($eventId, $quantity) : bool {
         $event = $this->eventRepository->getEventById($eventId);
         if ($event == null) {
             throw new Exception("Event not found", 404);

@@ -13,6 +13,8 @@ use Services\InvoiceService;
 use Services\MailerService;
 use Services\UserService;
 use Services\OrderService;
+use Services\qrCodeService;
+
 
 class PaymentController extends Controller
 {
@@ -26,6 +28,7 @@ class PaymentController extends Controller
 	private $userService;
 	private $orderService;
 	private ShoppingCartService $shoppingCart;
+	private $qrCodeService;
 
 	public function __construct()
 	{
@@ -38,6 +41,7 @@ class PaymentController extends Controller
 		$this->userService = new UserService();
 		$this->orderService = new OrderService();
 		$this->shoppingCart = new ShoppingCartService();
+		$this->qrCodeService = new qrCodeService();
 
 		// Check if user is logged in
 		if (isset($_SESSION['user'])) {
@@ -202,6 +206,8 @@ class PaymentController extends Controller
 		$ticketPDFs = [];
 		$tickets = $this->ticketService->getTicketsByOrderId($orderId);
 		foreach ($tickets as $ticket) {
+			$qrCode = $this->ticketService->generateQRCode($ticket);
+			$ticket->setQRCode($qrCode);
 			$pdfContent = $this->pdfService->generateTicketPDF($ticket);
 			$filePath = $tempDir . '/ticket_' . $ticket->getTicketID() . '.pdf';
 			file_put_contents($filePath, $pdfContent);
