@@ -3,6 +3,7 @@
 namespace Controllers;
 
 use Models\User;
+use Services\EventService;
 use Services\PaymentService;
 use Services\ShoppingCartService;
 use Services\TicketService;
@@ -18,6 +19,7 @@ class PaymentController extends Controller
 	private $user;
 	private $paymentService;
 	private $ticketService;
+	private $eventService;
 	private $pdfService;
 	private $invoiceService;
 	private $mailerService;
@@ -29,6 +31,7 @@ class PaymentController extends Controller
 	{
 		$this->paymentService = new PaymentService();
 		$this->ticketService = new TicketService();
+		$this->eventService = new EventService();
 		$this->pdfService = new pdfService();
 		$this->invoiceService = new InvoiceService();
 		$this->mailerService = new MailerService();
@@ -62,6 +65,14 @@ class PaymentController extends Controller
 
 		foreach ($shoppingCartItems as $item) {
 			/** @var \Models\ShoppingCartItem $item */
+
+			// available tickets check
+			if ($this->eventService->getAvailibility($item->getEvent()->getEventID(), $item->getQuantity()) == false) {
+				$this->shoppingCart->removeItem($item->getEvent()->getEventID(), $this->user->getID(), $item->getisFamilyTicket());
+				header('Location: /shopping-cart');
+				exit;
+			}
+
 			$totalAmount += $item->getEvent()->getPrice() * $item->getQuantity();
 		}
 		$totalAmount = $totalAmount * 100; // Convert to cents for Stripe
