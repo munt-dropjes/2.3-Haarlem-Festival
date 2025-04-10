@@ -101,7 +101,7 @@ class DanceRepository extends BaseRepository
 	public function getAllPasses(): array
 	{
 		try {
-			$sql = "SELECT * FROM Events WHERE Name LIKE '%All Access Pass%' AND Category = 'Dance'";
+			$sql = "SELECT * FROM Events WHERE Name LIKE '%Pass%' AND Category = 'Dance'";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute();
 			return $stmt->fetchAll(PDO::FETCH_CLASS, Event::class);
