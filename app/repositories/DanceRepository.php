@@ -39,7 +39,7 @@ class DanceRepository extends BaseRepository
 	{
 		try {
 			$sql = "SELECT 
-				Events.`EventID`, Events.`Name` AS `EventName`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `AvailableTickets`, Events.`ImageName` AS EventImage,
+				Events.`EventID`, Events.`Name` AS `EventName`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets`, SoldTickets, Events.`ImageName` AS EventImage,
 				Artists.`ArtistID`, Artists.`Name` AS ArtistName, Artists.`ImageName` AS ArtistImage
 			FROM Dance LEFT JOIN Events ON Dance.EventID = Events.EventID LEFT JOIN Artists ON Dance.ArtistID = Artists.ArtistID";
 			$stmt = $this->connection->prepare($sql);
@@ -61,7 +61,8 @@ class DanceRepository extends BaseRepository
 					$event->setEndTime($eventData['EndTime']);
 					$event->setLocation($eventData['Location']);
 					$event->setPrice($eventData['Price']);
-					$event->setAvailableTickets($eventData['AvailableTickets']);
+					$event->setTotalTickets($eventData['TotalTickets']);
+					$event->setSoldTickets($eventData['SoldTickets']);
 					$event->setImageName($eventData['EventImage']);
 
 					$events[$eventID] = $event;
