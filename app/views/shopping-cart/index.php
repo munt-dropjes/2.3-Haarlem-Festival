@@ -15,7 +15,9 @@
 			<div class="ticket row align-items-center gap-3 rounded-3 p-3 bg-white m-0 mb-5 position-relative"
 				data-item-id="<?= $item->getItemID() ?>" data-cart-id="<?= $item->getCartID() ?>"
 				data-event-id="<?= $item->getEventID() ?>" data-quantity="<?= $item->getQuantity() ?>"
-				data-price="<?= $item->getEvent()->getPrice() ?>">
+				data-price="<?= $item->getEvent()->getPrice() ?>"
+				data-is-family-ticket="<?= $item->getIsFamilyTicket() ? 'true' : 'false' ?>"
+				data-selected="<?= $item->getSelected() ? 'true' : 'false' ?>">
 
 				<div class="col-12 col-md-4 p-0">
 					<img src="/images/<?= $item->getEvent()->getImageName() ?>" class="img-fluid ticket-image rounded-3"

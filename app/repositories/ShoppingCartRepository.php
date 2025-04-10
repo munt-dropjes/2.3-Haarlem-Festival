@@ -33,17 +33,23 @@ class ShoppingCartRepository extends BaseRepository
 			}
 
 			// Check if the item already exists in the shopping cart
-			$sql = "SELECT ItemID, Quantity FROM ShoppingCartItems WHERE CartID = :cartID AND EventID = :eventID";
+			$sql = "SELECT
+				ItemID, Quantity, isFamilyTicket
+			FROM
+			 	ShoppingCartItems
+			WHERE
+				CartID = :cartID AND EventID = :eventID AND isFamilyTicket = :isFamilyTicket";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
 				':cartID' => $cartID,
-				':eventID' => $eventID
+				':eventID' => $eventID,
+				':isFamilyTicket' => (int) $isFamilyTicket
 			]);
 			$item = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			if ($item) {
 				// If the item exists, update its quantity using the updateQuantity method
-				$this->updateQuantity($userID, $item['ItemID'], $item['Quantity'] + $quantity);
+				$this->updateQuantity($userID, $item['ItemID'], $item['Quantity'] + $quantity, $isFamilyTicket);
 			} else {
 				// If the item does not exist, add it to the shopping cart
 				$sql = "INSERT INTO ShoppingCartItems (CartID, EventID, Quantity, Selected, isFamilyTicket, AddedAt) 
@@ -104,6 +110,7 @@ class ShoppingCartRepository extends BaseRepository
 				$shoppingCartItem->setQuantity($row['Quantity']);
 				$shoppingCartItem->setSelected($row['Selected']);
 				$shoppingCartItem->setAddedAt($row['AddedAt']);
+				$shoppingCartItem->setIsFamilyTicket($row['isFamilyTicket']);
 
 				$event = new Event();
 				$event->setEventID($row['EventID']);
@@ -132,11 +139,14 @@ class ShoppingCartRepository extends BaseRepository
 			$inQuery = implode(',', array_fill(0, count($ids), '?'));
 
 			$sql = "SELECT
-				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`
+				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`, E.`ImageName`, E.`Category`,
+				IF(S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS FamilyPrice
 			FROM
 				Events AS E
+			LEFT JOIN
+				Stroll AS S ON E.EventID = S.EventID
 			WHERE
-				EventID IN ($inQuery)
+				E.EventID IN ($inQuery)
 			";
 
 			$stmt = $this->connection->prepare($sql);
@@ -169,6 +179,7 @@ class ShoppingCartRepository extends BaseRepository
 				$event->setPrice($row['Price']);
 				$event->setImageName($row['ImageName']);
 				$event->setCategory($row['Category']);
+				$event->FamilyTicketPrice = $row['FamilyPrice'];
 
 				$shoppingCartItem->setEvent($event);
 
@@ -181,20 +192,22 @@ class ShoppingCartRepository extends BaseRepository
 		}
 	}
 
-	public function updateQuantity(int $userID, int $itemID, int $quantity): int
+	public function updateQuantity(int $userID, int $itemID, int $quantity, $isFamilyTicket): int
 	{
 		try {
 			// Check if the item belongs to the given user
 			$sql = "UPDATE ShoppingCartItems 
                 SET Quantity = :quantity 
                 WHERE ItemID = :itemID 
-                AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)";
+                AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)
+				AND isFamilyTicket = :isFamilyTicket";
 
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
 				':quantity' => $quantity,
 				':itemID' => $itemID,
-				':userID' => $userID
+				':userID' => $userID,
+				':isFamilyTicket' => (int) $isFamilyTicket
 			]);
 
 			if ($stmt->rowCount() === 0) {
@@ -207,18 +220,20 @@ class ShoppingCartRepository extends BaseRepository
 		}
 	}
 
-	public function removeItem(int $userID, int $itemID): void
+	public function removeItem(int $userID, int $itemID, $isFamilyTicket): void
 	{
 		try {
 			// Check if the item belongs to the given user
 			$sql = "DELETE FROM ShoppingCartItems 
 				WHERE ItemID = :itemID 
-				AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)";
+				AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)
+				AND isFamilyTicket = :isFamilyTicket";
 
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
 				':itemID' => $itemID,
-				':userID' => $userID
+				':userID' => $userID,
+				':isFamilyTicket' => (int) $isFamilyTicket
 			]);
 
 			if ($stmt->rowCount() === 0) {
@@ -229,20 +244,22 @@ class ShoppingCartRepository extends BaseRepository
 		}
 	}
 
-	public function selectItem(int $userID, int $itemID, bool $selected): void
+	public function selectItem(int $userID, int $itemID, bool $selected, $isFamilyTicket): void
 	{
 		try {
 			// Check if the item belongs to the given user
 			$sql = "UPDATE ShoppingCartItems 
 				SET Selected = :selected 
 				WHERE ItemID = :itemID 
-				AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)";
+				AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)
+				AND isFamilyTicket = :isFamilyTicket";
 
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
 				':selected' => (int) $selected,
 				':itemID' => $itemID,
-				':userID' => $userID
+				':userID' => $userID,
+				':isFamilyTicket' => (int) $isFamilyTicket
 			]);
 
 			if ($stmt->rowCount() === 0) {
