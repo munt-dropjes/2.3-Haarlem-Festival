@@ -4,6 +4,10 @@ CREATE DATABASE IF NOT EXISTS thefestivaldb;
 
 USE thefestivaldb;
 
+CREATE TABLE `HomePage`(
+	`data` LONGTEXT NOT NULL
+);
+
 CREATE TABLE `Artists` (
 	`ArtistID` INT(11) NOT NULL,
 	`Name` VARCHAR(128) NOT NULL,
@@ -416,9 +420,9 @@ VALUES
 		'6jmTQwFzejCurofZDz7x9k',
 		'4cYrCTMjUzdFvMT9XcMXYu',
 		'3Nnq6YSHQ5LwRKkioGIjhb',
-		'/hardwell.png',
+		'dance/hardwell.png',
 		'Dance',
-		'/Hardwell dj.png'
+		'dance/Hardwell dj.png'
 	);
 
 INSERT INTO `Events`
@@ -541,7 +545,7 @@ VALUES
 		'Caprera Openluchttheater',
 		110.00,
 		2000,
-		'Caprera_Openluchttheater.png',
+		'dance/Caprera_Openluchttheater.png',
 		'Dance'
 	),
 	(
@@ -553,7 +557,7 @@ VALUES
 		'Jopenkerk',
 		60.00,
 		300,
-		'Jopenkerk.png',
+		'dance/Jopenkerk.png',
 		'Dance'
 	),
 	(
@@ -565,7 +569,7 @@ VALUES
 		'Festival Grounds',
 		120.00,
 		300,
-		'dance-festival.png',
+		'dance/dance-festival.png',
 		'Dance'
 	),
 	(
