@@ -14,7 +14,7 @@
 	<script src="/js/cms.js" defer></script>
 
 	<!-- Favicon -->
-	<link rel="icon" type="image/svg+xml" href="/assets/favicon/favicon.svg">
+	<link rel="icon" type="image/svg+xml" href="/assets/logo/logo.svg">
 	<link rel="icon" type="image/png" sizes="16x16" href="/assets/favicon/favicon-16.png">
 	<link rel="icon" type="image/png" sizes="32x32" href="/assets/favicon/favicon-32.png">
 	<link rel="icon" type="image/png" sizes="48x48" href="/assets/favicon/favicon-48.png">
