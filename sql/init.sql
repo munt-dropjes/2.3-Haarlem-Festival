@@ -5,6 +5,7 @@ CREATE DATABASE IF NOT EXISTS thefestivaldb;
 USE thefestivaldb;
 
 CREATE TABLE `HomePage`(
+	`id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
 	`data` LONGTEXT NOT NULL
 );
 
