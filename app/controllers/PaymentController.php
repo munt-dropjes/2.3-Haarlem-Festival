@@ -54,13 +54,19 @@ class PaymentController extends Controller
 		$totalAmount = 0;
 		$shoppingCartItems = $this->shoppingCart->getUserShoppingCartOrder($this->user->getID());
 
+		// Check if the shopping cart is empty
+		if (empty($shoppingCartItems)) {
+			header('Location: /shopping-cart');
+			exit;
+		}
+
 		foreach ($shoppingCartItems as $item) {
 			/** @var \Models\ShoppingCartItem $item */
 			$totalAmount += $item->getEvent()->getPrice() * $item->getQuantity();
 		}
 		$totalAmount = $totalAmount * 100; // Convert to cents for Stripe
 
-		$data['ShoppingCartItems'] = $this->shoppingCart->getUserShoppingCartItems($this->user->getID());
+		$data['ShoppingCartItems'] = $shoppingCartItems;
 		$data['clientSecret'] = $this->createSession($totalAmount, $orderId);
 		$data['orderId'] = $orderId;
 		$data['user'] = $this->user;

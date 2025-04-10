@@ -233,8 +233,9 @@ ALTER TABLE `Tickets`
 ALTER TABLE `PurchasedTickets`
 	ADD PRIMARY KEY (`id`),
 	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
-	ADD FOREIGN KEY (`EventID`) REFERENCES `Events` (`EventID`),
-  	ADD FOREIGN KEY (`UserId`) REFERENCES `Users` (`UserID`);
+	ADD FOREIGN KEY (`OrderID`) REFERENCES `Orders` (`OrderID`),
+  	ADD FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`),
+  	ADD FOREIGN KEY (`EventID`) REFERENCES `Events` (`EventID`);
 
 ALTER TABLE `Orders`
 	ADD PRIMARY KEY (`OrderID`),

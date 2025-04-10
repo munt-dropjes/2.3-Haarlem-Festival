@@ -166,6 +166,68 @@ class ShoppingCartRepository extends BaseRepository
 			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all shopping cart items");
 		}
 	}
+	
+	public function getUserSelectedShoppingCartItems(int $userID): array
+	{
+		try {
+			$sql = "SELECT
+				SC.`CartID`, SC.`UserID`,
+				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`isFamilyTicket`, SCI.`AddedAt`,
+				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, 
+				IF(SCI.`isFamilyTicket` = 1 AND S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS Price,
+				E.`ImageName`, E.`Category`
+			FROM
+				ShoppingCart AS SC
+			INNER JOIN
+				ShoppingCartItems AS SCI ON SC.CartID = SCI.CartID
+			INNER JOIN
+				Events AS E ON SCI.EventID = E.EventID
+			LEFT JOIN
+				Stroll AS S ON E.EventID = S.EventID
+			WHERE
+				SC.UserID = :userID
+			AND
+				SCI.Selected = 1
+			ORDER BY
+				SCI.AddedAt DESC
+			";
+
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([
+				':userID' => $userID
+			]);
+			$results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			$items = [];
+			foreach ($results as $row) {
+				$shoppingCartItem = new ShoppingCartItem();
+				$shoppingCartItem->setItemID($row['ItemID']);
+				$shoppingCartItem->setCartID($row['CartID']);
+				$shoppingCartItem->setEventID($row['EventID']);
+				$shoppingCartItem->setQuantity($row['Quantity']);
+				$shoppingCartItem->setSelected($row['Selected']);
+				$shoppingCartItem->setAddedAt($row['AddedAt']);
+
+				$event = new Event();
+				$event->setEventID($row['EventID']);
+				$event->setName($row['Name']);
+				$event->setStartTime($row['StartTime']);
+				$event->setEndTime($row['EndTime']);
+				$event->setLocation($row['Location']);
+				$event->setPrice($row['Price']);
+				$event->setImageName($row['ImageName']);
+				$event->setCategory($row['Category']);
+
+				$shoppingCartItem->setEvent($event);
+
+				$items[] = $shoppingCartItem;
+			}
+
+			return $items;
+		} catch (Exception $e) {
+			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all shopping cart items");
+		}
+	}
 
 	public function getMultipleEventsById(array $ids): array
 	{

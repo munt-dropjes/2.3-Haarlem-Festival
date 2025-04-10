@@ -29,7 +29,7 @@ class ShoppingCartService
 
 	public function getUserShoppingCartOrder(int $userID): array
 	{
-		$shoppingCartItems = $this->shoppingCartRepository->getUserShoppingCartItems($userID);
+		$shoppingCartItems = $this->shoppingCartRepository->getUserSelectedShoppingCartItems($userID);
 
 		if (!$shoppingCartItems) {
 			return [];
