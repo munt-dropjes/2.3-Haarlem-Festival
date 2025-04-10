@@ -31,6 +31,18 @@ class EventService {
         return $this->eventRepository->countTotalEvents();
     }
 
+    public function getAvailibility($eventId) : boolval {
+        $event = $this->eventRepository->getEventById($eventId);
+        if ($event == null) {
+            throw new Exception("Event not found", 404);
+        }
+        if ($event->getAvailableTickets() > 0) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
     // ~~Update~~
     public function updateEvent($event) : Event {
         return $this->eventRepository->updateEvent($event);
