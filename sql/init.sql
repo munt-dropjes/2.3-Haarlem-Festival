@@ -416,9 +416,9 @@ VALUES
 		'6jmTQwFzejCurofZDz7x9k',
 		'4cYrCTMjUzdFvMT9XcMXYu',
 		'3Nnq6YSHQ5LwRKkioGIjhb',
-		'dance/hardwell.png',
+		'/hardwell.png',
 		'Dance',
-		'dance/Hardwell dj.png'
+		'/Hardwell dj.png'
 	);
 
 INSERT INTO `Events`
@@ -541,7 +541,7 @@ VALUES
 		'Caprera Openluchttheater',
 		110.00,
 		2000,
-		'dance/Caprera_Openluchttheater.png',
+		'Caprera_Openluchttheater.png',
 		'Dance'
 	),
 	(
@@ -553,7 +553,7 @@ VALUES
 		'Jopenkerk',
 		60.00,
 		300,
-		'dance/Jopenkerk.png',
+		'Jopenkerk.png',
 		'Dance'
 	),
 	(
@@ -565,7 +565,7 @@ VALUES
 		'Festival Grounds',
 		120.00,
 		300,
-		'dance/dance-festival.png',
+		'dance-festival.png',
 		'Dance'
 	),
 	(
