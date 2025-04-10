@@ -102,7 +102,7 @@ class PaymentController extends Controller
 
 	public function success()
 	{
-		$this->shoppingCart->createPurchasedTickets($this->user->getID());
+		$this->shoppingCart->createTickets($this->user->getID());
 		$this->shoppingCart->clearUserShoppingCartSelectedItems(userID: $this->user->getID());
 		$this->shoppingCart->clearUserShoppingCart($this->user->getID());
 
