@@ -21,9 +21,9 @@ class QrService
         return $this->qrRepository->getAllQrCodes();
     }
 
-    public function scanQrTicket($ticket)
+    public function setTicketScanned($ticket)
     {
-        $this->qrRepository->scanQrTicket($ticket);
+        $this->qrRepository->setTicketScanned($ticket);
     }
 
     public function createQrCode($url)
@@ -46,5 +46,26 @@ class QrService
         $out  = (new QRCode($options))->render($url);
 
         return $out;
+    }
+
+    public function checkTicket($ticket)
+    {
+        try {
+            $ticketData = $this->qrRepository->getQrCodeByTicket($ticket);
+
+            if (!$ticketData) 
+                return ['status' => 'incorrect'];
+
+            if ($ticketData['IsScanned'] != 0) 
+                return ['status' => 'scanned'];
+
+            if ($ticketData['QRCode'] != $ticket) 
+                return ['status' => 'incorrect'];
+
+            $this->setTicketScanned($ticketData['TicketID']);
+            return ['status' => 'correct'];
+        } catch (\Exception $e) {
+            return ['status' => 'error', 'message' => $e->getMessage()];
+        }
     }
 }

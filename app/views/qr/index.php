@@ -76,6 +76,9 @@
           }
         }).catch(function (error) {
           console.error('Error: ', error);
+          correctImage.style.display = 'none';
+          incorrectImage.style.display = 'block';
+          scannedImage.style.display = 'none';
         });
       });
     </script>
