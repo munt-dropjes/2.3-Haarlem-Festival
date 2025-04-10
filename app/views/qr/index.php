@@ -54,7 +54,7 @@
       scanner.addListener('scan', function (content) {
         console.log("scanning");
         const decodedString = atob(content);
-        console.log("decodedstring: " decodedString);
+        console.log("decodedstring: " + decodedString);
 
         qrservice.checkTicket(decodedString).then(function (response) {
           if (response.status === 200) {
