@@ -291,7 +291,11 @@ ALTER TABLE `Stroll`
 INSERT INTO `Users` 
 	(`UserID`, `Role`, `Name`, `Email`, `Password`, `Phone`, `Country`, `RegisteredAt`)
 VALUES
-	(1, 'Administrator', 'Daniel Zwart', 'dtzwart@gmail.com', '$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW', '0612345678', 'Netherlands', '2025-03-06 12:04:16');
+	(1, 'Administrator', 'Daniel Zwart', 'dtzwart@gmail.com', '$2y$12$AtD6c5mvh6R1//0TWiAk3uhix4geuIPjWVJiGIuXTwMNm179fQ4HW', '0612345678', 'Netherlands', '2025-03-06 12:04:16'),
+	(2, 'Customer', 'Customer Test', 'customer@testmail.com', '$2y$12$ZD4gbCVRRPtxROkN44iMMeBhmQgmOO4BuRVr.flrrNIqmrJDo3AkK', '0612345678', 'Netherlands', '2025-04-09 22:28:06'),
+	(3, 'Administrator', 'Admin Test', 'admin@testmail.com', '$2y$12$5DP89FRGtloS2e1wCEt6.uK1SmoxWN/wboWlFe3KxXKqMT3DPqwly', '0612345678', 'Netherlands', '2025-04-09 22:29:14'),
+	(4, 'Employee', 'Employee Test', 'employee@testmail.com', '$2y$12$GerAwBwcN9tcM89MY0RWhuvFTY6duamEBCh9WrdmQuSWFcgrif1oG', '0612345678', 'Netherlands', '2025-04-09 22:29:45');
+
 
 INSERT INTO `StrollDetail`
 	(`EventID`, `StopNumber`, `StopName`, `Description`, `Adress`, `BreakLocation`, `mapName`)
@@ -536,24 +540,12 @@ VALUES
 		'Dance'
 	),
 	(
-		11,
+		12,
 		'Jopenkerk',
 		'Harwell\r\nMartin Garrix\r\nArmin van Buuren',
 		'2025-03-14 23:00:00',
 		'2025-03-15 00:30:00',
 		'Jopenkerk',
-		60.00,
-		300,
-		'dance/Jopenkerk.png',
-		'Dance'
-	),
-	(
-		12,
-		'Test',
-		'Test',
-		'2025-03-14 23:00:00',
-		'2025-03-15 00:30:00',
-		'Test',
 		60.00,
 		300,
 		'dance/Jopenkerk.png',
@@ -947,8 +939,7 @@ VALUES
 INSERT INTO `Dance`
 	(`ArtistID`, `EventID`)
 VALUES
-	(1, 10),
-	(1, 11);
+	(1, 10);
 
 INSERT INTO `Stroll`
 	(`EventID`, `Language`, `Guide`, `FamilyTicketPrice`)
