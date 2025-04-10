@@ -119,22 +119,15 @@ CREATE TABLE `StrollDetail` (
 
 CREATE TABLE `Tickets` (
 	`TicketID` INT(11) NOT NULL,
-	`EventID` INT(11) NOT NULL,
-	`UserID` INT(11) NOT NULL,
-	`QRCode` VARCHAR(255) NOT NULL,
-	`Status` enum('Valid', 'Scanned', 'Cancelled') NOT NULL,
-	`PurchasedAt` datetime NOT NULL,
-	`PaymentStatus'` enum('Completed', 'Failed', 'Pending') NOT NULL
-);
-
-Create Table `PurchasedTickets` (
-	`id` INT(11) NOT NULL,
 	`OrderID` INT(11) NOT NULL,
-	`UserID` INT(11) NOT NULL,
 	`EventID` INT(11) NOT NULL,
+	`UserID` INT(11) NOT NULL,
 	`Quantity` INT(11) NOT NULL,
 	`isFamilyTicket` TINYINT(1) NOT NULL DEFAULT 0,
-	`PurchasedAt` datetime NOT NULL DEFAULT current_timestamp()
+	`QRCode` VARCHAR(255) NULL DEFAULT NULL,
+	`Status` enum('Valid', 'Scanned', 'Cancelled') NOT NULL,
+	`PurchasedAt` datetime NOT NULL DEFAULT CURRENT_TIMESTAMP,
+	`PaymentStatus'` enum('Completed', 'Failed', 'Pending') NOT NULL
 );
 
 CREATE TABLE `Users` (
@@ -224,20 +217,14 @@ ALTER TABLE `Users`
 	MODIFY `UserID` INT(11) NOT NULL AUTO_INCREMENT,
 	ADD UNIQUE KEY `Email` (`Email`);
 
-ALTER TABLE `Tickets`
-	ADD PRIMARY KEY (`TicketID`),
-	MODIFY `TicketID` INT(11) NOT NULL AUTO_INCREMENT,
-	ADD FOREIGN KEY (`EventID`) REFERENCES `Events` (`EventID`),
-	ADD FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`);
-
 ALTER TABLE `Orders`
 	ADD PRIMARY KEY (`OrderID`),
 	MODIFY `OrderID` INT(11) NOT NULL AUTO_INCREMENT,
 	ADD FOREIGN KEY (`UserID`) REFERENCES `Users`(`UserID`);
 
-ALTER TABLE `PurchasedTickets`
-	ADD PRIMARY KEY (`id`),
-	MODIFY `id` int(11) NOT NULL AUTO_INCREMENT,
+ALTER TABLE `Tickets`
+	ADD PRIMARY KEY (`TicketID`),
+	MODIFY `TicketID` INT(11) NOT NULL AUTO_INCREMENT,
 	ADD FOREIGN KEY (`OrderID`) REFERENCES `Orders` (`OrderID`),
   	ADD FOREIGN KEY (`UserID`) REFERENCES `Users` (`UserID`),
   	ADD FOREIGN KEY (`EventID`) REFERENCES `Events` (`EventID`);

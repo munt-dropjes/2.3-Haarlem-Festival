@@ -388,7 +388,7 @@ class ShoppingCartRepository extends BaseRepository
 		}
 	}
 
-	public function createPurchasedTickets(int $userID): void
+	public function createTickets(int $userID): void
 	{
 		try {
 			$this->connection->beginTransaction();
@@ -400,7 +400,7 @@ class ShoppingCartRepository extends BaseRepository
 			$order = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			// Check if the item belongs to the given user
-			$sql = "INSERT INTO PurchasedTickets (UserID, OrderID, EventID, Quantity, isFamilyTicket) 
+			$sql = "INSERT INTO Tickets (UserID, OrderID, EventID, Quantity, isFamilyTicket) 
 				SELECT ShoppingCart.UserID, :orderID, ShoppingCartItems.EventID, ShoppingCartItems.Quantity, ShoppingCartItems.isFamilyTicket 
 				FROM ShoppingCart
 				INNER JOIN ShoppingCartItems ON ShoppingCart.CartID = ShoppingCartItems.CartID
