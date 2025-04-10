@@ -756,22 +756,6 @@ h3 {
 	border-radius: 20px;
 }
 
-.carousel {
-	margin-top: 20px;
-	width: 50%;
-	max-width: 800px;
-	height: 100%;
-	margin: 0 auto;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-	margin-bottom: 3rem;
-}
-
-.carousel img {
-	border-radius: 30px;
-}
-
 #details {
 	max-width: 80% !important;
 }
@@ -955,6 +939,10 @@ h3 {
 	margin-top: 10px;
 }
 
+.stollBuyBtn{
+	margin-top: 20px;
+	width: 100%;
+}
 
 .stroll-swiper .swiper {
 	padding-top: 50px;
@@ -981,10 +969,12 @@ h3 {
 
 .stroll-swiper .swiper-slide img {
     display: block;
-    max-width: 100%;
-    max-height: 400px; 
-    object-fit: contain;
-	border-radius: 50px;
+    max-width: 80% !important;
+    max-height: auto !important; 
+    object-fit: fill;
+	object-position: center;
+	margin: 0 auto; 
+	border-radius: 30px;
 }
 
 .StrollDetail-btn-back {

@@ -74,15 +74,17 @@
                                     <p class="card-text">Start Location: <?php echo $event->getLocation(); ?></p>
                                     <p class="card-text">Guide: <?php echo $event->getGuide(); ?></p>
                                     <p class="card-text">Tickets Available: <?php echo $event->getAvailableTickets(); ?></p>
-                                    <select class="form-select">
-                                        <?php if ($event->getAvailableTickets() == 0) { ?>
-                                            <option value="" selected disabled>No tickets available</option>
-                                        <?php }else {?>
+                                    
+                                    <?php if ($event->getAvailableTickets() == 0) { ?>
+                                        <p>No tickets available</p>
+                                    <?php } else { ?>
+                                        <select class="form-select" onchange="toggleBuyButton(this, <?= $event->getEventID(); ?>)">
                                             <option value="" selected disabled>Select option</option>
                                             <option value="regular">Regular Price: €<?php echo number_format($event->getPrice(), 2, '.', ''); ?></option>
                                             <option value="family">Family Price: €<?php echo number_format($event->getFamilyTicketPrice(), 2, '.', ''); ?></option>
-                                        <?php } ?>
-                                    </select>
+                                        </select>
+                                        <button id="buy-button-<?= $event->getEventID(); ?>" class="btn btn-primary stollBuyBtn" style="display: none;" onclick="addToCart(<?= $event->getEventID(); ?>, 1, false)">Buy</button>
+                                    <?php } ?>
                                 </div>
                             </div>
                             <?php 

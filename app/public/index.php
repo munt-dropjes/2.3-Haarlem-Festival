@@ -65,7 +65,7 @@ $router->get('/home', 'HomeController@index');
     $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
     $router->get('/yummie', 'YummieController@index');
     $router->get('/yummie/{id}', 'YummieController@getRestaurantById');
-    
+
     //cms
     $router->get('/cms', 'CmsController@index');
     $router->post('/cms', 'CmsController@login');
