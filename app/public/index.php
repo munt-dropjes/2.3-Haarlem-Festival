@@ -97,8 +97,11 @@ $router->get('/shopping-cart', 'ShoppingCartController@index');
 // shopping cart actions
 $router->get('/shopping-cart/add-item/{itemID}/{quantity}/{isFamilyTicket}', 'ShoppingCartController@addItem');
 $router->get('/shopping-cart/add-item/{itemID}/{quantity}', 'ShoppingCartController@addItem');
+$router->get('/shopping-cart/update-quantity/{itemID}/{quantity}/{isFamilyTicket}', 'ShoppingCartController@updateQuantity');
 $router->get('/shopping-cart/update-quantity/{itemID}/{quantity}', 'ShoppingCartController@updateQuantity');
+$router->get('/shopping-cart/remove-item/{itemID}/{isFamilyTicket}', 'ShoppingCartController@removeItem');
 $router->get('/shopping-cart/remove-item/{itemID}', 'ShoppingCartController@removeItem');
+$router->patch('/shopping-cart/select-item/{itemID}/{selected}/{isFamilyTicket}', 'ShoppingCartController@selectItem');
 $router->patch('/shopping-cart/select-item/{itemID}/{selected}', 'ShoppingCartController@selectItem');
 $router->get('/shopping-cart/select-all', 'ShoppingCartController@selectAll');
 
