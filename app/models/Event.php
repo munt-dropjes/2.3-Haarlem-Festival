@@ -12,7 +12,8 @@ class Event implements JsonSerializable
 	private string $EndTime;
 	private string $Location;
 	private float $Price;
-	private int $AvailableTickets;
+	private int $TotalTickets;
+	private int $SoldTickets;
 	private string $ImageName;
 	private string $Category;
 	private array $Artists;
@@ -27,7 +28,7 @@ class Event implements JsonSerializable
 			'EndTime' => $this->EndTime,
 			'Location' => $this->Location,
 			'Price' => $this->Price,
-			'AvailableTickets' => $this->AvailableTickets,
+			'AvailableTickets' => $this->getAvailableTickets(),
 			'ImageName' => $this->ImageName,
 			'Category' => $this->Category,
 			'Artists' => $this->Artists
@@ -63,9 +64,18 @@ class Event implements JsonSerializable
 	{
 		return round($this->Price, 2);
 	}
+	public function getTotalTickets(): int
+	{
+		return $this->TotalTickets;
+	}
+	public function getSoldTickets(): int
+	{
+		return $this->SoldTickets;
+	}
 	public function getAvailableTickets(): int
 	{
-		return $this->AvailableTickets;
+		$AvailableTickets = $this->TotalTickets - $this->SoldTickets;
+		return $AvailableTickets < 0 ? 0 : $AvailableTickets;
 	}
 	public function getImageName(): string
 	{
@@ -109,9 +119,13 @@ class Event implements JsonSerializable
 	{
 		$this->Price = $Price;
 	}
-	public function setAvailableTickets(int $AvailableTickets): void
+	public function setTotalTickets(int $TotalTickets): void
 	{
-		$this->AvailableTickets = $AvailableTickets;
+		$this->TotalTickets = $TotalTickets;
+	}
+	public function setSoldTickets(int $SoldTickets): void
+	{
+		$this->SoldTickets = $SoldTickets;
 	}
 	public function setImageName(string $ImageName): void
 	{

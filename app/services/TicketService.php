@@ -21,4 +21,8 @@ class TicketService
     {
         return $this->ticketRepository->getTicketsByUserId($userId);
     }
+    public function getTicketsByOrderId($orderId)
+    {
+        return $this->ticketRepository->getTicketsByOrderId($orderId);
+    }
 }

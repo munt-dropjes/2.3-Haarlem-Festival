@@ -13,9 +13,9 @@
 				<div class="swiper-wrapper">
 					<?php foreach ($artists as $artist):
 						/** @var \Models\Artist $artist */ ?>
-						<a href="/dance/hardwell" class="swiper-slide swiper-slide-normal card overflow-hidden rounded-4">
+						<a href="/dance/<?= $artist->getName() ?>" class="swiper-slide swiper-slide-normal card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
-								<img class="ArtistImage card-image-top" src="/images/dance/<?= $artist->getImageName() ?>"
+								<img class="ArtistImage card-image-top" src="/images/<?= $artist->getImageName() ?>"
 									alt="">
 								<i class="text-center fw-bold d-none"><?= $artist->getName() ?></i>
 							</div>
@@ -37,7 +37,7 @@
 						/** @var \Models\Event $event */ ?>
 						<div class="swiper-slide swiper-slide-extended card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
-								<img clang="EventImage card-img-top" src="/images/dance/<?= $event->getImageName() ?>"
+								<img clang="EventImage card-img-top" src="/images/<?= $event->getImageName() ?>"
 									alt="foto van <?= $event->getName() ?>">
 								<i class="text-center fw-bold d-none"><?= $event->getName() ?></i>
 							</div>
@@ -68,7 +68,7 @@
 						/** @var \Models\Event $event */ ?>
 						<div class="swiper-slide swiper-slide-extended card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
-								<img clang="EventImage card-img-top" src="/images/dance/<?= $event->getImageName() ?>"
+								<img clang="EventImage card-img-top" src="/images/<?= $event->getImageName() ?>"
 									alt="foto van <?= $event->getName() ?>">
 								<i class="text-center fw-bold d-none"><?= $event->getName() ?></i>
 							</div>
@@ -99,7 +99,7 @@
 						/** @var \Models\Event $event */ ?>
 						<div class="swiper-slide swiper-slide-extended card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
-								<img clang="EventImage card-img-top" src="/images/dance/<?= $event->getImageName() ?>"
+								<img clang="EventImage card-img-top" src="/images/<?= $event->getImageName() ?>"
 									alt="foto van <?= $event->getName() ?>">
 								<i class="text-center fw-bold d-none"><?= $event->getName() ?></i>
 							</div>
@@ -130,7 +130,7 @@
 						/** @var \Models\Event $event */ ?>
 						<div class="event-button-hover swiper-slide swiper-slide-normal card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
-								<img clang="card-img-top" src="/images/dance/<?= $event->getImageName() ?>"
+								<img clang="card-img-top" src="/images/<?= $event->getImageName() ?>"
 									alt="All Access Pass">
 								<i class="text-center fw-bold">
 									<span>

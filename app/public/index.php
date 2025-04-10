@@ -65,7 +65,7 @@ $router->get('/home', 'HomeController@index');
     $router->post('/reservation/available-timeslots', 'ReservationController@getAvailableTimeSlots');
     $router->get('/yummie', 'YummieController@index');
     $router->get('/yummie/{id}', 'YummieController@getRestaurantById');
-    
+
     //cms
     $router->get('/cms', 'CmsController@index');
     $router->post('/cms', 'CmsController@login');
@@ -78,6 +78,8 @@ $router->get('/home', 'HomeController@index');
     $router->post('/cms/events/delete', 'CmsEventController@delete');
     $router->post('/cms/events/edit', 'CmsEventController@update');
     $router->get('/cms/orders', 'CmsOrderController@index');
+    $router->get('/cms/homepage', 'HomeController@wysiwig');
+    $router->post('/cms/homepage', 'HomeController@wysiwig');
 
     //qr-codes
     $router->get('/qr', 'QrController@index');

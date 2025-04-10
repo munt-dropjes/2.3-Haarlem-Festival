@@ -19,11 +19,13 @@ Hi, just a project made for a school project.
 ### **Passwords and accounts:**
 **_Important Note:_** The following table is for demonstration purposes only.
 
-| Role           | Username (Placeholder) | Password (Placeholder) |
+```markdown
+| **Role**       | **Username**           | **Password**           |
 |----------------|------------------------|------------------------|
-| Administrator  | `admin@admin.com`      | `      `               |
-| ContentManager | `content@content.com`  | `      `               |  
-| User           | `user@user.com`        | `      `               |
+| Administrator  | `admin@testmail.com`   | `Wachtwoord1!`         |
+| Employee       | `employee@testmail.com`| `Wachtwoord1!`         |
+| Customer       | `customer@testmail.com`| `Wachtwoord1!`         |
+```
 
 ### **Importing the SQL Script (If necessary):**
 

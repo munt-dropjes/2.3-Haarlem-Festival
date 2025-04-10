@@ -43,4 +43,16 @@ class OrderRepository extends BaseRepository {
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to count total orders");
         }
     }
+
+    public function updateOrderStatus($orderId, $status) : void {
+        try {
+            $sql = "UPDATE Orders SET Status = :status WHERE OrderID = :order_id;";
+            $stmt = $this->connection->prepare($sql);
+            $stmt->bindParam(':order_id', $orderId, PDO::PARAM_INT);
+            $stmt->bindParam(':status', $status, PDO::PARAM_STR);
+            $stmt->execute();
+        } catch (Exception $e) {
+            throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to update order status");
+        }
+    }
 }
