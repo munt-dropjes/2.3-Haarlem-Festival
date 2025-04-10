@@ -148,8 +148,8 @@
                                 <input type="text" class="form-control" id="price" name="price" required>
                             </div>
                             <div class="modal-group">
-                                <label for="availableTickets">Available Tickets</label>
-                                <input type="text" class="form-control" id="availableTickets" name="availableTickets" required>
+                                <label for="availableTickets">Total Tickets</label>
+                                <input type="text" class="form-control" id="tickets" name="tickets" required>
                             </div>
                             <div class="modal-group">
                                 <label for="category">Category</label>

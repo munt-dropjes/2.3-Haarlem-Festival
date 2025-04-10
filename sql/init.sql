@@ -30,7 +30,8 @@ CREATE TABLE `Events` (
 	`EndTime` DATETIME NULL,
 	`Location` VARCHAR(255) NOT NULL,
 	`Price` DECIMAL(10, 2) NOT NULL,
-	`AvailableTickets` INT(11) NOT NULL,
+	`TotalTickets` INT(11) NOT NULL,
+	`SoldTickets` INT(11) NOT NULL DEFAULT 0,
 	`ImageName` VARCHAR(128) NOT NULL,
 	`Category` enum(
 		'Jazz',
@@ -417,7 +418,7 @@ VALUES
 	);
 
 INSERT INTO `Events`
-	(`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `AvailableTickets`, `ImageName`, `Category`)
+	(`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets`, `ImageName`, `Category`)
 VALUES
 	(
 		1,

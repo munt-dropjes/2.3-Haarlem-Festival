@@ -44,7 +44,7 @@ class CmsEventController extends Controller {
         $event->setEndTime($_POST['endtime']);
         $event->setLocation($_POST['location']);
         $event->setPrice($_POST['price']);	
-        $event->setAvailableTickets($_POST['availableTickets']);
+        $event->setTotalTickets($_POST['tickets']);
         $event->setCategory($_POST['category']);
         $this->eventService->insertEvent($event);
 
