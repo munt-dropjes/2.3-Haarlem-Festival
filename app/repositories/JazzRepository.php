@@ -25,7 +25,7 @@ class JazzRepository extends BaseRepository
         $jazzArtists = [];
         foreach ($results as $row) {
             $jazz = new Jazz();
-            $jazz->setDate($row['date']);
+            $jazz->setStartTime($row['starttime']);
             $jazz->setName($row['name']);
             $jazz->setImage($row['image']);
             $jazzArtists[] = $jazz;
@@ -50,10 +50,9 @@ class JazzRepository extends BaseRepository
         $jazzTimetable = [];
         foreach ($results as $row) {
             $jazz = new Jazz();
-            $jazz->setDate($row['date']);
+            $jazz->setStartTime($row['starttime']);
             $jazz->setName($row['name']);
-            $jazz->setStartTime($row['start_time']);
-            $jazz->setEndTime($row['end_time']);
+            $jazz->setEndTime($row['endtime']);
             $jazz->setPlace($row['place']);
             $jazzTimetable[] = $jazz;
         }
@@ -92,7 +91,7 @@ class JazzRepository extends BaseRepository
     public function getAvailebleTicketsForArtist($name)
     {
         $sql = "
-        SELECT e.starttime AS EventDate, e.StartTime, e.EndTime, e.Price, e.AvailableTickets
+        SELECT e.starttime AS EventDate, e.StartTime, e.EndTime, e.Price, e.TotalTickets
         FROM Artists a
         JOIN Jazz j ON a.ArtistID = j.ArtistID
         JOIN Events e ON j.EventID = e.EventID
@@ -111,7 +110,7 @@ class JazzRepository extends BaseRepository
             $jazz->setStartTime($row['StartTime']);  // Voeg starttijd toe
             $jazz->setEndTime($row['EndTime']);      // Voeg eindtijd toe
             $jazz->setPrice($row['Price']);          // Voeg prijs toe
-            $jazz->setAvailableTickets($row['AvailableTickets']);
+            $jazz->setAvailableTickets($row['TotalTickets']);
             $tickets[] = $jazz;
         }
 
