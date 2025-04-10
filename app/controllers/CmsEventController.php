@@ -46,7 +46,39 @@ class CmsEventController extends Controller {
         $event->setPrice($_POST['price']);	
         $event->setTotalTickets($_POST['tickets']);
         $event->setCategory($_POST['category']);
-        $this->eventService->insertEvent($event);
+
+        // If category is jazz or dance, ask also for artist
+        if ($_POST['category'] === 'jazz' || $_POST['category'] === 'dance') {
+            $artist = new \Models\Artist();
+            $artist->setName($_POST['artistName']);
+            $artist->setAbout($_POST['artistAbout']);
+            $artist->setKnownFor($_POST['artistKnownFor']);
+            $artist->setSong1Link($_POST['song1Link']);
+            $artist->setSong2Link($_POST['song2Link']);
+            $artist->setSong3Link($_POST['song3Link']);
+            $artist->setImageName($_POST['artistImageName']);
+            $artist->setCategory($_POST['artistCategory']);
+            $artist->setBannerImage($_POST['bannerImage']);
+            $this->eventService->insertArtist($artist);
+            $event->setArtist($artist);
+        }
+
+        // If category is yummy, ask for food type, star rating, and menu
+        if ($_POST['category'] === 'yummy') {
+            // create a new YummieModel object
+            // post yummie data to the database
+            // set the yummie object to the event
+        }
+        $event = $this->eventService->insertEvent($event);
+
+        // If category is stroll, ask for language and guide
+        if ($_POST['category'] === 'stroll') {
+            $strollEvent = new \Models\StrollEvent();
+            $strollEvent->setEventID($event->getEventID());
+            $strollEvent->setLanguage($_POST['language']);
+            $strollEvent->setGuide($_POST['guide']);
+            $strollEvent->setFamilyTicketPrice(60);
+        }
 
         $this->index();
     }
