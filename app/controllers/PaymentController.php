@@ -206,7 +206,7 @@ class PaymentController extends Controller
 		$ticketPDFs = [];
 		$tickets = $this->ticketService->getTicketsByOrderId($orderId);
 		foreach ($tickets as $ticket) {
-			$qrCode = $this->qrCodeService->generateQRCode($ticket);
+			$qrCode = $this->qrCodeService->createQrCode($ticket);
 			$ticket->setQRCode($qrCode);
 			$pdfContent = $this->pdfService->generateTicketPDF($ticket);
 			$filePath = $tempDir . '/ticket_' . $ticket->getTicketID() . '.pdf';
