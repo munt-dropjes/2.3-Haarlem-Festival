@@ -17,6 +17,7 @@ class Event implements JsonSerializable
 	private string $ImageName;
 	private string $Category;
 	private array $Artists;
+	public float $FamilyTicketPrice = 0.0;
 
 	public function jsonSerialize(): array
 	{
@@ -28,10 +29,12 @@ class Event implements JsonSerializable
 			'EndTime' => $this->EndTime,
 			'Location' => $this->Location,
 			'Price' => $this->Price,
+			'TotalTickets' => $this->TotalTickets,
 			'AvailableTickets' => $this->getAvailableTickets(),
 			'ImageName' => $this->ImageName,
 			'Category' => $this->Category,
-			'Artists' => $this->Artists
+			'Artists' => $this->Artists,
+			'FamilyTicketPrice' => $this->FamilyTicketPrice,
 		];
 	}
 
@@ -89,6 +92,10 @@ class Event implements JsonSerializable
 	{
 		return $this->Artists;
 	}
+	public function getFamilyTicketPrice(): float
+	{
+		return $this->FamilyTicketPrice;
+	}
 
 	// Setters
 	public function setEventID(int $EventID): void
@@ -138,6 +145,10 @@ class Event implements JsonSerializable
 	public function setArtists(array $Artists): void
 	{
 		$this->Artists = $Artists;
+	}
+	public function setFamilyTicketPrice(float $FamilyTicketPrice): void
+	{
+		$this->FamilyTicketPrice = $FamilyTicketPrice;
 	}
 
 	// Additional utilitys

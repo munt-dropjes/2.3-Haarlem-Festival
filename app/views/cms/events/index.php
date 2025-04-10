@@ -10,6 +10,9 @@
             <li class="nav-item">
                 <a class="nav-link" href="/cms/orders">Orders</a>
             </li>
+            <li class="nav-item">
+                <a class="nav-link" href="/cms/homepage">Homepage</a>
+            </li>
         </ul>
         <div class="table-wrapper">
             <div class="table-title">
@@ -159,6 +162,82 @@
                                     <option value="Dance">Dance</option>
                                     <option value="A Stroll through History">Stroll</option>
                                 </select>
+                            </div>
+                            <div id="additional-fields">
+                                <script>
+                                    document.getElementById('category').addEventListener('change', function() {
+                                        const category = this.value;
+                                        const additionalFields = document.getElementById('additional-fields');
+                                        additionalFields.innerHTML = ''; // Clear previous fields
+
+                                        if (category === 'Jazz' || category === 'Dance') {
+                                            additionalFields.innerHTML = `
+                                                <div class="modal-group">
+                                                    <label for="artistName">Artist Name</label>
+                                                    <input type="text" class="form-control" id="artistName" name="artistName" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="artistAbout">About</label>
+                                                    <textarea class="form-control" id="artistAbout" name="artistAbout" required></textarea>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="artistKnownFor">Known For</label>
+                                                    <input type="text" class="form-control" id="artistKnownFor" name="artistKnownFor" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="song1Link">Song 1 Link</label>
+                                                    <input type="url" class="form-control" id="song1Link" name="song1Link" pattern="https?://(www\\\\.)?(spotify\\\\.com|soundcloud\\\\.com)/.*" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="song2Link">Song 2 Link</label>
+                                                    <input type="url" class="form-control" id="song2Link" name="song2Link" pattern="https?://(www\\\\.)?(spotify\\\\.com|soundcloud\\\\.com)/.*">
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="song3Link">Song 3 Link</label>
+                                                    <input type="url" class="form-control" id="song3Link" name="song3Link" pattern="https?://(www\\\\.)?(spotify\\\\.com|soundcloud\\\\.com)/.*">
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="artistImageName">Artist Image Name</label>
+                                                    <input type="text" class="form-control" id="artistImageName" name="artistImageName" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="artistCategory">Category</label>
+                                                    <input type="text" class="form-control" id="artistCategory" name="artistCategory" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="bannerImage">Banner Image</label>
+                                                    <input type="text" class="form-control" id="bannerImage" name="bannerImage" required>
+                                                </div>
+                                            `;
+                                        } else if (category === 'Yummy') {
+                                            additionalFields.innerHTML = `
+                                                <div class="modal-group">
+                                                    <label for="foodType">Food Type</label>
+                                                    <input type="text" class="form-control" id="foodType" name="foodType" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="starRating">Star Rating</label>
+                                                    <input type="number" class="form-control" id="starRating" name="starRating" min="1" max="5" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="menu">Menu</label>
+                                                    <textarea class="form-control" id="menu" name="menu" required></textarea>
+                                                </div>
+                                            `;
+                                        } else if (category === 'A Stroll through History') {
+                                            additionalFields.innerHTML = `
+                                                <div class="modal-group">
+                                                    <label for="language">Language</label>
+                                                    <input type="text" class="form-control" id="language" name="language" required>
+                                                </div>
+                                                <div class="modal-group">
+                                                    <label for="guide">Guide</label>
+                                                    <input type="text" class="form-control" id="guide" name="guide" required>
+                                                </div>
+                                            `;
+                                        }
+                                    });
+                                </script>
                             </div>
                         </div>
                     </div>

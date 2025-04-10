@@ -31,12 +31,12 @@ class EventService {
         return $this->eventRepository->countTotalEvents();
     }
 
-    public function getAvailibility($eventId) : boolval {
+    public function getAvailibility($eventId, $quantity) : boolval {
         $event = $this->eventRepository->getEventById($eventId);
         if ($event == null) {
             throw new Exception("Event not found", 404);
         }
-        if ($event->getAvailableTickets() > 0) {
+        if ($event->getAvailableTickets() > 0 && $event->getAvailableTickets() >= $quantity) {
             return true;
         } else {
             return false;
