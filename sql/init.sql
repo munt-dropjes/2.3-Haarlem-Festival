@@ -5,8 +5,8 @@ CREATE DATABASE IF NOT EXISTS thefestivaldb;
 USE thefestivaldb;
 
 CREATE TABLE `HomePage`(
-	`id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
-	`data` LONGTEXT NOT NULL
+    `id` INT(11) NOT NULL PRIMARY KEY AUTO_INCREMENT,
+    `data` LONGTEXT NOT NULL
 );
 
 CREATE TABLE `Artists` (
@@ -424,7 +424,31 @@ VALUES
 		'dance/hardwell.png',
 		'Dance',
 		'dance/Hardwell dj.png'
-	);
+	),
+(2, 'Gumbo Kings', 'De Gumbo Kings zijn een vijfkoppige band die de groove van New Orleans combineren met ruige deltablues en de melodie van soul uit het oude Memphis. Ze staan bekend om hun energieke live shows.', 'Roots Blues', 'https://open.spotify.com/track/example1', 'https://soundcloud.com/example1', 'https://open.spotify.com/track/example3', 0, 'Jazz', 0),
+(3, 'Evolve', 'Informatie over Evolve.', 'Genre of bekendheid', 'https://open.spotify.com/track/example4', 'https://soundcloud.com/example4', 'https://open.spotify.com/track/example6', 0, 'Jazz', 0),
+(4, 'Ntjam Rosie', 'Informatie over Ntjam Rosie.', 'Genre of bekendheid', 'https://open.spotify.com/track/example7', 'https://soundcloud.com/example7', 'https://open.spotify.com/track/example9', 0, 'Jazz', 0),
+(5, 'Wicked Jazz Sounds', 'Wicked Jazz Sounds is een wekelijkse clubavond waar jazz en dans samenkomen. DJs en muzikanten spelen samen een mix van funk, soul, hiphop, house en meer.', 'Funk, Soul, Hiphop, House', 'https://open.spotify.com/track/example10', 'https://soundcloud.com/example10', 'https://open.spotify.com/track/example12', 0, 'Jazz', 0),
+(6, 'Wouter Hamel', 'Informatie over Wouter Hamel.', 'Genre of bekendheid', 'https://open.spotify.com/track/example13', 'https://soundcloud.com/example13', 'https://open.spotify.com/track/example15', 0, 'Jazz', 0),
+(7, 'Jonna Frazer', 'Informatie over Jonna Frazer.', 'Genre of bekendheid', 'https://open.spotify.com/track/example16', 'https://soundcloud.com/example16', 'https://open.spotify.com/track/example18', 0, 'Jazz', 0),
+
+-- Vrijdag 25 juli 2025
+(8, 'Karsu', 'Informatie over Karsu.', 'Genre of bekendheid', 'https://open.spotify.com/track/example19', 'https://soundcloud.com/example19', 'https://open.spotify.com/track/example21', 0, 'Jazz', 0),
+(9, 'Uncle Sue', 'Informatie over Uncle Sue.', 'Genre of bekendheid', 'https://open.spotify.com/track/example22', 'https://soundcloud.com/example22', 'https://open.spotify.com/track/example24', 0, 'Jazz', 0),
+(10, 'Chris Allen', 'Informatie over Chris Allen.', 'Genre of bekendheid', 'https://open.spotify.com/track/example25', 'https://soundcloud.com/example25', 'https://open.spotify.com/track/example27', 0, 'Jazz', 0),
+(11, 'Myles Sanko', 'Myles Sanko is een Britse soulzanger die bekendstaat om zijn funky, jazzy en vintage soul sound. Zijn vierde album, "Memories of Love", werd in 2021 uitgebracht.', 'Britse Soulzanger', 'https://open.spotify.com/track/example28', 'https://soundcloud.com/example28', 'https://open.spotify.com/track/example30', 0, 'Jazz', 0),
+(12, 'Ilse Huizinga', 'Informatie over Ilse Huizinga.', 'Genre of bekendheid', 'https://open.spotify.com/track/example31', 'https://soundcloud.com/example31', 'https://open.spotify.com/track/example33', 0, 'Jazz', 0),
+(13, 'Eric Vloeimans and Hotspot!', 'Eric Vloeimans is een Nederlandse trompettist die bekendstaat om zijn virtuositeit en expressieve speelstijl. Zijn project "Hotspot!" combineert jazz met andere genres.', 'Nederlandse Trompettist', 'https://open.spotify.com/track/example34', 'https://soundcloud.com/example34', 'https://open.spotify.com/track/example36', 0, 'Jazz', 0),
+
+-- Zaterdag 26 juli 2025
+(14, 'Gare du Nord', 'Gare du Nord is een Nederlandse band die jazz, blues en swing combineert met moderne invloeden. Ze staan bekend om hun energieke optredens.', 'Jazz, Blues, Swing Band', 'https://open.spotify.com/track/example37', 'https://soundcloud.com/example37', 'https://open.spotify.com/track/example39', 0, 'Jazz', 0),
+(15, 'Rilan & The Bombadiers', 'Informatie over Rilan & The Bombadiers.', 'Genre of bekendheid', 'https://open.spotify.com/track/example40', 'https://soundcloud.com/example40', 'https://open.spotify.com/track/example42', 0, 'Jazz', 0),
+(16, 'Soul Six', 'Informatie over Soul Six.', 'Genre of bekendheid', 'https://open.spotify.com/track/example43', 'https://soundcloud.com/example43', 'https://open.spotify.com/track/example45', 0, 'Jazz', 0),
+(17, 'Han Bennink', 'Han Bennink is een Nederlandse jazzdrummer die bekendstaat om zijn innovatieve en energieke speelstijl. Hij is een pionier in de Europese jazzscene.', 'Nederlandse Jazzdrummer', 'https://open.spotify.com/track/example46', 'https://soundcloud.com/example46', 'https://open.spotify.com/track/example48', 0, 'Jazz', 0),
+(18, 'The Nordanians', 'Informatie over The Nordanians.', 'Genre of bekendheid', 'https://open.spotify.com/track/example49', 'https://soundcloud.com/example49', 'https://open.spotify.com/track/example51', 0, 'Jazz', 0),
+(19, 'Lilith Merlot', 'Informatie over Lilith Merlot.', 'Genre of bekendheid', 'https://open.spotify.com/track/example52', 'https://soundcloud.com/example52', 'https://open.spotify.com/track/example54', 0, 'Jazz', 0);
+
+
 
 INSERT INTO `Events`
 	(`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets`, `ImageName`, `Category`)
@@ -944,7 +968,37 @@ VALUES
 		12,
 		'Stroll_through_history.png',
 		'A Stroll through History'
-	);
+	),
+	(45, 'Gumbo Kings', '', '2025-07-24 18:00:00', '2025-07-24 19:00:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(46, 'Evolve', '', '2025-07-24 19:30:00', '2025-07-24 20:30:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(47, 'Ntjam Rosie', '', '2025-07-24 21:00:00', '2025-07-24 22:00:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(48, 'Wicked Jazz Sounds', '', '2025-07-24 18:00:00', '2025-07-24 19:00:00', 'Patronaat - Second Hall', 10.00, 200, '', 'Jazz'),
+	(49, 'Wouter Hamel', '', '2025-07-24 19:30:00', '2025-07-24 20:30:00', 'Patronaat - Second Hall', 10.00, 200, '', 'Jazz'),
+	(50, 'Jonna Frazer', '', '2025-07-24 21:00:00', '2025-07-24 22:00:00', 'Patronaat - Second Hall', 10.00, 200, '', 'Jazz'),
+
+	-- Vrijdag 25 juli 2025
+	(51, 'Karsu', '', '2025-07-25 18:00:00', '2025-07-25 19:00:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(52, 'Uncle Sue', '', '2025-07-25 19:30:00', '2025-07-25 20:30:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(53, 'Chris Allen', '', '2025-07-25 21:00:00', '2025-07-25 22:00:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(54, 'Myles Sanko', '', '2025-07-25 18:00:00', '2025-07-25 19:00:00', 'Patronaat - Second Hall', 10.00, 200, '', 'Jazz'),
+	(55, 'Ilse Huizinga', '', '2025-07-25 19:30:00', '2025-07-25 20:30:00', 'Patronaat - Second Hall', 10.00, 200, '', 'Jazz'),
+	(56, 'Eric Vloeimans and Hotspot!', '', '2025-07-25 21:00:00', '2025-07-25 22:00:00', 'Patronaat - Second Hall', 10.00, 200, '', 'Jazz'),
+
+	-- Zaterdag 26 juli 2025
+	(57, 'Gare du Nord', '', '2025-07-26 18:00:00', '2025-07-26 19:00:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(58, 'Rilan & The Bombadiers', '', '2025-07-26 19:30:00', '2025-07-26 20:30:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(59, 'Soul Six', '', '2025-07-26 21:00:00', '2025-07-26 22:00:00', 'Patronaat - Main Hall', 15.00, 300, '', 'Jazz'),
+	(60, 'Han Bennink', '', '2025-07-26 18:00:00', '2025-07-26 19:00:00', 'Patronaat - Third Hall', 10.00, 150, '', 'Jazz'),
+	(61, 'The Nordanians', '', '2025-07-26 19:30:00', '2025-07-26 20:30:00', 'Patronaat - Third Hall', 10.00, 150, '', 'Jazz'),
+	(62, 'Lilith Merlot', '', '2025-07-26 21:00:00', '2025-07-26 22:00:00', 'Patronaat - Third Hall', 10.00, 150, '', 'Jazz'),
+
+	-- Zondag 27 juli 2025 (gratis events)
+	(63, 'Ruis Soundsystem', '', '2025-07-27 15:00:00', '2025-07-27 16:00:00', 'Grote Markt', 0.00, 0, '', 'Jazz'),
+	(64, 'Wicked Jazz Sounds', '', '2025-07-27 16:00:00', '2025-07-27 17:00:00', 'Grote Markt', 0.00, 0, '', 'Jazz'),
+	(65, 'Evolve', '', '2025-07-27 17:00:00', '2025-07-27 18:00:00', 'Grote Markt', 0.00, 0, '', 'Jazz'),
+	(66, 'The Nordanians', '', '2025-07-27 18:00:00', '2025-07-27 19:00:00', 'Grote Markt', 0.00, 0, '', 'Jazz'),
+	(67, 'Gumbo Kings', '', '2025-07-27 19:00:00', '2025-07-27 20:00:00', 'Grote Markt', 0.00, 0, '', 'Jazz'),
+	(68, 'Gare du Nord', '', '2025-07-27 20:00:00', '2025-07-27 21:00:00', 'Grote Markt', 0.00, 0, '', 'Jazz');
 
 INSERT INTO `Dance`
 	(`ArtistID`, `EventID`)
@@ -1096,5 +1150,32 @@ VALUES
 	(2, 1, 0, 0, 'Friday', '18:30', '', 0, '2025-03-20 11:22:20'),
 	(3, 1, 0, 0, 'Saturday', '18:30', '', 0, '2025-03-20 11:23:05'),
 	(4, 1, 2, 2, 'Sunday', '21:30', '', 0, '2025-03-23 17:24:40');
+
+INSERT INTO `Jazz` (`ArtistID`, `EventID`)
+VALUES(2, 45),   -- Gumbo Kings
+(3, 46),   -- Evolve
+(4, 47),   -- Ntjam Rosie
+(5, 48),   -- Wicked Jazz Sounds (donderdag)
+(6, 49),   -- Wouter Hamel
+(7, 50),   -- Jonna Frazer
+(8, 51),   -- Karsu
+(9, 52),   -- Uncle Sue
+(10, 53),  -- Chris Allen
+(11, 54),  -- Myles Sanko
+(12, 55),  -- Ilse Huizinga
+(13, 56),  -- Eric Vloeimans and Hotspot!
+(14, 57),  -- Gare du Nord (zaterdag)
+(15, 58),  -- Rilan & The Bombadiers
+(16, 59),  -- Soul Six
+(17, 60),  -- Han Bennink
+(18, 61),  -- The Nordanians (zaterdag)
+(19, 62),  -- Lilith Merlot
+
+-- Zondag (gratis evenementen, al eerder genoemde artiesten)
+(5, 64),   -- Wicked Jazz Sounds (zondag)
+(3, 65),   -- Evolve (zondag)
+(18, 66),  -- The Nordanians (zondag)
+(2, 67),   -- Gumbo Kings (zondag)
+(14, 68);
 
 commit;
