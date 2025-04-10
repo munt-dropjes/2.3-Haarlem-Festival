@@ -40,9 +40,8 @@ class CmsEventController extends Controller {
         $event = new Event();
         $event->setName($_POST['name']);
         $event->setDescription($_POST['description']);
-        $event->setDate($_POST['date']);
-        $event->setTime($_POST['time']);
-        $event->setDuration($_POST['duration']);
+        $event->setStartTime($_POST['starttime']);
+        $event->setEndTime($_POST['endtime']);
         $event->setLocation($_POST['location']);
         $event->setPrice($_POST['price']);	
         $event->setTotalTickets($_POST['tickets']);
@@ -57,9 +56,9 @@ class CmsEventController extends Controller {
         $updateEvent = $this->eventService->getEventById($_POST['id']);
         $updateEvent->setName($_POST['name']);
         $updateEvent->setDescription($_POST['description']);
-        $updateEvent->setDate($_POST['date']);
-        $updateEvent->setTime($_POST['time']);
-        $updateEvent->setDuration($_POST['duration']);
+        $updateEvent->setStartTime($_POST['starttime']);
+        $updateEvent->setEndTime($_POST['endtime']);
+        $updateEvent->setAvailableTickets($_POST['tickets']);
         $updateEvent->setLocation($_POST['location']);
         $updateEvent->setPrice($_POST['price']);	
         $updateEvent->setCategory($_POST['category']);

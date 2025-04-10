@@ -13,7 +13,7 @@
 			<h2 class="col-12 text-center mb-2">Career Highlights</h2>
 
 			<div class="col-12 col-sm-4">
-				<img class="w-100" src="/images/hardwell.png" alt="">
+				<img class="w-100" src="/images/dance/<?= $artist->getImageName() ?>" alt="">
 			</div>
 
 			<div class="col-12 col-sm-8 d-flex align-items-center">

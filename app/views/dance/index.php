@@ -15,7 +15,8 @@
 						/** @var \Models\Artist $artist */ ?>
 						<a href="/dance/hardwell" class="swiper-slide swiper-slide-normal card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
-								<img class="ArtistImage card-image-top" src="/images/dance/<?= $artist->getImageName() ?>" alt="">
+								<img class="ArtistImage card-image-top" src="/images/dance/<?= $artist->getImageName() ?>"
+									alt="">
 								<i class="text-center fw-bold d-none"><?= $artist->getName() ?></i>
 							</div>
 						</a>
@@ -42,7 +43,8 @@
 							</div>
 
 							<div class="card-body pt-0 fw-bold">
-								<button class="CTA my-3 py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)"
+									class="CTA my-3 py-2 px-5">Buy</button>
 								<p class="card-text">Duration: <?= $event->getDuration() ?></p>
 								<p class="card-text">Tickets avilable: <?= $event->getAvailableTickets() ?></p>
 								<p class="card-text">Price: &euro;<?= $event->getPrice() ?></p>
@@ -72,7 +74,8 @@
 							</div>
 
 							<div class="card-body pt-0 fw-bold">
-								<button class="CTA my-3 py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)"
+									class="CTA my-3 py-2 px-5">Buy</button>
 								<p class="card-text">Duration: <?= $event->getDuration() ?></p>
 								<p class="card-text">Tickets avilable: <?= $event->getAvailableTickets() ?></p>
 								<p class="card-text">Price: &euro;<?= $event->getPrice() ?></p>
@@ -102,7 +105,8 @@
 							</div>
 
 							<div class="card-body pt-0 fw-bold">
-								<button class="CTA my-3 py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)"
+									class="CTA my-3 py-2 px-5">Buy</button>
 								<p class="card-text">Duration: <?= $event->getDuration() ?></p>
 								<p class="card-text">Tickets avilable: <?= $event->getAvailableTickets() ?></p>
 								<p class="card-text">Price: &euro;<?= $event->getPrice() ?></p>
@@ -126,7 +130,8 @@
 						/** @var \Models\Event $event */ ?>
 						<div class="event-button-hover swiper-slide swiper-slide-normal card overflow-hidden rounded-4">
 							<div class="image-container position-relative">
-								<img clang="card-img-top" src="/images/dance/<?= $event->getImageName() ?>" alt="All Access Pass">
+								<img clang="card-img-top" src="/images/dance/<?= $event->getImageName() ?>"
+									alt="All Access Pass">
 								<i class="text-center fw-bold">
 									<span>
 										<?= date('l', strtotime($event->getDate())) ?>
@@ -135,7 +140,7 @@
 										&euro;<?= $event->getPrice() ?>
 									</span>
 								</i>
-								<button class="CTA py-2 px-5">Buy</button>
+								<button onclick="addToCart(<?= $event->getEventID() ?>)" class="CTA py-2 px-5">Buy</button>
 							</div>
 						</div>
 					<?php endforeach; ?>
