@@ -11,12 +11,12 @@ class JazzRepository extends BaseRepository
     public function getFestivalDaysAndArtists()
     {
         $sql = "
-            SELECT E.Date AS date, A.Name AS name, A.ImageName AS image
+            SELECT E.StartTime AS starttime, A.Name AS name, A.ImageName AS image
             FROM Events E
             JOIN Jazz J ON E.EventID = J.EventID
             JOIN Artists A ON J.ArtistID = A.ArtistID
-            WHERE E.Date IS NOT NULL
-            ORDER BY E.Date, A.Name;
+            WHERE E.StartTime IS NOT NULL
+            ORDER BY E.StartTime, A.Name;
         ";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
@@ -37,11 +37,11 @@ class JazzRepository extends BaseRepository
     public function getFestivalTimetable()
     {
         $sql = "
-            SELECT E.Date AS date, A.Name AS name, E.StartTime AS start_time, E.EndTime AS end_time, E.Location AS place
+            SELECT E.Starttime AS starttime, A.Name AS name, E.EndTime AS endtime, E.Location AS place
             FROM Events E
             JOIN Jazz J ON E.EventID = J.EventID
             JOIN Artists A ON J.ArtistID = A.ArtistID
-            ORDER BY E.Date, E.Location, E.StartTime;
+            ORDER BY E.StartTime, E.Location;
         ";
         $stmt = $this->connection->prepare($sql);
         $stmt->execute();
@@ -92,7 +92,7 @@ class JazzRepository extends BaseRepository
     public function getAvailebleTicketsForArtist($name)
     {
         $sql = "
-        SELECT e.Date AS EventDate, e.StartTime, e.EndTime, e.Price, e.AvailableTickets
+        SELECT e.starttime AS EventDate, e.StartTime, e.EndTime, e.Price, e.AvailableTickets
         FROM Artists a
         JOIN Jazz j ON a.ArtistID = j.ArtistID
         JOIN Events e ON j.EventID = e.EventID
