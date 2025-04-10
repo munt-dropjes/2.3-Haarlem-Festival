@@ -56,7 +56,7 @@
                                 <td><?= $event->getPrice() ?></td>
                                 <td><?= $event->getCategory() ?></td>
                                 <td><?= $event->getAvailableTickets() ?></td>
-                                <td><?= $event->getPrice() > 0 ? 'Available' : 'Sold out' ?></td>
+                                <td><?= $event->getAvailableTickets() > 0 ? 'Available' : 'Sold out' ?></td>
                                 <td>
                                     <button
                                         type="button"
