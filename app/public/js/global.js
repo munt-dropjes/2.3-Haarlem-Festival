@@ -390,7 +390,6 @@ function addToCart(itemId, quantity = 1, isFamilyTicket = false) {
 		.catch(error => console.error("Error:", error));
 }
 
-
 // stroll buy button hide/show
 function toggleBuyButton(selectElement, eventID) {
     const selectedValue = selectElement.value;
