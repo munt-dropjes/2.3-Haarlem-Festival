@@ -28,11 +28,13 @@ class QrService
 
     public function createQrCode($url)
     {
+        $encodedObject = json_encode($url);
         $options = new QROptions;
 
-        $options->version      = 5;
+        $options->version      = 14;
         $options->outputType   = QROutputInterface::MARKUP_HTML;
         $options->cssClass     = 'qrcode';
+        $options->eccLevel = QRCode::ECC_L;
         $options->moduleValues = [
             // finder
             QRMatrix::M_FINDER_DARK    => '#A71111', // dark (true)
@@ -43,7 +45,7 @@ class QrService
             QRMatrix::M_ALIGNMENT      => '#FFC9C9',
         ];
 
-        $out  = (new QRCode($options))->render($url);
+        $out  = (new QRCode($options))->render($encodedObject);
 
         return $out;
     }

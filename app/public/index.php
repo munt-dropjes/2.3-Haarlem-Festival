@@ -82,6 +82,7 @@ $router->get('/home', 'HomeController@index');
     //qr-codes
     $router->get('/qr', 'QrController@index');
     $router->get('/qr/create', 'QrController@create');
+    $router->post('/api/check-ticket', 'QrController@checkTicket');
 
     //payment with stripe / shoppingcart routes
     $router->get('/checkout', 'PaymentController@createSession');

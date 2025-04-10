@@ -53,11 +53,11 @@ class TestController extends Controller
         $eventID = rand(1, 100); 
         $userID = rand(1, 1000); 
         $qrCode = 'https://api.qrserver.com/v1/create-qr-code/?size=150x150&data=Ticket-' . $ticketID; 
-        $status = 'Valid'; 
+        $status = '0'; 
         $purchasedAt = date('d-m-Y H:i:s');
         $eventName = 'Haarlem Festival Event'; 
         $eventDetails = [
-            'Date' => date('d-m-Y', strtotime('+7 days')), // Event date 7 days from now
+            'Date' => date('d-m-Y', strtotime('+7 days')),
             'Time' => '20:00', 
             'Location' => 'Haarlem Grote Markt', 
             'Duration' => '2 hours' 

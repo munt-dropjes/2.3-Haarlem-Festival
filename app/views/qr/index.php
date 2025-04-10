@@ -53,33 +53,55 @@
       
       scanner.addListener('scan', function (content) {
         console.log("scanning");
-        const decodedString = atob(content);
-        console.log("decodedstring: " + decodedString);
 
-        qrservice.checkTicket(decodedString).then(function (response) {
-          if (response.status === 200) {
-            if (response.data.status === 'correct') {
-              correctImage.style.display = 'block';
-              incorrectImage.style.display = 'none';
-              scannedImage.style.display = 'none';
-            } else if (response.data.status === 'incorrect') {
-              correctImage.style.display = 'none';
-              incorrectImage.style.display = 'block';
-              scannedImage.style.display = 'none';
-            } else if (response.data.status === 'scanned') {
-              correctImage.style.display = 'none';
-              incorrectImage.style.display = 'none';
-              scannedImage.style.display = 'block';
+        try {
+            let decodedString;
+
+            if (/^[A-Za-z0-9+/=]+$/.test(content) && content.length % 4 === 0) {
+                decodedString = atob(content);
+                console.log("Decoded Base64 string: " + decodedString);
+            } else {
+                decodedString = content;
+                console.log("Plain text content: " + decodedString);
             }
-          } else {
-            console.error('Error: ', response.statusText);
-          }
-        }).catch(function (error) {
-          console.error('Error: ', error);
-          correctImage.style.display = 'none';
-          incorrectImage.style.display = 'block';
-          scannedImage.style.display = 'none';
-        });
+
+            fetch('/api/check-ticket', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify({ ticket: decodedString }),
+            })
+                .then((response) => response.json())
+                .then((data) => {
+                    if (data.status === 'correct') {
+                        correctImage.style.display = 'block';
+                        incorrectImage.style.display = 'none';
+                        scannedImage.style.display = 'none';
+                    } else if (data.status === 'incorrect') {
+                        correctImage.style.display = 'none';
+                        incorrectImage.style.display = 'block';
+                        scannedImage.style.display = 'none';
+                    } else if (data.status === 'scanned') {
+                        correctImage.style.display = 'none';
+                        incorrectImage.style.display = 'none';
+                        scannedImage.style.display = 'block';
+                    } else {
+                        console.error('Unexpected response: ', data);
+                    }
+                })
+                .catch((error) => {
+                    console.error('Error: ', error);
+                    correctImage.style.display = 'none';
+                    incorrectImage.style.display = 'block';
+                    scannedImage.style.display = 'none';
+                });
+        } catch (error) {
+            console.error('Error decoding content: ', error.message);
+            correctImage.style.display = 'none';
+            incorrectImage.style.display = 'block';
+            scannedImage.style.display = 'none';
+        }
       });
     </script>
 </div>
