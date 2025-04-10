@@ -39,7 +39,6 @@
       let incorrectImage = document.getElementById('incorrectImage');
       let scannedImage = document.getElementById('scannedImage');
       const ticket = document.getElementById('ticket');
-      const correctCodes = <?php echo json_encode($qrcodes); ?>;
 
       Instascan.Camera.getCameras().then(function (cameras) {
         if (cameras.length > 0) {
@@ -53,32 +52,31 @@
       });
       
       scanner.addListener('scan', function (content) {
-        for (let i = 0; i < correctCodes.length; i++) {
-          const decodedString = atob(content);
-          ticket.value = decodedString;
-          if (parseInt(decodedString) == correctCodes[i].TicketID) {
-            if (correctCodes[i].isScanned == 1) {
-              scannedImage.style.display = 'block';
-              correctImage.style.display = 'none';
-              incorrectImage.style.display = 'none';
-              return;
-            }
-            else {
+        console.log("scanning");
+        const decodedString = atob(content);
+        console.log("decodedstring: " decodedString);
+
+        qrservice.checkTicket(decodedString).then(function (response) {
+          if (response.status === 200) {
+            if (response.data.status === 'correct') {
               correctImage.style.display = 'block';
               incorrectImage.style.display = 'none';
               scannedImage.style.display = 'none';
-              fetch('/qrscanner?ticket=' + decodedString,{
-                method: 'POST',
-              });
+            } else if (response.data.status === 'incorrect') {
+              correctImage.style.display = 'none';
+              incorrectImage.style.display = 'block';
+              scannedImage.style.display = 'none';
+            } else if (response.data.status === 'scanned') {
+              correctImage.style.display = 'none';
+              incorrectImage.style.display = 'none';
+              scannedImage.style.display = 'block';
             }
           } else {
-            console.log(parseInt(decodedString), correctCodes[i].TicketID);
-
-            correctImage.style.display = 'none';
-            scannedImage.style.display = 'none';
-            incorrectImage.style.display = 'block';
+            console.error('Error: ', response.statusText);
           }
-        }
+        }).catch(function (error) {
+          console.error('Error: ', error);
+        });
       });
     </script>
 </div>
