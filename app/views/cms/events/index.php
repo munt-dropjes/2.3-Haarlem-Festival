@@ -128,35 +128,35 @@
                         <div class="form-content">
                             <div class="modal-group">
                                 <label for="name">Name</label>
-                                <input type="text" class="form-control" id="name" name="name" required>
+                                <input type="text" class="form-control" id="name" name="Name" required>
                             </div>
                             <div class="modal-group">
                                 <label for="description">Description</label>
-                                <input type="text" class="form-control" id="description" name="description" required>
+                                <input type="text" class="form-control" id="description" name="Description" required>
                             </div>
                             <div class="modal-group">
                                 <label for="date">Starttime</label>
-                                <input type="datetime-local" class="form-control" id="starttime" name="starttime" required>
+                                <input type="datetime-local" class="form-control" id="starttime" name="StartTime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="date">Endtime</label>
-                                <input type="datetime-local" class="form-control" id="endtime" name="endtime" required>
+                                <input type="datetime-local" class="form-control" id="endtime" name="EndTime" required>
                             </div>
                             <div class="modal-group">
                                 <label for="duration">Location</label>
-                                <input type="text" class="form-control" id="location" name="location" required>
+                                <input type="text" class="form-control" id="location" name="Location" required>
                             </div>
                             <div class="modal-group">
                                 <label for="price">Price</label>
-                                <input type="text" class="form-control" id="price" name="price" required>
+                                <input type="text" class="form-control" id="price" name="Price" required>
                             </div>
                             <div class="modal-group">
                                 <label for="availableTickets">Total Tickets</label>
-                                <input type="text" class="form-control" id="tickets" name="tickets" required>
+                                <input type="text" class="form-control" id="tickets" name="TotalTickets" required>
                             </div>
                             <div class="modal-group">
                                 <label for="category">Category</label>
-                                <select class="form-select" id="category" name="category">
+                                <select class="form-select" id="category" name="Category">
                                     <option value="Jazz">Jazz</option>
                                     <option value="Yummy">Yummy</option>
                                     <option value="Dance">Dance</option>
@@ -186,15 +186,15 @@
                                                 </div>
                                                 <div class="modal-group">
                                                     <label for="song1Link">Song 1 Link</label>
-                                                    <input type="url" class="form-control" id="song1Link" name="song1Link" pattern="https?://(www\\\\.)?(spotify\\\\.com|soundcloud\\\\.com)/.*" required>
+                                                    <input type="url" class="form-control" id="song1Link" name="song1Link" required>
                                                 </div>
                                                 <div class="modal-group">
                                                     <label for="song2Link">Song 2 Link</label>
-                                                    <input type="url" class="form-control" id="song2Link" name="song2Link" pattern="https?://(www\\\\.)?(spotify\\\\.com|soundcloud\\\\.com)/.*">
+                                                    <input type="url" class="form-control" id="song2Link" name="song2Link">
                                                 </div>
                                                 <div class="modal-group">
                                                     <label for="song3Link">Song 3 Link</label>
-                                                    <input type="url" class="form-control" id="song3Link" name="song3Link" pattern="https?://(www\\\\.)?(spotify\\\\.com|soundcloud\\\\.com)/.*">
+                                                    <input type="url" class="form-control" id="song3Link" name="song3Link">
                                                 </div>
                                                 <div class="modal-group">
                                                     <label for="artistImageName">Artist Image Name</label>
@@ -285,8 +285,8 @@
                                 <input type="text" class="form-control" id="price" name="price" required>
                             </div>
                             <div class="modal-group">
-                                <label for="duration">Available Tickets</label>
-                                <input type="text" class="form-control" id="tickets" name="tickets" required>
+                                <label for="duration">Total Tickets</label>
+                                <input type="text" class="form-control" id="tickets" name="totalTickets" required>
                             </div>
                             <div class="modal-group">
                                 <label for="category">Category</label>

@@ -40,7 +40,7 @@ class CmsEventController extends Controller {
         $event = Event::unserialize($_POST);
 
         // If category is jazz or dance, ask also for artist
-        if ($_POST['category'] === 'jazz' || $_POST['category'] === 'dance') {
+        if ($_POST['Category'] === 'jazz' || $_POST['Category'] === 'dance') {
             $artist = new \Models\Artist();
             $artist->setName($_POST['artistName']);
             $artist->setAbout($_POST['artistAbout']);
@@ -56,7 +56,7 @@ class CmsEventController extends Controller {
         }
 
         // If category is yummy, ask for food type, star rating, and menu
-        if ($_POST['category'] === 'yummy') {
+        if ($_POST['Category'] === 'yummy') {
             // create a new YummieModel object
             // post yummie data to the database
             // set the yummie object to the event
@@ -64,7 +64,7 @@ class CmsEventController extends Controller {
         $event = $this->eventService->insertEvent($event);
 
         // If category is stroll, ask for language and guide
-        if ($_POST['category'] === 'stroll') {
+        if ($_POST['Category'] === 'stroll') {
             $strollEvent = new \Models\StrollEvent();
             $strollEvent->setEventID($event->getEventID());
             $strollEvent->setLanguage($_POST['language']);
@@ -77,12 +77,12 @@ class CmsEventController extends Controller {
 
     //see above
     public function update(){
-        $updateEvent = $this->eventService->getEventById($_POST['id']);
+		$updateEvent = $this->eventService->getEventById($_POST['id']);
         $updateEvent->setName($_POST['name']);
         $updateEvent->setDescription($_POST['description']);
         $updateEvent->setStartTime($_POST['starttime']);
         $updateEvent->setEndTime($_POST['endtime']);
-        $updateEvent->setAvailableTickets($_POST['tickets']);
+        $updateEvent->setTotalTickets($_POST['totalTickets']);
         $updateEvent->setLocation($_POST['location']);
         $updateEvent->setPrice($_POST['price']);	
         $updateEvent->setCategory($_POST['category']);
