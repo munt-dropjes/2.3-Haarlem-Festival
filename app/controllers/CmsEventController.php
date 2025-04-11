@@ -37,15 +37,7 @@ class CmsEventController extends Controller {
 
     //add html special chars
     public function create(){
-        $event = new Event();
-        $event->setName($_POST['name']);
-        $event->setDescription($_POST['description']);
-        $event->setStartTime($_POST['starttime']);
-        $event->setEndTime($_POST['endtime']);
-        $event->setLocation($_POST['location']);
-        $event->setPrice($_POST['price']);	
-        $event->setTotalTickets($_POST['tickets']);
-        $event->setCategory($_POST['category']);
+        $event = Event::unserialize($_POST);
 
         // If category is jazz or dance, ask also for artist
         if ($_POST['category'] === 'jazz' || $_POST['category'] === 'dance') {

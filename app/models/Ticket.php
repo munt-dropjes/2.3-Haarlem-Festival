@@ -4,26 +4,32 @@ namespace models;
 
 class Ticket implements \JsonSerializable{
     private $ticketID;
+    private $orderID;
     private $eventID;
     private $userID;
+	private $IsFamilyTicket;
+	private $Quantity;
     private $qrCode;
     private $IsScanned;
     private $status;
     private $purchasedAt;
+	private $paymentStatus;
     private $eventName;
     private $eventDetails = [];
-
-    public function __construct($ticketID, $eventID, $userID, $qrCode, $IsScanned, $status, $purchasedAt, $eventName, $eventDetails = []) {
-        $this->ticketID = $ticketID;
-        $this->eventID = $eventID;
-        $this->userID = $userID;
-        $this->qrCode = $qrCode;
-        $this->IsScanned = $IsScanned;
-        $this->status = $status;
-        $this->purchasedAt = $purchasedAt;
-        $this->eventName = $eventName;
-        $this->eventDetails = $eventDetails;
-    }
+    private Event $event;
+    public function __construct($ticketID, $orderID, $eventID, $userID, $IsFamilyTicket, $Quantity, $qrCode, $IsScanned, $status, $purchasedAt, $paymentStatus) {
+		$this->ticketID = $ticketID;
+		$this->orderID = $orderID;
+		$this->eventID = $eventID;
+		$this->userID = $userID;
+		$this->IsFamilyTicket = $IsFamilyTicket;
+		$this->Quantity = $Quantity;
+		$this->qrCode = $qrCode;
+		$this->IsScanned = $IsScanned;
+		$this->status = $status;
+		$this->purchasedAt = $purchasedAt;
+		$this->paymentStatus = $paymentStatus;
+	}
 
     public function jsonSerialize(): array {
         return [
@@ -41,18 +47,19 @@ class Ticket implements \JsonSerializable{
 
     public static function unserialize(array $data): self {
         return new self(
-            $data['ticketID'] ?? null,
-            $data['eventID'] ?? null,
-            $data['userID'] ?? null,
-            $data['qrCode'] ?? null,
+            $data['TicketID'] ?? null,
+			$data['OrderID']??null,
+            $data['EventID'] ?? null,
+            $data['UserID'] ?? null,
+            $data['IsFamilyTicket'] ?? null,
+			$data['Quantity'] ?? null,
+            $data['QrCode'] ?? null,
             $data['IsScanned'] ?? null,
-            $data['status'] ?? null,
-            $data['purchasedAt'] ?? null,
-            $data['eventName'] ?? null,
-            $data['eventDetails'] ?? []
+            $data['Status'] ?? null,
+            $data['PurchasedAt'] ?? null,
+			$data['PaymentStatus'] ?? null
         );
     }
-
     public function setIsScanned($IsScanned) {
         $this->IsScanned = $IsScanned;
     }
@@ -98,6 +105,16 @@ class Ticket implements \JsonSerializable{
     public function getEventDetail($key) {
         return $this->eventDetails[$key] ?? null; // Return null if the key doesn't exist
     }
+	
+	public function getEvent(): Event
+	{
+		return $this->event;
+	}
+	
+	public function getAmount()
+	{
+		return $this->event->getPrice() * $this->Quantity;
+	}
 
     public function setTicketID($ticketID) {
         $this->ticketID = $ticketID;
@@ -130,5 +147,10 @@ class Ticket implements \JsonSerializable{
     public function setEventDetails(array $eventDetails) {
         $this->eventDetails = $eventDetails;
     }
+
+	public function setEvent(Event $event)
+	{
+		$this->event = $event;
+	}
 }
 ?>

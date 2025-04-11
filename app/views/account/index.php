@@ -5,7 +5,7 @@
                 <h1>Account</h1>
                 <a href="/updateaccount">Update your account</a>
             </div>
-            <!-- <div class="col-12 mt-3">
+            <div class="col-12 mt-3">
                 <h2>Tickets</h2>
                 <?php if (empty($tickets)): ?>
                     <p>You have no tickets.</p>
@@ -24,7 +24,7 @@
                                 <tr>
                                     <td><?= $ticket->getEvent()->getName() ?></td>
                                     <td><?= $ticket->getEvent()->getDate() ?></td>
-                                    <td><?= $ticket->getEvent()->getTime() ?></td>
+                                    <td><?= $ticket->getEvent()->getStartTime() ?></td>
                                     <td><?= $ticket->getAmount() ?></td>
                                 </tr>
                             <?php endforeach; ?>
@@ -32,6 +32,6 @@
                     </table>
                 <?php endif; ?>
             </div>
-        </div> -->
+        </div>
     </div>
 </main>

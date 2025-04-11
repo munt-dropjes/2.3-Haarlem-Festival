@@ -53,18 +53,7 @@ class DanceRepository extends BaseRepository
 				$eventID = $eventData['EventID'];
 
 				if (!isset($events[$eventID])) {
-					$event = new Event();
-					$event->setEventID($eventID);
-					$event->setName($eventData['EventName']);
-					$event->setDescription($eventData['Description']);
-					$event->setStartTime($eventData['StartTime']);
-					$event->setEndTime($eventData['EndTime']);
-					$event->setLocation($eventData['Location']);
-					$event->setPrice($eventData['Price']);
-					$event->setTotalTickets($eventData['TotalTickets']);
-					$event->setSoldTickets($eventData['SoldTickets']);
-					$event->setImageName($eventData['EventImage']);
-
+					$event = Event::unserialize($eventData);
 					$events[$eventID] = $event;
 				}
 
@@ -91,8 +80,12 @@ class DanceRepository extends BaseRepository
 			$sql = "SELECT Events.`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets` FROM Dance INNER JOIN Events ON Dance.EventID = Events.EventID WHERE Dance.ArtistID = :id";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute(['id' => $id]);
-			$obj = $stmt->fetchAll(PDO::FETCH_CLASS, Event::class);
-			return $obj;
+			$eventRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$items = [];
+			foreach ($eventRows as $row) {
+				$items[] = Event::unserialize($row);
+			}
+            return $items ?: null;
 		} catch (Exception $e) {
 			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all dance artist events by id -" . $e->getMessage());
 		}
@@ -104,7 +97,13 @@ class DanceRepository extends BaseRepository
 			$sql = "SELECT * FROM Events WHERE Name LIKE '%Pass%' AND Category = 'Dance'";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute();
-			return $stmt->fetchAll(PDO::FETCH_CLASS, Event::class);
+			$eventRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			$items = [];
+			foreach ($eventRows as $row) {
+				$items[] = Event::unserialize($row);
+			}
+            return $items ?: null;
+			
 		} catch (Exception $e) {
 			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get dance all access passes");
 		}

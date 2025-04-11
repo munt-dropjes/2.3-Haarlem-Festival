@@ -68,11 +68,11 @@ class ShoppingCartRepository extends BaseRepository
 
 			// Check if the item already exists in the shopping cart
 			$sql = "SELECT
-				ItemID, Quantity, isFamilyTicket
+				ItemID, Quantity, IsFamilyTicket
 			FROM
 			 	ShoppingCartItems
 			WHERE
-				CartID = :cartID AND EventID = :eventID AND isFamilyTicket = :isFamilyTicket";
+				CartID = :cartID AND EventID = :eventID AND IsFamilyTicket = :isFamilyTicket";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
 				':cartID' => $cartID,
@@ -86,7 +86,7 @@ class ShoppingCartRepository extends BaseRepository
 				$this->updateQuantity($userID, $item['ItemID'], $item['Quantity'] + $quantity, $isFamilyTicket);
 			} else {
 				// If the item does not exist, add it to the shopping cart
-				$sql = "INSERT INTO ShoppingCartItems (CartID, EventID, Quantity, Selected, isFamilyTicket, AddedAt) 
+				$sql = "INSERT INTO ShoppingCartItems (CartID, EventID, Quantity, Selected, IsFamilyTicket, AddedAt) 
 						VALUES (:cartID, :eventID, :quantity, 0, :isFamilyTicket, NOW())";
 				$stmt = $this->connection->prepare($sql);
 				$stmt->execute([
@@ -111,9 +111,9 @@ class ShoppingCartRepository extends BaseRepository
 		try {
 			$sql = "SELECT
 				SC.`CartID`, SC.`UserID`,
-				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`isFamilyTicket`, SCI.`AddedAt`,
+				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`IsFamilyTicket`, SCI.`AddedAt`,
 				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, 
-				IF(SCI.`isFamilyTicket` = 1 AND S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS Price,
+				IF(SCI.`IsFamilyTicket` = 1 AND S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS Price,
 				E.`ImageName`, E.`Category`
 			FROM
 				ShoppingCart AS SC
@@ -144,18 +144,9 @@ class ShoppingCartRepository extends BaseRepository
 				$shoppingCartItem->setQuantity($row['Quantity']);
 				$shoppingCartItem->setSelected($row['Selected']);
 				$shoppingCartItem->setAddedAt($row['AddedAt']);
-				$shoppingCartItem->setIsFamilyTicket($row['isFamilyTicket']);
+				$shoppingCartItem->setIsFamilyTicket($row['IsFamilyTicket']);
 
-				$event = new Event();
-				$event->setEventID($row['EventID']);
-				$event->setName($row['Name']);
-				$event->setStartTime($row['StartTime']);
-				$event->setEndTime($row['EndTime']);
-				$event->setLocation($row['Location']);
-				$event->setPrice($row['Price']);
-				$event->setImageName($row['ImageName']);
-				$event->setCategory($row['Category']);
-
+				$event = Event::unserialize($row);
 				$shoppingCartItem->setEvent($event);
 
 				$items[] = $shoppingCartItem;
@@ -172,9 +163,9 @@ class ShoppingCartRepository extends BaseRepository
 		try {
 			$sql = "SELECT
 				SC.`CartID`, SC.`UserID`,
-				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`isFamilyTicket`, SCI.`AddedAt`,
+				SCI.`ItemID`, SCI.`CartID`, SCI.`Quantity`, SCI.`Selected`, SCI.`IsFamilyTicket`, SCI.`AddedAt`,
 				E.`EventID`, E.`Name`, E.`StartTime`, E.`EndTime`, E.`Location`, 
-				IF(SCI.`isFamilyTicket` = 1 AND S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS Price,
+				IF(SCI.`IsFamilyTicket` = 1 AND S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS Price,
 				E.`ImageName`, E.`Category`
 			FROM
 				ShoppingCart AS SC
@@ -208,15 +199,7 @@ class ShoppingCartRepository extends BaseRepository
 				$shoppingCartItem->setSelected($row['Selected']);
 				$shoppingCartItem->setAddedAt($row['AddedAt']);
 
-				$event = new Event();
-				$event->setEventID($row['EventID']);
-				$event->setName($row['Name']);
-				$event->setStartTime($row['StartTime']);
-				$event->setEndTime($row['EndTime']);
-				$event->setLocation($row['Location']);
-				$event->setPrice($row['Price']);
-				$event->setImageName($row['ImageName']);
-				$event->setCategory($row['Category']);
+				$event = Event::unserialize($row);
 
 				$shoppingCartItem->setEvent($event);
 
@@ -266,16 +249,7 @@ class ShoppingCartRepository extends BaseRepository
 					$shoppingCartItem->setSelected($cartItem['selected']);
 				}
 
-				$event = new Event();
-				$event->setEventID($row['EventID']);
-				$event->setName($row['Name']);
-				$event->setStartTime($row['StartTime']);
-				$event->setEndTime($row['EndTime']);
-				$event->setLocation($row['Location']);
-				$event->setPrice($row['Price']);
-				$event->setImageName($row['ImageName']);
-				$event->setCategory($row['Category']);
-				$event->FamilyTicketPrice = $row['FamilyPrice'];
+				$event = Event::unserialize($row);
 
 				$shoppingCartItem->setEvent($event);
 
@@ -296,7 +270,7 @@ class ShoppingCartRepository extends BaseRepository
                 SET Quantity = :quantity 
                 WHERE ItemID = :itemID 
                 AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)
-				AND isFamilyTicket = :isFamilyTicket";
+				AND IsFamilyTicket = :isFamilyTicket";
 
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
@@ -323,7 +297,7 @@ class ShoppingCartRepository extends BaseRepository
 			$sql = "DELETE FROM ShoppingCartItems 
 				WHERE ItemID = :itemID 
 				AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)
-				AND isFamilyTicket = :isFamilyTicket";
+				AND IsFamilyTicket = :isFamilyTicket";
 
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
@@ -348,7 +322,7 @@ class ShoppingCartRepository extends BaseRepository
 				SET Selected = :selected 
 				WHERE ItemID = :itemID 
 				AND CartID IN (SELECT CartID FROM ShoppingCart WHERE UserID = :userID)
-				AND isFamilyTicket = :isFamilyTicket";
+				AND IsFamilyTicket = :isFamilyTicket";
 
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute([
@@ -400,8 +374,8 @@ class ShoppingCartRepository extends BaseRepository
 			$order = $stmt->fetch(PDO::FETCH_ASSOC);
 
 			// Check if the item belongs to the given user
-			$sql = "INSERT INTO Tickets (UserID, OrderID, EventID, Quantity, isFamilyTicket) 
-				SELECT ShoppingCart.UserID, :orderID, ShoppingCartItems.EventID, ShoppingCartItems.Quantity, ShoppingCartItems.isFamilyTicket 
+			$sql = "INSERT INTO Tickets (UserID, OrderID, EventID, Quantity, IsFamilyTicket) 
+				SELECT ShoppingCart.UserID, :orderID, ShoppingCartItems.EventID, ShoppingCartItems.Quantity, ShoppingCartItems.IsFamilyTicket 
 				FROM ShoppingCart
 				INNER JOIN ShoppingCartItems ON ShoppingCart.CartID = ShoppingCartItems.CartID
 				WHERE ShoppingCart.UserID = :userID";

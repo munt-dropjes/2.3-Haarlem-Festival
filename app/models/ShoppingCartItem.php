@@ -12,7 +12,7 @@ class ShoppingCartItem implements JsonSerializable
 	private bool $Selected;
 	private string $AddedAt;
 	private Event $Event;
-	private bool $isFamilyTicket = false;
+	private bool $IsFamilyTicket = false;
 
 	public function jsonSerialize(): array
 	{
@@ -59,7 +59,7 @@ class ShoppingCartItem implements JsonSerializable
 	}
 	public function getIsFamilyTicket(): bool
 	{
-		return $this->isFamilyTicket;
+		return $this->IsFamilyTicket;
 	}
 
 	// Setters
@@ -91,9 +91,9 @@ class ShoppingCartItem implements JsonSerializable
 	{
 		$this->Event = $Event;
 	}
-	public function setIsFamilyTicket(bool $isFamilyTicket): void
+	public function setIsFamilyTicket(bool $IsFamilyTicket): void
 	{
-		$this->isFamilyTicket = $isFamilyTicket;
+		$this->IsFamilyTicket = $IsFamilyTicket;
 	}
 
 	// Additional utilitys
