@@ -80,11 +80,14 @@ class DanceRepository extends BaseRepository
 			$sql = "SELECT Events.`EventID`, `Name`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets` FROM Dance INNER JOIN Events ON Dance.EventID = Events.EventID WHERE Dance.ArtistID = :id";
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute(['id' => $id]);
+			
 			$eventRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
 			$items = [];
+			
 			foreach ($eventRows as $row) {
 				$items[] = Event::unserialize($row);
 			}
+
             return $items ?: null;
 		} catch (Exception $e) {
 			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all dance artist events by id -" . $e->getMessage());
@@ -98,12 +101,14 @@ class DanceRepository extends BaseRepository
 			$stmt = $this->connection->prepare($sql);
 			$stmt->execute();
 			$eventRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+			
 			$items = [];
+
 			foreach ($eventRows as $row) {
 				$items[] = Event::unserialize($row);
 			}
+
             return $items ?: null;
-			
 		} catch (Exception $e) {
 			throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get dance all access passes");
 		}

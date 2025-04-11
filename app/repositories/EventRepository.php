@@ -50,8 +50,15 @@ class EventRepository extends BaseRepository {
             $stmt->bindParam(':search', $search, PDO::PARAM_STR);
 
             $stmt->execute();
-            $obj = $stmt->fetchAll(PDO::FETCH_CLASS, 'Models\Event');
-            return $obj;
+			$eventRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			$items = [];
+			
+			foreach ($eventRows as $row) {
+				$items[] = Event::unserialize($row);
+			}
+
+            return $items ?: null;
         } catch (Exception $e) {
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all events");
         }
