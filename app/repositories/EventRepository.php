@@ -50,8 +50,15 @@ class EventRepository extends BaseRepository {
             $stmt->bindParam(':search', $search, PDO::PARAM_STR);
 
             $stmt->execute();
-            $obj = $stmt->fetchAll(PDO::FETCH_CLASS, 'Models\Event');
-            return $obj;
+			$eventRows = $stmt->fetchAll(PDO::FETCH_ASSOC);
+
+			$items = [];
+			
+			foreach ($eventRows as $row) {
+				$items[] = Event::unserialize($row);
+			}
+
+            return $items ?: null;
         } catch (Exception $e) {
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get all events");
         }
@@ -62,9 +69,9 @@ class EventRepository extends BaseRepository {
             $stmt = $this->connection->prepare("SELECT * FROM Events WHERE EventID = :id");
             $stmt->bindParam(':id', $id, PDO::PARAM_INT);
             $stmt->execute();
-            $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\Event');
-            $fetchedEvent = $stmt->fetch();
-            return $fetchedEvent ?: null;
+            $eventData = $stmt->fetch(PDO::FETCH_ASSOC);
+			$event = Event::unserialize($eventData);
+            return $event ?: null;
         } catch (Exception $e) {
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get event by id: " . $id);
         }
@@ -77,9 +84,9 @@ class EventRepository extends BaseRepository {
             $stmt = $this->connection->prepare("SELECT * FROM Events WHERE Name = :name");
             $stmt->bindParam(':name', $name, PDO::PARAM_STR);
             $stmt->execute();
-            $stmt->setFetchMode(\PDO::FETCH_CLASS, 'Models\Event');
-            $fetchedEvent = $stmt->fetch();
-            return $fetchedEvent ?: null;
+            $eventData = $stmt->fetch(PDO::FETCH_ASSOC);
+			$event = Event::unserialize($eventData);
+            return $event ?: null;
         } catch (Exception $e) {
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to get event by id: " . $event->getEventID());
         }

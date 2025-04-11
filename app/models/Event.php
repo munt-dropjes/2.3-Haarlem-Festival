@@ -19,6 +19,36 @@ class Event implements JsonSerializable
 	private array $Artists;
 	public float $FamilyTicketPrice = 0.0;
 
+	public function __construct(
+		int $EventID,
+		string $Name,
+		string $Description,
+		string $StartTime,
+		string $EndTime,
+		string $Location,
+		float $Price,
+		int $TotalTickets,
+		int $SoldTickets,
+		string $ImageName,
+		string $Category,
+		array $Artists,
+		float $FamilyTicketPrice,
+	) {
+		$this->EventID = $EventID;
+		$this->Name = $Name;
+		$this->Description = $Description;
+		$this->StartTime = $StartTime;
+		$this->EndTime = $EndTime;
+		$this->Location = $Location;
+		$this->Price = $Price;
+		$this->TotalTickets = $TotalTickets;
+		$this->SoldTickets = $SoldTickets;
+		$this->ImageName = $ImageName;
+		$this->Category = $Category;
+		$this->Artists = $Artists;
+		$this->FamilyTicketPrice = $FamilyTicketPrice;
+	}
+
 	public function jsonSerialize(): array
 	{
 		return [
@@ -31,11 +61,31 @@ class Event implements JsonSerializable
 			'Price' => $this->Price,
 			'TotalTickets' => $this->TotalTickets,
 			'AvailableTickets' => $this->getAvailableTickets(),
+			'SoldTickets' => $this->getSoldTickets(),
 			'ImageName' => $this->ImageName,
 			'Category' => $this->Category,
 			'Artists' => $this->Artists,
 			'FamilyTicketPrice' => $this->FamilyTicketPrice,
 		];
+	}
+
+	public static function unserialize(array $data): self
+	{
+		return new self(
+			$data['EventID'] ?? 0,
+			$data['Name'] ?? '',
+			$data['Description'] ?? '',
+			$data['StartTime'] ?? '',
+			$data['EndTime'] ?? '',
+			$data['Location'] ?? '',
+			$data['Price'] ?? 0.0,
+			$data['TotalTickets'] ?? 0,
+			$data['SoldTickets'] ?? 0,
+			$data['ImageName'] ?? '',
+			$data['Category'] ?? '',
+			$data['Artists'] ?? [],
+			$data['FamilyTicketPrice'] ?? 0.0
+		);
 	}
 
 	// Getters

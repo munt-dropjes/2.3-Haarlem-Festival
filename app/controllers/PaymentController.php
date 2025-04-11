@@ -72,7 +72,7 @@ class PaymentController extends Controller
 
 			// available tickets check
 			if ($this->eventService->getAvailibility($item->getEvent()->getEventID(), $item->getQuantity()) == false) {
-				$this->shoppingCart->removeItem($item->getEvent()->getEventID(), $this->user->getID(), $item->getisFamilyTicket());
+				$this->shoppingCart->removeItem($item->getEvent()->getEventID(), $this->user->getID(), $item->getIsFamilyTicket());
 				header('Location: /shopping-cart');
 				exit;
 			}
