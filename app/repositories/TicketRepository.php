@@ -21,8 +21,8 @@ class TicketRepository extends BaseRepository
 	{
 		$sql = "SELECT 
 			T.`TicketID`, T.`OrderID`, T.`EventID`, T.`UserID`, T.`IsFamilyTicket`, T.`Quantity`, T.`QRCode`, T.`IsScanned`, T.`Status`, T.`PurchasedAt`, T.`PaymentStatus`,
-			E.`EventID`, E.`Name`, E.`Description`, E.`StartTime`, E.`EndTime`, E.`Location`,
-			IF(S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS Price,
+			E.`EventID`, E.`Name`, E.`Description`, E.`StartTime`, E.`EndTime`, E.`Location`, E.`Price`,
+			IF(S.`FamilyTicketPrice` IS NOT NULL, S.`FamilyTicketPrice`, E.`Price`) AS FamilyTicketPrice,
 			E.`TotalTickets`, E.`SoldTickets`, E.`ImageName`, E.`Category`
 		FROM
 			Tickets AS T
@@ -40,6 +40,11 @@ class TicketRepository extends BaseRepository
 		foreach ($tmpTickets as $ticketData) {
 			$ticket = Ticket::unserialize($ticketData);
 			$event = Event::unserialize($ticketData);
+
+			if ($ticket->getIsFamilyTicket()) {
+				$event->setPrice($event->getFamilyTicketPrice());
+			}
+
 			$ticket->setEvent($event);
 
 			$tickets[] = $ticket;

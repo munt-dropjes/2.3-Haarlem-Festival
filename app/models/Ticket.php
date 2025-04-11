@@ -78,6 +78,14 @@ class Ticket implements \JsonSerializable{
         return $this->userID;
     }
 
+    public function getIsFamilyTicket() {
+        return $this->IsFamilyTicket;
+    }
+
+    public function getQuantity() {
+        return $this->Quantity;
+    }
+
     public function getQrCode() {
         return $this->qrCode;
     }
@@ -126,6 +134,14 @@ class Ticket implements \JsonSerializable{
 
     public function setUserID($userID) {
         $this->userID = $userID;
+    }
+
+    public function setIsFamilyTicket($IsFamilyTicket) {
+        $this->IsFamilyTicket = $IsFamilyTicket;
+    }
+
+    public function setQuantity($Quantity) {
+        $this->Quantity = $Quantity;
     }
 
     public function setQrCode($qrCode) {

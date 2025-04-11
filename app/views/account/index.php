@@ -16,16 +16,20 @@
                                 <th scope="col">Event</th>
                                 <th scope="col">Date</th>
                                 <th scope="col">Time</th>
-                                <th scope="col">Tickets</th>
+                                <th scope="col">Total Price</th>
+                                <th scope="col">Ticket</th>
                             </tr>
                         </thead>
                         <tbody>
-                            <?php foreach ($tickets as $ticket): ?>
+                            <?php foreach ($tickets as $ticket):
+								/** @var \models\Ticket $ticket */
+								?>
                                 <tr>
                                     <td><?= $ticket->getEvent()->getName() ?></td>
                                     <td><?= $ticket->getEvent()->getDate() ?></td>
-                                    <td><?= $ticket->getEvent()->getStartTime() ?></td>
-                                    <td><?= $ticket->getAmount() ?></td>
+                                    <td><?= date('H:i', strtotime($ticket->getEvent()->getStartTime())) ?></td>
+                                    <td>&euro;<?= $ticket->getAmount() ?></td>
+                                    <td><?= $ticket->getQuantity() ?></td>
                                 </tr>
                             <?php endforeach; ?>
                         </tbody>

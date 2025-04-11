@@ -31,7 +31,8 @@ class Event implements JsonSerializable
 		int $SoldTickets,
 		string $ImageName,
 		string $Category,
-		array $Artists
+		array $Artists,
+		float $FamilyTicketPrice,
 	) {
 		$this->EventID = $EventID;
 		$this->Name = $Name;
@@ -45,6 +46,7 @@ class Event implements JsonSerializable
 		$this->ImageName = $ImageName;
 		$this->Category = $Category;
 		$this->Artists = $Artists;
+		$this->FamilyTicketPrice = $FamilyTicketPrice;
 	}
 
 	public function jsonSerialize(): array
@@ -81,7 +83,8 @@ class Event implements JsonSerializable
 			$data['SoldTickets'] ?? 0,
 			$data['ImageName'] ?? '',
 			$data['Category'] ?? '',
-			$data['Artists'] ?? []
+			$data['Artists'] ?? [],
+			$data['FamilyTicketPrice'] ?? 0.0
 		);
 	}
 
