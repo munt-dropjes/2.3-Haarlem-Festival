@@ -8,22 +8,22 @@ use Models\Event;
 
 class EventRepository extends BaseRepository {
     // ~~Create~~
-    public function insertEvent($event) : Event {
+    public function insertEvent(Event $event) : Event {
         try {
-            $sql = "INSERT INTO Events (Name, Description, StartTime, EndTime, Location, Price, Category, TotalTickets, ImageName) 
-                    VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
-            $stmt = $this->connection->prepare($sql);
-            $stmt->execute([
-                $event->getName(),
-                $event->getDescription(),
-                $event->getStartTime(),
-                $event->getEndTime(),
-                $event->getLocation(),
-                $event->getPrice(),
-                $event->getCategory(),
-                $event->getTotalTickets(),
-                "placeholder.jpg"
-            ]);
+			$sql = "INSERT INTO Events (Name, Description, StartTime, EndTime, Location, Price, Category, TotalTickets, ImageName) 
+					VALUES (:name, :description, :startTime, :endTime, :location, :price, :category, :totalTickets, :imageName)";
+			$stmt = $this->connection->prepare($sql);
+			$stmt->execute([
+				':name'=> $event->getName(),
+				':description'=> $event->getDescription(),
+				':startTime'=> $event->getStartTime(),
+				':endTime'=> $event->getEndTime(),
+				':location'=> $event->getLocation(),
+				':price'=> $event->getPrice(),
+				':category'=> $event->getCategory(),
+				':totalTickets'=> $event->getTotalTickets(),
+				':imageName'=> $imageName = "placeholder.jpg"
+			]);
             return $this->getEvent($event);
         } catch (Exception $e) {
             throw new Exception("Error code: " . $e->getCode() . " -  Something went wrong trying to create event: " . $event->name);
@@ -106,7 +106,7 @@ class EventRepository extends BaseRepository {
     public function updateEvent($event) : Event {
         try {
             $sql = "UPDATE Events 
-                    SET Name = ?, Description = ?, StartTime = ?, EndTime = ?, Location = ?, Price = ?, Category = ?
+                    SET Name = ?, Description = ?, StartTime = ?, EndTime = ?, Location = ?, Price = ?, TotalTickets = ?, Category = ?
                     WHERE EventID = ?";
             $stmt = $this->connection->prepare($sql);
             $stmt->execute([
@@ -116,6 +116,7 @@ class EventRepository extends BaseRepository {
                 $event->getEndTime(),
                 $event->getLocation(),
                 $event->getPrice(),
+				$event->getTotalTickets(),
                 $event->getCategory(),
                 $event->getEventID()
             ]);
