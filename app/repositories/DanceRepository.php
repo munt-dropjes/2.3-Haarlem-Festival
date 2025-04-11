@@ -39,7 +39,7 @@ class DanceRepository extends BaseRepository
 	{
 		try {
 			$sql = "SELECT 
-				Events.`EventID`, Events.`Name` AS `EventName`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets`, SoldTickets, Events.`ImageName` AS EventImage,
+				Events.`EventID`, Events.`Name` AS `EventName`, `Description`, `StartTime`, `EndTime`, `Location`, `Price`, `TotalTickets`, SoldTickets, Events.`ImageName`,
 				Artists.`ArtistID`, Artists.`Name` AS ArtistName, Artists.`ImageName` AS ArtistImage
 			FROM Dance LEFT JOIN Events ON Dance.EventID = Events.EventID LEFT JOIN Artists ON Dance.ArtistID = Artists.ArtistID";
 			$stmt = $this->connection->prepare($sql);
